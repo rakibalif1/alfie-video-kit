@@ -1,0 +1,27 @@
+# Multi-voice voiceover for /stick-figure. In a reel folder, lines.txt has one sentence per line: "N: text" or "P: text".
+# Writes script.json, audio/vo.wav, audio/lines.json. Voices: edit VOICES or put voices.json in the reel folder.
+import json, os, re, shutil, tempfile
+import numpy as np, soundfile as sf
+from kokoro_onnx import Kokoro, EspeakConfig
+import espeakng_loader
+MODELS = os.path.join(os.environ.get("ALFIE_HOME", os.path.expanduser("~/.alfie")), "models")
+VOICES = {"N": ["bm_lewis", 0.95, "en-gb"], "A": ["am_echo", 1.08, "en-us"], "C": ["af_heart", 1.1, "en-us"]}  # N narrator, A Alfie, C extra: voice, speed, language
+if os.path.exists("voices.json"): VOICES.update(json.load(open("voices.json")))
+data = espeakng_loader.get_data_path()
+if len(data) > 100:
+    short = os.path.join(tempfile.gettempdir(), "kokoro-espeak-ng-data")
+    if not os.path.exists(os.path.join(short, "phontab")): shutil.rmtree(short, ignore_errors=True); shutil.copytree(data, short)
+    data = short
+cfg = EspeakConfig(lib_path=espeakng_loader.get_library_path(), data_path=data)
+k = Kokoro(MODELS + "/kokoro-v1.0.onnx", MODELS + "/voices-v1.0.bin", espeak_config=cfg)
+os.makedirs("audio", exist_ok=True); out, meta, t, sr = [], [], 0.0, 24000
+for i, raw in enumerate(l.strip() for l in open("lines.txt") if l.strip()):
+    m = re.match(r"^([A-Z]{1,4}):\s*(.+)$", raw); who, text = (m.group(1), m.group(2)) if m else ("N", raw)
+    v = VOICES[who] + ["en-us"]; s, sr = k.create(text, voice=v[0], speed=v[1], lang=v[2])
+    idx = np.where(np.abs(s) > 0.01)[0]; s = s[max(0, idx[0] - 480): idx[-1] + 1200]
+    gap = 0.12 + (0.12 if text.endswith(("?", "!")) else 0) + (0.10 if meta and meta[-1]["who"] != who else 0)
+    meta.append({"i": i, "who": who, "text": text, "start": round(t, 3), "dur": round(len(s) / sr, 3)})
+    out += [s, np.zeros(int(gap * sr), dtype=s.dtype)]; t += len(s) / sr + gap
+sf.write("audio/vo.wav", np.concatenate(out), sr)
+json.dump([m["text"] for m in meta], open("script.json", "w"), indent=1); json.dump(meta, open("audio/lines.json", "w"), indent=1)
+print(len(meta), "lines", round(t, 1), "s, voices", sorted({m["who"] for m in meta}))

@@ -1,0 +1,14 @@
+{
+  "title": "Inflation",
+  "currency": "£",
+  "cast": { "N": { "model": "Sakurada_Fumiriya", "name": "The Narrator" }, "A": { "model": "HairSample_Male", "name": "Alfie" } },
+  "props": [ { "type": "coin", "fromLine": 0, "toLine": 2, "scale": [1, 0.4] }, { "type": "stack", "fromLine": 4, "count": 9 } ],
+  "lines": [
+    { "who": "N", "text": "Inflation. Your savings are losing value while you sleep.", "gesture": "explain", "cam": "wide" },
+    { "who": "A", "text": "Wait, what? My coin is getting smaller!", "gesture": "panic", "cam": "closeA" },
+    { "who": "N", "text": "Prices rise, so the same pound buys a little less each year.", "gesture": "point", "cam": "mid", "react": { "A": "shrug" } },
+    { "who": "A", "text": "So what do I do?", "gesture": "shrug", "cam": "closeA" },
+    { "who": "N", "text": "Make your money grow faster than prices.", "gesture": "explain", "cam": "mid" },
+    { "who": "A", "text": "Then I must start today!", "gesture": "cheer", "cam": "closeA" }
+  ]
+}

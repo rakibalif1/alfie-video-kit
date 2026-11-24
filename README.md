@@ -1,1 +1,11 @@
 # alfie-video-kit
+
+Free, code-made short videos with anime-style 3D characters (Alfie and The Narrator), free voices and no paid APIs.
+
+- `install.sh` - one-time setup (JS libraries, free Kokoro voice, the /alfie-video skill)
+- `make.sh <episode-folder>` - builds `out.mp4` (720x1280) from `episode.json`
+- `skills/alfie-video/SKILL.md` - instructions for Claude
+- `examples/inflation/` - a sample episode
+- `characters/` - CC0 VRM characters, see `characters/LICENSES.md`
+
+Built with three.js, @pixiv/three-vrm (MIT) and kokoro-onnx. Rendering uses a headless browser on the CPU.
