@@ -1,333 +1,982 @@
 {
-  "title": "The Queue (Northern Rock 2007)",
-  "cast": {
+ "title": "The Queue (Northern Rock 2007)",
+ "cast": {
+  "N": {
+   "model": "Sakurada_Fumiriya",
+   "name": "The Narrator",
+   "look": {
+    "top": "#1d3557",
+    "bottom": "#2b2d42"
+   }
+  },
+  "A": {
+   "model": "HairSample_Male",
+   "name": "Alfie",
+   "look": {
+    "top": "#f77f00",
+    "bottom": "#3a5a8c",
+    "shoes": "#f1f1f1"
+   }
+  },
+  "V": {
+   "model": "Vivi",
+   "name": "Vivi",
+   "look": {
+    "top": "#06b6a4",
+    "shoes": "#7b2cbf"
+   }
+  },
+  "R": {
+   "model": "Victoria_Rubin",
+   "name": "Ms Rubin",
+   "look": {
+    "top": "#3d405b",
+    "bottom": "#3d405b"
+   }
+  }
+ },
+ "voices": {
+  "V": [
+   "af_bella",
+   1.08,
+   "en-us"
+  ],
+  "R": [
+   "bf_isabella",
+   0.98,
+   "en-gb"
+  ]
+ },
+ "sets": {
+  "street": {
+   "skyTop": "#6ec3ff",
+   "skyBottom": "#fdf3d8",
+   "floor": "#d6cdb8",
+   "skylineVisible": false,
+   "cast": [
+    "N",
+    "A",
+    "V"
+   ],
+   "light": "#fff6e0",
+   "layout": {
     "N": {
-      "model": "Sakurada_Fumiriya",
-      "name": "The Narrator"
+     "x": -1.0,
+     "yaw": 0.45
     },
     "A": {
-      "model": "HairSample_Male",
-      "name": "Alfie"
+     "x": -0.1,
+     "yaw": 0.1
     },
     "V": {
-      "model": "Vivi",
-      "name": "Vivi"
+     "x": 2.1,
+     "z": 0.2,
+     "yaw": -0.6
+    }
+   },
+   "pieces": [
+    {
+     "type": "buildings",
+     "z": -4.4,
+     "seed": 3
+    },
+    {
+     "type": "road",
+     "z": -1.5,
+     "w": 18,
+     "d": 1.5
+    },
+    {
+     "type": "wall",
+     "color": "#f7d9a8",
+     "zz": -2.6,
+     "h": 3.8,
+     "w": 4.4
+    },
+    {
+     "type": "column",
+     "x": -1.9,
+     "z": -2.35,
+     "h": 3.4
+    },
+    {
+     "type": "column",
+     "x": 1.9,
+     "z": -2.35,
+     "h": 3.4
+    },
+    {
+     "type": "sign",
+     "text": "BANK",
+     "x": 0,
+     "z": -2.45,
+     "yy": 3.2,
+     "w": 2.4,
+     "bg": "#14213d",
+     "fg": "#fca311"
+    },
+    {
+     "type": "tv",
+     "x": 0,
+     "z": -2.42,
+     "yy": 2.3,
+     "w": 1.2,
+     "title": "BREAKING NEWS",
+     "ticker": "BANK IN TROUBLE  *  SAVERS QUEUE FOR THEIR MONEY  *  MARKETS FALL  *  "
+    },
+    {
+     "type": "car",
+     "z": -1.7,
+     "color": "#e63946",
+     "speed": 0.9,
+     "phase": 0.1
+    },
+    {
+     "type": "car",
+     "z": -1.3,
+     "color": "#ffd166",
+     "speed": -0.7,
+     "phase": 0.55
+    },
+    {
+     "type": "bus",
+     "z": -1.7,
+     "color": "#2a9d8f",
+     "speed": 0.5,
+     "phase": 0.8
+    },
+    {
+     "type": "lamp",
+     "x": -2.3,
+     "z": -1.0
+    },
+    {
+     "type": "lamp",
+     "x": 2.4,
+     "z": -1.0
+    },
+    {
+     "type": "bunting",
+     "x1": -2.4,
+     "x2": 2.4,
+     "y": 3.7,
+     "z": -2.2
+    },
+    {
+     "type": "posts",
+     "x": -1.3,
+     "z": 1.1,
+     "n": 5,
+     "gap": 0.65
+    },
+    {
+     "type": "tree",
+     "x": -2.0,
+     "z": -0.7
+    },
+    {
+     "type": "plant",
+     "x": 1.9,
+     "z": 0.2
+    }
+   ]
+  },
+  "bank": {
+   "skyTop": "#f6e8c8",
+   "skyBottom": "#f6e8c8",
+   "floor": "#b99b6b",
+   "clouds": false,
+   "skylineVisible": false,
+   "cast": [
+    "N",
+    "A",
+    "V",
+    "R"
+   ],
+   "light": "#ffe8c0",
+   "ambient": "#fff3e0",
+   "layout": {
+    "A": {
+     "x": -0.45,
+     "z": 0.9,
+     "yaw": 0.3
+    },
+    "V": {
+     "x": -0.95,
+     "z": 0.8,
+     "yaw": 0.4
     },
     "R": {
-      "model": "Victoria_Rubin",
-      "name": "Ms Rubin"
+     "x": 0.2,
+     "z": -0.45,
+     "yaw": 0
+    },
+    "N": {
+     "x": 0.95,
+     "z": 0.6,
+     "yaw": -0.45
     }
-  },
-  "voices": {
-    "V": [
-      "af_bella",
-      1.08,
-      "en-us"
-    ],
-    "R": [
-      "bf_isabella",
-      0.98,
-      "en-gb"
-    ]
-  },
-  "sets": {
-    "street": {
-      "sky": "#bcd9ff",
-      "floor": "#cfc8b4",
-      "skylineVisible": false,
-      "cast": [
-        "N",
-        "A",
-        "V"
-      ],
-      "layout": {
-        "N": {
-          "x": -1.0,
-          "yaw": 0.45
-        },
-        "A": {
-          "x": -0.1,
-          "yaw": 0.1
-        },
-        "V": {
-          "x": 2.1,
-          "z": 0.2,
-          "yaw": -0.6
-        }
-      },
-      "pieces": [
-        {
-          "type": "wall",
-          "color": "#d8c9a8",
-          "zz": -2.6,
-          "h": 3.8
-        },
-        {
-          "type": "sign",
-          "text": "BANK",
-          "x": 0,
-          "z": -2.45,
-          "y": 2.9,
-          "w": 2.2
-        },
-        {
-          "type": "posts",
-          "x": -1.3,
-          "z": 1.1,
-          "n": 5,
-          "gap": 0.65
-        }
-      ]
+   },
+   "pieces": [
+    {
+     "type": "wall",
+     "color": "#efe2c0",
+     "zz": -2.2,
+     "h": 4.2,
+     "w": 12
     },
-    "bank": {
-      "sky": "#efe4c8",
-      "floor": "#b99b6b",
-      "skylineVisible": false,
-      "cast": [
-        "N",
-        "A",
-        "V",
-        "R"
-      ],
-      "layout": {
-        "A": {
-          "x": -0.45,
-          "z": 0.9,
-          "yaw": 0.3
-        },
-        "V": {
-          "x": -0.95,
-          "z": 0.8,
-          "yaw": 0.4
-        },
-        "R": {
-          "x": 0.2,
-          "z": -0.45,
-          "yaw": 0
-        },
-        "N": {
-          "x": 0.95,
-          "z": 0.6,
-          "yaw": -0.45
-        }
-      },
-      "pieces": [
-        {
-          "type": "wall",
-          "color": "#efe4c8",
-          "zz": -2.1,
-          "h": 3.6
-        },
-        {
-          "type": "vault",
-          "x": 0.2,
-          "z": -1.95
-        },
-        {
-          "type": "counter",
-          "x": 0.2,
-          "z": 0.0,
-          "w": 1.9
-        }
-      ]
+    {
+     "type": "checker",
+     "w": 10,
+     "d": 7,
+     "z": 0.6
     },
-    "calm": {
-      "sky": "#ffe3c4",
-      "floor": "#cfc8b4",
-      "skylineVisible": false,
-      "cast": [
-        "N",
-        "A",
-        "V"
-      ],
-      "layout": {
-        "N": {
-          "x": -1.0,
-          "yaw": 0.45
-        },
-        "A": {
-          "x": -0.1,
-          "yaw": 0.1
-        },
-        "V": {
-          "x": 0.85,
-          "yaw": -0.4
-        }
+    {
+     "type": "column",
+     "x": -2.3,
+     "z": -1.9,
+     "h": 3.6
+    },
+    {
+     "type": "column",
+     "x": 2.3,
+     "z": -1.9,
+     "h": 3.6
+    },
+    {
+     "type": "vault",
+     "x": 0.2,
+     "z": -2.0
+    },
+    {
+     "type": "clock",
+     "x": 0.2,
+     "z": -2.05,
+     "yy": 3.75,
+     "r": 0.45
+    },
+    {
+     "type": "counter",
+     "x": 0.2,
+     "z": 0.0,
+     "w": 1.9
+    },
+    {
+     "type": "poster",
+     "x": -1.55,
+     "z": -2.05,
+     "yy": 2.0,
+     "w": 0.8,
+     "h": 1.1,
+     "text": "SAVE",
+     "bg": "#ffd166",
+     "fg": "#14213d"
+    },
+    {
+     "type": "tv",
+     "x": 1.65,
+     "z": -2.05,
+     "yy": 2.2,
+     "w": 1.0,
+     "title": "MARKETS",
+     "bg": "#1d3557",
+     "ticker": "SAVERS WITHDRAW  *  SHARES FALL  *  "
+    },
+    {
+     "type": "plant",
+     "x": -2.0,
+     "z": -1.0
+    },
+    {
+     "type": "plant",
+     "x": 2.0,
+     "z": -1.0
+    },
+    {
+     "type": "infocard",
+     "x": 0.05,
+     "z": -1.2,
+     "yy": 2.4,
+     "w": 1.6,
+     "h": 1.05,
+     "title": "WHERE \u00a3100 GOES",
+     "fromLine": 7,
+     "toLine": 9,
+     "rows": [
+      {
+       "label": "Lent out (mortgages)",
+       "value": 0.9,
+       "text": "\u00a390",
+       "color": "#ef476f"
       },
-      "pieces": [
-        {
-          "type": "wall",
-          "color": "#ecd9b5",
-          "zz": -2.6,
-          "h": 3.8
-        },
-        {
-          "type": "sign",
-          "text": "BANK",
-          "x": 0,
-          "z": -2.45,
-          "y": 2.9,
-          "w": 2.2
-        },
-        {
-          "type": "tree",
-          "x": 1.7,
-          "z": -1.0
-        },
-        {
-          "type": "tree",
-          "x": -1.9,
-          "z": -1.2
-        }
-      ]
+      {
+       "label": "Cash in the bank",
+       "value": 0.1,
+       "text": "\u00a310",
+       "color": "#06d6a0"
+      }
+     ]
     }
+   ]
   },
-  "lines": [
-    {
-      "who": "N",
-      "set": "street",
-      "text": "September 2007. Thousands of people queue outside a British bank to take their savings out.",
-      "gesture": "explain",
-      "cam": "wide"
+  "calm": {
+   "skyTop": "#ff9a8b",
+   "skyBottom": "#ffe0b5",
+   "floor": "#cfc3a8",
+   "skylineVisible": false,
+   "cast": [
+    "N",
+    "A",
+    "V"
+   ],
+   "light": "#ffd9a0",
+   "ambient": "#ffe9d0",
+   "layout": {
+    "N": {
+     "x": -1.0,
+     "yaw": 0.45
     },
-    {
-      "who": "N",
-      "text": "Nobody robbed it. Nothing was stolen. So why did the bank start to fall apart?",
-      "gesture": "explain",
-      "cam": "mid:N"
+    "A": {
+     "x": -0.1,
+     "yaw": 0.1
     },
-    {
-      "who": "V",
-      "text": "Alfie! Alfie! Have you seen the news? Our bank is in trouble!",
-      "gesture": "panic",
-      "cam": "two:A:V",
-      "move": {
-        "V": {
-          "x": 0.7,
-          "z": 0.2,
-          "yaw": -0.4
-        }
-      },
-      "react": {
-        "A": "listen"
-      }
-    },
-    {
-      "who": "A",
-      "text": "What?! My savings are in there! Everything I have!",
-      "gesture": "panic",
-      "cam": "close:A",
-      "react": {
-        "V": "panic"
-      }
-    },
-    {
-      "who": "V",
-      "text": "Come on, get in the queue before it all runs out!",
-      "gesture": "point",
-      "cam": "two:A:V",
-      "move": {
-        "A": {
-          "x": -0.5,
-          "yaw": 0.3
-        },
-        "V": {
-          "x": 0.2
-        }
-      }
-    },
-    {
-      "who": "A",
-      "set": "bank",
-      "text": "Please, I need all my money out. Right now!",
-      "gesture": "panic",
-      "cam": "two:A:R"
-    },
-    {
-      "who": "R",
-      "text": "I'm sorry, Alfie. Your money isn't sitting in a box with your name on it.",
-      "gesture": "shrug",
-      "cam": "close:R",
-      "react": {
-        "A": "panic"
-      }
-    },
-    {
-      "who": "R",
-      "text": "When you save a hundred pounds, we lend most of it to people buying homes. We keep only a little as cash.",
-      "gesture": "explain",
-      "cam": "mid:R",
-      "react": {
-        "A": "listen",
-        "V": "listen"
-      }
-    },
-    {
-      "who": "A",
-      "text": "What?! So where is my money?!",
-      "gesture": "panic",
-      "cam": "close:A",
-      "react": {
-        "R": "listen"
-      }
-    },
-    {
-      "who": "R",
-      "text": "In thousands of mortgages. That works perfectly, until everyone asks for it back on the same day.",
-      "gesture": "point",
-      "cam": "two:A:R",
-      "react": {
-        "A": "shrug"
-      }
-    },
-    {
-      "who": "N",
-      "text": "That is a bank run. The longer the queue, the more people panic. And the panic itself becomes the crisis.",
-      "gesture": "explain",
-      "cam": "wide"
-    },
-    {
-      "who": "N",
-      "text": "It happened to Northern Rock. The queues lasted four days, until the government guaranteed savers' money. Within five months, the bank was nationalised.",
-      "gesture": "explain",
-      "cam": "mid:N"
-    },
-    {
-      "who": "N",
-      "set": "calm",
-      "text": "Today, UK savings are protected up to a limit by the Financial Services Compensation Scheme. Check the current limit yourself.",
-      "gesture": "explain",
-      "cam": "wide"
-    },
-    {
-      "who": "A",
-      "text": "So... I panicked for nothing?",
-      "gesture": "shrug",
-      "cam": "close:A"
-    },
-    {
-      "who": "V",
-      "text": "Not for nothing. You learned something. Panic is expensive, Alfie.",
-      "gesture": "point",
-      "cam": "two:A:V",
-      "react": {
-        "A": "nod"
-      }
-    },
-    {
-      "who": "N",
-      "text": "Know where your money lives. Stay calm. Check what is protected. This is not financial advice.",
-      "gesture": "explain",
-      "cam": "mid:N"
-    },
-    {
-      "who": "A",
-      "text": "Right. Deep breaths. Fancy a cup of tea?",
-      "gesture": "cheer",
-      "cam": "two:A:V",
-      "react": {
-        "V": "cheer"
-      }
+    "V": {
+     "x": 0.85,
+     "yaw": -0.4
     }
-  ]
+   },
+   "pieces": [
+    {
+     "type": "buildings",
+     "z": -4.4,
+     "seed": 9
+    },
+    {
+     "type": "road",
+     "z": -1.5,
+     "w": 18,
+     "d": 1.5
+    },
+    {
+     "type": "wall",
+     "color": "#e6d5b0",
+     "zz": -2.6,
+     "h": 3.8,
+     "w": 4.4
+    },
+    {
+     "type": "column",
+     "x": -1.9,
+     "z": -2.35,
+     "h": 3.4
+    },
+    {
+     "type": "column",
+     "x": 1.9,
+     "z": -2.35,
+     "h": 3.4
+    },
+    {
+     "type": "sign",
+     "text": "BANK",
+     "x": 0,
+     "z": -2.45,
+     "yy": 3.2,
+     "w": 2.4,
+     "bg": "#14213d",
+     "fg": "#fca311"
+    },
+    {
+     "type": "car",
+     "z": -1.5,
+     "color": "#9b5de5",
+     "speed": 0.7,
+     "phase": 0.3
+    },
+    {
+     "type": "lamp",
+     "x": -2.3,
+     "z": -1.0
+    },
+    {
+     "type": "lamp",
+     "x": 2.4,
+     "z": -1.0
+    },
+    {
+     "type": "bunting",
+     "x1": -2.4,
+     "x2": 2.4,
+     "y": 3.7,
+     "z": -2.2
+    },
+    {
+     "type": "balloons",
+     "x": 1.6,
+     "z": -0.6,
+     "n": 6
+    },
+    {
+     "type": "tree",
+     "x": -2.0,
+     "z": -0.7
+    },
+    {
+     "type": "tree",
+     "x": 2.1,
+     "z": -0.9
+    }
+   ]
+  }
+ },
+ "lines": [
+  {
+   "who": "N",
+   "set": "street",
+   "text": "September 2007. Thousands of people queue outside a British bank to take their savings out.",
+   "gesture": "explain",
+   "cam": "wide",
+   "emotion": "worried"
+  },
+  {
+   "who": "N",
+   "text": "Nobody robbed it. Nothing was stolen. So why did the bank start to fall apart?",
+   "gesture": "explain",
+   "cam": "mid:N",
+   "emotion": "calm"
+  },
+  {
+   "who": "V",
+   "text": "Alfie! Alfie! Have you seen the news? Our bank is in trouble!",
+   "gesture": "panic",
+   "cam": "two:A:V",
+   "move": {
+    "V": {
+     "x": 0.7,
+     "z": 0.2,
+     "yaw": -0.4
+    }
+   },
+   "react": {
+    "A": "listen"
+   },
+   "emotion": "panic"
+  },
+  {
+   "who": "A",
+   "text": "What?! My savings are in there! Everything I have!",
+   "gesture": "panic",
+   "cam": "close:A",
+   "react": {
+    "V": "panic"
+   },
+   "emotion": "panic"
+  },
+  {
+   "who": "V",
+   "text": "Come on, get in the queue before it all runs out!",
+   "gesture": "point",
+   "cam": "two:A:V",
+   "move": {
+    "A": {
+     "x": -0.5,
+     "yaw": 0.3
+    },
+    "V": {
+     "x": 0.2
+    }
+   },
+   "emotion": "excited"
+  },
+  {
+   "who": "A",
+   "set": "bank",
+   "text": "Please, I need all my money out. Right now!",
+   "gesture": "panic",
+   "cam": "two:A:R",
+   "emotion": "panic"
+  },
+  {
+   "who": "R",
+   "text": "I'm sorry, Alfie. Your money isn't sitting in a box with your name on it.",
+   "gesture": "shrug",
+   "cam": "close:R",
+   "react": {
+    "A": "panic"
+   },
+   "emotion": "worried"
+  },
+  {
+   "who": "R",
+   "text": "When you save a hundred pounds, we lend most of it to people buying homes. We keep only a little as cash.",
+   "gesture": "explain",
+   "cam": "high",
+   "react": {
+    "A": "listen",
+    "V": "listen"
+   },
+   "emotion": "calm"
+  },
+  {
+   "who": "A",
+   "text": "What?! So where is my money?!",
+   "gesture": "panic",
+   "cam": "close:A",
+   "react": {
+    "R": "listen"
+   },
+   "emotion": "panic"
+  },
+  {
+   "who": "R",
+   "text": "In thousands of mortgages. That works perfectly, until everyone asks for it back on the same day.",
+   "gesture": "point",
+   "cam": "high",
+   "react": {
+    "A": "shrug"
+   },
+   "emotion": "calm"
+  },
+  {
+   "who": "N",
+   "text": "That is a bank run. The longer the queue, the more people panic. And the panic itself becomes the crisis.",
+   "gesture": "explain",
+   "cam": "wide",
+   "emotion": "worried"
+  },
+  {
+   "who": "N",
+   "text": "It happened to Northern Rock. The queues lasted four days, until the government guaranteed savers' money. Within five months, the bank was nationalised.",
+   "gesture": "explain",
+   "cam": "mid:N",
+   "emotion": "calm"
+  },
+  {
+   "who": "N",
+   "set": "calm",
+   "text": "Today, UK savings are protected up to a limit by the Financial Services Compensation Scheme. Check the current limit yourself.",
+   "gesture": "explain",
+   "cam": "wide",
+   "emotion": "calm"
+  },
+  {
+   "who": "A",
+   "text": "So... I panicked for nothing?",
+   "gesture": "shrug",
+   "cam": "close:A",
+   "emotion": "sad"
+  },
+  {
+   "who": "V",
+   "text": "Not for nothing. You learned something. Panic is expensive, Alfie.",
+   "gesture": "point",
+   "cam": "two:A:V",
+   "react": {
+    "A": "nod"
+   },
+   "emotion": "excited"
+  },
+  {
+   "who": "N",
+   "text": "Know where your money lives. Stay calm. Check what is protected. This is not financial advice.",
+   "gesture": "explain",
+   "cam": "mid:N",
+   "emotion": "calm"
+  },
+  {
+   "who": "A",
+   "text": "Right. Deep breaths. Fancy a cup of tea?",
+   "gesture": "cheer",
+   "cam": "two:A:V",
+   "react": {
+    "V": "cheer"
+   },
+   "emotion": "cheer"
+  }
+ ],
+ "extras": [
+  {
+   "model": "HairSample_Female",
+   "set": [
+    "street"
+   ],
+   "x": -2.3,
+   "z": -0.7,
+   "yaw": 0.5,
+   "h": 1.45,
+   "clip": "Idle_Talking_Loop",
+   "phase": 0.0,
+   "look": {
+    "skin": "#f2c9a5",
+    "hair": "#1b1b1b",
+    "top": "#e63946",
+    "bottom": "#264653"
+   },
+   "react": {
+    "from": 2,
+    "to": 4,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "HairSample_Male",
+   "set": [
+    "street"
+   ],
+   "x": -1.75,
+   "z": -1.0499999999999998,
+   "yaw": 0.5,
+   "h": 1.55,
+   "clip": "Idle_Loop",
+   "phase": 0.37,
+   "look": {
+    "skin": "#d9a066",
+    "hair": "#d9a441",
+    "top": "#118ab2",
+    "bottom": "#1d3557"
+   },
+   "react": {
+    "from": 2,
+    "to": 4,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "Sendagaya_Shibu",
+   "set": [
+    "street"
+   ],
+   "x": -1.2,
+   "z": -1.4,
+   "yaw": 0.5,
+   "h": 1.65,
+   "clip": "Idle_Torch_Loop",
+   "phase": 0.74,
+   "look": {
+    "skin": "#8d5524",
+    "hair": "#222831",
+    "top": "#ffd166",
+    "bottom": "#6c757d"
+   },
+   "react": {
+    "from": 2,
+    "to": 4,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "Sendagaya_Shino",
+   "set": [
+    "street"
+   ],
+   "x": 1.5,
+   "z": -0.7,
+   "yaw": -0.5,
+   "h": 1.45,
+   "clip": "Idle_Talking_Loop",
+   "phase": 0.10999999999999988,
+   "look": {
+    "skin": "#c68642",
+    "hair": "#3b2f2f",
+    "top": "#7b2cbf",
+    "bottom": "#3d405b"
+   },
+   "react": {
+    "from": 2,
+    "to": 4,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "Victoria_Rubin",
+   "set": [
+    "street"
+   ],
+   "x": 1.95,
+   "z": -1.0499999999999998,
+   "yaw": -0.5,
+   "h": 1.55,
+   "clip": "Idle_Loop",
+   "phase": 0.48,
+   "look": {
+    "skin": "#e0ac69",
+    "hair": "#c1121f",
+    "top": "#06d6a0",
+    "bottom": "#8d99ae"
+   },
+   "react": {
+    "from": 2,
+    "to": 4,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "Vivi",
+   "set": [
+    "street"
+   ],
+   "x": 2.4,
+   "z": -1.4,
+   "yaw": -0.5,
+   "h": 1.65,
+   "clip": "Idle_Torch_Loop",
+   "phase": 0.8500000000000001,
+   "look": {
+    "skin": "#5c3a21",
+    "hair": "#4a2c2a",
+    "top": "#f77f00",
+    "bottom": "#2b2d42"
+   },
+   "react": {
+    "from": 2,
+    "to": 4,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "Sakurada_Fumiriya",
+   "set": [
+    "street"
+   ],
+   "x": -0.6,
+   "z": -0.7,
+   "yaw": 0.5,
+   "h": 1.45,
+   "clip": "Idle_Talking_Loop",
+   "phase": 0.21999999999999975,
+   "look": {
+    "skin": "#f1c27d",
+    "hair": "#8a5a2b",
+    "top": "#ef476f",
+    "bottom": "#5f0f40"
+   },
+   "react": {
+    "from": 2,
+    "to": 4,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "HairSample_Female",
+   "set": [
+    "street"
+   ],
+   "x": 0.5,
+   "z": -1.0499999999999998,
+   "yaw": -0.5,
+   "h": 1.55,
+   "clip": "Idle_Loop",
+   "phase": 0.5899999999999999,
+   "look": {
+    "skin": "#3b2219",
+    "hair": "#6a4c93",
+    "top": "#3a86ff",
+    "bottom": "#386641"
+   },
+   "react": {
+    "from": 2,
+    "to": 4,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "Sendagaya_Shino",
+   "set": [
+    "street",
+    "calm"
+   ],
+   "walk": {
+    "x0": -3.6,
+    "x1": 3.6,
+    "speed": 0.55
+   },
+   "z": -0.95,
+   "h": 1.5,
+   "phase": 0.0,
+   "look": {
+    "skin": "#8d5524",
+    "hair": "#6a4c93",
+    "top": "#7b2cbf",
+    "bottom": "#1d3557"
+   }
+  },
+  {
+   "model": "Victoria_Rubin",
+   "set": [
+    "street",
+    "calm"
+   ],
+   "walk": {
+    "x0": 3.6,
+    "x1": -3.6,
+    "speed": 0.65
+   },
+   "z": -1.15,
+   "h": 1.5,
+   "phase": 0.27,
+   "look": {
+    "skin": "#c68642",
+    "hair": "#222831",
+    "top": "#06d6a0",
+    "bottom": "#6c757d"
+   }
+  },
+  {
+   "model": "Vivi",
+   "set": [
+    "street",
+    "calm"
+   ],
+   "walk": {
+    "x0": -3.6,
+    "x1": 3.6,
+    "speed": 0.75
+   },
+   "z": -0.95,
+   "h": 1.5,
+   "phase": 0.54,
+   "look": {
+    "skin": "#e0ac69",
+    "hair": "#4a2c2a",
+    "top": "#f77f00",
+    "bottom": "#3d405b"
+   }
+  },
+  {
+   "model": "Sakurada_Fumiriya",
+   "set": [
+    "street",
+    "calm"
+   ],
+   "walk": {
+    "x0": 3.6,
+    "x1": -3.6,
+    "speed": 0.8500000000000001
+   },
+   "z": -1.15,
+   "h": 1.5,
+   "phase": 0.81,
+   "look": {
+    "skin": "#5c3a21",
+    "hair": "#1b1b1b",
+    "top": "#ef476f",
+    "bottom": "#8d99ae"
+   }
+  },
+  {
+   "model": "HairSample_Male",
+   "set": [
+    "bank"
+   ],
+   "x": -2.0,
+   "z": -0.6,
+   "yaw": 0.4,
+   "h": 1.5,
+   "clip": "Idle_Loop",
+   "phase": 0.0,
+   "look": {
+    "skin": "#e0ac69",
+    "hair": "#8a5a2b",
+    "top": "#f77f00",
+    "bottom": "#3d405b"
+   },
+   "react": {
+    "from": 8,
+    "to": 10,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "Sendagaya_Shibu",
+   "set": [
+    "bank"
+   ],
+   "x": -1.5,
+   "z": -1.0,
+   "yaw": 0.4,
+   "h": 1.5,
+   "clip": "Idle_Talking_Loop",
+   "phase": 0.31,
+   "look": {
+    "skin": "#5c3a21",
+    "hair": "#d9a441",
+    "top": "#ef476f",
+    "bottom": "#8d99ae"
+   },
+   "react": {
+    "from": 8,
+    "to": 10,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "Sendagaya_Shino",
+   "set": [
+    "bank"
+   ],
+   "x": 1.9,
+   "z": -0.9,
+   "yaw": -0.4,
+   "h": 1.5,
+   "clip": "Idle_Torch_Loop",
+   "phase": 0.62,
+   "look": {
+    "skin": "#f1c27d",
+    "hair": "#c1121f",
+    "top": "#3a86ff",
+    "bottom": "#2b2d42"
+   },
+   "react": {
+    "from": 8,
+    "to": 10,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "Victoria_Rubin",
+   "set": [
+    "bank"
+   ],
+   "x": 2.2,
+   "z": -0.4,
+   "yaw": -0.4,
+   "h": 1.5,
+   "clip": "Idle_Loop",
+   "phase": 0.9299999999999999,
+   "look": {
+    "skin": "#3b2219",
+    "hair": "#6a4c93",
+    "top": "#e63946",
+    "bottom": "#5f0f40"
+   },
+   "react": {
+    "from": 8,
+    "to": 10,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  },
+  {
+   "model": "Vivi",
+   "set": [
+    "bank"
+   ],
+   "x": -0.2,
+   "z": -1.3,
+   "yaw": -0.4,
+   "h": 1.5,
+   "clip": "Idle_Talking_Loop",
+   "phase": 1.24,
+   "look": {
+    "skin": "#f2c9a5",
+    "hair": "#222831",
+    "top": "#118ab2",
+    "bottom": "#386641"
+   },
+   "react": {
+    "from": 8,
+    "to": 10,
+    "clip": "Spell_Simple_Idle_Loop"
+   }
+  }
+ ]
 }

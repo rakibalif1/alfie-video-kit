@@ -13,10 +13,10 @@ export function makeRetargeter(THREE, gltf, vrm, flip) {
   for (const [v, s] of Object.entries(map)) { const node = vrm.humanoid.getNormalizedBoneNode(v), src = byName[s.replace(/\./g, '')]; if (node && src) pairs.push({ v, node, src }); }
   const depth = (n) => { let d = 0; for (let o = n; o.parent; o = o.parent) d++; return d; };
   pairs.sort((a, b) => depth(a.node) - depth(b.node));
-  const mixer = new THREE.AnimationMixer(root), clips = Object.fromEntries(gltf.animations.map((a) => [a.name, a])), acts = {};
-  let current = null;
+  const U = root.userData; U.mixer = U.mixer || new THREE.AnimationMixer(root); U.acts = U.acts || {}; U.cur = U.cur || null;
+  const mixer = U.mixer, acts = U.acts, clips = Object.fromEntries(gltf.animations.map((a) => [a.name, a]));
   const setClip = (name, t) => {
-    if (current !== name) { mixer.stopAllAction(); acts[name] = acts[name] || mixer.clipAction(clips[name]); acts[name].reset().play(); current = name; }
+    if (U.cur !== name) { mixer.stopAllAction(); acts[name] = acts[name] || mixer.clipAction(clips[name]); acts[name].reset().play(); U.cur = name; }
     mixer.setTime(t); root.updateMatrixWorld(true);
   };
   setClip('A_TPose', 0);

@@ -39,6 +39,15 @@ You write one small file, `episode.json`. The kit does everything else (voices, 
 - More gestures: flinch (Hit_Chest), run. Props can add `"setName":"bank"` to show only in one set.
 - Renders at about 5 frames per second: run `make.sh` in the background (`setsid nohup`) and poll.
 
+
+## Richer worlds, crowds, costumes, emotions (see examples/bank-run)
+- Make scenes busy and colourful: many things to look at (the owner wants viewers "flooded" with detail). Use every set with a bright sky (`skyTop`, `skyBottom`), `light`, and 8-15 pieces.
+- More piece types: buildings (windowed city skyline, auto-added when `skylineVisible` is not false), road, car, bus (they drive past), lamp, bunting, balloons, tv (live screen with scrolling ticker: `title`, `ticker`, `bg`), poster, checker (marble floor), column, clock (moving hands), plant, tree, vault, counter, sign, wall, posts, infocard (animated bar panel: `title`, `rows:[{label,value 0-1,text,color}]`, `fromLine`, `toLine`).
+- Costumes: `"look":{"skin","hair","top","bottom","shoes"}` on a cast member or extra recolours VRoid-style characters (flat colours; a crude but effective way to make many different people).
+- Crowd: top-level `"extras":[{model, set:[names], x, z, yaw, h, clip, phase, look, react:{from,to,clip}, walk:{x0,x1,speed}}]`. Use a diverse mix of skin tones, hair colours and clothes. Walkers cross the street; queue people react (e.g. panic) between lines `from`..`to`.
+- Camera `high` shows the upper part of the frame (use it when an infocard or screen is the point of the line).
+- Emotion: `"emotion":"panic"` on a line changes that voice's speed, pitch and loudness. Values: calm, excited, panic, sad, angry, cheer, worried, sly. Use varied emotions so voices are not flat.
+
 ## Rules
 - Movement comes from a free recorded library, so it is natural but generic: no custom acting, eyes do not follow anything, lip-sync follows loudness only. Say so honestly. Do not claim film-quality CGI.
 - To save tokens: write only episode.json, do not read the kit's source files unless something breaks, do not view every frame.

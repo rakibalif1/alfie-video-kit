@@ -24,6 +24,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { VRMLoaderPlugin, VRMUtils } from '@pixiv/three-vrm';
 import { makeRetargeter } from '/retarget.js';
+import { buildPiece, makeClouds, tintVRM, gradientTexture } from '/world.js';
 
 const EP = await (await fetch('/ep/episode.json')).json();
 const TL = await (await fetch('/ep/tl.json')).json();
@@ -32,36 +33,32 @@ const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), ease = (a) => a 
 
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true, preserveDrawingBuffer: true });
 renderer.setPixelRatio(1); renderer.setSize(W, H, false);
-const scene = new THREE.Scene(); scene.background = new THREE.Color(0xcfe3ff); scene.fog = new THREE.Fog(0xcfe3ff, 8, 18);
-const floor = new THREE.Mesh(new THREE.CircleGeometry(6, 64), new THREE.MeshStandardMaterial({ color: 0xfff1c9, roughness: 1 }));
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xcfe3ff); scene.fog = new THREE.Fog(0xcfe3ff, 12, 30);
+const floor = new THREE.Mesh(new THREE.CircleGeometry(9, 64), new THREE.MeshStandardMaterial({ color: 0xfff1c9, roughness: 1 }));
 floor.rotation.x = -Math.PI / 2; scene.add(floor);
-const blocks = [];
-for (let i = 0; i < 9; i++) { const hh = 2.2 + (i % 3) * 0.6, b = new THREE.Mesh(new THREE.BoxGeometry(0.9, hh, 0.3), new THREE.MeshStandardMaterial({ color: 0xa8c7fa, roughness: 1 })); b.position.set(-4 + i, hh / 2, -3.4); scene.add(b); blocks.push(b); }
-const key = new THREE.DirectionalLight(0xffffff, Math.PI * 0.9); key.position.set(1.5, 2.5, 2.5); scene.add(key); scene.add(new THREE.AmbientLight(0xffffff, 0.9));
-const camera = new THREE.PerspectiveCamera(30, W / H, 0.1, 40);
+const skyMesh = new THREE.Mesh(new THREE.SphereGeometry(30, 24, 16), new THREE.MeshBasicMaterial({ side: THREE.BackSide, fog: false })); scene.add(skyMesh);
+const clouds = makeClouds(THREE, 7); scene.add(clouds.obj);
+const key = new THREE.DirectionalLight(0xffffff, Math.PI * 0.9); key.position.set(1.5, 2.5, 2.5); scene.add(key); const amb = new THREE.AmbientLight(0xffffff, 0.9); scene.add(amb);
+const camera = new THREE.PerspectiveCamera(30, W / H, 0.1, 60);
 
 // ---------- sets (backdrop colours, set pieces, who is on stage)
 const SETS = EP.sets || { default: {} };
 const setOf = []; LINES.forEach((l, i) => { setOf[i] = l.set || (i > 0 ? setOf[i - 1] : Object.keys(SETS)[0]); });
-const labelTex = (text, bg, fg, w = 512, h = 256) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); g.fillStyle = bg; g.fillRect(0, 0, w, h); g.fillStyle = fg; g.font = `bold ${Math.floor(h * 0.4)}px Arial`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(text, w / 2, h / 2 + 6); return new THREE.CanvasTexture(c); };
-const mat = (c) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.9 });
-function buildPiece(p) {
-  const g = new THREE.Group(); g.position.set(p.x || 0, 0, p.z || 0);
-  if (p.type === 'counter') { const w = p.w || 1.8; const b = new THREE.Mesh(new THREE.BoxGeometry(w, 0.95, 0.55), mat(p.color || 0x8d6e4b)); b.position.y = 0.475; const t = new THREE.Mesh(new THREE.BoxGeometry(w + 0.1, 0.07, 0.65), mat(0xe9dcc3)); t.position.y = 0.98; g.add(b, t); }
-  if (p.type === 'vault') { const d = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.85, 0.2, 48), new THREE.MeshStandardMaterial({ color: 0x9aa3ad, metalness: 0.7, roughness: 0.35 })); d.rotation.x = Math.PI / 2; d.position.y = 1.2; const r = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.05, 12, 40), mat(0x5c6670)); r.position.set(0, 1.2, 0.12); const h = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.08, 0.08), mat(0x5c6670)); h.position.set(0, 1.2, 0.2); const h2 = h.clone(); h2.rotation.z = Math.PI / 2; g.add(d, r, h, h2); }
-  if (p.type === 'sign') { const m = new THREE.Mesh(new THREE.PlaneGeometry(p.w || 1.6, (p.w || 1.6) / 2), new THREE.MeshBasicMaterial({ map: labelTex(p.text || 'BANK', p.bg || '#1d3557', p.fg || '#ffffff') })); m.position.y = p.y || 2.4; g.add(m); }
-  if (p.type === 'wall') { const m = new THREE.Mesh(new THREE.BoxGeometry(p.w || 9, p.h || 3.4, 0.2), mat(p.color || 0xefe4c8)); m.position.set(0, (p.h || 3.4) / 2, p.zz ?? -2.0); g.position.z = 0; g.add(m); }
-  if (p.type === 'posts') { for (let i = 0; i < (p.n || 4); i++) { const post = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 0.9, 12), mat(0x333b4a)); post.position.set(i * (p.gap || 0.7), 0.45, 0); g.add(post); if (i) { const rope = new THREE.Mesh(new THREE.BoxGeometry(p.gap || 0.7, 0.04, 0.04), mat(0xc0392b)); rope.position.set((i - 0.5) * (p.gap || 0.7), 0.8, 0); g.add(rope); } } }
-  if (p.type === 'tree') { const tr = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.14, 1.0, 10), mat(0x7a5a3a)); tr.position.y = 0.5; const lf = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 12), mat(0x52b788)); lf.position.y = 1.35; g.add(tr, lf); }
-  return g;
+const tlOf = (i) => { const l = TL.lines[Math.min(i, TL.lines.length - 1)] || { start: 0, dur: 0 }; return { start: l.start, end: l.start + l.dur }; };
+const setGroups = {}, setUpdates = {};
+for (const [name, s] of Object.entries(SETS)) {
+  const g = new THREE.Group(), ups = [], list = [...(s.pieces || [])];
+  if (s.skylineVisible !== false && !list.some((p) => p.type === 'buildings')) list.unshift({ type: 'buildings', z: -4.2, seed: 7 });
+  list.forEach((p) => { const o = buildPiece(THREE, p, {}); g.add(o.obj); if (o.update) ups.push(o.update); });
+  g.visible = false; scene.add(g); setGroups[name] = g; setUpdates[name] = ups;
 }
-const setGroups = {};
-for (const [name, s] of Object.entries(SETS)) { const g = new THREE.Group(); (s.pieces || []).forEach((p) => g.add(buildPiece(p))); g.visible = false; scene.add(g); setGroups[name] = g; }
 let activeSet = null;
 function applySet(name) {
   if (name === activeSet) return; activeSet = name; const s = SETS[name] || {};
-  scene.background.set(s.sky || '#cfe3ff'); scene.fog.color.set(s.sky || '#cfe3ff'); floor.material.color.set(s.floor || '#fff1c9');
-  const sk = s.skyline || ['#a8c7fa', '#9fb8e8', '#b9d3ff']; blocks.forEach((b, i) => { b.material.color.set(sk[i % sk.length]); b.visible = s.skylineVisible !== false; });
+  const top = s.skyTop || s.sky || '#8ec5ff', bot = s.skyBottom || '#fff1d6';
+  skyMesh.material.map = gradientTexture(THREE, top, bot); skyMesh.material.needsUpdate = true; skyMesh.position.y = 0;
+  scene.background.set(bot); scene.fog.color.set(bot); floor.material.color.set(s.floor || '#fff1c9'); clouds.obj.visible = s.clouds !== false;
+  key.color.set(s.light || '#ffffff'); amb.color.set(s.ambient || '#ffffff'); amb.intensity = s.ambientIntensity ?? 0.9;
   for (const [n, g] of Object.entries(setGroups)) g.visible = n === name;
 }
 
@@ -69,14 +66,15 @@ function applySet(name) {
 const loader = new GLTFLoader(); loader.register((p) => new VRMLoaderPlugin(p));
 const DEFAULT_LAYOUT = { N: { x: -0.95, z: 0, yaw: 0.4, h: 1.6 }, A: { x: 0.0, z: 0, yaw: 0, h: 1.5 }, V: { x: 0.9, z: 0, yaw: -0.4, h: 1.45 }, R: { x: 0.9, z: 0, yaw: -0.4, h: 1.55 }, S: { x: 0.9, z: 0, yaw: -0.4, h: 1.5 }, C: { x: 0.9, z: 0, yaw: -0.4, h: 1.5 } };
 const slotFor = (id, setName) => ({ ...(DEFAULT_LAYOUT[id] || { x: 0, z: 0, yaw: 0, h: 1.5 }), ...((EP.layout || {})[id] || {}), ...(((SETS[setName] || {}).layout || {})[id] || {}) });
+const UAL = await new GLTFLoader().loadAsync('/animations/UAL_Standard.glb');
 const cast = {};
 for (const [id, c] of Object.entries(EP.cast)) {
   const vrm = (await loader.loadAsync('/characters/' + c.model + '.vrm')).userData.vrm; VRMUtils.rotateVRM0(vrm); scene.add(vrm.scene);
   const flip = !!(vrm.meta && vrm.meta.metaVersion === '0'); vrm.update(0);
   const box = new THREE.Box3().setFromObject(vrm.scene), s = slotFor(id).h / (box.max.y - box.min.y);
   vrm.scene.scale.setScalar(s);
-  const ag = await new GLTFLoader().loadAsync('/animations/UAL_Standard.glb');
-  cast[id] = { vrm, flip, baseY: -box.min.y * s, name: c.name || id, rt: makeRetargeter(THREE, ag, vrm, flip), x: 0, z: 0 };
+  tintVRM(THREE, vrm, c.look);
+  cast[id] = { vrm, flip, baseY: -box.min.y * s, name: c.name || id, rt: makeRetargeter(THREE, UAL, vrm, flip), x: 0, z: 0 };
 }
 const ids = Object.keys(cast);
 // per-line stage positions: a set change places everyone at the set layout; "move" walks characters to new spots
@@ -85,6 +83,27 @@ LINES.forEach((l, i) => {
   const changed = i === 0 || setOf[i] !== setOf[i - 1]; P[i] = {};
   for (const id of ids) { const from = changed ? slotFor(id, setOf[i]) : P[i - 1][id].to, mv = l.move && l.move[id]; P[i][id] = { from: { ...from }, to: mv ? { ...from, ...mv } : { ...from } }; }
 });
+
+// ---------- background crowd: recoloured copies of the characters (different skin, hair, clothes), standing, talking, reacting or walking past
+const extras = [];
+for (const e of (EP.extras || [])) {
+  const vrm = (await loader.loadAsync('/characters/' + e.model + '.vrm')).userData.vrm; VRMUtils.rotateVRM0(vrm); scene.add(vrm.scene);
+  const flip = !!(vrm.meta && vrm.meta.metaVersion === '0'); vrm.update(0); const box = new THREE.Box3().setFromObject(vrm.scene), s = (e.h || 1.55) / (box.max.y - box.min.y);
+  vrm.scene.scale.setScalar(s); tintVRM(THREE, vrm, e.look);
+  extras.push({ e, vrm, flip, baseY: -box.min.y * s, rt: makeRetargeter(THREE, UAL, vrm, flip), sets: [].concat(e.set || []) });
+}
+function updateExtras(t, idx, sName) {
+  for (const x of extras) {
+    const on = !x.sets.length || x.sets.includes(sName); x.vrm.scene.visible = on; if (!on) continue;
+    const e = x.e, reacting = e.react && idx >= e.react.from && idx <= e.react.to, clip = reacting ? e.react.clip : (e.walk ? 'Walk_Loop' : (e.clip || 'Idle_Loop')), ph = (e.phase || 0) * 3;
+    const pose = x.rt.sample(clip, t + ph); x.rt.apply(pose); const hp = x.vrm.humanoid.getNormalizedBoneNode('hips').position; hp.x = pose.rest.x; hp.z = pose.rest.z;
+    let px = e.x || 0, yaw = e.yaw || 0;
+    if (e.walk && !reacting) { const L = Math.abs(e.walk.x1 - e.walk.x0), dir = Math.sign(e.walk.x1 - e.walk.x0) || 1; px = e.walk.x0 + dir * (((e.walk.speed || 0.7) * t + (e.phase || 0) * L) % L); yaw = dir > 0 ? 1.15 : -1.15; }
+    x.vrm.scene.position.set(px, x.baseY, e.z || 0); x.vrm.scene.rotation.y = yaw + (x.flip ? Math.PI : 0);
+    const em = x.vrm.expressionManager; em.setValue('blink', Math.sin(t * 2.0 + (e.phase || 0) * 9) > 0.965 ? 1 : 0); em.setValue('happy', reacting ? 0 : 0.12); em.setValue('surprised', reacting ? 0.7 : 0);
+    x.vrm.update(1 / FPS);
+  }
+}
 
 // ---------- gestures -> real recorded clips (Quaternius Universal Animation Library, CC0)
 const GESTURES = {
@@ -126,6 +145,7 @@ function camOf(spec, cur) {
   if (kind === 'wide') return [0, 1.2, 8.6, 0, 1.0];
   if (kind === 'mid') return a ? [px(a) * 0.5, 1.2, 5.2, px(a), 1.0] : [0, 1.2, 5.6, 0, 1.0];
   if (kind === 'low') return [0, 0.6, 5.2, 0, 1.0];
+  if (kind === 'high') return [0, 1.55, 6.6, 0, 1.45];
   if (kind === 'close') return [px(a) * 0.75, 1.22, 3.5, px(a), 1.17];
   if (kind === 'two') { const m = (px(a) + px(b)) / 2; return [m, 1.2, 4.4 + Math.abs(px(a) - px(b)) * 0.9, m, 1.0]; }
   if (kind === 'closeN') return camOf('close:N', cur); if (kind === 'closeA') return camOf('close:A', cur);
@@ -158,6 +178,7 @@ window.renderAt = (t) => {
     for (const n of ['surprised', 'happy', 'sad', 'angry']) e.setValue(n, (((g.face[n] || 0) * u) + ((prev.face[n] || 0) * (1 - u))) * (n === 'happy' ? 0.5 : 1));
     c.vrm.update(1 / FPS);
   }
+  (setUpdates[sName] || []).forEach((u) => u(t, idx, tlOf)); clouds.update(t); updateExtras(t, idx, sName);
   updateProps(t);
   const to = camOf(cur.cam, curPos), from = camOf(idx > 0 ? LINES[idx - 1].cam : cur.cam, curPos), cu = ease(clamp((t - (L ? L.start : 0)) / 0.6)), m = (i) => lerp(from[i], to[i], cu);
   camera.position.set(m(0), m(1), m(2)); camera.lookAt(m(3), m(4) - 0.1, 0);

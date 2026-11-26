@@ -33,6 +33,11 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 - Rendering is CPU only: about 5 frames per second at 720x1280 (a 90 s video takes roughly 9 to 10 minutes). Run it in the background and wait.
 - Use `CHROME=/opt/pw-browsers/chromium` (set in the environment). Run long jobs with `setsid nohup`, not in the foreground.
 
+## Feedback history
+- Round 1 (stickman/old kit): stiff animation rejected. Round 2: real recorded movement accepted as a big improvement.
+- Round 3 ("The Queue" story): narrator and Ms Rubin voices were fine; Alfie's voice (am_echo) was flat with no emotion, so it was replaced (emotion tags added, new voice being chosen by the owner). Staging was "dull and gloomy": the owner wants an epic, busy, colourful, information-rich world with many people of different races, modern clothes, costume changes, lots of props. The kit now has crowds, costumes (colour tints), a lively city street and bank interior, moving traffic, live screens and animated infographic cards.
+- The owner wants to be asked what makes the video unique and wants ideas offered.
+
 ## Known weaknesses / to do
 - No chair prop for sitting; eyes do not follow anything; lip-sync follows loudness only; some gestures are approximations (e.g. shrug).
 - Background characters and crowds are not built yet.
