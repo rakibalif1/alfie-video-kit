@@ -23,6 +23,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { VRMLoaderPlugin, VRMUtils } from '@pixiv/three-vrm';
+import { makeRetargeter } from '/retarget.js';
 
 const EP = await (await fetch('/ep/episode.json')).json();
 const TL = await (await fetch('/ep/tl.json')).json();
@@ -53,33 +54,18 @@ for (const [id, c] of Object.entries(EP.cast)) {
   const box = new THREE.Box3().setFromObject(vrm.scene), s = (slots[id] || { h: 1.55 }).h / (box.max.y - box.min.y);
   const slot = slots[id] || { x: 0, yaw: 0 };
   vrm.scene.scale.setScalar(s); vrm.scene.position.set(slot.x, -box.min.y * s, 0.3); vrm.scene.rotation.y += slot.yaw || 0;
-  cast[id] = { vrm, flip, baseY: -box.min.y * s, name: c.name || id };
+  const ag = await new GLTFLoader().loadAsync('/animations/UAL_Standard.glb');
+  cast[id] = { vrm, flip, baseY: -box.min.y * s, name: c.name || id, rt: makeRetargeter(THREE, ag, vrm, flip) };
 }
-const bone = (c, n) => c.vrm.humanoid.getNormalizedBoneNode(n);
-const q = (c, x, y, z) => new THREE.Quaternion().setFromEuler(new THREE.Euler(c.flip ? -x : x, y, c.flip ? -z : z));
-// arm(down: 1 hangs, 0 overhead; fwd: swing forward; bend: elbow)
-function arm(c, side, down, fwd, bend) {
-  const s = side === 'L' ? 1 : -1, phi = s * (-1.3 + 2.6 * (1 - down));
-  bone(c, side === 'L' ? 'leftUpperArm' : 'rightUpperArm').quaternion.copy(q(c, 0, -s * fwd, phi));
-  bone(c, side === 'L' ? 'leftLowerArm' : 'rightLowerArm').quaternion.copy(q(c, 0, -s * bend, 0));
-}
-// gesture library: returns {L:[down,fwd,bend], R:[...], head:[x,y,z], spine:[x,y,z], face:{surprised,happy,sad,angry}, hop}
-function gesture(name, t, tt, look) {
-  const k = ease(clamp(tt / 0.35)), sw = Math.sin(t * 1.3) * 0.02;
-  const g = { L: [1, 0.05, 0], R: [1, 0.05, 0], head: [0, 0, 0], spine: [sw, 0, 0], face: { happy: 0.15 }, hop: 0 };
-  switch (name) {
-    case 'listen': g.head = [0.04 + 0.03 * Math.sin(t * 2.4), look * 0.35, 0]; break;
-    case 'explain': g.R = [1 - 0.3 * k, 0.6 * k + Math.sin(t * 3.2) * 0.2 * k, 1.0 * k]; g.head = [0.03, look * 0.2, 0]; g.face = { happy: 0.2 }; break;
-    case 'panic': { const sh = Math.sin(t * 22) * 0.12 * k; g.L = [1 - 0.75 * k + sh, 0.55 * k, 0.9 * k]; g.R = [1 - 0.75 * k - sh, 0.55 * k, 0.9 * k]; g.head = [0, look * 0.3 + Math.sin(t * 14) * 0.18 * k, 0]; g.spine = [0.04 * k, Math.sin(t * 12) * 0.05 * k, 0]; g.face = { surprised: 0.9 * k }; break; }
-    case 'point': g.R = [1 - 0.45 * k, 1.05 * k, 0.1]; g.head = [0.05, look * 0.35, 0]; g.face = { sad: 0.15 * k, happy: 0.05 }; break;
-    case 'cheer': g.R = [1 - 0.85 * k + Math.sin(t * 16) * 0.05, 0.1 * k, 1.5 * k]; g.L = [1, 0.1, 0.2]; g.head = [-0.08, 0, 0]; g.face = { happy: 0.9 }; g.hop = Math.abs(Math.sin(tt * 7)) * 0.05 * k; break;
-    case 'shrug': g.L = [1 - 0.22 * k, 0.35 * k, 1.2 * k]; g.R = [1 - 0.22 * k, 0.35 * k, 1.2 * k]; g.head = [0, 0, 0.12 * k]; g.face = { sad: 0.2 * k }; break;
-    case 'wave': g.R = [1 - 0.8 * k, 0.1, 0.9 + Math.sin(t * 9) * 0.5 * k]; g.face = { happy: 0.8 }; break;
-    case 'nod': g.head = [0.12 * Math.sin(t * 6), 0, 0]; g.face = { happy: 0.3 }; break;
-    case 'angry': g.L = [1 - 0.3 * k, 0.2 * k, 1.1 * k]; g.R = [1 - 0.3 * k, 0.2 * k, 1.1 * k]; g.face = { angry: 0.8 * k }; g.head = [0.1, 0, 0]; break;
-  }
-  return g;
-}
+// gesture name -> real recorded animation clip (Quaternius Universal Animation Library, CC0) + a face expression
+const GESTURES = {
+  explain: { clip: 'Idle_Talking_Loop', face: { happy: 0.2 } }, listen: { clip: 'Idle_Loop', face: { happy: 0.1 } },
+  point: { clip: 'Interact', face: { happy: 0.1 } }, panic: { clip: 'Spell_Simple_Idle_Loop', face: { surprised: 0.9 } },
+  cheer: { clip: 'Dance_Loop', face: { happy: 0.9 } }, shrug: { clip: 'Idle_Torch_Loop', face: { sad: 0.2 } },
+  wave: { clip: 'Spell_Simple_Idle_Loop', face: { happy: 0.8 } }, nod: { clip: 'Idle_Talking_Loop', face: { happy: 0.3 } },
+  angry: { clip: 'Interact', face: { angry: 0.8 } }, walk: { clip: 'Walk_Loop', face: {} }, sit: { clip: 'Sitting_Talking_Loop', face: {} },
+};
+const gestureOf = (id, i) => { const l = EP.lines[i]; if (!l) return GESTURES.listen; const name = l.who === id ? (l.gesture || 'explain') : ((l.react && l.react[id]) || 'listen'); return l.clip && l.who === id ? { clip: l.clip, face: (GESTURES[name] || {}).face || {} } : (GESTURES[name] || GESTURES.explain); };
 
 // ---------- props
 const mats = { gold: new THREE.MeshStandardMaterial({ color: 0xe8b923, metalness: 0.6, roughness: 0.35 }) };
@@ -113,15 +99,15 @@ let sceneIdx = (t) => { let i = 0; for (let k = 0; k < TL.lines.length; k++) if 
 window.renderAt = (t) => {
   const idx = sceneIdx(t), L = TL.lines[idx], inLine = L && t >= L.start - 0.05 && t <= L.start + L.dur + 0.15, cur = lines[idx] || {};
   for (const [id, c] of Object.entries(cast)) {
-    const speaking = inLine && L.who === id, tt = speaking ? t - L.start : 0;
-    const other = id === 'N' ? 1 : -1;
-    const g = gesture(speaking ? (cur.gesture || 'explain') : (cur.react && cur.react[id]) || 'listen', t, speaking ? tt : Math.max(0, t - (L ? L.start : 0)), other);
-    arm(c, 'L', ...g.L); arm(c, 'R', ...g.R);
-    bone(c, 'head').quaternion.copy(q(c, ...g.head)); bone(c, 'spine').quaternion.copy(q(c, ...g.spine));
-    c.vrm.scene.position.y = c.baseY + Math.sin(t * 2.2 + (id === 'A' ? 1 : 0)) * 0.01 + g.hop;
+    const speaking = inLine && L.who === id, g = gestureOf(id, idx), prev = idx > 0 ? gestureOf(id, idx - 1) : g;
+    const u = ease(clamp((t - (L ? L.start : 0)) / 0.4));              // blend from the previous line's clip to this line's clip
+    const A = c.rt.sample(prev.clip, t), B = prev.clip === g.clip ? null : c.rt.sample(g.clip, t);
+    if (B) c.rt.apply(A, B, u); else c.rt.apply(A);
+    const hp = c.vrm.humanoid.getNormalizedBoneNode('hips').position; hp.x = A.rest.x; hp.z = A.rest.z;   // stay in place
+    c.vrm.scene.position.y = c.baseY;
     const e = c.vrm.expressionManager, mv = speaking ? (TL.mouth[Math.min(TL.mouth.length - 1, Math.round(t * FPS))] || 0) : 0;
     e.setValue('aa', mv * 0.9); e.setValue('blink', Math.sin(t * 2.1 + (id === 'A' ? 2 : 0)) > 0.965 ? 1 : 0);
-    for (const n of ['surprised', 'happy', 'sad', 'angry']) e.setValue(n, (g.face[n] || 0) * (n === 'happy' ? 0.5 : 1));
+    for (const n of ['surprised', 'happy', 'sad', 'angry']) e.setValue(n, ((g.face[n] || 0) * u + ((prev.face[n] || 0)) * (1 - u)) * (n === 'happy' ? 0.5 : 1));
     c.vrm.update(1 / FPS);
   }
   updateProps(t);

@@ -7,5 +7,6 @@ Free, code-made short videos with anime-style 3D characters (Alfie and The Narra
 - `skills/alfie-video/SKILL.md` - instructions for Claude
 - `examples/inflation/` - a sample episode
 - `characters/` - CC0 VRM characters, see `characters/LICENSES.md`
+- `animations/` - CC0 recorded movement clips (Quaternius), retargeted onto the characters by `web/retarget.js`
 
 Built with three.js, @pixiv/three-vrm (MIT) and kokoro-onnx. Rendering uses a headless browser on the CPU.

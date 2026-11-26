@@ -23,12 +23,12 @@ You write one small file, `episode.json`. The kit does everything else (voices, 
   "lines": [ {"who":"N","text":"...","gesture":"explain","cam":"wide","react":{"A":"shrug"}} ] }
 ```
 - `who`: N = Narrator (posh British voice), A = Alfie (young American voice), C = a third voice (needs a third cast entry with id "C").
-- gestures: explain, point, panic, cheer, shrug, wave, nod, angry (the other character listens, or use `react`).
+- gestures (each plays a real recorded animation, blended smoothly between lines): explain (talking with hand gestures), point, panic (hand raised, shocked face), cheer, shrug, wave, nod, angry, walk, sit. The character who is not speaking listens, or set `react`, e.g. "react":{"A":"shrug"}. For any other clip add "clip":"<name>" to a line; names are in animations/UAL_Standard.glb (e.g. Idle_Talking_Loop, Idle_Loop, Interact, Dance_Loop, Hit_Chest, Hit_Head, Walk_Loop, Jog_Fwd_Loop, Sitting_Talking_Loop, Spell_Simple_Idle_Loop, Punch_Jab, Sword_Attack, PickUp_Table, Roll). Characters stay in place; sitting has no chair prop yet.
 - cam: wide, mid, closeN, closeA, low. Change the camera on most lines.
 - props: coin (shrinks or grows), stack (coins pop up), bars (three bars rise or fall); line numbers start at 0.
 - Characters (free, CC0) are in `characters/`: Sakurada_Fumiriya, HairSample_Male (anime style); Bizdude, CoolMoneyBag, StonksReporter, Mister, HodlerKing, Mafiossini (toy style, only tested standing still). Do not mix anime and toy style in one scene without checking. See `characters/LICENSES.md`.
 
 ## Rules
-- Pose and look are limited: say so honestly. Do not claim film-quality CGI.
+- Movement comes from a free recorded library, so it is natural but generic: no custom acting, eyes do not follow anything, lip-sync follows loudness only. Say so honestly. Do not claim film-quality CGI.
 - To save tokens: write only episode.json, do not read the kit's source files unless something breaks, do not view every frame.
 - Ask the user questions whenever in doubt.

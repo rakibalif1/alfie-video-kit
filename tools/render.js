@@ -3,7 +3,7 @@ const http = require('http'), fs = require('fs'), path = require('path'), { spaw
 const ROOT = path.resolve(__dirname, '..'), EP = path.resolve(process.argv[2]);
 let pw; try { pw = require('playwright'); } catch (e) { pw = require(path.join(ROOT, 'node_modules/playwright')); }
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.vrm': 'application/octet-stream', '.css': 'text/css' };
-const map = (u) => u.startsWith('/ep/') ? path.join(EP, u.slice(4)) : u.startsWith('/characters/') ? path.join(ROOT, u) : u.startsWith('/node_modules/') ? path.join(ROOT, u) : path.join(ROOT, 'web', u === '/' ? 'scene.html' : u);
+const map = (u) => u.startsWith('/ep/') ? path.join(EP, u.slice(4)) : u.startsWith('/characters/') || u.startsWith('/animations/') ? path.join(ROOT, u) : u.startsWith('/node_modules/') ? path.join(ROOT, u) : path.join(ROOT, 'web', u === '/' ? 'scene.html' : u);
 const srv = http.createServer((req, res) => {
   const f = map(decodeURIComponent(req.url.split('?')[0]));
   fs.readFile(f, (err, buf) => { if (err) { res.writeHead(404); return res.end(); } res.writeHead(200, { 'Content-Type': types[path.extname(f)] || 'application/octet-stream' }); res.end(buf); });
