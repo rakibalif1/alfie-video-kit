@@ -1,5 +1,5 @@
 {
- "title": "The Queue (Northern Rock 2007)",
+ "title": "The Queue: the 2007 bank run",
  "cast": {
   "N": {
    "model": "Sakurada_Fumiriya",
@@ -978,5 +978,6 @@
     "clip": "Spell_Simple_Idle_Loop"
    }
   }
- ]
+ ],
+ "series": "MONEY STORIES"
 }

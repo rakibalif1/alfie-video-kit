@@ -5,7 +5,7 @@ import numpy as np, soundfile as sf
 from kokoro_onnx import Kokoro, EspeakConfig
 import espeakng_loader
 MODELS = os.path.join(os.environ.get("ALFIE_HOME", os.path.expanduser("~/.alfie")), "models")
-VOICES = {"N": ["bm_lewis", 0.95, "en-gb"], "A": ["am_echo", 1.08, "en-us"], "C": ["af_heart", 1.1, "en-us"], "V": ["af_bella", 1.05, "en-us"], "R": ["bf_isabella", 1.0, "en-gb"], "S": ["af_nicole", 1.05, "en-us"]}  # N narrator, A Alfie, V/R/S/C extras (override in episode.json "voices"): voice, speed, language
+VOICES = {"N": ["bm_lewis", 0.95, "en-gb"], "A": ["am_michael", 1.08, "en-us"], "C": ["af_heart", 1.1, "en-us"], "V": ["af_bella", 1.05, "en-us"], "R": ["bf_isabella", 1.0, "en-gb"], "S": ["af_nicole", 1.05, "en-us"]}  # N narrator, A Alfie, V/R/S/C extras (override in episode.json "voices"): voice, speed, language
 if os.path.exists("voices.json"): VOICES.update(json.load(open("voices.json")))
 data = espeakng_loader.get_data_path()
 if len(data) > 100:

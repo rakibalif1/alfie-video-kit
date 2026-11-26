@@ -4,6 +4,7 @@
 <div style="position:relative;width:720px;height:1280px">
 <canvas id="c" width="720" height="1280" style="width:720px;height:1280px;display:block"></canvas>
 <div id="cap" style="position:absolute;left:30px;right:30px;bottom:95px;text-align:center;font:800 46px/1.12 Arial,Helvetica,sans-serif;color:#fff;-webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:0 4px 0 #000"></div>
+<div id="series" style="position:absolute;right:26px;top:44px;font:800 30px Arial;color:#fff;background:#d62828;padding:7px 16px;border-radius:14px;letter-spacing:1px"></div>
 <div id="who" style="position:absolute;left:30px;top:40px;font:700 34px Arial;color:#1d3557;background:#ffffffcc;padding:8px 18px;border-radius:20px"></div>
 </div>
 <script type="importmap">
@@ -182,6 +183,7 @@ window.renderAt = (t) => {
   updateProps(t);
   const to = camOf(cur.cam, curPos), from = camOf(idx > 0 ? LINES[idx - 1].cam : cur.cam, curPos), cu = ease(clamp((t - (L ? L.start : 0)) / 0.6)), m = (i) => lerp(from[i], to[i], cu);
   camera.position.set(m(0), m(1), m(2)); camera.lookAt(m(3), m(4) - 0.1, 0);
+  document.getElementById('series').textContent = EP.series || '';
   document.getElementById('cap').textContent = inLine ? L.text : '';
   document.getElementById('who').textContent = inLine ? (cast[L.who] ? cast[L.who].name : L.who).toUpperCase() : '';
   renderer.render(scene, camera);

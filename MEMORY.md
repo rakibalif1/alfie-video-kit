@@ -3,6 +3,7 @@
 This repo is public. It holds decisions and preferences for the owner's video project. No personal details belong here.
 
 ## The project
+- Series format: **MONEY STORIES** = 60 to 90 second animated retellings of real UK money events (Northern Rock bank run done as episode 1). Always: a busy colourful screen (live news screens, tickers, infographic cards, crowd that reacts), the same cast (Alfie the viewer's stand-in, the posh Narrator, supporting characters), a real fact behind every story, a motivating end and "This is not financial advice." Idea list: Black Wednesday 1992, South Sea Bubble 1720, Barings 1995, inflation, compound interest, Bank of England rates.
 - Faceless YouTube / Shorts channel. Topics: money, banking and trading explained simply (UK context), plus short story-style videos.
 - Everything is made with code and free tools: no paid APIs, no ElevenLabs, no credits.
 - The owner is not a prompt expert: they give a one-line idea, Claude turns it into the script, plan and video. They do not want to repeat themselves.
@@ -20,7 +21,7 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 - Keep what is saved on the account: the setup script is on the Default cloud environment. It has a 100-line limit, so keep it small and test any change before saving.
 
 ## Characters and voices (all free)
-- **Alfie**: young male, anime style (HairSample_Male), voice `am_echo` (young American). Series hero.
+- **Alfie**: young male, anime style (HairSample_Male, orange hoodie look), voice `am_michael` (young American, chosen by the owner, with emotion tags). Series hero.
 - **The Narrator**: posh British (Sakurada_Fumiriya), voice `bm_lewis`.
 - Supporting: Vivi (Vivi, voice af_bella), Ms Rubin the manager (Victoria_Rubin, voice bf_isabella). More CC0 characters are listed in `characters/LICENSES.md`; toy-style ones were only tested standing still.
 - Voice codes in episode lines: N narrator, A Alfie, V Vivi, R Rubin, S, C extras. Override per episode with `"voices"` in episode.json.
