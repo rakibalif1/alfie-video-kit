@@ -1,0 +1,333 @@
+{
+  "title": "The Queue (Northern Rock 2007)",
+  "cast": {
+    "N": {
+      "model": "Sakurada_Fumiriya",
+      "name": "The Narrator"
+    },
+    "A": {
+      "model": "HairSample_Male",
+      "name": "Alfie"
+    },
+    "V": {
+      "model": "Vivi",
+      "name": "Vivi"
+    },
+    "R": {
+      "model": "Victoria_Rubin",
+      "name": "Ms Rubin"
+    }
+  },
+  "voices": {
+    "V": [
+      "af_bella",
+      1.08,
+      "en-us"
+    ],
+    "R": [
+      "bf_isabella",
+      0.98,
+      "en-gb"
+    ]
+  },
+  "sets": {
+    "street": {
+      "sky": "#bcd9ff",
+      "floor": "#cfc8b4",
+      "skylineVisible": false,
+      "cast": [
+        "N",
+        "A",
+        "V"
+      ],
+      "layout": {
+        "N": {
+          "x": -1.0,
+          "yaw": 0.45
+        },
+        "A": {
+          "x": -0.1,
+          "yaw": 0.1
+        },
+        "V": {
+          "x": 2.1,
+          "z": 0.2,
+          "yaw": -0.6
+        }
+      },
+      "pieces": [
+        {
+          "type": "wall",
+          "color": "#d8c9a8",
+          "zz": -2.6,
+          "h": 3.8
+        },
+        {
+          "type": "sign",
+          "text": "BANK",
+          "x": 0,
+          "z": -2.45,
+          "y": 2.9,
+          "w": 2.2
+        },
+        {
+          "type": "posts",
+          "x": -1.3,
+          "z": 1.1,
+          "n": 5,
+          "gap": 0.65
+        }
+      ]
+    },
+    "bank": {
+      "sky": "#efe4c8",
+      "floor": "#b99b6b",
+      "skylineVisible": false,
+      "cast": [
+        "N",
+        "A",
+        "V",
+        "R"
+      ],
+      "layout": {
+        "A": {
+          "x": -0.45,
+          "z": 0.9,
+          "yaw": 0.3
+        },
+        "V": {
+          "x": -0.95,
+          "z": 0.8,
+          "yaw": 0.4
+        },
+        "R": {
+          "x": 0.2,
+          "z": -0.45,
+          "yaw": 0
+        },
+        "N": {
+          "x": 0.95,
+          "z": 0.6,
+          "yaw": -0.45
+        }
+      },
+      "pieces": [
+        {
+          "type": "wall",
+          "color": "#efe4c8",
+          "zz": -2.1,
+          "h": 3.6
+        },
+        {
+          "type": "vault",
+          "x": 0.2,
+          "z": -1.95
+        },
+        {
+          "type": "counter",
+          "x": 0.2,
+          "z": 0.0,
+          "w": 1.9
+        }
+      ]
+    },
+    "calm": {
+      "sky": "#ffe3c4",
+      "floor": "#cfc8b4",
+      "skylineVisible": false,
+      "cast": [
+        "N",
+        "A",
+        "V"
+      ],
+      "layout": {
+        "N": {
+          "x": -1.0,
+          "yaw": 0.45
+        },
+        "A": {
+          "x": -0.1,
+          "yaw": 0.1
+        },
+        "V": {
+          "x": 0.85,
+          "yaw": -0.4
+        }
+      },
+      "pieces": [
+        {
+          "type": "wall",
+          "color": "#ecd9b5",
+          "zz": -2.6,
+          "h": 3.8
+        },
+        {
+          "type": "sign",
+          "text": "BANK",
+          "x": 0,
+          "z": -2.45,
+          "y": 2.9,
+          "w": 2.2
+        },
+        {
+          "type": "tree",
+          "x": 1.7,
+          "z": -1.0
+        },
+        {
+          "type": "tree",
+          "x": -1.9,
+          "z": -1.2
+        }
+      ]
+    }
+  },
+  "lines": [
+    {
+      "who": "N",
+      "set": "street",
+      "text": "September 2007. Thousands of people queue outside a British bank to take their savings out.",
+      "gesture": "explain",
+      "cam": "wide"
+    },
+    {
+      "who": "N",
+      "text": "Nobody robbed it. Nothing was stolen. So why did the bank start to fall apart?",
+      "gesture": "explain",
+      "cam": "mid:N"
+    },
+    {
+      "who": "V",
+      "text": "Alfie! Alfie! Have you seen the news? Our bank is in trouble!",
+      "gesture": "panic",
+      "cam": "two:A:V",
+      "move": {
+        "V": {
+          "x": 0.7,
+          "z": 0.2,
+          "yaw": -0.4
+        }
+      },
+      "react": {
+        "A": "listen"
+      }
+    },
+    {
+      "who": "A",
+      "text": "What?! My savings are in there! Everything I have!",
+      "gesture": "panic",
+      "cam": "close:A",
+      "react": {
+        "V": "panic"
+      }
+    },
+    {
+      "who": "V",
+      "text": "Come on, get in the queue before it all runs out!",
+      "gesture": "point",
+      "cam": "two:A:V",
+      "move": {
+        "A": {
+          "x": -0.5,
+          "yaw": 0.3
+        },
+        "V": {
+          "x": 0.2
+        }
+      }
+    },
+    {
+      "who": "A",
+      "set": "bank",
+      "text": "Please, I need all my money out. Right now!",
+      "gesture": "panic",
+      "cam": "two:A:R"
+    },
+    {
+      "who": "R",
+      "text": "I'm sorry, Alfie. Your money isn't sitting in a box with your name on it.",
+      "gesture": "shrug",
+      "cam": "close:R",
+      "react": {
+        "A": "panic"
+      }
+    },
+    {
+      "who": "R",
+      "text": "When you save a hundred pounds, we lend most of it to people buying homes. We keep only a little as cash.",
+      "gesture": "explain",
+      "cam": "mid:R",
+      "react": {
+        "A": "listen",
+        "V": "listen"
+      }
+    },
+    {
+      "who": "A",
+      "text": "What?! So where is my money?!",
+      "gesture": "panic",
+      "cam": "close:A",
+      "react": {
+        "R": "listen"
+      }
+    },
+    {
+      "who": "R",
+      "text": "In thousands of mortgages. That works perfectly, until everyone asks for it back on the same day.",
+      "gesture": "point",
+      "cam": "two:A:R",
+      "react": {
+        "A": "shrug"
+      }
+    },
+    {
+      "who": "N",
+      "text": "That is a bank run. The longer the queue, the more people panic. And the panic itself becomes the crisis.",
+      "gesture": "explain",
+      "cam": "wide"
+    },
+    {
+      "who": "N",
+      "text": "It happened to Northern Rock. The queues lasted four days, until the government guaranteed savers' money. Within five months, the bank was nationalised.",
+      "gesture": "explain",
+      "cam": "mid:N"
+    },
+    {
+      "who": "N",
+      "set": "calm",
+      "text": "Today, UK savings are protected up to a limit by the Financial Services Compensation Scheme. Check the current limit yourself.",
+      "gesture": "explain",
+      "cam": "wide"
+    },
+    {
+      "who": "A",
+      "text": "So... I panicked for nothing?",
+      "gesture": "shrug",
+      "cam": "close:A"
+    },
+    {
+      "who": "V",
+      "text": "Not for nothing. You learned something. Panic is expensive, Alfie.",
+      "gesture": "point",
+      "cam": "two:A:V",
+      "react": {
+        "A": "nod"
+      }
+    },
+    {
+      "who": "N",
+      "text": "Know where your money lives. Stay calm. Check what is protected. This is not financial advice.",
+      "gesture": "explain",
+      "cam": "mid:N"
+    },
+    {
+      "who": "A",
+      "text": "Right. Deep breaths. Fancy a cup of tea?",
+      "gesture": "cheer",
+      "cam": "two:A:V",
+      "react": {
+        "V": "cheer"
+      }
+    }
+  ]
+}

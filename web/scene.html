@@ -3,7 +3,7 @@
 <body style="margin:0;background:#000;overflow:hidden">
 <div style="position:relative;width:720px;height:1280px">
 <canvas id="c" width="720" height="1280" style="width:720px;height:1280px;display:block"></canvas>
-<div id="cap" style="position:absolute;left:30px;right:30px;bottom:150px;text-align:center;font:800 54px/1.15 Arial,Helvetica,sans-serif;color:#fff;-webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:0 4px 0 #000"></div>
+<div id="cap" style="position:absolute;left:30px;right:30px;bottom:95px;text-align:center;font:800 46px/1.12 Arial,Helvetica,sans-serif;color:#fff;-webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:0 4px 0 #000"></div>
 <div id="who" style="position:absolute;left:30px;top:40px;font:700 34px Arial;color:#1d3557;background:#ffffffcc;padding:8px 18px;border-radius:20px"></div>
 </div>
 <script type="importmap">
@@ -27,51 +27,80 @@ import { makeRetargeter } from '/retarget.js';
 
 const EP = await (await fetch('/ep/episode.json')).json();
 const TL = await (await fetch('/ep/tl.json')).json();
-const W = 720, H = 1280, FPS = TL.fps;
+const W = 720, H = 1280, FPS = TL.fps, LINES = EP.lines;
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), ease = (a) => a * a * (3 - 2 * a), lerp = (a, b, u) => a + (b - a) * u;
 
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true, preserveDrawingBuffer: true });
 renderer.setPixelRatio(1); renderer.setSize(W, H, false);
-const scene = new THREE.Scene();
-const bg = new THREE.Color((EP.set && EP.set.sky) || 0xcfe3ff); scene.background = bg; scene.fog = new THREE.Fog(bg, 7, 15);
-const floor = new THREE.Mesh(new THREE.CircleGeometry(5, 64), new THREE.MeshStandardMaterial({ color: (EP.set && EP.set.floor) || 0xfff1c9, roughness: 1 }));
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xcfe3ff); scene.fog = new THREE.Fog(0xcfe3ff, 8, 18);
+const floor = new THREE.Mesh(new THREE.CircleGeometry(6, 64), new THREE.MeshStandardMaterial({ color: 0xfff1c9, roughness: 1 }));
 floor.rotation.x = -Math.PI / 2; scene.add(floor);
-const skyline = (EP.set && EP.set.skyline) || [0xa8c7fa, 0x9fb8e8, 0xb9d3ff];
-for (let i = 0; i < 7; i++) {
-  const hh = 2.2 + (i % 3) * 0.6, b = new THREE.Mesh(new THREE.BoxGeometry(0.9, hh, 0.3), new THREE.MeshStandardMaterial({ color: skyline[i % skyline.length], roughness: 1 }));
-  b.position.set(-3 + i, hh / 2, -3.2); scene.add(b);
-}
+const blocks = [];
+for (let i = 0; i < 9; i++) { const hh = 2.2 + (i % 3) * 0.6, b = new THREE.Mesh(new THREE.BoxGeometry(0.9, hh, 0.3), new THREE.MeshStandardMaterial({ color: 0xa8c7fa, roughness: 1 })); b.position.set(-4 + i, hh / 2, -3.4); scene.add(b); blocks.push(b); }
 const key = new THREE.DirectionalLight(0xffffff, Math.PI * 0.9); key.position.set(1.5, 2.5, 2.5); scene.add(key); scene.add(new THREE.AmbientLight(0xffffff, 0.9));
-const camera = new THREE.PerspectiveCamera(30, W / H, 0.1, 30);
+const camera = new THREE.PerspectiveCamera(30, W / H, 0.1, 40);
+
+// ---------- sets (backdrop colours, set pieces, who is on stage)
+const SETS = EP.sets || { default: {} };
+const setOf = []; LINES.forEach((l, i) => { setOf[i] = l.set || (i > 0 ? setOf[i - 1] : Object.keys(SETS)[0]); });
+const labelTex = (text, bg, fg, w = 512, h = 256) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); g.fillStyle = bg; g.fillRect(0, 0, w, h); g.fillStyle = fg; g.font = `bold ${Math.floor(h * 0.4)}px Arial`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(text, w / 2, h / 2 + 6); return new THREE.CanvasTexture(c); };
+const mat = (c) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.9 });
+function buildPiece(p) {
+  const g = new THREE.Group(); g.position.set(p.x || 0, 0, p.z || 0);
+  if (p.type === 'counter') { const w = p.w || 1.8; const b = new THREE.Mesh(new THREE.BoxGeometry(w, 0.95, 0.55), mat(p.color || 0x8d6e4b)); b.position.y = 0.475; const t = new THREE.Mesh(new THREE.BoxGeometry(w + 0.1, 0.07, 0.65), mat(0xe9dcc3)); t.position.y = 0.98; g.add(b, t); }
+  if (p.type === 'vault') { const d = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.85, 0.2, 48), new THREE.MeshStandardMaterial({ color: 0x9aa3ad, metalness: 0.7, roughness: 0.35 })); d.rotation.x = Math.PI / 2; d.position.y = 1.2; const r = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.05, 12, 40), mat(0x5c6670)); r.position.set(0, 1.2, 0.12); const h = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.08, 0.08), mat(0x5c6670)); h.position.set(0, 1.2, 0.2); const h2 = h.clone(); h2.rotation.z = Math.PI / 2; g.add(d, r, h, h2); }
+  if (p.type === 'sign') { const m = new THREE.Mesh(new THREE.PlaneGeometry(p.w || 1.6, (p.w || 1.6) / 2), new THREE.MeshBasicMaterial({ map: labelTex(p.text || 'BANK', p.bg || '#1d3557', p.fg || '#ffffff') })); m.position.y = p.y || 2.4; g.add(m); }
+  if (p.type === 'wall') { const m = new THREE.Mesh(new THREE.BoxGeometry(p.w || 9, p.h || 3.4, 0.2), mat(p.color || 0xefe4c8)); m.position.set(0, (p.h || 3.4) / 2, p.zz ?? -2.0); g.position.z = 0; g.add(m); }
+  if (p.type === 'posts') { for (let i = 0; i < (p.n || 4); i++) { const post = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 0.9, 12), mat(0x333b4a)); post.position.set(i * (p.gap || 0.7), 0.45, 0); g.add(post); if (i) { const rope = new THREE.Mesh(new THREE.BoxGeometry(p.gap || 0.7, 0.04, 0.04), mat(0xc0392b)); rope.position.set((i - 0.5) * (p.gap || 0.7), 0.8, 0); g.add(rope); } } }
+  if (p.type === 'tree') { const tr = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.14, 1.0, 10), mat(0x7a5a3a)); tr.position.y = 0.5; const lf = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 12), mat(0x52b788)); lf.position.y = 1.35; g.add(tr, lf); }
+  return g;
+}
+const setGroups = {};
+for (const [name, s] of Object.entries(SETS)) { const g = new THREE.Group(); (s.pieces || []).forEach((p) => g.add(buildPiece(p))); g.visible = false; scene.add(g); setGroups[name] = g; }
+let activeSet = null;
+function applySet(name) {
+  if (name === activeSet) return; activeSet = name; const s = SETS[name] || {};
+  scene.background.set(s.sky || '#cfe3ff'); scene.fog.color.set(s.sky || '#cfe3ff'); floor.material.color.set(s.floor || '#fff1c9');
+  const sk = s.skyline || ['#a8c7fa', '#9fb8e8', '#b9d3ff']; blocks.forEach((b, i) => { b.material.color.set(sk[i % sk.length]); b.visible = s.skylineVisible !== false; });
+  for (const [n, g] of Object.entries(setGroups)) g.visible = n === name;
+}
 
 // ---------- cast
 const loader = new GLTFLoader(); loader.register((p) => new VRMLoaderPlugin(p));
+const DEFAULT_LAYOUT = { N: { x: -0.95, z: 0, yaw: 0.4, h: 1.6 }, A: { x: 0.0, z: 0, yaw: 0, h: 1.5 }, V: { x: 0.9, z: 0, yaw: -0.4, h: 1.45 }, R: { x: 0.9, z: 0, yaw: -0.4, h: 1.55 }, S: { x: 0.9, z: 0, yaw: -0.4, h: 1.5 }, C: { x: 0.9, z: 0, yaw: -0.4, h: 1.5 } };
+const slotFor = (id, setName) => ({ ...(DEFAULT_LAYOUT[id] || { x: 0, z: 0, yaw: 0, h: 1.5 }), ...((EP.layout || {})[id] || {}), ...(((SETS[setName] || {}).layout || {})[id] || {}) });
 const cast = {};
-const slots = EP.layout || { N: { x: -0.45, yaw: 0.35, h: 1.6 }, A: { x: 0.42, yaw: -0.35, h: 1.5 } };
 for (const [id, c] of Object.entries(EP.cast)) {
   const vrm = (await loader.loadAsync('/characters/' + c.model + '.vrm')).userData.vrm; VRMUtils.rotateVRM0(vrm); scene.add(vrm.scene);
   const flip = !!(vrm.meta && vrm.meta.metaVersion === '0'); vrm.update(0);
-  const box = new THREE.Box3().setFromObject(vrm.scene), s = (slots[id] || { h: 1.55 }).h / (box.max.y - box.min.y);
-  const slot = slots[id] || { x: 0, yaw: 0 };
-  vrm.scene.scale.setScalar(s); vrm.scene.position.set(slot.x, -box.min.y * s, 0.3); vrm.scene.rotation.y += slot.yaw || 0;
+  const box = new THREE.Box3().setFromObject(vrm.scene), s = slotFor(id).h / (box.max.y - box.min.y);
+  vrm.scene.scale.setScalar(s);
   const ag = await new GLTFLoader().loadAsync('/animations/UAL_Standard.glb');
-  cast[id] = { vrm, flip, baseY: -box.min.y * s, name: c.name || id, rt: makeRetargeter(THREE, ag, vrm, flip) };
+  cast[id] = { vrm, flip, baseY: -box.min.y * s, name: c.name || id, rt: makeRetargeter(THREE, ag, vrm, flip), x: 0, z: 0 };
 }
-// gesture name -> real recorded animation clip (Quaternius Universal Animation Library, CC0) + a face expression
+const ids = Object.keys(cast);
+// per-line stage positions: a set change places everyone at the set layout; "move" walks characters to new spots
+const P = [];
+LINES.forEach((l, i) => {
+  const changed = i === 0 || setOf[i] !== setOf[i - 1]; P[i] = {};
+  for (const id of ids) { const from = changed ? slotFor(id, setOf[i]) : P[i - 1][id].to, mv = l.move && l.move[id]; P[i][id] = { from: { ...from }, to: mv ? { ...from, ...mv } : { ...from } }; }
+});
+
+// ---------- gestures -> real recorded clips (Quaternius Universal Animation Library, CC0)
 const GESTURES = {
   explain: { clip: 'Idle_Talking_Loop', face: { happy: 0.2 } }, listen: { clip: 'Idle_Loop', face: { happy: 0.1 } },
   point: { clip: 'Interact', face: { happy: 0.1 } }, panic: { clip: 'Spell_Simple_Idle_Loop', face: { surprised: 0.9 } },
   cheer: { clip: 'Dance_Loop', face: { happy: 0.9 } }, shrug: { clip: 'Idle_Torch_Loop', face: { sad: 0.2 } },
   wave: { clip: 'Spell_Simple_Idle_Loop', face: { happy: 0.8 } }, nod: { clip: 'Idle_Talking_Loop', face: { happy: 0.3 } },
   angry: { clip: 'Interact', face: { angry: 0.8 } }, walk: { clip: 'Walk_Loop', face: {} }, sit: { clip: 'Sitting_Talking_Loop', face: {} },
+  flinch: { clip: 'Hit_Chest', face: { surprised: 0.8 } }, run: { clip: 'Jog_Fwd_Loop', face: { surprised: 0.4 } },
 };
-const gestureOf = (id, i) => { const l = EP.lines[i]; if (!l) return GESTURES.listen; const name = l.who === id ? (l.gesture || 'explain') : ((l.react && l.react[id]) || 'listen'); return l.clip && l.who === id ? { clip: l.clip, face: (GESTURES[name] || {}).face || {} } : (GESTURES[name] || GESTURES.explain); };
+const gestureOf = (id, i) => { const l = LINES[i]; if (!l) return GESTURES.listen; const name = l.who === id ? (l.gesture || 'explain') : ((l.react && l.react[id]) || 'listen'); const base = GESTURES[name] || GESTURES.explain; return l.clip && l.who === id ? { clip: l.clip, face: base.face || {} } : base; };
 
-// ---------- props
+// ---------- props (coin / stack / bars) as before
 const mats = { gold: new THREE.MeshStandardMaterial({ color: 0xe8b923, metalness: 0.6, roughness: 0.35 }) };
 function poundTex() { const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d'); g.fillStyle = '#f5c518'; g.fillRect(0, 0, 256, 256); g.strokeStyle = '#b8860b'; g.lineWidth = 14; g.beginPath(); g.arc(128, 128, 110, 0, 7); g.stroke(); g.fillStyle = '#8a6508'; g.font = 'bold 150px Arial'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText((EP.currency || '£'), 128, 138); return new THREE.CanvasTexture(c); }
-const tex = poundTex();
-const faceMats = [mats.gold, new THREE.MeshStandardMaterial({ map: tex }), new THREE.MeshStandardMaterial({ map: tex })];
+const tex = poundTex(), faceMats = [mats.gold, new THREE.MeshStandardMaterial({ map: tex }), new THREE.MeshStandardMaterial({ map: tex })];
 const lineStart = (i) => (TL.lines[Math.min(i, TL.lines.length - 1)] || { start: 0 }).start;
 const lineEnd = (i) => { const l = TL.lines[Math.min(i, TL.lines.length - 1)] || { start: 0, dur: 0 }; return l.start + l.dur; };
 const props = (EP.props || []).map((p) => {
@@ -84,36 +113,53 @@ const props = (EP.props || []).map((p) => {
 function updateProps(t) {
   for (const o of props) {
     const p = o.cfg, a = lineStart(p.fromLine ?? 0), b = lineEnd(p.toLine ?? p.fromLine ?? 0), u = ease(clamp((t - a) / Math.max(0.01, b - a)));
-    if (p.type === 'coin') { const sc = lerp(p.scale ? p.scale[0] : 1, p.scale ? p.scale[1] : 0.4, u); o.obj.scale.setScalar(sc); o.obj.rotation.y = t * 1.2; o.obj.position.y = (p.y ?? 1.95) - 0.15 * u + Math.sin(t * 3) * 0.02; }
-    if (p.type === 'stack') o.items.forEach((m, i) => { const k = clamp((t - a - i * 0.3) / 0.25); m.visible = k > 0; m.scale.setScalar(ease(k)); });
-    if (p.type === 'bars') o.items.forEach((m, i) => { const h = Math.max(0.02, lerp((p.from || [0.3, 0.4, 0.5])[i], (p.to || [0.4, 0.8, 1.2])[i], u)); m.scale.y = h; m.position.y = h / 2; });
+    const show = p.setName ? setOf[sceneIdx(t)] === p.setName : true;
+    if (p.type === 'coin') { o.obj.visible = show; o.obj.scale.setScalar(lerp(p.scale ? p.scale[0] : 1, p.scale ? p.scale[1] : 0.4, u)); o.obj.rotation.y = t * 1.2; o.obj.position.y = (p.y ?? 1.95) - 0.15 * u + Math.sin(t * 3) * 0.02; }
+    if (p.type === 'stack') o.items.forEach((m, i) => { const k = clamp((t - a - i * 0.3) / 0.25); m.visible = show && k > 0; m.scale.setScalar(ease(k)); });
+    if (p.type === 'bars') o.items.forEach((m, i) => { const h = Math.max(0.02, lerp((p.from || [0.3, 0.4, 0.5])[i], (p.to || [0.4, 0.8, 1.2])[i], u)); m.visible = show; m.scale.y = h; m.position.y = h / 2; });
   }
 }
 
-// ---------- camera presets
-const CAM = { wide: [0, 1.15, 6.2, 0, 0.95], mid: [0, 1.2, 5.5, 0, 1.0], closeN: [-0.25, 1.25, 3.4, -0.4, 1.2], closeA: [0.25, 1.2, 3.4, 0.4, 1.15], low: [0, 0.6, 5.0, 0, 1.0] };
-const camOf = (name) => CAM[name] || CAM.wide;
-const lines = EP.lines;
-let sceneIdx = (t) => { let i = 0; for (let k = 0; k < TL.lines.length; k++) if (t >= TL.lines[k].start - 0.05) i = k; return i; };
+// ---------- camera: wide, mid, low, close:ID, mid:ID, two:ID:ID  (presets follow the characters)
+function camOf(spec, cur) {
+  const [kind, a, b] = String(spec || 'wide').split(':'), px = (id) => (cur[id] ? cur[id].x : 0);
+  if (kind === 'wide') return [0, 1.2, 8.6, 0, 1.0];
+  if (kind === 'mid') return a ? [px(a) * 0.5, 1.2, 5.2, px(a), 1.0] : [0, 1.2, 5.6, 0, 1.0];
+  if (kind === 'low') return [0, 0.6, 5.2, 0, 1.0];
+  if (kind === 'close') return [px(a) * 0.75, 1.22, 3.5, px(a), 1.17];
+  if (kind === 'two') { const m = (px(a) + px(b)) / 2; return [m, 1.2, 4.4 + Math.abs(px(a) - px(b)) * 0.9, m, 1.0]; }
+  if (kind === 'closeN') return camOf('close:N', cur); if (kind === 'closeA') return camOf('close:A', cur);
+  return [0, 1.2, 8.6, 0, 1.0];
+}
+const sceneIdx = (t) => { let i = 0; for (let k = 0; k < TL.lines.length; k++) if (t >= TL.lines[k].start - 0.05) i = k; return i; };
 
 window.renderAt = (t) => {
-  const idx = sceneIdx(t), L = TL.lines[idx], inLine = L && t >= L.start - 0.05 && t <= L.start + L.dur + 0.15, cur = lines[idx] || {};
+  const idx = sceneIdx(t), L = TL.lines[idx], inLine = L && t >= L.start - 0.05 && t <= L.start + L.dur + 0.15, cur = LINES[idx] || {}, sName = setOf[idx], S = SETS[sName] || {};
+  applySet(sName);
+  const curPos = {};
   for (const [id, c] of Object.entries(cast)) {
+    const onStage = !S.cast || S.cast.includes(id); c.vrm.scene.visible = onStage; if (!onStage) continue;
+    const pp = P[idx][id], dx = pp.to.x - pp.from.x, dz = pp.to.z - pp.from.z, moving = Math.abs(dx) + Math.abs(dz) > 0.01;
+    const dur = Math.min(2.2, Math.max(1.0, (L ? L.dur : 1)));
+    const lp = moving ? clamp((t - (L ? L.start : 0)) / dur) : 1, uu = ease(lp), walkW = moving && lp < 1 ? clamp(Math.min(lp * 8, (1 - lp) * 8)) : 0;
+    const x = lerp(pp.from.x, pp.to.x, uu), z = lerp(pp.from.z, pp.to.z, uu), baseYaw = lerp(pp.from.yaw || 0, pp.to.yaw || 0, uu);
+    const walkYaw = Math.abs(dx) >= Math.abs(dz) ? (dx > 0 ? 1.15 : -1.15) : (dz > 0 ? 0 : Math.PI), yaw = baseYaw + walkW * (walkYaw - baseYaw);
+    curPos[id] = { x, z }; c.x = x; c.z = z;
     const speaking = inLine && L.who === id, g = gestureOf(id, idx), prev = idx > 0 ? gestureOf(id, idx - 1) : g;
-    const u = ease(clamp((t - (L ? L.start : 0)) / 0.4));              // blend from the previous line's clip to this line's clip
-    const A = c.rt.sample(prev.clip, t), B = prev.clip === g.clip ? null : c.rt.sample(g.clip, t);
-    if (B) c.rt.apply(A, B, u); else c.rt.apply(A);
-    const hp = c.vrm.humanoid.getNormalizedBoneNode('hips').position; hp.x = A.rest.x; hp.z = A.rest.z;   // stay in place
-    c.vrm.scene.position.y = c.baseY;
+    const u = ease(clamp((t - (L ? L.start : 0)) / 0.4));
+    const A = c.rt.sample(prev.clip, t);
+    let pose = prev.clip === g.clip ? A : c.rt.blend(A, c.rt.sample(g.clip, t), u);
+    if (walkW > 0) pose = c.rt.blend(pose, c.rt.sample('Walk_Loop', t), walkW);
+    c.rt.apply(pose);
+    const hp = c.vrm.humanoid.getNormalizedBoneNode('hips').position; hp.x = pose.rest.x; hp.z = pose.rest.z;   // locomotion comes from moving the whole figure
+    c.vrm.scene.position.set(x, c.baseY, z + 0.3); c.vrm.scene.rotation.y = yaw + (c.flip ? Math.PI : 0);
     const e = c.vrm.expressionManager, mv = speaking ? (TL.mouth[Math.min(TL.mouth.length - 1, Math.round(t * FPS))] || 0) : 0;
-    e.setValue('aa', mv * 0.9); e.setValue('blink', Math.sin(t * 2.1 + (id === 'A' ? 2 : 0)) > 0.965 ? 1 : 0);
-    for (const n of ['surprised', 'happy', 'sad', 'angry']) e.setValue(n, ((g.face[n] || 0) * u + ((prev.face[n] || 0)) * (1 - u)) * (n === 'happy' ? 0.5 : 1));
+    e.setValue('aa', mv * 0.9); e.setValue('blink', Math.sin(t * 2.1 + ids.indexOf(id) * 1.7) > 0.965 ? 1 : 0);
+    for (const n of ['surprised', 'happy', 'sad', 'angry']) e.setValue(n, (((g.face[n] || 0) * u) + ((prev.face[n] || 0) * (1 - u))) * (n === 'happy' ? 0.5 : 1));
     c.vrm.update(1 / FPS);
   }
   updateProps(t);
-  // camera: blend from the previous line's preset to this line's preset during the first 0.6 s
-  const to = camOf(cur.cam), from = camOf(idx > 0 ? lines[idx - 1].cam : cur.cam), u = ease(clamp((t - (L ? L.start : 0)) / 0.6));
-  const m = (i) => lerp(from[i], to[i], u);
+  const to = camOf(cur.cam, curPos), from = camOf(idx > 0 ? LINES[idx - 1].cam : cur.cam, curPos), cu = ease(clamp((t - (L ? L.start : 0)) / 0.6)), m = (i) => lerp(from[i], to[i], cu);
   camera.position.set(m(0), m(1), m(2)); camera.lookAt(m(3), m(4) - 0.1, 0);
   document.getElementById('cap').textContent = inLine ? L.text : '';
   document.getElementById('who').textContent = inLine ? (cast[L.who] ? cast[L.who].name : L.who).toUpperCase() : '';

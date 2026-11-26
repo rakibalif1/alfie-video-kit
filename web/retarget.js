@@ -40,6 +40,7 @@ export function makeRetargeter(THREE, gltf, vrm, flip) {
       const dp = srcHips.getWorldPosition(new THREE.Vector3()).sub(restHipsPos).multiplyScalar(ratio); if (flip) { dp.x = -dp.x; dp.z = -dp.z; }
       return { q, hips: vRestPos.clone().add(dp), rest: vRestPos };
     },
+    blend(a, b, u) { const q = {}; for (const k of Object.keys(a.q)) q[k] = a.q[k].clone().slerp(b.q[k], u); return { q, hips: a.hips.clone().lerp(b.hips, u), rest: a.rest }; },
     // writes a (possibly blended) pose to the character
     apply(a, b, u) {
       for (const p of pairs) { const out = b && u > 0 ? a.q[p.v].clone().slerp(b.q[p.v], u) : a.q[p.v]; p.node.quaternion.copy(out); }

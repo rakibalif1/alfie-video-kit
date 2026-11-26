@@ -5,6 +5,8 @@ description: Make a short vertical (9:16, 720p) explainer video with free anime-
 
 # /alfie-video
 
+First read `MEMORY.md` in the kit folder: it holds the owner's rules and decisions.
+
 You write one small file, `episode.json`. The kit does everything else (voices, timing, animation, render, mux). Do NOT write drawing code: that is what makes episodes expensive.
 
 ## Steps
@@ -27,6 +29,15 @@ You write one small file, `episode.json`. The kit does everything else (voices, 
 - cam: wide, mid, closeN, closeA, low. Change the camera on most lines.
 - props: coin (shrinks or grows), stack (coins pop up), bars (three bars rise or fall); line numbers start at 0.
 - Characters (free, CC0) are in `characters/`: Sakurada_Fumiriya, HairSample_Male (anime style); Bizdude, CoolMoneyBag, StonksReporter, Mister, HodlerKing, Mafiossini (toy style, only tested standing still). Do not mix anime and toy style in one scene without checking. See `characters/LICENSES.md`.
+
+
+## Stories with several characters (see examples/bank-run)
+- `cast`: any ids, each `{"model": "<file in characters/>", "name": "..."}`. Voice codes N (British narrator), A (Alfie), V, R, S, C; change a voice with `"voices": {"V": ["af_bella", 1.08, "en-us"]}` (voice, speed, language).
+- `sets`: named locations `{sky, floor, skylineVisible, cast:[ids on stage], layout:{id:{x,z,yaw,h}}, pieces:[...]}`. Pieces: wall, sign (text), counter, vault, posts (queue barrier), tree. Start a line with `"set":"name"` to cut to a location (everyone is placed at that set's layout).
+- `move`: on a line, `"move":{"V":{"x":0.7}}` walks that character to the new spot (uses the real walking clip). Visible stage is about x -1.2 to 1.2; x beyond 1.5 is off-screen (use it to walk a character in).
+- cam: `wide`, `mid`, `low`, `close:ID`, `mid:ID`, `two:ID:ID` (frames two characters). Cut often, but keep the speaker on screen.
+- More gestures: flinch (Hit_Chest), run. Props can add `"setName":"bank"` to show only in one set.
+- Renders at about 5 frames per second: run `make.sh` in the background (`setsid nohup`) and poll.
 
 ## Rules
 - Movement comes from a free recorded library, so it is natural but generic: no custom acting, eyes do not follow anything, lip-sync follows loudness only. Say so honestly. Do not claim film-quality CGI.

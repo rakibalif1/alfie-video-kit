@@ -15,6 +15,11 @@ const srv = http.createServer((req, res) => {
   await p.goto(`http://127.0.0.1:${port}/scene.html`);
   await p.waitForFunction('window.ready===true', null, { timeout: 120000 });
   const fps = await p.evaluate('window.fps'), dur = await p.evaluate('window.dur'), N = Math.ceil((dur + 0.6) * fps);
+  if (process.env.SNAPSHOTS) {   // quick look: SNAPSHOTS="1.5,9,20" -> snap_0.jpg, snap_1.jpg ...
+    const ts = process.env.SNAPSHOTS.split(',').map(Number); let k = 0;
+    for (const t of ts) { await p.evaluate(`window.renderAt(${t})`); await p.screenshot({ path: path.join(EP, `snap_${k++}.jpg`), type: 'jpeg', quality: 85 }); }
+    await b.close(); srv.close(); console.log('snapshots', ts.length); return;
+  }
   const out = path.join(EP, 'silent.mp4');
   const ff = spawn('ffmpeg', ['-y', '-v', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-', '-c:v', 'libx264', '-preset', 'medium', '-crf', '20', '-pix_fmt', 'yuv420p', out], { stdio: ['pipe', 'inherit', 'inherit'] });
   const t0 = Date.now();
