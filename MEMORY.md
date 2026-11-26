@@ -42,6 +42,8 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 - Round 4: the owner found the 1-2 minute topics (inflation, bank run) not interesting or successful. Wants 5-minute widescreen videos plus vertical Shorts cut from them, better scripts and descriptions, richer skies and floors, characters higher in frame, and a Bangla version.
 - Bangla: Kokoro has no Bangla. Meta MMS-TTS Bengali works on CPU but is non-commercial (test only). Indic Parler-TTS (Apache-2.0, commercial OK) is gated on Hugging Face: needs the owner's free account, accepted terms and a token. A working venv recipe is torch==2.11.0 + torchaudio==2.11.0 (CPU) + transformers 4.46 + parler-tts from git. Bangla captions need a Bengali font in the container (none installed yet).
 
+- Round 5 (direction change): the owner and their friends found the money/banking topics generic and boring, so those are dropped for now (Bangla also paused). New idea: gaming-related Shorts (GTA 6 funny TV shows, radio, NPC moments). Rule: do NOT download or re-upload other people's streams or videos, or Rockstar's audio and music, without permission. Legit routes to offer: own gameplay captures (check Rockstar's current fan-content policy), permission-based clipping with credit, platform clip/remix tools, or ORIGINAL animated parody of GTA-style radio, TV and NPC humour using our kit (no Rockstar names, logos, characters or music).
+
 ## Known weaknesses / to do
 - No chair prop for sitting; eyes do not follow anything; lip-sync follows loudness only; some gestures are approximations (e.g. shrug).
 - Background characters and crowds are not built yet.
