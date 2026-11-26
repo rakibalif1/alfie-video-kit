@@ -58,6 +58,11 @@ You write one small file, `episode.json`. The kit does everything else (voices, 
 - Deliver with every long video: 3 title options (curiosity plus a number or stake, under 60 characters), a YouTube description (first two lines carry the hook and main keywords, then chapters with timestamps, then sources, then disclaimer and hashtags), 10 to 15 tags, a thumbnail idea, and suggested Shorts cut points.
 - Topics: stories with stakes beat definitions (real UK money events, scams, "the case of the shrinking chocolate bar"). Do not use generic explainer topics.
 
+## Comedy parody format (Sunny Bay Radio, see examples/sunny-bay-radio)
+- Original GTA-style humour only: fictional city (Sunny Bay), fictional radio stations, TV shows, ads and NPC chats. Never use Rockstar or GTA names, logos, characters, music or real brands. Keep jokes advertiser-friendly.
+- Pieces for studios and cities: neon sign, speaker, record (spinning), equalizer (animated bars), mic, palm, tv (news ticker), infocard. Any piece accepts `"s"` to scale it.
+- Make 45 to 90 second landscape episodes with a Shorts cut list; every 10 seconds a new joke, camera cut or visual surprise. Portrait Shorts auto-frame the speaker.
+
 ## Rules
 - Movement comes from a free recorded library, so it is natural but generic: no custom acting, eyes do not follow anything, lip-sync follows loudness only. Say so honestly. Do not claim film-quality CGI.
 - To save tokens: write only episode.json, do not read the kit's source files unless something breaks, do not view every frame.

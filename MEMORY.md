@@ -44,6 +44,8 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 
 - Round 5 (direction change): the owner and their friends found the money/banking topics generic and boring, so those are dropped for now (Bangla also paused). New idea: gaming-related Shorts (GTA 6 funny TV shows, radio, NPC moments). Rule: do NOT download or re-upload other people's streams or videos, or Rockstar's audio and music, without permission. Legit routes to offer: own gameplay captures (check Rockstar's current fan-content policy), permission-based clipping with credit, platform clip/remix tools, or ORIGINAL animated parody of GTA-style radio, TV and NPC humour using our kit (no Rockstar names, logos, characters or music).
 
+- Round 6: the owner chose the ORIGINAL PARODY route (own jokes, GTA-style radio / TV / NPC humour, no Rockstar or streamer content) and can also record their own GTA 6 gameplay (a clip-cutter for their own footage is a possible later tool). First episode: examples/sunny-bay-radio (DJ Rick Neon, Intern Alfie, Brenda), 57 s widescreen plus two auto-cut Shorts.
+
 ## Known weaknesses / to do
 - No chair prop for sitting; eyes do not follow anything; lip-sync follows loudness only; some gestures are approximations (e.g. shrug).
 - Background characters and crowds are not built yet.

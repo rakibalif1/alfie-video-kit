@@ -22,5 +22,17 @@ for s in ep.get("shorts", []):
                 else: p["fromLine"] = max(p["fromLine"] - a, 0); p["toLine"] = min(p.get("toLine", p["fromLine"] + a) - a, b - a)
     for x in e.get("extras", []):
         if "react" in x: x["react"]["from"] = x["react"]["from"] - a; x["react"]["to"] = x["react"]["to"] - a
+    def sx(o):   # portrait shows about half the width: pull everything toward the centre
+        if isinstance(o, dict):
+            for k, v in list(o.items()):
+                if k == "x" and isinstance(v, (int, float)): o[k] = round(v * 0.62, 3)
+                elif k in ("x0", "x1") and isinstance(v, (int, float)): o[k] = round(v * 0.62, 3)
+                else: sx(v)
+        elif isinstance(o, list):
+            for v in o: sx(v)
+    if ep.get("format") == "landscape":   # portrait is narrow: frame the speaker instead of a wide slice
+        for l in e["lines"]:
+            if str(l.get("cam", "wide")).split(":")[0] in ("wide", "high", "mid", "low"): l["cam"] = "close:" + l["who"]
+    if ep.get("format") == "landscape": sx(e.get("layout")); sx(e.get("sets")); sx(e.get("extras"))
     out = os.path.join(d, "shorts", s["name"]); os.makedirs(out, exist_ok=True); json.dump(e, open(os.path.join(out, "episode.json"), "w"), indent=1)
     print("short", s["name"], "lines", a, "to", b)

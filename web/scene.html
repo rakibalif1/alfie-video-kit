@@ -150,13 +150,13 @@ function updateProps(t) {
 function camOf(spec, cur) {
   const [kind, a, b] = String(spec || 'wide').split(':'), px = (id) => (cur[id] ? cur[id].x : 0);
   if (LAND) {
-    if (kind === 'wide') return [0, 1.25, 6.3, 0, 0.95];
+    if (kind === 'wide') return [0, 1.55, 7.3, 0, 1.4];
     if (kind === 'mid') return a ? [px(a) * 0.5, 1.2, 4.5, px(a), 1.0] : [0, 1.2, 4.8, 0, 1.0];
     if (kind === 'low') return [0, 0.5, 4.8, 0, 1.0];
     if (kind === 'high') return [0, 1.6, 5.6, 0, 1.45];
     if (kind === 'close') return [px(a) * 0.8, 1.25, 2.9, px(a), 1.12];
     if (kind === 'two') { const m = (px(a) + px(b)) / 2; return [m, 1.2, 3.6 + Math.abs(px(a) - px(b)) * 0.55, m, 1.0]; }
-    return [0, 1.25, 6.3, 0, 0.95];
+    return [0, 1.55, 7.3, 0, 1.4];
   }
   if (kind === 'wide') return [0, 1.2, 8.6, 0, 0.8];
   if (kind === 'mid') return a ? [px(a) * 0.5, 1.2, 5.2, px(a), 0.85] : [0, 1.2, 5.6, 0, 0.85];

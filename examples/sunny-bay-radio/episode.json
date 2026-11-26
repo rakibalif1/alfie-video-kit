@@ -1,0 +1,421 @@
+{
+ "title": "Sunny Bay Radio: Morning Madness",
+ "series": "SUNNY BAY RADIO",
+ "format": "landscape",
+ "cast": {
+  "D": {
+   "model": "Sakurada_Fumiriya",
+   "name": "DJ Rick Neon",
+   "look": {
+    "top": "#ff2fd6",
+    "bottom": "#f5f5f5",
+    "shoes": "#ffd166"
+   }
+  },
+  "A": {
+   "model": "HairSample_Male",
+   "name": "Intern Alfie",
+   "look": {
+    "top": "#f77f00",
+    "bottom": "#3a5a8c",
+    "shoes": "#f1f1f1"
+   }
+  },
+  "B": {
+   "model": "Vivi",
+   "name": "Brenda (eyewitness)",
+   "look": {
+    "top": "#06b6a4",
+    "shoes": "#7b2cbf"
+   }
+  }
+ },
+ "voices": {
+  "D": [
+   "am_onyx",
+   1.08,
+   "en-us"
+  ],
+  "B": [
+   "af_nicole",
+   1.1,
+   "en-us"
+  ],
+  "A": [
+   "am_michael",
+   1.1,
+   "en-us"
+  ]
+ },
+ "layout": {
+  "D": {
+   "x": -1.25,
+   "z": 0.3,
+   "yaw": 0.45,
+   "h": 1.62
+  },
+  "A": {
+   "x": 0.1,
+   "z": 0.3,
+   "yaw": 0.0,
+   "h": 1.5
+  },
+  "B": {
+   "x": 1.4,
+   "z": 0.3,
+   "yaw": -0.45,
+   "h": 1.45
+  }
+ },
+ "sets": {
+  "studio": {
+   "skyStyle": "neon",
+   "floorStyle": "grid",
+   "floorRepeat": 6,
+   "clouds": false,
+   "skylineVisible": false,
+   "cast": [
+    "D",
+    "A",
+    "B"
+   ],
+   "layout": {},
+   "pieces": [
+    {
+     "type": "wall",
+     "color": "#2a0a4a",
+     "zz": -2.3,
+     "h": 4.2,
+     "w": 9
+    },
+    {
+     "type": "neon",
+     "text": "WAVE 99.9 FM",
+     "x": -1.5,
+     "z": -2.15,
+     "yy": 3.1,
+     "w": 2.6
+    },
+    {
+     "type": "sign",
+     "text": "ON AIR",
+     "x": 1.9,
+     "z": -2.15,
+     "yy": 3.1,
+     "w": 1.4,
+     "bg": "#b00020",
+     "fg": "#ffffff"
+    },
+    {
+     "type": "record",
+     "x": -3.0,
+     "z": -2.1,
+     "yy": 2.2,
+     "r": 0.45,
+     "color": "#ff2fd6"
+    },
+    {
+     "type": "record",
+     "x": 3.0,
+     "z": -2.1,
+     "yy": 2.2,
+     "r": 0.45,
+     "color": "#19f0ff"
+    },
+    {
+     "type": "speaker",
+     "x": -3.1,
+     "z": -1.7,
+     "h": 1.5
+    },
+    {
+     "type": "speaker",
+     "x": 3.2,
+     "z": -1.7,
+     "h": 1.5
+    },
+    {
+     "type": "equalizer",
+     "x": 0.1,
+     "z": -2.1,
+     "n": 18,
+     "h": 0.9
+    },
+    {
+     "type": "tv",
+     "x": 2.3,
+     "z": -2.0,
+     "yy": 1.7,
+     "w": 1.7,
+     "title": "SUNNY BAY NEWS",
+     "bg": "#1d3557",
+     "ticker": "SEAGULL STEALS PIZZA  *  MAN CLAIMS DOG FILES TAXES  *  TRAFFIC: STILL TERRIBLE  *  "
+    },
+    {
+     "type": "palm",
+     "x": -2.4,
+     "z": -1.2,
+     "h": 2.8
+    },
+    {
+     "type": "palm",
+     "x": 2.9,
+     "z": -1.0,
+     "h": 3.0
+    },
+    {
+     "type": "infocard",
+     "x": -0.4,
+     "z": -1.5,
+     "yy": 2.9,
+     "w": 2.0,
+     "h": 1.1,
+     "title": "SEAGULL CRIME REPORT",
+     "fromLine": 5,
+     "toLine": 9,
+     "rows": [
+      {
+       "label": "Pizzas stolen",
+       "value": 1.0,
+       "text": "1",
+       "color": "#ef476f"
+      },
+      {
+       "label": "Garlic bread attempts",
+       "value": 0.6,
+       "text": "2",
+       "color": "#ffd166"
+      },
+      {
+       "label": "Arrests",
+       "value": 0.0,
+       "text": "0",
+       "color": "#06d6a0"
+      }
+     ]
+    },
+    {
+     "type": "mic",
+     "x": -0.62,
+     "z": 0.75,
+     "s": 0.7
+    },
+    {
+     "type": "mic",
+     "x": 0.78,
+     "z": 0.75,
+     "s": 0.7
+    }
+   ]
+  }
+ },
+ "extras": [
+  {
+   "model": "HairSample_Female",
+   "set": [
+    "studio"
+   ],
+   "x": -2.4,
+   "z": -1.0,
+   "yaw": 0.5,
+   "h": 1.5,
+   "clip": "Dance_Loop",
+   "phase": 0.0,
+   "look": {
+    "skin": "#d9a066",
+    "hair": "#c1121f",
+    "top": "#ffd166",
+    "bottom": "#2b2d42"
+   }
+  },
+  {
+   "model": "Sendagaya_Shino",
+   "set": [
+    "studio"
+   ],
+   "x": -1.9,
+   "z": -1.5,
+   "yaw": 0.5,
+   "h": 1.5,
+   "clip": "Dance_Loop",
+   "phase": 0.23,
+   "look": {
+    "skin": "#8d5524",
+    "hair": "#6a4c93",
+    "top": "#7b2cbf",
+    "bottom": "#2b2d42"
+   }
+  },
+  {
+   "model": "Sendagaya_Shibu",
+   "set": [
+    "studio"
+   ],
+   "x": 2.3,
+   "z": -1.1,
+   "yaw": -0.5,
+   "h": 1.5,
+   "clip": "Dance_Loop",
+   "phase": 0.46,
+   "look": {
+    "skin": "#c68642",
+    "hair": "#d9a441",
+    "top": "#06d6a0",
+    "bottom": "#2b2d42"
+   }
+  },
+  {
+   "model": "Victoria_Rubin",
+   "set": [
+    "studio"
+   ],
+   "x": 2.8,
+   "z": -1.45,
+   "yaw": -0.5,
+   "h": 1.5,
+   "clip": "Dance_Loop",
+   "phase": 0.6900000000000001,
+   "look": {
+    "skin": "#e0ac69",
+    "hair": "#222831",
+    "top": "#f77f00",
+    "bottom": "#2b2d42"
+   }
+  }
+ ],
+ "lines": [
+  {
+   "who": "D",
+   "emotion": "excited",
+   "text": "Good morning, Sunny Bay! You're listening to Wave ninety-nine point nine, where the traffic is terrible and the music is worse!",
+   "gesture": "explain",
+   "cam": "wide",
+   "set": "studio"
+  },
+  {
+   "who": "A",
+   "emotion": "cheer",
+   "text": "And I'm Alfie, the intern! I make the coffee, and I'm legally allowed to touch exactly one button!",
+   "gesture": "cheer",
+   "cam": "two:D:A"
+  },
+  {
+   "who": "D",
+   "emotion": "worried",
+   "text": "Alfie, which button?",
+   "gesture": "point",
+   "cam": "close:D"
+  },
+  {
+   "who": "A",
+   "emotion": "worried",
+   "text": "I forgot. Please don't ask me again.",
+   "gesture": "shrug",
+   "cam": "close:A"
+  },
+  {
+   "who": "D",
+   "emotion": "excited",
+   "text": "Our first guest saw a seagull steal a whole pizza. Brenda, you're on the air!",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "B",
+   "emotion": "panic",
+   "text": "It was a WHOLE pizza, Rick! He flew off with it, and then he came BACK for the garlic bread!",
+   "gesture": "panic",
+   "cam": "high",
+   "react": {
+    "D": "listen",
+    "A": "listen"
+   }
+  },
+  {
+   "who": "D",
+   "emotion": "angry",
+   "text": "The audacity! Alfie, put that on the news ticker!",
+   "gesture": "angry",
+   "cam": "two:D:B"
+  },
+  {
+   "who": "A",
+   "emotion": "sad",
+   "text": "I would, but the ticker is just a hamster on a wheel.",
+   "gesture": "shrug",
+   "cam": "close:A"
+  },
+  {
+   "who": "D",
+   "emotion": "worried",
+   "text": "Then make sure it's a fast hamster. Brenda, did you get a licence plate?",
+   "gesture": "point",
+   "cam": "high"
+  },
+  {
+   "who": "B",
+   "emotion": "angry",
+   "text": "Rick. He's a seagull.",
+   "gesture": "angry",
+   "cam": "close:B"
+  },
+  {
+   "who": "D",
+   "emotion": "sly",
+   "text": "A lot of criminals hide behind that excuse.",
+   "gesture": "nod",
+   "cam": "close:D"
+  },
+  {
+   "who": "D",
+   "emotion": "excited",
+   "text": "This segment is sponsored by Gator Dental. Because every great smile deserves a snappy bite!",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "A",
+   "emotion": "cheer",
+   "text": "Gator Dental: if you can't afford your teeth, we'll find you a friend who can!",
+   "gesture": "cheer",
+   "cam": "two:D:A",
+   "react": {
+    "B": "cheer"
+   }
+  },
+  {
+   "who": "D",
+   "emotion": "excited",
+   "text": "Coming up after the break, a man who claims his dog can file taxes. Stay tuned, Sunny Bay!",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "A",
+   "emotion": "worried",
+   "text": "And remember: if you see a seagull, don't make eye contact!",
+   "gesture": "panic",
+   "cam": "two:A:B",
+   "react": {
+    "B": "panic",
+    "D": "cheer"
+   }
+  }
+ ],
+ "shorts": [
+  {
+   "name": "seagull",
+   "lines": [
+    4,
+    10
+   ]
+  },
+  {
+   "name": "gator",
+   "lines": [
+    11,
+    13
+   ]
+  }
+ ]
+}
