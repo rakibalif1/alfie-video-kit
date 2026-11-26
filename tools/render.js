@@ -1,6 +1,7 @@
 // Renders an episode folder to silent.mp4 by capturing the scene page frame by frame. Usage: node render.js <episode-dir>
 const http = require('http'), fs = require('fs'), path = require('path'), { spawn } = require('child_process');
 const ROOT = path.resolve(__dirname, '..'), EP = path.resolve(process.argv[2]);
+const LAND = (() => { try { return JSON.parse(fs.readFileSync(path.join(EP, 'episode.json'))).format === 'landscape'; } catch (e) { return false; } })(), VW = LAND ? 1280 : 720, VH = LAND ? 720 : 1280;
 let pw; try { pw = require('playwright'); } catch (e) { pw = require(path.join(ROOT, 'node_modules/playwright')); }
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.vrm': 'application/octet-stream', '.css': 'text/css' };
 const map = (u) => u.startsWith('/ep/') ? path.join(EP, u.slice(4)) : u.startsWith('/characters/') || u.startsWith('/animations/') ? path.join(ROOT, u) : u.startsWith('/node_modules/') ? path.join(ROOT, u) : path.join(ROOT, 'web', u === '/' ? 'scene.html' : u);
@@ -10,7 +11,7 @@ const srv = http.createServer((req, res) => {
 }).listen(0, '127.0.0.1', async () => {
   const port = srv.address().port;
   const b = await pw.chromium.launch({ ...(process.env.CHROME || fs.existsSync('/opt/pw-browsers/chromium') ? { executablePath: process.env.CHROME || '/opt/pw-browsers/chromium' } : {}), args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
-  const p = await b.newPage({ viewport: { width: 720, height: 1280 } });
+  const p = await b.newPage({ viewport: { width: VW, height: VH } });
   p.on('pageerror', (e) => console.log('pageerror:', String(e).slice(0, 300)));
   await p.goto(`http://127.0.0.1:${port}/scene.html`);
   await p.waitForFunction('window.ready===true', null, { timeout: 120000 });

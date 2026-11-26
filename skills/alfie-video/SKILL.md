@@ -48,6 +48,16 @@ You write one small file, `episode.json`. The kit does everything else (voices, 
 - Camera `high` shows the upper part of the frame (use it when an infocard or screen is the point of the line).
 - Emotion: `"emotion":"panic"` on a line changes that voice's speed, pitch and loudness. Values: calm, excited, panic, sad, angry, cheer, worried, sly. Use varied emotions so voices are not flat.
 
+
+## Long videos (5 minutes), widescreen and Shorts
+- Add `"format":"landscape"` to episode.json for 16:9 (1280x720). Widescreen shows about +-2.4 world units across, so spread characters and set pieces wider (x from -2.2 to 2.2). Portrait shows only +-1.2.
+- Skies and floors: per set `"skyStyle"`: day, sunset, dawn, night (stars and moon), storm (lightning flashes), neon (retro sun); `"floorStyle"`: grid (neon), wood, cobble, grass, tiles, carpet. Vary them from scene to scene so the world keeps changing.
+- Shorts: add `"shorts":[{"name":"hook","lines":[0,6]}]` (inclusive line numbers) and run `make.sh <episode-folder> shorts`: it cuts portrait versions into `<episode>/shorts/<name>/out.mp4` (same cast, sets, crowd, voices).
+- A 5-minute video is about 850 spoken words and takes roughly 50+ minutes to render (about 9,000 frames). Run it in the background and poll.
+- Structure: 0:00 cold-open hook (20 s) -> promise and stakes -> act 1 setup (60 s) -> act 2 escalation with a change of scene, infocard or gag every 20 to 30 seconds (120 s) -> act 3 how it works, one worked example with real numbers (60 s) -> twist or common mistake (30 s) -> recap, motivating line, "not financial advice", tease the next video (20 s).
+- Deliver with every long video: 3 title options (curiosity plus a number or stake, under 60 characters), a YouTube description (first two lines carry the hook and main keywords, then chapters with timestamps, then sources, then disclaimer and hashtags), 10 to 15 tags, a thumbnail idea, and suggested Shorts cut points.
+- Topics: stories with stakes beat definitions (real UK money events, scams, "the case of the shrinking chocolate bar"). Do not use generic explainer topics.
+
 ## Rules
 - Movement comes from a free recorded library, so it is natural but generic: no custom acting, eyes do not follow anything, lip-sync follows loudness only. Say so honestly. Do not claim film-quality CGI.
 - To save tokens: write only episode.json, do not read the kit's source files unless something breaks, do not view every frame.

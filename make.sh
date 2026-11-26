@@ -3,6 +3,7 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"; EP="$(cd "${1:?usage: make.sh <episode-dir>}" && pwd)"
 PY="${ALFIE_HOME:-$HOME/.alfie}/venv/bin/python"; [ -x "$PY" ] || { echo "not installed: run $ROOT/install.sh"; exit 1; }
+if [ "${2:-}" = "shorts" ]; then "$PY" "$ROOT/tools/shorts.py" "$EP"; for s in "$EP"/shorts/*/; do bash "$ROOT/make.sh" "$s"; done; exit 0; fi
 cd "$EP"; rm -rf audio; mkdir -p audio
 echo "== lines";  "$PY" "$ROOT/tools/prep.py" "$EP"
 echo "== voices"; "$PY" -I "$ROOT/tools/two_voice.py"

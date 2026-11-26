@@ -1,7 +1,7 @@
 <!doctype html>
 <meta charset="utf-8">
 <body style="margin:0;background:#000;overflow:hidden">
-<div style="position:relative;width:720px;height:1280px">
+<div id="stage" style="position:relative;width:720px;height:1280px">
 <canvas id="c" width="720" height="1280" style="width:720px;height:1280px;display:block"></canvas>
 <div id="cap" style="position:absolute;left:30px;right:30px;bottom:95px;text-align:center;font:800 46px/1.12 Arial,Helvetica,sans-serif;color:#fff;-webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:0 4px 0 #000"></div>
 <div id="series" style="position:absolute;right:26px;top:44px;font:800 30px Arial;color:#fff;background:#d62828;padding:7px 16px;border-radius:14px;letter-spacing:1px"></div>
@@ -25,11 +25,14 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { VRMLoaderPlugin, VRMUtils } from '@pixiv/three-vrm';
 import { makeRetargeter } from '/retarget.js';
-import { buildPiece, makeClouds, tintVRM, gradientTexture } from '/world.js';
+import { buildPiece, makeClouds, tintVRM, gradientTexture, floorTexture, makeSkyDecor, SKY_STYLES } from '/world.js';
 
 const EP = await (await fetch('/ep/episode.json')).json();
 const TL = await (await fetch('/ep/tl.json')).json();
-const W = 720, H = 1280, FPS = TL.fps, LINES = EP.lines;
+const LAND = EP.format === 'landscape', W = LAND ? 1280 : 720, H = LAND ? 720 : 1280, FPS = TL.fps, LINES = EP.lines;
+{ const st = document.getElementById('stage'), cn = document.getElementById('c'), cp = document.getElementById('cap');
+  st.style.width = W + 'px'; st.style.height = H + 'px'; cn.width = W; cn.height = H; cn.style.width = W + 'px'; cn.style.height = H + 'px';
+  if (LAND) { cp.style.bottom = '34px'; cp.style.fontSize = '38px'; cp.style.left = '140px'; cp.style.right = '140px'; } }
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), ease = (a) => a * a * (3 - 2 * a), lerp = (a, b, u) => a + (b - a) * u;
 
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true, preserveDrawingBuffer: true });
@@ -53,13 +56,16 @@ for (const [name, s] of Object.entries(SETS)) {
   list.forEach((p) => { const o = buildPiece(THREE, p, {}); g.add(o.obj); if (o.update) ups.push(o.update); });
   g.visible = false; scene.add(g); setGroups[name] = g; setUpdates[name] = ups;
 }
-let activeSet = null;
+let activeSet = null, decor = null, decorObj = null, baseAmb = 0.9, baseKey = Math.PI * 0.9;
+const STYLE_LIGHT = { night: ['#b8c8ff', '#8aa0ff', 0.6], storm: ['#d5dde6', '#9aa5b1', 0.7], neon: ['#ff9ee6', '#d9a0ff', 0.75], sunset: ['#ffd9a0', '#ffe9d0', 0.9], dawn: ['#ffe3c4', '#fff0e0', 0.9] };
 function applySet(name) {
-  if (name === activeSet) return; activeSet = name; const s = SETS[name] || {};
-  const top = s.skyTop || s.sky || '#8ec5ff', bot = s.skyBottom || '#fff1d6';
-  skyMesh.material.map = gradientTexture(THREE, top, bot); skyMesh.material.needsUpdate = true; skyMesh.position.y = 0;
-  scene.background.set(bot); scene.fog.color.set(bot); floor.material.color.set(s.floor || '#fff1c9'); clouds.obj.visible = s.clouds !== false;
-  key.color.set(s.light || '#ffffff'); amb.color.set(s.ambient || '#ffffff'); amb.intensity = s.ambientIntensity ?? 0.9;
+  if (name === activeSet) return; activeSet = name; const s = SETS[name] || {}, st = s.skyStyle, pair = SKY_STYLES[st], sl = STYLE_LIGHT[st] || ['#ffffff', '#ffffff', 0.9];
+  const top = s.skyTop || (pair ? pair[0] : '#8ec5ff'), bot = s.skyBottom || (pair ? pair[1] : '#fff1d6');
+  skyMesh.material.map = gradientTexture(THREE, top, bot); skyMesh.material.needsUpdate = true;
+  scene.background.set(bot); scene.fog.color.set(bot); clouds.obj.visible = s.clouds !== false && st !== 'night' && st !== 'neon';
+  if (s.floorStyle) { floor.material.map = floorTexture(THREE, s.floorStyle, s.floorRepeat || 8); floor.material.color.set('#ffffff'); } else { floor.material.map = null; floor.material.color.set(s.floor || '#fff1c9'); } floor.material.needsUpdate = true;
+  key.color.set(s.light || sl[0]); amb.color.set(s.ambient || sl[1]); baseAmb = s.ambientIntensity ?? sl[2];
+  if (decorObj) scene.remove(decorObj); decor = makeSkyDecor(THREE, st); decorObj = decor.obj; scene.add(decorObj);
   for (const [n, g] of Object.entries(setGroups)) g.visible = n === name;
 }
 
@@ -143,14 +149,23 @@ function updateProps(t) {
 // ---------- camera: wide, mid, low, close:ID, mid:ID, two:ID:ID  (presets follow the characters)
 function camOf(spec, cur) {
   const [kind, a, b] = String(spec || 'wide').split(':'), px = (id) => (cur[id] ? cur[id].x : 0);
-  if (kind === 'wide') return [0, 1.2, 8.6, 0, 1.0];
-  if (kind === 'mid') return a ? [px(a) * 0.5, 1.2, 5.2, px(a), 1.0] : [0, 1.2, 5.6, 0, 1.0];
-  if (kind === 'low') return [0, 0.6, 5.2, 0, 1.0];
-  if (kind === 'high') return [0, 1.55, 6.6, 0, 1.45];
-  if (kind === 'close') return [px(a) * 0.75, 1.22, 3.5, px(a), 1.17];
-  if (kind === 'two') { const m = (px(a) + px(b)) / 2; return [m, 1.2, 4.4 + Math.abs(px(a) - px(b)) * 0.9, m, 1.0]; }
+  if (LAND) {
+    if (kind === 'wide') return [0, 1.25, 6.3, 0, 0.95];
+    if (kind === 'mid') return a ? [px(a) * 0.5, 1.2, 4.5, px(a), 1.0] : [0, 1.2, 4.8, 0, 1.0];
+    if (kind === 'low') return [0, 0.5, 4.8, 0, 1.0];
+    if (kind === 'high') return [0, 1.6, 5.6, 0, 1.45];
+    if (kind === 'close') return [px(a) * 0.8, 1.25, 2.9, px(a), 1.12];
+    if (kind === 'two') { const m = (px(a) + px(b)) / 2; return [m, 1.2, 3.6 + Math.abs(px(a) - px(b)) * 0.55, m, 1.0]; }
+    return [0, 1.25, 6.3, 0, 0.95];
+  }
+  if (kind === 'wide') return [0, 1.2, 8.6, 0, 0.8];
+  if (kind === 'mid') return a ? [px(a) * 0.5, 1.2, 5.2, px(a), 0.85] : [0, 1.2, 5.6, 0, 0.85];
+  if (kind === 'low') return [0, 0.6, 5.2, 0, 0.9];
+  if (kind === 'high') return [0, 1.55, 6.6, 0, 1.3];
+  if (kind === 'close') return [px(a) * 0.75, 1.22, 3.5, px(a), 1.05];
+  if (kind === 'two') { const m = (px(a) + px(b)) / 2; return [m, 1.2, 4.4 + Math.abs(px(a) - px(b)) * 0.9, m, 0.88]; }
   if (kind === 'closeN') return camOf('close:N', cur); if (kind === 'closeA') return camOf('close:A', cur);
-  return [0, 1.2, 8.6, 0, 1.0];
+  return [0, 1.2, 8.6, 0, 0.8];
 }
 const sceneIdx = (t) => { let i = 0; for (let k = 0; k < TL.lines.length; k++) if (t >= TL.lines[k].start - 0.05) i = k; return i; };
 
@@ -179,6 +194,7 @@ window.renderAt = (t) => {
     for (const n of ['surprised', 'happy', 'sad', 'angry']) e.setValue(n, (((g.face[n] || 0) * u) + ((prev.face[n] || 0) * (1 - u))) * (n === 'happy' ? 0.5 : 1));
     c.vrm.update(1 / FPS);
   }
+  const flash = decor ? decor.update(t) : 0; amb.intensity = baseAmb + flash * 1.6; key.intensity = baseKey + flash * 2.5;
   (setUpdates[sName] || []).forEach((u) => u(t, idx, tlOf)); clouds.update(t); updateExtras(t, idx, sName);
   updateProps(t);
   const to = camOf(cur.cam, curPos), from = camOf(idx > 0 ? LINES[idx - 1].cam : cur.cam, curPos), cu = ease(clamp((t - (L ? L.start : 0)) / 0.6)), m = (i) => lerp(from[i], to[i], cu);

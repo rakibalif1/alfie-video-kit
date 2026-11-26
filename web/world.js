@@ -89,3 +89,33 @@ export function tintVRM(THREE, vrm, look) {
     });
   });
 }
+
+// ---------- skies and floors with character
+export function floorTexture(THREE, style, repeat = 8) {
+  const [c, g] = cv(512, 512); let base = '#ffffff';
+  if (style === 'grid') { g.fillStyle = '#0b1030'; g.fillRect(0, 0, 512, 512); g.strokeStyle = '#19f0ff'; g.lineWidth = 5; g.shadowColor = '#19f0ff'; g.shadowBlur = 14; for (let i = 0; i <= 512; i += 128) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i, 512); g.moveTo(0, i); g.lineTo(512, i); g.stroke(); } g.shadowBlur = 0; g.strokeStyle = '#ff2fd6'; g.lineWidth = 2; for (let i = 64; i < 512; i += 128) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i, 512); g.stroke(); } }
+  else if (style === 'wood') { const r = rng(5); for (let y = 0; y < 8; y++) { g.fillStyle = ['#b07a4b', '#a46f40', '#bd8756', '#9a6a3e'][y % 4]; g.fillRect(0, y * 64, 512, 62); g.fillStyle = 'rgba(60,30,10,0.18)'; for (let k = 0; k < 14; k++) g.fillRect(r() * 512, y * 64 + r() * 60, 30 + r() * 80, 2); g.fillStyle = '#6e4626'; g.fillRect((y % 2) * 256 + 120, y * 64, 3, 62); } }
+  else if (style === 'cobble') { const r = rng(9); g.fillStyle = '#7d7f86'; g.fillRect(0, 0, 512, 512); for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) { const sh = 110 + Math.floor(r() * 60); g.fillStyle = `rgb(${sh},${sh},${sh + 8})`; g.beginPath(); g.roundRect(x * 64 + (y % 2) * 32 + 3, y * 64 + 3, 56, 56, 14); g.fill(); } }
+  else if (style === 'grass') { const r = rng(3); g.fillStyle = '#4caf50'; g.fillRect(0, 0, 512, 512); for (let k = 0; k < 2200; k++) { g.fillStyle = ['#43a047', '#66bb6a', '#2e7d32', '#81c784'][Math.floor(r() * 4)]; g.fillRect(r() * 512, r() * 512, 3, 10); } g.fillStyle = '#ffeb3b'; for (let k = 0; k < 30; k++) { g.beginPath(); g.arc(r() * 512, r() * 512, 4, 0, 7); g.fill(); } }
+  else if (style === 'tiles') { g.fillStyle = '#e8e2d2'; g.fillRect(0, 0, 512, 512); g.strokeStyle = '#b9b19a'; g.lineWidth = 4; for (let i = 0; i <= 512; i += 128) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i, 512); g.moveTo(0, i); g.lineTo(512, i); g.stroke(); } g.fillStyle = 'rgba(255,255,255,0.25)'; g.fillRect(0, 0, 512, 6); }
+  else if (style === 'carpet') { g.fillStyle = '#9d0208'; g.fillRect(0, 0, 512, 512); g.strokeStyle = '#ffba08'; g.lineWidth = 6; g.strokeRect(24, 24, 464, 464); g.lineWidth = 3; g.strokeRect(48, 48, 416, 416); g.fillStyle = '#ffba08'; for (let i = 0; i < 4; i++) { g.beginPath(); g.moveTo(256, 96 + i * 8); g.lineTo(416 - i * 8, 256); g.lineTo(256, 416 - i * 8); g.lineTo(96 + i * 8, 256); g.closePath(); g.globalAlpha = 0.18; g.fill(); g.globalAlpha = 1; } }
+  else { g.fillStyle = base; g.fillRect(0, 0, 512, 512); }
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(repeat, repeat); t.anisotropy = 4; return t;
+}
+
+// decor in front of the sky sphere: sun, moon, stars, neon sun, lightning. Returns { obj, update(t) -> flash 0..1 }
+export function makeSkyDecor(THREE, style) {
+  const g = new THREE.Group(), r = rng(21); let flash = () => 0;
+  const disc = (rad, color, x, y, op = 1) => { const m = new THREE.Mesh(new THREE.CircleGeometry(rad, 48), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: op, fog: false })); m.position.set(x, y, -17); g.add(m); return m; };
+  if (style === 'sunset' || style === 'dawn') { disc(7, style === 'dawn' ? '#ffd1a0' : '#ff9e5e', 4, 2.0, 0.28); disc(4.2, style === 'dawn' ? '#ffe6c7' : '#ffb347', 4, 2.0, 0.55); disc(2.6, '#fff3c4', 4, 2.0); }
+  if (style === 'day') { disc(5.5, '#fff6b0', 6, 9, 0.3); disc(2.4, '#fff9d6', 6, 9); }
+  if (style === 'night' || style === 'neon') {
+    const n = 380, pos = new Float32Array(n * 3); for (let i = 0; i < n; i++) { pos[i * 3] = -22 + r() * 44; pos[i * 3 + 1] = 2.5 + r() * 17; pos[i * 3 + 2] = -17; }
+    const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); const pm = new THREE.PointsMaterial({ color: '#ffffff', size: 0.14, transparent: true, fog: false }); g.add(new THREE.Points(geo, pm));
+    if (style === 'night') { disc(3.0, '#f5f3e7', -5, 9); disc(2.8, '#0b1030', -4.1, 9.5, 0.0); const cut = disc(2.5, '#0b1a3a', -3.9, 9.4); } else { const [c, gg] = cv(256, 256); const gr = gg.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, '#ffe66d'); gr.addColorStop(1, '#ff2fd6'); gg.fillStyle = gr; gg.beginPath(); gg.arc(128, 128, 126, 0, 7); gg.fill(); gg.globalCompositeOperation = 'destination-out'; for (let i = 0; i < 8; i++) gg.fillRect(0, 130 + i * 16, 256, 3 + i * 1.6); const sun = new THREE.Mesh(new THREE.CircleGeometry(5, 48), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, fog: false })); sun.position.set(0, 4.5, -17); g.add(sun); }
+    g.userData.stars = pm;
+  }
+  if (style === 'storm') { flash = (t) => { const k = Math.sin(t * 3.1) * Math.sin(t * 7.3) * Math.sin(t * 1.7); return k > 0.88 ? 1 : 0; }; }
+  return { obj: g, update: (t) => { if (g.userData.stars) g.userData.stars.opacity = 0.65 + 0.35 * Math.sin(t * 2.2); return flash(t); } };
+}
+export const SKY_STYLES = { day: ['#4aa8ff', '#e8f6ff'], sunset: ['#3a2a78', '#ff9e7d'], dawn: ['#6a7fdb', '#ffd9b0'], night: ['#050a24', '#1f3a7a'], storm: ['#2b3138', '#7f8a94'], neon: ['#1a0536', '#ff4fa3'] };

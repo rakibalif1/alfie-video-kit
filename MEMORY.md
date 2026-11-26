@@ -39,6 +39,9 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 - Round 3 ("The Queue" story): narrator and Ms Rubin voices were fine; Alfie's voice (am_echo) was flat with no emotion, so it was replaced (emotion tags added, new voice being chosen by the owner). Staging was "dull and gloomy": the owner wants an epic, busy, colourful, information-rich world with many people of different races, modern clothes, costume changes, lots of props. The kit now has crowds, costumes (colour tints), a lively city street and bank interior, moving traffic, live screens and animated infographic cards.
 - The owner wants to be asked what makes the video unique and wants ideas offered.
 
+- Round 4: the owner found the 1-2 minute topics (inflation, bank run) not interesting or successful. Wants 5-minute widescreen videos plus vertical Shorts cut from them, better scripts and descriptions, richer skies and floors, characters higher in frame, and a Bangla version.
+- Bangla: Kokoro has no Bangla. Meta MMS-TTS Bengali works on CPU but is non-commercial (test only). Indic Parler-TTS (Apache-2.0, commercial OK) is gated on Hugging Face: needs the owner's free account, accepted terms and a token. A working venv recipe is torch==2.11.0 + torchaudio==2.11.0 (CPU) + transformers 4.46 + parler-tts from git. Bangla captions need a Bengali font in the container (none installed yet).
+
 ## Known weaknesses / to do
 - No chair prop for sitting; eyes do not follow anything; lip-sync follows loudness only; some gestures are approximations (e.g. shrug).
 - Background characters and crowds are not built yet.
