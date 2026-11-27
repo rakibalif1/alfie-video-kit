@@ -7,5 +7,5 @@ cd "$ROOT" && [ -d node_modules/three ] || npm install --silent --no-audit --no-
 "$HOME_DIR/venv/bin/python" -c "import kokoro_onnx, soundfile, numpy" 2>/dev/null || "$HOME_DIR/venv/bin/python" -m pip install -q numpy soundfile kokoro-onnx
 R=https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0
 for f in kokoro-v1.0.onnx voices-v1.0.bin; do [ -s "$HOME_DIR/models/$f" ] || curl -fsSL -o "$HOME_DIR/models/$f" "$R/$f"; done
-mkdir -p "${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"; ln -sfn "$ROOT/skills/alfie-video" "${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}/alfie-video"
+SK="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"; mkdir -p "$SK"; for n in alfie-video team; do [ -L "$SK/$n" ] || rm -rf "$SK/$n"; ln -sfn "$ROOT/skills/$n" "$SK/$n"; done
 echo "alfie-video-kit ready (use: $ROOT/make.sh <episode-folder>)"
