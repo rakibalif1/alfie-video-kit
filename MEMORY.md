@@ -9,6 +9,7 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 - The owner is not a prompt expert: they give a one-line idea, Claude turns it into the script, plan and video. They do not want to repeat themselves.
 
 ## Owner's rules (follow always)
+- **Name every delivered file with the tool/skill that made it** (for example queue_hyperframes.mp4) and say in the caption which skill or tool was used. Never send several files all called out.mp4.
 - **Always show a progress bar** in every status update (for example [██████████░░░░░░░░░░] 50%, with what is done, what is running and time left).
 - **/team = 4 workers always busy**: shared work queue in a job folder (tasks/, claims/, shared/brief.md, shared/protocol.md); finished workers claim the next free task; free workers help (QA, logs, split renders); the manager is never idle either. See skills/team/SKILL.md.
 - **Ask questions whenever in doubt.** Do not guess.
