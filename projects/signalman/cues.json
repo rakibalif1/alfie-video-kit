@@ -1,0 +1,11 @@
+{"cues": {
+ "drone":   {"intro":0.5,"hook":0.5,"cutting":0.3,"box":0.25,"story":0.5,"bell":0.6,"last":0.6,"driver":0.5,"ending":0.4,"outro":0.3},
+ "wind":    {"intro":0.25,"hook":0.4,"cutting":0.4,"box":0.2,"story":0.2,"bell":0.25,"last":0.5,"driver":0.3,"ending":0.4,"outro":0.15},
+ "howl":    {"hook":0.4,"cutting":0.35,"story":0.55,"bell":0.5,"last":0.3,"ending":0.35},
+ "telegraph": {"box":0.45,"story":0.2,"bell":0.3},
+ "fire":    {"box":0.5,"story":0.45,"bell":0.3},
+ "heart":   {"bell":0.3,"last":0.55,"driver":0.2},
+ "rain":    {"cutting":0.1,"last":0.1},
+ "crickets":{}, "frogs":{}, "knock":{}, "birds":{"outro":0.0}
+ },
+ "events": [["trainfar","hook",0.55],["bell","bell",0.22],["bell","bell",0.33],["bell","bell",0.55],["bell","story",0.9],["train","last",0.88],["train","driver",0.5],["trainfar","ending",0.6]]}

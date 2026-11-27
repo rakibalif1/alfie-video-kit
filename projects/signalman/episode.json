@@ -1,0 +1,1106 @@
+{
+ "title": "The Signal-Man",
+ "series": "NIGHT TALES",
+ "format": "landscape",
+ "cast": {
+  "N": {
+   "name": "Narrator"
+  },
+  "D": {
+   "name": "Driver"
+  },
+  "G": {
+   "name": "The Voice"
+  }
+ },
+ "voices": {
+  "N": [
+   "bm_lewis",
+   0.95,
+   "en-gb"
+  ],
+  "D": [
+   "bm_daniel",
+   1.0,
+   "en-gb"
+  ],
+  "G": [
+   "bm_fable",
+   0.9,
+   "en-gb"
+  ]
+ },
+ "lines": [
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "The last thing I heard in that railway cutting was not the roar of a train.",
+   "scene": "hook"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "It was a voice, hoarse and broken, repeating what it had shouted from a locomotive that morning, a minute too late",
+   "scene": "hook"
+  },
+  {
+   "who": "D",
+   "emotion": "sad",
+   "text": "Halloa! Below there! Look out! Look out! For God's sake, clear the way!",
+   "scene": "hook",
+   "pause": 0.9
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And I stood there in the dusk, and understood that I had heard those exact words before.",
+   "scene": "hook"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Not from the driver.",
+   "scene": "hook"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "From the signalman.",
+   "scene": "hook"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "The night before, he had repeated them to me by the light of his little lamp, word for word, and I, who prided myself on being a rational man, had told him, very gently, that he was unwell.",
+   "scene": "hook",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "That is how the story ends.",
+   "scene": "hook"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "But a ghost story told from the end is a cheat.",
+   "scene": "hook"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "So let me take you back to the afternoon I first stood at the top of that cutting, and called down to a man who would not look up.",
+   "scene": "hook",
+   "pause": 1.5
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "It was one of those deep, narrow cuttings that a railway carves through a hill, so steep that the sun reaches the bottom for only a few hours a day.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Water seeped down the walls, black and glittering.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "A zigzag path, slippery with clay, wound down to the line, and at the far end of the line the rails vanished into the mouth of a tunnel.",
+   "scene": "cutting",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "The stone around that tunnel had a savage, forbidding look, as though whoever built it had hoped nobody would ever want to go in.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "There was a smell of wet earth and old iron, and a cold that did not belong to the season.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "The cold of a cellar.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "The cold of a place that was never meant for the living.",
+   "scene": "cutting",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "At the bottom, beside a small red lamp, stood a man with his back to me.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He was looking along the line, towards the tunnel, like someone who has dropped something precious and cannot bear to see where it fell.",
+   "scene": "cutting",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "I called down to him.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Halloa! Below there!",
+   "scene": "cutting",
+   "pause": 0.2
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He turned.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "But he did not look up at me.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He looked at the tunnel.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "At the mouth of it.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "At the dark.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Only then, slowly, did he lift his eyes up the cutting, and when he found me there, I saw an expression I have never forgotten.",
+   "scene": "cutting",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He looked at me with dread.",
+   "scene": "cutting"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "As if I were the thing he had been waiting for.",
+   "scene": "cutting",
+   "pause": 1.5
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "I went down.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "It took some time.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "The clay held on to my boots, and the daylight seemed to thin with every turn of the path.",
+   "scene": "box",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He was a dark, sallow man, with a thick black beard and heavy eyebrows, and he waited at the foot of the path without stepping forward and without offering his hand.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Behind him stood his little signal box: a fire, a desk, a book to write in, a telegraph instrument that clicked and fell silent and clicked again, and on the wall beside it, a small bell.",
+   "scene": "box",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "You spoke from up there,\" he said.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "And I thought you were someone else.",
+   "scene": "box",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Who?",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "I asked, and laughed a little, because that is what we do when a stranger frightens us.",
+   "scene": "box",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He did not laugh.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "I don't know,\" he said.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "That is the trouble.",
+   "scene": "box",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "We talked for an hour, and what struck me was how little he fitted the place.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He was an educated man, far more than his post required.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "In his youth, he told me, he had studied, and wasted it, as young men do, and sunk, and never risen again.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He knew the rules of the line by heart.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He was exact, sober, tireless.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "The kind of man you would trust with your life.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Which, as it happened, was exactly what hundreds of strangers did, every day, without ever knowing his name.",
+   "scene": "box",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "When I rose to leave, I promised to come back.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He asked me to come after dark, and not to call down from the top.",
+   "scene": "box",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Why not?",
+   "scene": "box",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Please,\" he said.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Come at ten.",
+   "scene": "box"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "I will wave my lamp.",
+   "scene": "box",
+   "pause": 1.5
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "The next night I came at ten, and he waved his lamp, and I went down in the dark and sat by his fire while the wind moaned in the mouth of the tunnel like something trying to remember a song.",
+   "scene": "story",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "I will tell you,\" he said, \"because you are a sensible man, and I have told nobody.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "There is something wrong with this place.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "I see something here.",
+   "scene": "story",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "He kept his eyes on the fire.",
+   "scene": "story",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "A year ago, at about this hour, I was standing by the red lamp when I heard a voice cry out",
+   "scene": "story"
+  },
+  {
+   "who": "G",
+   "emotion": "ghostly",
+   "text": "Halloa! Below there!",
+   "scene": "story",
+   "pause": 0.9
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "I looked up the line, and there, at the mouth of the tunnel, stood a figure.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "It had one arm laid across its face, as if to shut out a sight too terrible to look at.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And the other arm was waving.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Waving, waving, wildly, as though to say: stop.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Stop.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Stop.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And it cried",
+   "scene": "story"
+  },
+  {
+   "who": "G",
+   "emotion": "ghostly",
+   "text": "Look out! Look out!",
+   "scene": "story",
+   "pause": 0.9
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "in a voice I can hear even now.",
+   "scene": "story",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "I ran to the tunnel.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "There was nothing.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Only the cold and the black arch of the brickwork.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And six hours later, an express train struck another in that very tunnel, and they carried the dead past this door.",
+   "scene": "story",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "I said what a reasonable man says.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "That a tired man, alone at night, sees shapes.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "That terrible things happen on railways, and a mind that has seen one will always find a warning in hindsight.",
+   "scene": "story",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "I thought so too,\" he said quietly.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Until it came back.",
+   "scene": "story",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "He told me how, some months later, in the grey of an evening, it stood at the tunnel mouth again.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "The same arm across the face.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "The same waving.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "The same cry.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "He had telegraphed along the line; the answer came back that all was well.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Nothing happened that night.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "But within the week, a train rolled slowly past his box, and in one carriage a young woman had died, quietly, alone, in her seat, with nobody beside her to hear.",
+   "scene": "story"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "They laid her down on the floor of his hut.",
+   "scene": "story",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And now,\" he said, \"for a week, it has been back.",
+   "scene": "story",
+   "pause": 1.5
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "Here, for the first time, I saw his hands shake.",
+   "scene": "bell",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "It stands at the lamp, by the tunnel.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "It does not speak now.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "It only waves and covers its face.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "And the bell,\" he said, and his eyes went to the wall, \"the bell rings.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "Not on the wire.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "Nobody is at the other end.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "It rings and I hear it, and I go to the door, and the figure is there.",
+   "scene": "bell",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "I looked at the bell.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "It hung perfectly still on its bracket.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "I told him so.",
+   "scene": "bell",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "No,\" he said.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "You will not hear it.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "I will.",
+   "scene": "bell",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "And then, I think, I understood his real torment.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "It was not the ghost.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "It was the uselessness of it.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "What is it warning me of?\" he asked.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "Where is the danger?",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "When?",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "And what can I do?",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "I am only a signalman.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "If I stop a train on the word of a ghost, they will call me mad and take my post.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "If I do nothing, and it happens...",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "He could not finish.",
+   "scene": "bell",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "I did the one sensible thing I could think of.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "I told him he was overworked, that what he needed was a doctor, and that tomorrow, at the hour he went off duty, I would walk him to one myself.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "He thanked me.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "He did not believe me.",
+   "scene": "bell"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "I knew that, and I went up the cutting in the dark, with the cold at my back, and did not look behind me.",
+   "scene": "bell",
+   "pause": 1.5
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "I did not sleep.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "At first light I was walking, and I walked all the long day without knowing where, and as the afternoon turned to dusk, my feet brought me to the top of the cutting.",
+   "scene": "last",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "I stopped at the edge.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "Below me, the red lamp.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "And beside it, at the mouth of the tunnel, a figure.",
+   "scene": "last",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "It stood with its left arm laid across its eyes.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "And the right arm was waving.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "Waving.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "Waving.",
+   "scene": "last",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "For one second, one long, cold second, I believed everything.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "Every word he had told me.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "Every doubt I had put to him so sensibly.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "The cold came up the cutting and closed around my chest like water.",
+   "scene": "last",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "I ran.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "I do not remember the path.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "And when I reached the bottom, the figure was gone, and in its place stood a knot of men, their lamps held low, gathered around something on the ground.",
+   "scene": "last"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "text": "One of them lifted his head and looked at me as at someone he had been told to expect.",
+   "scene": "last",
+   "pause": 1.5
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "When I reached the bottom, they would not let me through.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "A man in a blue coat took my arm.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He is gone, sir,\" he said.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "This morning.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "The engine got him.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "We have laid him in his own hut.",
+   "scene": "driver",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "The signalman had been standing on the line, in the cutting, by the tunnel mouth, with his back to the train, looking at his red lamp.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He had not heard it.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "The tunnel curves, and the sound comes out late, and the whistle had screamed and it had been too late, and the driver had leaned from his cab and shouted, and flung one arm across his eyes so as not to see, and waved with the other.",
+   "scene": "driver",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "I cried out to him,\" the driver said.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "He was sitting on the bank with his head in his hands, and his voice cracked.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "I cried",
+   "scene": "driver"
+  },
+  {
+   "who": "D",
+   "emotion": "sad",
+   "text": "Halloa! Below there! Look out! Look out! For God's sake, clear the way!",
+   "scene": "driver",
+   "pause": 0.9
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "I did not say a word.",
+   "scene": "driver",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Because I knew those words.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "I had heard them from a man in lamplight, repeating a ghost.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "And I knew the gesture, the arm over the face and the other waving, and now I knew whose it was.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "It had never been a warning of a train, a collision or a crash.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "It had been a warning of a man.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "A driver.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "A shout.",
+   "scene": "driver"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "A signalman's own death, rehearsed again and again in the dark, so that he could never say he had not been told.",
+   "scene": "driver",
+   "pause": 1.5
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "I have told this story many times, and there is a part of it I have never told aloud, until now.",
+   "scene": "ending",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "On that first afternoon, when I stood at the top of the cutting and called down, I did not shout something at random.",
+   "scene": "ending"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "I called out the first thing a man calls to a stranger working far below.",
+   "scene": "ending"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Halloa! Below there!",
+   "scene": "ending",
+   "pause": 0.2
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And the signalman looked at me with dread.",
+   "scene": "ending"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "As if I were the thing he had been waiting for.",
+   "scene": "ending",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "I have wondered ever since which of us was the ghost.",
+   "scene": "ending"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Whether the figure at the tunnel mouth was only a dying man's fear, or the driver's cry arriving early, or something older than either of us, which had been calling that warning for a year, and which, on the day I appeared at the top of the cutting, finally found a voice that said it first.",
+   "scene": "ending",
+   "pause": 0.6
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "I know only this.",
+   "scene": "ending"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "I have never again called down to a stranger from a height.",
+   "scene": "ending"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And on certain evenings, when the light is low and the cold comes up from the ground, I think I hear it, from a long way off, on a long straight line, in the dark",
+   "scene": "ending"
+  },
+  {
+   "who": "G",
+   "emotion": "ghostly",
+   "text": "Halloa! Below there!",
+   "scene": "ending",
+   "pause": 0.9
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And I do not look round.",
+   "scene": "ending",
+   "pause": 1.5
+  }
+ ]
+}

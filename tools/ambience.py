@@ -22,6 +22,9 @@ CUES = {  # scene: level 0..1
  "knock":   dict(bamboo=.6),
  "birds":   dict(dawn=.5, outro=.4),
 }
+if len(sys.argv) > 3:   # optional cue file: {"cues": {layer: {scene: level}}, "events": [[type, scene, fraction], ...]}
+    _c = json.load(open(sys.argv[3])); CUES.update({k: v for k, v in _c.get("cues", {}).items()}); EVENTS = _c.get("events", [])
+else: EVENTS = []
 mix = np.zeros(n)
 # drone: low unsettling cluster with slow beating
 d = sum(np.sin(2 * np.pi * f * t + ph) * a for f, ph, a in [(55, 0, 1), (55.7, 1, .8), (82.4, 2, .5), (58.3, 3, .35), (110.5, 4, .25)])
@@ -46,6 +49,7 @@ mix += .16 * env_from(CUES["frogs"]) * fg
 # thunder in the room scene and once in the dark
 th = np.zeros(n)
 for name, off in [("room", .35), ("room", .8), ("dark", .15)]:
+    if name not in S: continue
     s0 = int((S[name]["t0"] + off * (S[name]["t1"] - S[name]["t0"])) * SR); L = int(SR * 3.5); e = np.exp(-np.arange(L) / (SR * 0.9)) * np.minimum(1, np.arange(L) / (SR * .12))
     th[s0:s0 + L] += bandnoise(30, 140)[:L] * e * 1.6
 mix += .5 * th
@@ -55,12 +59,12 @@ for _ in range(int(DUR * 14)):
     s0 = rng.integers(0, n - 400); L = int(rng.integers(60, 300)); fc[s0:s0 + L] += rng.standard_normal(L) * np.exp(-np.arange(L) / (L / 4)) * rng.random()
 mix += .35 * env_from(CUES["fire"]) * fc
 # heartbeat: thump-thump, rate rises in the dark
-hb = np.zeros(n); tcur = S["room"]["t0"]; bpm = 58
+hb = np.zeros(n); _hs = [k for k, v in CUES["heart"].items() if v > 0 and k in S] or ["room"]; _hs = [k for k in _hs if k in S]; hb0 = S[_hs[0]]["t0"] if _hs else DUR + 1; hb1 = S[_hs[-1]]["t1"] if _hs else DUR + 2; tcur = hb0; bpm = 58
 while tcur < DUR:
     for off, a in [(0, 1.0), (0.22, 0.7)]:
         s0 = int((tcur + off) * SR); L = int(SR * 0.22)
         if s0 + L < n: tt = np.arange(L) / SR; hb[s0:s0 + L] += np.sin(2 * np.pi * 58 * tt) * np.exp(-tt * 18) * a
-    frac = np.clip((tcur - S["room"]["t0"]) / max(1, (S["dark"]["t1"] - S["room"]["t0"])), 0, 1); tcur += 60 / (bpm + 22 * frac)
+    frac = np.clip((tcur - hb0) / max(1, (hb1 - hb0)), 0, 1); tcur += 60 / (bpm + 22 * frac)
 mix += .65 * env_from(CUES["heart"]) * hb
 # bamboo knocks
 kb = np.zeros(n)
@@ -73,6 +77,26 @@ for _ in range(int(DUR * 1.2)):
     s0 = rng.integers(0, n - SR); L = int(SR * (0.08 + rng.random() * 0.12)); tt = np.arange(L) / SR; f = 2400 + rng.random() * 1400
     bd[s0:s0 + L] += np.sin(2 * np.pi * (f + 900 * tt / (L / SR)) * tt) * np.hanning(L)
 mix += .10 * env_from(CUES["birds"]) * bd
+# tunnel howl, telegraph clicks, bell strikes, passing trains (cue-file layers)
+if "howl" in CUES:
+    hw = bandnoise(90, 420) * (0.5 + 0.5 * np.sin(2 * np.pi * t / 6.5)) + 0.5 * np.sin(2 * np.pi * (170 + 25 * np.sin(2 * np.pi * t / 9)) * t) * (0.5 + 0.5 * np.sin(2 * np.pi * t / 13 + 1))
+    mix += .5 * env_from(CUES["howl"]) * hw
+if "telegraph" in CUES:
+    tg = np.zeros(n)
+    for _ in range(int(DUR * 0.5)):
+        s0 = rng.integers(0, n - SR); k = int(rng.integers(3, 9))
+        for j in range(k): p = s0 + int(j * SR * 0.07 * (0.6 + rng.random())); tg[p:p + 90] += np.sin(2 * np.pi * 1500 * np.arange(90) / SR) * np.exp(-np.arange(90) / 25)
+    mix += .35 * env_from(CUES["telegraph"]) * tg
+for typ, sc_name, frac in EVENTS:
+    s0 = int((S[sc_name]["t0"] + frac * (S[sc_name]["t1"] - S[sc_name]["t0"])) * SR)
+    if typ == "bell":
+        L = int(SR * 4); tt = np.arange(L) / SR; b = (np.sin(2 * np.pi * 1180 * tt) + 0.6 * np.sin(2 * np.pi * 1910 * tt) + 0.3 * np.sin(2 * np.pi * 2870 * tt)) * np.exp(-tt * 1.3) * np.minimum(1, tt * 400)
+        if s0 + L < n: mix[s0:s0 + L] += 0.55 * b
+    if typ in ("train", "trainfar"):
+        L = int(SR * 9); tt = np.arange(L) / SR; amp = (np.sin(np.pi * tt / 9) ** 2) * (0.25 if typ == "trainfar" else 1.0)
+        rumble = bandnoise(30, 160)[:L] * amp * 1.2; chug = (np.sin(2 * np.pi * (3 + 2 * tt / 9) * tt) > 0.7) * bandnoise(60, 700)[:L] * amp * 0.9
+        clack = (np.sin(2 * np.pi * (6 + 3 * tt / 9) * tt) > 0.96) * bandnoise(800, 3500)[:L] * amp * 0.8; whistle = np.sin(2 * np.pi * (780 + 90 * np.sin(tt * 2)) * tt) * (tt > 3) * (tt < 6.5) * amp * 0.35
+        if s0 + L < n: mix[s0:s0 + L] += 0.6 * (rumble + chug + clack + whistle)
 # fade in/out, normalise
 mix *= np.minimum(1, t / 2.0) * np.minimum(1, (DUR - t) / 2.5); mix = mix / (np.abs(mix).max() + 1e-9) * 0.6
 sf.write(sys.argv[2], mix.astype(np.float32), SR); print("ambience", round(DUR, 1), "s ->", sys.argv[2])
