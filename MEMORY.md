@@ -46,6 +46,8 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 
 - Round 6: the owner chose the ORIGINAL PARODY route (own jokes, GTA-style radio / TV / NPC humour, no Rockstar or streamer content) and can also record their own GTA 6 gameplay (a clip-cutter for their own footage is a possible later tool). First episode: examples/sunny-bay-radio (DJ Rick Neon, Intern Alfie, Brenda), 57 s widescreen plus two auto-cut Shorts.
 
+- Round 7: the owner watched Sunny Bay Radio and rejected it ("awful, drop it"). Dropped so far: money/banking explainers, Money Stories, the original GTA-style parody. LESSON: do not invent topics, jokes or formats blind and then render them. First get a concrete reference from the owner (channels or videos they want to resemble in FORMAT, not content), or the topic and key ideas from the owner, then show a short outline, then produce. Keep the production kit (characters, animation, sets, voices, Shorts) as a tool; the content direction is still undecided.
+
 ## Known weaknesses / to do
 - No chair prop for sitting; eyes do not follow anything; lip-sync follows loudness only; some gestures are approximations (e.g. shrug).
 - Background characters and crowds are not built yet.
