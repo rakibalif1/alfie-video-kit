@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=720, height=1280" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 720px; height: 1280px; overflow: hidden; background: #111; font-family: "Poppins", "Nunito", sans-serif; }
+      #root { position: absolute; left: 0; top: 0; width: 720px; height: 1280px; overflow: hidden; background: #6cd0ff; }
+      .scene { position: absolute; left: 0; top: 0; width: 720px; height: 1280px; overflow: hidden; }
+      .abs { position: absolute; }
+      .person { position: absolute; width: 150px; height: 300px; }
+      .person svg { width: 150px; height: 300px; overflow: visible; }
+      .bubble { position: absolute; background: #fff; color: #1b1f5e; border: 5px solid #1b1f5e; border-radius: 34px; padding: 10px 22px; font-weight: 800; font-size: 40px; line-height: 1.05; text-align: center; font-family: "Archivo Black", "Poppins", sans-serif; box-shadow: 0 8px 0 rgba(0,0,0,.18); white-space: nowrap; z-index: 20; }
+      .bubble::after { content: ""; position: absolute; bottom: -26px; width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 26px solid #1b1f5e; }
+      .bubble.tl::after { left: 36px; } .bubble.tr::after { right: 36px; }
+      .bubble.red { background: #ff3b5c; color: #fff; }
+      .bubble.yel { background: #ffd23f; }
+      .bubble.grn { background: #2ecc71; color: #fff; }
+      .h1 { position: absolute; font-family: "Archivo Black", "Poppins", sans-serif; font-weight: 900; text-align: center; color: #fff; text-shadow: 0 5px 0 rgba(27,31,94,.9), 0 0 0 #1b1f5e; -webkit-text-stroke: 3px #1b1f5e; paint-order: stroke fill; letter-spacing: 1px; white-space: nowrap; }
+      .tag { position: absolute; border-radius: 18px; font-family: "Archivo Black", sans-serif; color: #fff; text-align: center; border: 5px solid #1b1f5e; box-shadow: 0 7px 0 rgba(0,0,0,.2); white-space: nowrap; }
+      #caps { position: absolute; left: 0; top: 1040px; width: 720px; height: 190px; z-index: 100; }
+      .cg { position: absolute; left: 0; top: 0; width: 720px; height: 190px; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; padding: 0 30px; opacity: 0; }
+      .cw { font-family: "Poppins", sans-serif; font-weight: 800; font-size: 58px; line-height: 1.1; color: #fff; text-transform: uppercase; padding: 2px 14px; border-radius: 16px; --sc:#1b1f5e; -webkit-text-stroke: 8px var(--sc); paint-order: stroke fill; display: inline-block; }
+      #wipe { position: absolute; left: 0; top: 0; width: 720px; height: 1280px; z-index: 200; pointer-events: none; overflow: hidden; }
+      .strip { position: absolute; top: -200px; width: 1300px; height: 1700px; left: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="81.4" data-width="720" data-height="1280">
+      <div id="s1" class="scene clip" data-start="0" data-duration="12.5" data-track-index="1"></div>
+      <div id="s2" class="scene clip" data-start="12.5" data-duration="5.9" data-track-index="1">
+        <div id="tvwrap" style="position:absolute;left:60px;top:196px;width:1920px;height:1080px;transform:scale(0.3125);transform-origin:0 0;z-index:15;pointer-events:none;">
+          <div id="tvticker" data-composition-id="news-ticker" data-composition-src="compositions/news-ticker.html" data-start="12.7" data-duration="5.7" data-track-index="3" data-width="1920" data-height="1080"></div>
+        </div>
+      </div>
+      <div id="s3" class="scene clip" data-start="18.4" data-duration="5.1" data-track-index="1"></div>
+      <div id="s4" class="scene clip" data-start="23.5" data-duration="17.2" data-track-index="1"></div>
+      <div id="s5" class="scene clip" data-start="40.7" data-duration="16.7" data-track-index="1"></div>
+      <div id="s6" class="scene clip" data-start="57.4" data-duration="8.8" data-track-index="1"></div>
+      <div id="s7" class="scene clip" data-start="66.2" data-duration="12.6" data-track-index="1"></div>
+      <div id="s8" class="scene clip" data-start="78.8" data-duration="2.6" data-track-index="1"></div>
+      <div id="badge" class="abs" style="left:18px;top:22px;width:128px;height:128px;z-index:90;"></div>
+      <div id="caps"></div>
+      <div id="wipe"></div>
+      <audio id="vo" src="assets/vo.wav" data-start="0" data-duration="81.4" data-track-index="5" data-volume="1"></audio>
+      <audio id="bgm" src="assets/bgm.wav" data-start="0" data-duration="81.4" data-track-index="6" data-volume="0.35"></audio>
+    </div>
+    <script>
+window.__timelines = window.__timelines || {};
+const tl = gsap.timeline({ paused: true });

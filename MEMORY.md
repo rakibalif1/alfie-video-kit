@@ -56,6 +56,11 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 - NOT in the automatic setup: directing-stickman-videos (kaomei/stickman-video-director, skill folder 555 MB). Install on demand: npx skills add kaomei/stickman-video-director --skill directing-stickman-videos -g -y -a claude-code
 - Third-party skills run with full agent permissions; review new ones before adding.
 
+## DECISION (owner liked row 3): the HyperFrames pop-art look is the preferred visual style for now
+- Saved as projects/hyperframes-queue (flat SVG figures from src/rig.js with arms, legs and flapping mouth; bright pop-art scenes with sunburst, halftone dots, wipes, news ticker, gauge, timeline, shield, rule cards, confetti). Build: `cd projects/hyperframes-queue && python3 build.py` (joins src/*.js into index.html), then `npx --yes hyperframes@0.9.102 render` (CHROME=/opt/pw-browsers/chromium). Skills used: hyperframes, hyperframes-cli, hyperframes-registry, media-use. It was made by a Sonnet worker in about 15 minutes plus a 2 minute render.
+- Known weaknesses to fix next: caption timing is estimated by letter count (Whisper models would not download), figures move stiffly, ticker text is tiny, 42 overlap warnings from `check`, one big index.html, captions sit below the safe zone. The topic itself (bank run) is still not a proven winner: ask the owner for the next topic.
+- The Alfie 3D kit remains available for acting 3D characters.
+
 ## Tool comparison on 'The Queue' (same script and voice; workers judged from stills only, owner has the files)
 - Alfie kit (baseline): the only one with real acting 3D characters; best so far. Recommended main tool.
 - hyperframes 6/10 (busy colourful flat SVG figures, ticker, wipes); openmontage 6/10 (ink stick figures with real mocap walks, busy 7); lemo-opuscar 6 looks / 2 funny (broadcast-news look, no people, landscape); claudeanimationbase 6 look / 4 fit (hand-painted mascot, very slow, 10 s excerpt only, 2.2 h for 80 s); explainroo 4/10 (slides); moneyprinterturbo 3/10 (only re-cut footage; needs Pexels and LLM keys).
