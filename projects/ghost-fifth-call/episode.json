@@ -1,0 +1,396 @@
+{
+ "title": "The Fifth Call",
+ "series": "NIGHT TALES",
+ "format": "landscape",
+ "cast": {
+  "N": {
+   "model": "Sakurada_Fumiriya",
+   "name": "The Storyteller"
+  },
+  "W": {
+   "model": "Sakurada_Fumiriya",
+   "name": "Bhola"
+  },
+  "G": {
+   "model": "Vivi",
+   "name": "The Voice"
+  }
+ },
+ "voices": {
+  "N": [
+   "bm_lewis",
+   0.95,
+   "en-gb"
+  ],
+  "W": [
+   "am_onyx",
+   1.0,
+   "en-us"
+  ],
+  "G": [
+   "af_nicole",
+   1.0,
+   "en-us"
+  ]
+ },
+ "lines": [
+  {
+   "who": "N",
+   "emotion": "story",
+   "pause": 1.0,
+   "scene": "dusk",
+   "text": "In our village, the evening did not fall. It crept in.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "dusk",
+   "text": "First came the conch shells, one house after another, calling the day to bed. Then the frogs began, thousands of them, as if the whole earth were clearing its throat.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "dusk",
+   "text": "My grandmother used to say that dusk is a door, and it stays open, just a little, until the first jackal cries.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "pause": 1.2,
+   "scene": "dusk",
+   "text": "She told me this story only once. She would never tell it again.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "road",
+   "text": "It happened to her younger brother, Arun, in the monsoon of nineteen sixty-one. He was twenty-two, a schoolteacher, posted to a village so remote that the road gave up three miles before it.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "road",
+   "text": "That night he had gone to a wedding across the river. He stayed late. The songs were long, and the rain held off, like a held breath.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "road",
+   "text": "When he left, the sky had no moon and no stars. Only clouds, low and heavy, the colour of a bruise. He carried a hurricane lamp, a small yellow flame that made the darkness around it feel larger.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "pause": 1.0,
+   "scene": "road",
+   "text": "The path ran along the old embankment. Black water on both sides. Still. And listening.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "watchman",
+   "text": "Halfway home stood a watchman's hut, with a tin roof and a smoky fire. The watchman, Bhola, was so old that people said he had been awake since the British left.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "watchman",
+   "text": "He looked at the lamp. Then at the sky. Then at Arun. He did not say good evening.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "W",
+   "emotion": "old",
+   "pause": 0.3,
+   "scene": "watchman",
+   "text": "Babu. Tonight, on the embankment, someone may call your name.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "W",
+   "emotion": "old",
+   "pause": 0.3,
+   "scene": "watchman",
+   "text": "It will sound like someone you love. Do not turn. Do not answer. And never count the calls. The fifth is the one you cannot refuse.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "watchman",
+   "text": "Arun laughed. He taught the children that thunder was only air, and ghosts were only stories.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "W",
+   "emotion": "old",
+   "pause": 1.2,
+   "scene": "watchman",
+   "text": "The dead are polite, Babu. They always wait to be invited.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "bamboo",
+   "text": "Beyond the hut, the bamboo grove began. The stalks leaned together, and in the wind they knocked against each other, hollow and slow, like someone patiently tapping on a door.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "bamboo",
+   "text": "Arun walked faster. His lamp threw long shadows that moved when nothing else did.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "pause": 0.4,
+   "scene": "bamboo",
+   "text": "Then, from behind the bamboo, in the silence between two gusts of wind, he heard it.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "G",
+   "emotion": "ghostly",
+   "pause": 1.3,
+   "scene": "bamboo",
+   "text": "Anu.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "bamboo",
+   "text": "Only his name. Soft, unhurried, the way a mother calls a child who is already on his way home.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "pause": 1.0,
+   "scene": "bamboo",
+   "text": "It was his mother's voice. But his mother was two hundred miles away, in Kolkata, asleep.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "pond",
+   "text": "He kept walking. His heart was a fist against his ribs. And then, from his left, from the pond, the second call.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "pond",
+   "text": "Everyone knew that pond. Its stone steps had crumbled long ago, and its water was so dark it seemed a hole cut in the world. Above it, small lights were drifting. Pale, blue and green. The villagers called them aleya, lanterns carried by those who do not wish to be seen.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "pause": 0.8,
+   "scene": "pond",
+   "text": "They did not flicker. They did not rise. One by one, they turned to face him.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "G",
+   "emotion": "ghostly",
+   "pause": 1.3,
+   "scene": "pond",
+   "text": "Anu. Come, my son. I have kept your rice.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "pause": 1.0,
+   "scene": "pond",
+   "text": "That was the line that nearly broke him. Because his mother said it every night of his childhood. I have kept your rice.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "room",
+   "text": "He reached his room above the post office, bolted the door, and sat on the bed with the lamp in his lap, shaking, laughing a little, the way you laugh when you are not sure you are allowed to.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "room",
+   "text": "The rain came then, a million small fingers on the tin roof. The wind pushed at the shutters. Somewhere, a dog howled once, and stopped, as though it had been told to.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "pause": 0.6,
+   "scene": "room",
+   "text": "The flame leaned toward the window. Not away. Toward.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "G",
+   "emotion": "ghostly",
+   "pause": 1.3,
+   "scene": "room",
+   "text": "Anu. Open the window. I am cold.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "pause": 0.4,
+   "scene": "room",
+   "text": "Three. He did not answer. Then the voice moved, and it was no longer at the window. It was inside the room.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "G",
+   "emotion": "ghostly",
+   "pause": 1.5,
+   "scene": "room",
+   "text": "Anu. Why are you shaking? It is only me.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "dark",
+   "text": "One hour. Two. The rain softened. The frogs fell silent, one pond at a time, until the silence was the loudest thing he had ever heard.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "scene": "dark",
+   "text": "He sat very still, and the voice did not shout, and it did not plead. It only waited. Politely.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "pause": 1.0,
+   "scene": "dark",
+   "text": "Then, close to the floor, close to his feet, it spoke a fifth time.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "G",
+   "emotion": "ghostly",
+   "pause": 1.8,
+   "scene": "dark",
+   "text": "Anu. Look under the bed.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "pause": 1.5,
+   "scene": "dark",
+   "text": "The lamp went out. Not blown. Not guttered. Simply, politely, out. And in the dark, in the little space under his bed, something that had been waiting for hours softly breathed in, as if to say his name.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "dawn",
+   "text": "He opened his mouth. The word was already on his tongue. Ma. And then, far away across the fields, a rooster crowed.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "dawn",
+   "text": "The postmaster found the door still bolted from the inside, and Arun sitting on the bed, white as paper, his hair no longer black.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "scene": "dawn",
+   "text": "A telegram arrived that morning from Kolkata. His mother had died the night before. At nine o'clock, before he had even left the wedding.",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "pause": 1.2,
+   "scene": "dawn",
+   "text": "My grandmother always stopped here. She would blow out the lamp, and say, very quietly: so who, then, was calling him all night?",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "pause": 1.5,
+   "scene": "dawn",
+   "text": "Tonight, if someone calls your name from the dark, in a voice you love, do not turn. Do not answer. And whatever you do...",
+   "gesture": "explain",
+   "cam": "wide"
+  },
+  {
+   "who": "N",
+   "emotion": "dread",
+   "pause": 2.0,
+   "scene": "dawn",
+   "text": "do not count.",
+   "gesture": "explain",
+   "cam": "wide"
+  }
+ ]
+}
