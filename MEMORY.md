@@ -53,6 +53,11 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 - NOT in the automatic setup: directing-stickman-videos (kaomei/stickman-video-director, skill folder 555 MB). Install on demand: npx skills add kaomei/stickman-video-director --skill directing-stickman-videos -g -y -a claude-code
 - Third-party skills run with full agent permissions; review new ones before adding.
 
+## Extra tools (installed on request; reinstall with tools/install_extra_tools.sh [cab|openmontage|mpt|all])
+- **ClaudeAnimationBase** (JohnHeibel): p5.js hand-drawn style animation of a small character; node render.mjs; about 8 seconds per frame on CPU (very slow), use --soft-gl; read its ANIMATION_GUIDE.md.
+- **OpenMontage** (calesthio): agent-driven video production framework with 141 skills, local to /home/user/OpenMontage (do not copy its skills to the global folder: they would bloat every chat). `make preflight` showed free tools for analysis, audio processing, character animation, subtitles and video post; text-to-speech, video generation, image generation and music need API keys or extra models (the free Piper voice is installed but reported unavailable until a voice model is added).
+- **MoneyPrinterTurbo** (harry0703): script-to-stock-footage video app (Streamlit/FastAPI). Needs the owner's own LLM key and Pexels/other stock key in config.toml; default voice is a cloud service. Not run yet.
+
 ## Known weaknesses / to do
 - No chair prop for sitting; eyes do not follow anything; lip-sync follows loudness only; some gestures are approximations (e.g. shrug).
 - Background characters and crowds are not built yet.
