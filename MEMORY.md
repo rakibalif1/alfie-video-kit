@@ -9,6 +9,8 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 - The owner is not a prompt expert: they give a one-line idea, Claude turns it into the script, plan and video. They do not want to repeat themselves.
 
 ## Owner's rules (follow always)
+- **Always show a progress bar** in every status update (for example [██████████░░░░░░░░░░] 50%, with what is done, what is running and time left).
+- **/team = 4 workers always busy**: shared work queue in a job folder (tasks/, claims/, shared/brief.md, shared/protocol.md); finished workers claim the next free task; free workers help (QA, logs, split renders); the manager is never idle either. See skills/team/SKILL.md.
 - **Ask questions whenever in doubt.** Do not guess.
 - **Be honest**: say plainly what is weak, untested or unproven. Never claim a video is good without having checked frames. Claude cannot watch or listen to video, only inspect frames and files.
 - **Hook first**: the first 2 seconds must be a threat, a mystery or a shocking true fact. Never "Today we learn what X is". Avoid crowded, generic topics.
@@ -52,6 +54,11 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 - Installed every new session in the background by the setup script: explainroo, linkedin-marketing (contains 12 LinkedIn sub-skills), remotion-to-hyperframes, slideshow, gbro-collage-broll (needs a paid GEMINI_API_KEY, built for Codex), claude-video-caption (Whisper captions), lemo-opuscar (downloads its library from its own GitHub on first use), 12 Reactive Resume career skills (resume-builder, accomplishment-inventory, healthcare-resume, resume-bullet-writer, resume-tailor, resume-proofreader, resume-content-guide, cover-letter-writer, application-answers, interview-prep, mock-interview, job-application-manager). Also hyperframes core + remotion-best-practices.
 - NOT in the automatic setup: directing-stickman-videos (kaomei/stickman-video-director, skill folder 555 MB). Install on demand: npx skills add kaomei/stickman-video-director --skill directing-stickman-videos -g -y -a claude-code
 - Third-party skills run with full agent permissions; review new ones before adding.
+
+## Tool comparison on 'The Queue' (same script and voice; workers judged from stills only, owner has the files)
+- Alfie kit (baseline): the only one with real acting 3D characters; best so far. Recommended main tool.
+- hyperframes 6/10 (busy colourful flat SVG figures, ticker, wipes); openmontage 6/10 (ink stick figures with real mocap walks, busy 7); lemo-opuscar 6 looks / 2 funny (broadcast-news look, no people, landscape); claudeanimationbase 6 look / 4 fit (hand-painted mascot, very slow, 10 s excerpt only, 2.2 h for 80 s); explainroo 4/10 (slides); moneyprinterturbo 3/10 (only re-cut footage; needs Pexels and LLM keys).
+- Ideas to borrow: lemo-opuscar news strap, stamps and breaking chart; openmontage mocap walk cycles; hyperframes wipes and ticker. Files were in /home/user/compare (gone when the container resets).
 
 ## Extra tools (installed on request; reinstall with tools/install_extra_tools.sh [cab|openmontage|mpt|all])
 - **ClaudeAnimationBase** (JohnHeibel): p5.js hand-drawn style animation of a small character; node render.mjs; about 8 seconds per frame on CPU (very slow), use --soft-gl; read its ANIMATION_GUIDE.md.
