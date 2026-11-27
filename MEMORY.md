@@ -48,6 +48,11 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 
 - Round 7: the owner watched Sunny Bay Radio and rejected it ("awful, drop it"). Dropped so far: money/banking explainers, Money Stories, the original GTA-style parody. LESSON: do not invent topics, jokes or formats blind and then render them. First get a concrete reference from the owner (channels or videos they want to resemble in FORMAT, not content), or the topic and key ideas from the owner, then show a short outline, then produce. Keep the production kit (characters, animation, sets, voices, Shorts) as a tool; the content direction is still undecided.
 
+## Extra skills installed (owner's request, all reviewed before install)
+- Installed every new session in the background by the setup script: explainroo, linkedin-marketing (contains 12 LinkedIn sub-skills), remotion-to-hyperframes, slideshow, gbro-collage-broll (needs a paid GEMINI_API_KEY, built for Codex), claude-video-caption (Whisper captions), lemo-opuscar (downloads its library from its own GitHub on first use), 12 Reactive Resume career skills (resume-builder, accomplishment-inventory, healthcare-resume, resume-bullet-writer, resume-tailor, resume-proofreader, resume-content-guide, cover-letter-writer, application-answers, interview-prep, mock-interview, job-application-manager). Also hyperframes core + remotion-best-practices.
+- NOT in the automatic setup: directing-stickman-videos (kaomei/stickman-video-director, skill folder 555 MB). Install on demand: npx skills add kaomei/stickman-video-director --skill directing-stickman-videos -g -y -a claude-code
+- Third-party skills run with full agent permissions; review new ones before adding.
+
 ## Known weaknesses / to do
 - No chair prop for sitting; eyes do not follow anything; lip-sync follows loudness only; some gestures are approximations (e.g. shrug).
 - Background characters and crowds are not built yet.
