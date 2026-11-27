@@ -9,6 +9,8 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 - The owner is not a prompt expert: they give a one-line idea, Claude turns it into the script, plan and video. They do not want to repeat themselves.
 
 ## Owner's rules (follow always)
+- **Use the whole arsenal, not one tool.** The owner liking one look (HyperFrames pop-art) does NOT mean we only use that. For every video pick the best tool or combine tools: Alfie 3D kit, HyperFrames, OpenMontage (ink, mocap walks), Lemo-Opuscar (painterly and broadcast styles), ClaudeAnimationBase, explainroo, our own code (ambient sound, fog, particles). Choose per video and say why.
+- **Ghost-story direction (Dec 2026):** entertainment, not logic or science. The WORDS are the strong side: Bengali and Indian ghost-story style, rich atmosphere and surroundings, slow low calm narration, no loud jump-scare voice. Visuals support the mood, they do not try to scare. 5-minute videos. Original stories only (folklore motifs are fine, no copying of published stories).
 - **Name every delivered file with the tool/skill that made it** (for example queue_hyperframes.mp4) and say in the caption which skill or tool was used. Never send several files all called out.mp4.
 - **Always show a progress bar** in every status update (for example [██████████░░░░░░░░░░] 50%, with what is done, what is running and time left).
 - **/team = 4 workers always busy**: shared work queue in a job folder (tasks/, claims/, shared/brief.md, shared/protocol.md); finished workers claim the next free task; free workers help (QA, logs, split renders); the manager is never idle either. See skills/team/SKILL.md.
