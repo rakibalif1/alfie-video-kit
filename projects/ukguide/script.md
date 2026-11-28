@@ -1,6 +1,12 @@
 # YOUR FIRST 30 DAYS IN THE UK — script v1 (for approval)
 *Working title. Format: 16:9, 1280x720, one warm narrator, short character voices for the "bad advice" moments. Target about 17 minutes (about 2,080 spoken words at a slow pace plus pauses). Fact-checked on 28 Nov 2026 (sources at the end). This is a draft: nothing is rendered until you approve it.*
 
+## AUDIENCE AND PACE (owner's answers, 28 Nov 2026)
+- Viewers: Bangladesh, India, Pakistan, Nepal, Sri Lanka, Nigeria, Ghana. Many watch in English as a second language, so: plain words, short sentences, captions always on, narrator at about 150 to 160 words per minute (quicker than the ghost film, never rushed), pauses short (about 0.3 to 0.5 s).
+- This is NOT a ghost story: the voice is warm, clear, friendly and alive. Dramatic only for the scam and warning moments.
+- Crowds and characters in the pictures should include mostly South Asian and West African everyday people (everyday clothes, no stereotypes, no real people), plus a few others.
+- Later: the same video with Bengali, Hindi, Urdu, Nepali, Sinhala and Tamil subtitles (YouTube supports many subtitle languages on one video). English narration is fine for Nigeria and Ghana.
+
 ## HOW TO READ THIS SCRIPT
 Each scene has: **ON SCREEN** (exactly what the code must draw), **SOUND**, and **NARRATION** lines in our voice format `SPEAKER[emotion]{pause after, seconds}: text`.
 - Speakers: `N` = Narrator (warm, honest, a friend who has lived here for years and made every mistake). `S` = the Salesman (pushy, bright). `A` = the "Agent" scammer (sly, smooth). `L` = the Landlord (rushed, vague). `P` = the Phone-call scammer (stern, official).
@@ -49,15 +55,22 @@ Each scene has: **ON SCREEN** (exactly what the code must draw), **SOUND**, and 
 | Indeed | "in-DEED" |
 | tenancy | "TEN-un-see" |
 | Leicester / Worcester | "LESS-ter" / "WUSS-ter" |
+| Dhaka | "DAH-ka" |
+| Delhi | "DEL-ee" |
+| Karachi | "kuh-RAH-chee" |
+| Kathmandu | "kat-man-DOO" |
+| Colombo | "kuh-LUM-bo" |
+| Lagos | "LAY-gos" |
+| Accra | "uh-KRAH" |
 | £12.71 | "twelve pounds seventy-one" |
 | 111 / 999 | "one-one-one" / "nine-nine-nine" |
 
 ---
 ## SCENE 1 — THE TWO SUITCASES (cold open) · about 0:50
-**ON SCREEN:** Rainy window of an airport arrivals hall at dusk; a crowd of different people (different skin tones, clothing, ages, one family with a pushchair) walking out with suitcases. Camera pushes through the doors. Cut to a clean split screen, left and right, same grey London street: LEFT figure (tinted red, label "PATH A") and RIGHT figure (tinted green, label "PATH B"), each holding the same blue suitcase. Under each figure a big money bar labelled "£2,000" (bar fills the bottom of each half). Day counter in the centre ticks "DAY 1 … DAY 30" fast. Left bar drains in jumps while small icons fly out of the figure: phone, laptop, sofa, a pen signing paper, a stack of cash going into an envelope. Right bar barely moves: icons that fly in are a SIM card, a bank card, a stethoscope, a bus. At DAY 30 the left figure sits on a friend's sofa looking at an empty phone screen; the right figure waves from a bus window. Hold on the title card: "YOUR FIRST 30 DAYS IN THE UK" in big warm letters.
+**ON SCREEN:** Rainy window of an airport arrivals hall at dusk; a crowd of everyday travellers, mostly South Asian and West African (different ages, everyday clothes, one family with a pushchair) walking out with suitcases. Camera pushes through the doors. Cut to a clean split screen, left and right, same grey London street: LEFT figure (tinted red, label "PATH A") and RIGHT figure (tinted green, label "PATH B"), each holding the same blue suitcase. Under each figure a big money bar labelled "£2,000" (bar fills the bottom of each half). Day counter in the centre ticks "DAY 1 … DAY 30" fast. Left bar drains in jumps while small icons fly out of the figure: phone, laptop, sofa, a pen signing paper, a stack of cash going into an envelope. Right bar barely moves: icons that fly in are a SIM card, a bank card, a stethoscope, a bus. At DAY 30 the left figure sits on a friend's sofa looking at an empty phone screen; the right figure waves from a bus window. Hold on the title card: "YOUR FIRST 30 DAYS IN THE UK" in big warm letters.
 **SOUND:** rain, distant announcements, soft piano; a low "thud" each time the left bar drops; a bright "ding" for each right-side icon; title card with a gentle swell.
 **NARRATION:**
-N[story]{0.4}: Two people land in the United Kingdom on the very same day. Same airport. Same suitcase. Same two thousand pounds.
+N[story]{0.4}: Two people land in the United Kingdom on the very same day. One flew in from Lagos. The other from Dhaka. Same airport. Same suitcase. Same two thousand pounds.
 N[worried]{0.5}: Thirty days later... one of them is broke, in debt, and sleeping on a friend's sofa.
 N[calm]{0.4}: The other one has a bank account, a doctor, a job search already running, and — this is the part nobody believes — most of that money is still in the bank.
 N[hush]{0.7}: The difference was not luck. It was not money. It was the order they did things in.
@@ -164,7 +177,8 @@ N[cheer]{0.3}: Oh, and Vinted and Facebook Marketplace? For the furniture you do
 **NARRATION:**
 N[calm]{0.3}: Step eight. Your voice. But please listen carefully, because this one is not the same for everybody.
 N[calm]{0.4}: You can register to vote if you are a British citizen, an Irish citizen, or a citizen of a qualifying Commonwealth country with permission to be in the U.K.
-N[worried]{0.4}: If you are from somewhere else, you may be able to vote only in certain local elections, or not at all. It depends on your country. Check on GOV.UK, in the page called Register to vote, before you do anything.
+N[calm]{0.4}: Good news for many of you. India, Pakistan, Bangladesh, Sri Lanka, Nigeria and Ghana are all Commonwealth countries. So if you are a citizen of one of those, and you have permission to be here, you can usually register.
+N[worried]{0.4}: Nepal is not in the Commonwealth, so Nepali citizens cannot vote here unless they become British. And rules can differ for each person. Check on GOV.UK, in the page called Register to vote, before you do anything.
 N[angry]{0.4}: And do not tick a box if you are not eligible. Registering when you should not is a crime.
 N[calm]{0.4}: If you are eligible, register. It takes about five minutes, and it has a quiet bonus: being on the electoral roll helps lenders confirm your address, which makes it easier to build a credit history later.
 
@@ -177,6 +191,7 @@ P[calm]{0.2}: This is the Home Office. There is a problem with your visa. You mu
 N[angry]{0.5}: That is not the Home Office. The Home Office says it will never ask you to pay by email, or into a personal bank account.
 N[worried]{0.4}: Here is the pattern. Scammers promise you something you desperately want. A job. A visa. A room. A number. And they ask you to pay first. They want you to rush. They want you to be scared.
 N[sad]{0.5}: Every year, hardworking people lose their savings to these promises. And many feel too ashamed to tell anyone.
+N[calm]{0.4}: One more, especially for people coming for care work and other sponsored jobs. Before you pay anything, or even trust an offer, check the employer on the official Register of Licensed Sponsors on GOV.UK. If the company is not on it, it cannot sponsor you.
 N[calm]{0.4}: You are not stupid, and you are not alone. If something feels wrong, stop. Take a breath. Ask a friend. And if you have been tricked, report it to the police fraud service, or ask Citizens Advice or Migrant Help. They are free.
 N[cheer]{0.3}: The golden rule for scams? Anything real is free, or can wait for a day.
 
@@ -186,7 +201,7 @@ N[cheer]{0.3}: The golden rule for scams? Anything real is free, or can wait for
 **NARRATION:**
 N[calm]{0.3}: Once those basics are done, there are a few more things worth knowing.
 N[calm]{0.4}: Your local council will want you registered for council tax, and there may be discounts, for example if you live alone. Don't ignore their letters.
-N[calm]{0.4}: If you drive, many licences from outside Europe can be used for twelve months. After that, you need a U.K. licence. Check GOV.UK for your own country, because the rules differ.
+N[calm]{0.4}: If you drive, a licence from outside Europe can usually be used for twelve months. After that you need a U.K. licence. For most of our countries, that means passing the U.K. driving test, so book your theory test early. Check GOV.UK for your own country, because the rules differ.
 N[calm]{0.4}: If you have children, you apply for a school place through your local council. And you only need a T-V licence if you watch live television, or the BBC's catch-up service.
 N[cheer]{0.3}: And find a free English class near you. Even a little improves your confidence, your job options, and your friends.
 
@@ -202,7 +217,7 @@ N[calm]{0.4}: And in months two and three, when you have a job and an address, t
 N[hush]{0.6}: Notice what is not on the list. A new phone. A new laptop. A new sofa. They can wait.
 N[calm]{0.4}: And one last time, because it matters. This is general information, correct as of {{MONTH_YEAR}}. It is not legal advice. Rules, fees and processes change, so always check GOV.UK before you act. If your situation is complicated, ask Citizens Advice, or a regulated immigration adviser.
 N[story]{0.5}: Starting in a new country is one of the bravest things a person can do. It is supposed to feel hard. That does not mean you are doing it wrong.
-N[cheer]{0.4}: You are not behind. You are just beginning. Welcome to the U.K.
+N[cheer]{0.4}: Whether you came from Dhaka, Delhi, Karachi, Kathmandu, Colombo, Lagos or Accra... you are not behind. You are just beginning. Welcome to the U.K.
 
 ---
 ## FACT CHECK TABLE (what I verified, what to re-check before upload)
@@ -221,6 +236,9 @@ N[cheer]{0.4}: You are not behind. You are just beginning. Welcome to the U.K.
 | Charging a worker for a job is illegal | Verified (reporting cites it); re-check wording | Action Fraud / police guidance |
 | 30-day rolling SIM-only plans; pay-as-you-go brands | Verified from comparison sites only; check current terms before upload | MoneySavingExpert, Uswitch |
 | Driving: non-EEA licences valid for 12 months after becoming resident | Verified for most cases, mention "check GOV.UK" | gov.uk driving licences |
+| Commonwealth voting: India, Pakistan, Bangladesh, Sri Lanka, Nigeria, Ghana are Commonwealth members; Nepal is not | From general knowledge, RE-CHECK on gov.uk/register-to-vote and the council nationalities lists | gov.uk |
+| Licences from these countries are not exchangeable, so a UK driving test is needed after 12 months | From memory. RE-CHECK on gov.uk exchangeable licence list | gov.uk |
+| Register of Licensed Sponsors exists on GOV.UK; unlicensed firms cannot sponsor | From knowledge. RE-CHECK link and wording | gov.uk |
 | Council tax discounts, TV licence wording | From memory. RE-CHECK before upload. | gov.uk |
 | Electoral roll helps prove address for credit | Widely stated by credit agencies; keep wording as "helps" | credit agencies |
 
@@ -232,11 +250,15 @@ N[cheer]{0.4}: You are not behind. You are just beginning. Welcome to the U.K.
 5. **Translations:** same script, same visuals, a second voice track per language (Bengali, Urdu, Hindi, Polish, Romanian, Arabic ...) is the biggest audience multiplier. Needs free voices for each language (I tested Bengali earlier: weak).
 6. **Honesty box:** end card line "General information, not legal advice. Check GOV.UK for your own situation." (protects you and the viewers).
 
+## MORE IDEAS FOR THESE AUDIENCES
+- Part 2 candidates: sending money home safely (fees, exchange rates, avoid informal agents), your first job and payslip, renting without being cheated, building credit, care-worker rights, student life.
+- Titles can name the audience in the description (not the title): "for new arrivals from Bangladesh, India, Pakistan, Nepal, Sri Lanka, Nigeria and Ghana".
+- Subtitle files in Bengali, Hindi, Urdu, Nepali, Sinhala, Tamil (I can write them; a native speaker should review before upload).
+
 ## QUESTIONS FOR YOU
-1. Your message stopped at "The man is ignored by …". How did you want to finish that sentence?
-2. Length: this draft is about 16 to 17 minutes. Shorter (about 10 to 12) or keep full?
-3. Narrator: warm British (like Lewis/George, a friend), or a woman's voice, or an accent closer to your audience?
-4. Which nationalities are your viewers? It changes a few facts (voting, driving).
+(Answered by the owner on 28 Nov: ignore the unfinished sentence; keep full length with a quicker narrator; voice to be chosen from samples; audience BD, India, Pakistan, Nepal, Sri Lanka, Nigeria, Ghana.)
+1. Which voice sample do you prefer?
+2. Approve the script or tell me which scenes to change.
 
 ## DESCRIPTION DISCLAIMER (paste at the top of the YouTube description and the pinned comment)
 "Information correct as of {{MONTH_YEAR}}. This video is general information to help new arrivals, not legal, immigration or financial advice. UK rules, fees and processes change often. Always check the official GOV.UK website (and nhs.uk for health) before you act, and if your situation is complicated, speak to Citizens Advice or a regulated immigration adviser. Official links: gov.uk/apply-national-insurance-number · nhs.uk/register · gov.uk/register-to-vote · gov.uk/view-prove-immigration-status · gov.uk/tenancy-deposit-protection · reportfraud.police.uk. We never ask for money, passports or personal details."
