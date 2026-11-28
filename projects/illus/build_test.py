@@ -1,6 +1,8 @@
 import json,re
 d=json.load(open('lines.json')); DUR=round(d['dur']+0.4,1)
 import wave, numpy as np
+_cues=json.load(open('/home/user/illus2-job/out/lipsync_cues.json'))['lines']
+for _i,_l in enumerate(d['lines']): _l['cues']=_cues[_i]['cues'] if _i<len(_cues) else []
 _w=wave.open('assets/vo.wav'); _sr=_w.getframerate(); _a=np.frombuffer(_w.readframes(_w.getnframes()),dtype=np.int16).astype(float)/32768
 _p=np.percentile(np.abs(_a),99) or 1.0
 for _l in d['lines']:
@@ -8,7 +10,7 @@ for _l in d['lines']:
     _l['env']=[round(float(min(1,np.sqrt(np.mean(_a[_s+i*_h:_s+(i+1)*_h]**2))/_p*1.7)),2) if _s+(i+1)*_h<=len(_a) else 0 for i in range(_n)]
 S='/home/user/jobguide/project/src/'
 kit=open(S+'kit.js').read(); ill=open(S+'illus.js').read()
-extra=''.join(open(S+f).read()+'\n' for f in ['bg_sky.js','bg_shops.js','bg_street.js','bg_gags.js'] if __import__('os').path.exists(S+f))
+extra=''.join(open(S+f).read()+'\n' for f in ['perspective.js','bg_sky.js','bg_shops.js','bg_street.js','bg_gags.js'] if __import__('os').path.exists(S+f))
 calls=[]
 for fn,mod in [('ukSky','bg_sky.js'),('ukShops','bg_shops.js'),('ukStreet','bg_street.js'),('ukGags','bg_gags.js')]:
     if __import__('os').path.exists(S+mod): calls.append(f"{fn}(w,{{T:0,D:DUR}});")
@@ -34,7 +36,7 @@ const bgw=box(w,{{left:0,top:0,width:W,height:H}});bgw.style.filter='saturate(.7
 const cast=[['priya',380,626],['emma',650,634],['ada',915,616]],P={{}},SC_=(y)=>0.86*(y-360)/260;
 cast.forEach(([k,x,y])=>{{P[k]=illus(w,Object.assign({{x,y,s:SC_(y),T:0,D:DUR}},ICAST[k]));P[k].breathe(0,DUR);P[k].weight(0,DUR);P[k].saccades(0,DUR);}});
 const NM={{priya:['PRIYA','#2a9d8f'],emma:['EMMA','#1d3557'],ada:['ADA','#e63946']}},EM=['happy','happy','angry','happy'],X={{priya:380,emma:650,ada:915}},HY={{priya:626,emma:634,ada:616}};
-LINES.forEach((l,i)=>{{const sp=P[l.who];sp.emote(EM[i],l.start);sp.speak(l.start,l.env,30);sp.emote('normal',l.start+l.dur+0.1);
+LINES.forEach((l,i)=>{{const sp=P[l.who];sp.emote(EM[i],l.start);sp.lipsync(l.cues,l.start);sp.gesture(l.start+0.35,l.dur-0.2);sp.emote('normal',l.start+l.dur+0.1);
  Object.keys(P).forEach((k)=>{{if(k===l.who)return;const dir=X[l.who]>X[k]?1:-1;P[k].turn(dir,l.start+0.08,Math.max(0.8,l.dur-0.3));P[k].emote(EM[i]==='angry'?'surprised':'normal',l.start+0.2);P[k].emote('normal',l.start+l.dur*0.7);}});
  const e=document.createElement('div');e.className='capl';e.innerHTML=`<span class="nm" style="background:${{NM[l.who][1]}}">${{NM[l.who][0]}}</span>${{l.text}}`;document.getElementById('cap').appendChild(e);gsap.set(e,{{opacity:0}});tl.to(e,{{opacity:1,duration:0.15}},l.start);tl.to(e,{{opacity:0,duration:0.15}},l.start+l.dur);}});
 const last=LINES[LINES.length-1];Object.keys(P).forEach((k,i)=>P[k].laugh(last.start+last.dur-0.6+i*0.15,2.2));
