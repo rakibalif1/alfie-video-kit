@@ -1,0 +1,1021 @@
+{
+ "title": "How to Get a Job in the UK",
+ "series": "UK SURVIVAL GUIDE · PART 2",
+ "format": "landscape",
+ "voices": {
+  "N": [
+   "bf_isabella",
+   1.0,
+   "en-gb",
+   -1.0
+  ],
+  "K": [
+   "bm_lewis",
+   1.05,
+   "en-gb"
+  ],
+  "C": [
+   "am_puck",
+   1.1,
+   "en-us"
+  ],
+  "S": [
+   "am_michael",
+   1.08,
+   "en-us"
+  ],
+  "A": [
+   "bm_fable",
+   0.97,
+   "en-gb"
+  ],
+  "L": [
+   "bm_george",
+   1.15,
+   "en-gb"
+  ],
+  "P": [
+   "bm_daniel",
+   0.97,
+   "en-gb"
+  ]
+ },
+ "emo": {
+  "calm": [
+   1.0,
+   0,
+   1,
+   0.35
+  ],
+  "cheer": [
+   1.08,
+   0.5,
+   1,
+   0.3
+  ],
+  "excited": [
+   1.12,
+   1.0,
+   1.05,
+   0.25
+  ],
+  "surprised": [
+   1.06,
+   1.0,
+   1,
+   0.35
+  ],
+  "worried": [
+   1.0,
+   0.3,
+   1,
+   0.35
+  ],
+  "sad": [
+   0.9,
+   -0.8,
+   0.95,
+   0.5
+  ],
+  "angry": [
+   1.06,
+   -0.8,
+   1.1,
+   0.35
+  ],
+  "sly": [
+   0.95,
+   -0.5,
+   1,
+   0.3
+  ],
+  "hush": [
+   0.92,
+   -0.8,
+   0.92,
+   0.45
+  ],
+  "panic": [
+   1.12,
+   1.5,
+   1.1,
+   0.25
+  ],
+  "story": [
+   0.95,
+   -0.3,
+   1,
+   0.5
+  ]
+ },
+ "pace": {
+  "scene_lead": 0.7,
+  "short_gap": 0.2,
+  "short_lead": 0.0,
+  "q_gap": 0.15,
+  "ell_gap": 0.2
+ },
+ "chain": "highpass=f=65,equalizer=f=150:t=q:w=1:g=4.5,equalizer=f=3000:t=q:w=1.2:g=0.4,equalizer=f=7500:t=q:w=1:g=-3.5,acompressor=threshold=-26dB:ratio=3.5:attack=10:release=350:makeup=6,aecho=0.9:0.5:34|80:0.09|0.05,alimiter=limit=0.95",
+ "month": "November 2026",
+ "checks": {
+  "visa": "CHECK: your eVisa or decision letter, and your university visa team",
+  "survive": "CHECK: gov.uk (SIA licence and right to work)",
+  "cv": "CHECK: nationalcareers.service.gov.uk (CV advice)",
+  "tools": "TIP: never paste passport or ID numbers into AI tools",
+  "scams": "REPORT: reportfraud.police.uk · FREE HELP: Citizens Advice",
+  "linkedin": "TIP: never pay anyone who contacts you on LinkedIn",
+  "find": "CHECK: the employer on the Register of Licensed Sponsors (GOV.UK)",
+  "study": "CHECK: gov.uk (Graduate visa and Skilled Worker rules)"
+ },
+ "next": "Subscribe for Part 3: money, credit and sending money home",
+ "lines": [
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Chidi sent two hundred job applications. He got zero replies.",
+   "scene": "cold",
+   "pause": 0.4,
+   "say": "Chidi sent two hundred job applications. He got zero replies."
+  },
+  {
+   "who": "N",
+   "emotion": "sad",
+   "text": "Not one interview. Not one email. Not even a no.",
+   "scene": "cold",
+   "pause": 0.4,
+   "say": "Not one interview. Not one email. Not even a no."
+  },
+  {
+   "who": "C",
+   "emotion": "sad",
+   "text": "Two hundred, Kiran. Two hundred.",
+   "scene": "cold",
+   "pause": 0.2,
+   "say": "Two hundred, Kiran. Two hundred."
+  },
+  {
+   "who": "K",
+   "emotion": "sly",
+   "text": "And how many were the same CV?",
+   "scene": "cold",
+   "pause": 0.2,
+   "say": "And how many were the same CV?"
+  },
+  {
+   "who": "C",
+   "emotion": "worried",
+   "text": "... Two hundred.",
+   "scene": "cold",
+   "pause": 0.3,
+   "say": "... Two hundred."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Chidi is smart. He works hard. So what went wrong?",
+   "scene": "cold",
+   "pause": 0.4,
+   "say": "Chidi is smart. He works hard. So what went wrong?"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "It was not his talent. It was what he sent.",
+   "scene": "cold",
+   "pause": 0.6,
+   "say": "It was not his talent. It was what he sent."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "In this video, I will show you how to find a job in the UK, how to write a CV that gets replies, how to build a good LinkedIn profile, how to spot the scams, and how to walk into an interview with confidence. No shortcuts. Just steps that work.",
+   "scene": "cold",
+   "pause": 0.3,
+   "say": "In this video, I will show you how to find a job in the U.K., how to write a CV that gets replies, how to build a good Linked In profile, how to spot the scams, and how to walk into an interview with confidence. No shortcuts. Just steps that work."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "One important thing before we start. Everything in this video is correct as of November 2026.",
+   "scene": "safety",
+   "pause": 0.3,
+   "say": "One important thing before we start. Everything in this video is correct as of November 2026."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "Job rules and visa rules change often. So before you act, check GOV.UK, your university, or your employer.",
+   "scene": "safety",
+   "pause": 0.3,
+   "say": "Job rules and visa rules change often. So before you act, check gov dot U K, your university, or your employer."
+  },
+  {
+   "who": "K",
+   "emotion": "calm",
+   "text": "Rule zero. Check your own visa conditions.",
+   "scene": "safety",
+   "pause": 0.2,
+   "say": "Rule zero. Check your own visa conditions."
+  },
+  {
+   "who": "C",
+   "emotion": "worried",
+   "text": "Mine are in very tiny letters.",
+   "scene": "safety",
+   "pause": 0.2,
+   "say": "Mine are in very tiny letters."
+  },
+  {
+   "who": "K",
+   "emotion": "sly",
+   "text": "Then read the tiny letters.",
+   "scene": "safety",
+   "pause": 0.2,
+   "say": "Then read the tiny letters."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "First, the big picture. There is a simple plan, in three stages.",
+   "scene": "plan",
+   "pause": 0.3,
+   "say": "First, the big picture. There is a simple plan, in three stages."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Stage one is a survival job. For the first six months or so, you need money, a routine, and UK work experience. A restaurant, a supermarket, a warehouse, security. Any honest job is a good job.",
+   "scene": "plan",
+   "pause": 0.3,
+   "say": "Stage one is a survival job. For the first six months or so, you need money, a routine, and U.K. work experience. A restaurant, a supermarket, a warehouse, security. Any honest job is a good job."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "But it is a stepping stone. It is not the finish line.",
+   "scene": "plan",
+   "pause": 0.4,
+   "say": "But it is a stepping stone. It is not the finish line."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Stage two is relevant experience. If you came here to study, look for work connected to your course. Even part-time. Even volunteering.",
+   "scene": "plan",
+   "pause": 0.3,
+   "say": "Stage two is relevant experience. If you came here to study, look for work connected to your course. Even part-time. Even volunteering."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Stage three is a job in your own career. For many of you, that means a company that can sponsor your visa.",
+   "scene": "plan",
+   "pause": 0.3,
+   "say": "Stage three is a job in your own career. For many of you, that means a company that can sponsor your visa."
+  },
+  {
+   "who": "C",
+   "emotion": "excited",
+   "text": "Can I skip to stage three?",
+   "scene": "plan",
+   "pause": 0.2,
+   "say": "Can I skip to stage three?"
+  },
+  {
+   "who": "K",
+   "emotion": "sly",
+   "text": "It is stairs, Chidi. Not a lift.",
+   "scene": "plan",
+   "pause": 0.2,
+   "say": "It is stairs, Chidi. Not a lift."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "Nobody does this overnight. But the UK has every kind of job. How far you go depends on your effort.",
+   "scene": "plan",
+   "pause": 0.3,
+   "say": "Nobody does this overnight. But the U.K. has every kind of job. How far you go depends on your effort."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "Before you apply for anything, check your own visa rules. This is the most important step.",
+   "scene": "visa",
+   "pause": 0.3,
+   "say": "Before you apply for anything, check your own visa rules. This is the most important step."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "If you are on a Student visa, most full-time university students can work up to twenty hours a week in term time, and full time in the official holidays. If your course is below degree level, the limit is usually ten hours. Your exact conditions are in your eVisa or your decision letter. Read them.",
+   "scene": "visa",
+   "pause": 0.3,
+   "say": "If you are on a Student visa, most full-time university students can work up to twenty hours a week in term time, and full time in the official holidays. If your course is below degree level, the limit is usually ten hours. Your exact conditions are in your ee Visa or your decision letter. Read them."
+  },
+  {
+   "who": "C",
+   "emotion": "excited",
+   "text": "Sixty hours a week! Easy money!",
+   "scene": "visa",
+   "pause": 0.2,
+   "say": "Sixty hours a week! Easy money!"
+  },
+  {
+   "who": "K",
+   "emotion": "angry",
+   "text": "Chidi. Twenty. Not sixty.",
+   "scene": "visa",
+   "pause": 0.2,
+   "say": "Chidi. Twenty. Not sixty."
+  },
+  {
+   "who": "N",
+   "emotion": "angry",
+   "text": "Going over your hours is not a small mistake. It can put your visa at risk.",
+   "scene": "visa",
+   "pause": 0.4,
+   "say": "Going over your hours is not a small mistake. It can put your visa at risk."
+  },
+  {
+   "who": "N",
+   "emotion": "surprised",
+   "text": "And here is one that catches students out. You cannot be self-employed on a Student visa. That includes many gig jobs, like delivery riding, where you work for yourself. Ask the company, and ask your university's visa team, before you start.",
+   "scene": "visa",
+   "pause": 0.4,
+   "say": "And here is one that catches students out. You cannot be self-employed on a Student visa. That includes many gig jobs, like delivery riding, where you work for yourself. Ask the company, and ask your university's visa team, before you start."
+  },
+  {
+   "who": "C",
+   "emotion": "sly",
+   "text": "I will become a delivery rider!",
+   "scene": "visa",
+   "pause": 0.2,
+   "say": "I will become a delivery rider!"
+  },
+  {
+   "who": "K",
+   "emotion": "calm",
+   "text": "Self-employed. Not allowed. Ask first.",
+   "scene": "visa",
+   "pause": 0.2,
+   "say": "Self-employed. Not allowed. Ask first."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Paid work and volunteering both count towards your weekly limit.",
+   "scene": "visa",
+   "pause": 0.3,
+   "say": "Paid work and volunteering both count towards your weekly limit."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "If you are not on a Student visa, your rules may be different. Always check your own.",
+   "scene": "visa",
+   "pause": 0.4,
+   "say": "If you are not on a Student visa, your rules may be different. Always check your own."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Now, the survival job. Restaurants, cafes, supermarkets, warehouses, hotels, cleaning. They hire all year, and they are a real way to pay your bills.",
+   "scene": "survive",
+   "pause": 0.3,
+   "say": "Now, the survival job. Restaurants, cafes, supermarkets, warehouses, hotels, cleaning. They hire all year, and they are a real way to pay your bills."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Walk in with a short CV, smile, and ask for the manager. Many jobs are filled that way.",
+   "scene": "survive",
+   "pause": 0.3,
+   "say": "Walk in with a short CV, smile, and ask for the manager. Many jobs are filled that way."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Every employer must check your right to work. Use your share code, just like in the last video.",
+   "scene": "survive",
+   "pause": 0.3,
+   "say": "Every employer must check your right to work. Use your share code, just like in the last video."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Check your pay. For age twenty-one and over, the minimum is £12.71 an hour. For ages eighteen to twenty, it is £10.85.",
+   "scene": "survive",
+   "pause": 0.3,
+   "say": "Check your pay. For age twenty-one and over, the minimum is twelve pounds seventy-one an hour. For ages eighteen to twenty, it is ten pounds eighty-five."
+  },
+  {
+   "who": "N",
+   "emotion": "surprised",
+   "text": "Security work is popular too. But you need a licence from the SIA. That needs approved training, a criminal record check, and a fee. Apply only through GOV.UK, and check the current cost there before you pay anyone.",
+   "scene": "survive",
+   "pause": 0.4,
+   "say": "Security work is popular too. But you need a licence from the S-I-A. That needs approved training, a criminal record check, and a fee. Apply only through gov dot U K, and check the current cost there before you pay anyone."
+  },
+  {
+   "who": "C",
+   "emotion": "cheer",
+   "text": "Cafe job? I love coffee!",
+   "scene": "survive",
+   "pause": 0.2,
+   "say": "Cafe job? I love coffee!"
+  },
+  {
+   "who": "K",
+   "emotion": "sly",
+   "text": "Good. Do it well. People remember.",
+   "scene": "survive",
+   "pause": 0.2,
+   "say": "Good. Do it well. People remember."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And give your survival job an end date. Six months, maybe. Then move up.",
+   "scene": "survive",
+   "pause": 0.4,
+   "say": "And give your survival job an end date. Six months, maybe. Then move up."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Now your CV. In the UK, a CV is one or two pages. Not five.",
+   "scene": "cv",
+   "pause": 0.3,
+   "say": "Now your CV. In the U.K., a CV is one or two pages. Not five."
+  },
+  {
+   "who": "C",
+   "emotion": "worried",
+   "text": "Mine has my photo, my age, and five pages.",
+   "scene": "cv",
+   "pause": 0.2,
+   "say": "Mine has my photo, my age, and five pages."
+  },
+  {
+   "who": "K",
+   "emotion": "calm",
+   "text": "We will fix that.",
+   "scene": "cv",
+   "pause": 0.2,
+   "say": "We will fix that."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "At the top, put your name, phone number, email, and your LinkedIn link. Do not put a photo. Do not put your date of birth, your age, your marital status, or your nationality.",
+   "scene": "cv",
+   "pause": 0.3,
+   "say": "At the top, put your name, phone number, email, and your Linked In link. Do not put a photo. Do not put your date of birth, your age, your marital status, or your nationality."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Then, in this order: a short profile, your work experience, your education, and your skills. Newest first.",
+   "scene": "cv",
+   "pause": 0.3,
+   "say": "Then, in this order: a short profile, your work experience, your education, and your skills. Newest first."
+  },
+  {
+   "who": "N",
+   "emotion": "excited",
+   "text": "Under each job, show what you achieved, with numbers. Not 'I worked in a shop'. Say 'I served around one hundred customers a day', if that is true.",
+   "scene": "cv",
+   "pause": 0.3,
+   "say": "Under each job, show what you achieved, with numbers. Not 'I worked in a shop'. Say 'I served around one hundred customers a day', if that is true."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "And most important: change your CV for every job. Use the words from the job advert.",
+   "scene": "cv",
+   "pause": 0.4,
+   "say": "And most important: change your CV for every job. Use the words from the job advert."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "Good news. You do not need to pay anyone to write a good CV. There are free tools.",
+   "scene": "tools",
+   "pause": 0.3,
+   "say": "Good news. You do not need to pay anyone to write a good CV. There are free tools."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "The National Careers Service has a free CV builder and guides. Google Docs and Microsoft Word have free CV templates. Canva has free designs.",
+   "scene": "tools",
+   "pause": 0.3,
+   "say": "The National Careers Service has a free CV builder and guides. Google Docs and Microsoft Word have free CV templates. Can va has free designs."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Your university careers service is free for students, and many will check your CV. Just ask.",
+   "scene": "tools",
+   "pause": 0.3,
+   "say": "Your university careers service is free for students, and many will check your CV. Just ask."
+  },
+  {
+   "who": "N",
+   "emotion": "excited",
+   "text": "And you can use free AI tools, like ChatGPT, Gemini or Claude, as a writing helper. Give it your real experience and the job advert, and ask it to improve your wording.",
+   "scene": "tools",
+   "pause": 0.3,
+   "say": "And you can use free A-I tools, like Chat G P T, Jem in eye or Claude, as a writing helper. Give it your real experience and the job advert, and ask it to improve your wording."
+  },
+  {
+   "who": "C",
+   "emotion": "sly",
+   "text": "Can the AI just write that I am a doctor?",
+   "scene": "tools",
+   "pause": 0.2,
+   "say": "Can the A-I just write that I am a doctor?"
+  },
+  {
+   "who": "K",
+   "emotion": "angry",
+   "text": "No. True things only.",
+   "scene": "tools",
+   "pause": 0.2,
+   "say": "No. True things only."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "Be careful. Do not paste your passport number or your home address. Check every line. And never let AI invent experience. Every word must be true.",
+   "scene": "tools",
+   "pause": 0.4,
+   "say": "Be careful. Do not paste your passport number or your home address. Check every line. And never let A-I invent experience. Every word must be true."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Now, the dangerous part. People will try to sell you a job, or a CV course.",
+   "scene": "scams",
+   "pause": 0.4,
+   "say": "Now, the dangerous part. People will try to sell you a job, or a CV course."
+  },
+  {
+   "who": "S",
+   "emotion": "cheer",
+   "text": "Special CV course! Only five hundred pounds! Guaranteed job!",
+   "scene": "scams",
+   "pause": 0.2,
+   "say": "Special CV course! Only five hundred pounds! Guaranteed job!"
+  },
+  {
+   "who": "N",
+   "emotion": "angry",
+   "text": "No one can guarantee you a job. And real employers never ask you to pay to be hired. Not for training, a uniform, a background check, or a visa.",
+   "scene": "scams",
+   "pause": 0.4,
+   "say": "No one can guarantee you a job. And real employers never ask you to pay to be hired. Not for training, a uniform, a background check, or a visa."
+  },
+  {
+   "who": "A",
+   "emotion": "sly",
+   "text": "I know a company. Pay me, and I will get you a sponsored job.",
+   "scene": "scams",
+   "pause": 0.2,
+   "say": "I know a company. Pay me, and I will get you a sponsored job."
+  },
+  {
+   "who": "N",
+   "emotion": "angry",
+   "text": "That is a scam. Jobs and visas are not for sale.",
+   "scene": "scams",
+   "pause": 0.4,
+   "say": "That is a scam. Jobs and visas are not for sale."
+  },
+  {
+   "who": "P",
+   "emotion": "calm",
+   "text": "Congratulations! You are hired. Send two hundred pounds for your security check.",
+   "scene": "scams",
+   "pause": 0.2,
+   "say": "Congratulations! You are hired. Send two hundred pounds for your security check."
+  },
+  {
+   "who": "C",
+   "emotion": "panic",
+   "text": "Guaranteed job! Where do I pay?",
+   "scene": "scams",
+   "pause": 0.2,
+   "say": "Guaranteed job! Where do I pay?"
+  },
+  {
+   "who": "K",
+   "emotion": "angry",
+   "text": "Chidi. Put the wallet down.",
+   "scene": "scams",
+   "pause": 0.2,
+   "say": "Chidi. Put the wallet down."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "Be careful with job offers on WhatsApp or text, with recruiters who use free email addresses, and with offers for jobs you never applied for. If a company promises sponsorship, check it on the official Register of Licensed Sponsors on GOV.UK.",
+   "scene": "scams",
+   "pause": 0.4,
+   "say": "Be careful with job offers on WhatsApp or text, with recruiters who use free email addresses, and with offers for jobs you never applied for. If a company promises sponsorship, check it on the official Register of Licensed Sponsors on gov dot U K."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "If you are unsure, ask a friend. Free advice is available from Citizens Advice, SAFERjobs and JobsAware. And report scams to Report Fraud, the police fraud service.",
+   "scene": "scams",
+   "pause": 0.4,
+   "say": "If you are unsure, ask a friend. Free advice is available from Citizens Advice, safer jobs and jobs aware. And report scams to Report Fraud, the police fraud service."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Next, LinkedIn. It is free, and recruiters really do use it.",
+   "scene": "linkedin",
+   "pause": 0.3,
+   "say": "Next, Linked In. It is free, and recruiters really do use it."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Use a clear, friendly photo with a plain background. Write a headline that says what you do, and what you want. For example: Data analyst student, looking for part-time roles.",
+   "scene": "linkedin",
+   "pause": 0.3,
+   "say": "Use a clear, friendly photo with a plain background. Write a headline that says what you do, and what you want. For example: Data analyst student, looking for part-time roles."
+  },
+  {
+   "who": "C",
+   "emotion": "excited",
+   "text": "My headline is: Legend!",
+   "scene": "linkedin",
+   "pause": 0.2,
+   "say": "My headline is: Legend!"
+  },
+  {
+   "who": "K",
+   "emotion": "sly",
+   "text": "Try: Marketing graduate looking for an internship.",
+   "scene": "linkedin",
+   "pause": 0.2,
+   "say": "Try: Marketing graduate looking for an internship."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "In the About section, write three or four short sentences. Who you are, what you are good at, and what you want next.",
+   "scene": "linkedin",
+   "pause": 0.3,
+   "say": "In the About section, write three or four short sentences. Who you are, what you are good at, and what you want next."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Under Experience, copy the best points from your CV. Add your skills and your university.",
+   "scene": "linkedin",
+   "pause": 0.3,
+   "say": "Under Experience, copy the best points from your CV. Add your skills and your university."
+  },
+  {
+   "who": "N",
+   "emotion": "excited",
+   "text": "Switch on Open to Work, for recruiters only. Follow companies you like. Connect with people in your field, and send them a short, polite message.",
+   "scene": "linkedin",
+   "pause": 0.3,
+   "say": "Switch on Open to Work, for recruiters only. Follow companies you like. Connect with people in your field, and send them a short, polite message."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "And remember, fake recruiters use LinkedIn too. Never pay anyone who contacts you there.",
+   "scene": "linkedin",
+   "pause": 0.4,
+   "say": "And remember, fake recruiters use Linked In too. Never pay anyone who contacts you there."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Where do you find the jobs? Indeed is a good start. Make a free profile, upload your CV, and set job alerts for your area and your field.",
+   "scene": "find",
+   "pause": 0.3,
+   "say": "Where do you find the jobs? Indeed is a good start. Make a free profile, upload your CV, and set job alerts for your area and your field."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Also use LinkedIn Jobs, Reed, Totaljobs, and the government's Find a job service. Look at company websites too, and your university's job board.",
+   "scene": "find",
+   "pause": 0.3,
+   "say": "Also use Linked In Jobs, Reed, Total jobs, and the government's Find a job service. Look at company websites too, and your university's job board."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Apply for jobs that fit your profile. Ten good applications, written for each job, beat two hundred copied ones.",
+   "scene": "find",
+   "pause": 0.3,
+   "say": "Apply for jobs that fit your profile. Ten good applications, written for each job, beat two hundred copied ones."
+  },
+  {
+   "who": "C",
+   "emotion": "sad",
+   "text": "Ten? I sent two hundred.",
+   "scene": "find",
+   "pause": 0.2,
+   "say": "Ten? I sent two hundred."
+  },
+  {
+   "who": "K",
+   "emotion": "sly",
+   "text": "Quality, Chidi. Not quantity.",
+   "scene": "find",
+   "pause": 0.2,
+   "say": "Quality, Chidi. Not quantity."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Keep a simple list. Company, date, link, and what happened next. Follow up politely after a week.",
+   "scene": "find",
+   "pause": 0.3,
+   "say": "Keep a simple list. Company, date, link, and what happened next. Follow up politely after a week."
+  },
+  {
+   "who": "N",
+   "emotion": "surprised",
+   "text": "And if you hope to work here after your studies, look at whether the employer can sponsor workers. Ask, and check the official register.",
+   "scene": "find",
+   "pause": 0.4,
+   "say": "And if you hope to work here after your studies, look at whether the employer can sponsor workers. Ask, and check the official register."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "If you came to study, this part is for you.",
+   "scene": "study",
+   "pause": 0.3,
+   "say": "If you came to study, this part is for you."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "A restaurant job pays the bills. But a job connected to your course builds your future.",
+   "scene": "study",
+   "pause": 0.3,
+   "say": "A restaurant job pays the bills. But a job connected to your course builds your future."
+  },
+  {
+   "who": "K",
+   "emotion": "calm",
+   "text": "Pays the bills now. Builds the future later.",
+   "scene": "study",
+   "pause": 0.2,
+   "say": "Pays the bills now. Builds the future later."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Studying business? Look for work in sales, admin or finance. Studying computing? Look for tech support or data work. Studying health? Look for care or hospital roles. Always within your visa hours, of course.",
+   "scene": "study",
+   "pause": 0.3,
+   "say": "Studying business? Look for work in sales, admin or finance. Studying computing? Look for tech support or data work. Studying health? Look for care or hospital roles. Always within your visa hours, of course."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Internships, placement years, society roles and volunteering all count as experience. Ask your careers service. Many universities have job boards just for students.",
+   "scene": "study",
+   "pause": 0.3,
+   "say": "Internships, placement years, society roles and volunteering all count as experience. Ask your careers service. Many universities have job boards just for students."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "Why does it matter? Because your time after the degree is limited. For most graduate visa applications from January twenty twenty-seven, it is eighteen months. And a sponsored job usually needs a licensed employer, and a role that meets the skill and salary rules.",
+   "scene": "study",
+   "pause": 0.4,
+   "say": "Why does it matter? Because your time after the degree is limited. For most graduate visa applications from January twenty twenty-seven, it is eighteen months. And a sponsored job usually needs a licensed employer, and a role that meets the skill and salary rules."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "The experience you build now is what wins the offer later. Check the details on GOV.UK.",
+   "scene": "study",
+   "pause": 0.4,
+   "say": "The experience you build now is what wins the offer later. Check the details on gov dot U K."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "You got an interview! Congratulations. Now, prepare.",
+   "scene": "prep",
+   "pause": 0.3,
+   "say": "You got an interview! Congratulations. Now, prepare."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "First, research the company. Read their website, their news, their values, and the job advert again. Know what they do.",
+   "scene": "prep",
+   "pause": 0.3,
+   "say": "First, research the company. Read their website, their news, their values, and the job advert again. Know what they do."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Second, prepare examples from your life. For each one, say the situation, your task, what you did, and the result.",
+   "scene": "prep",
+   "pause": 0.3,
+   "say": "Second, prepare examples from your life. For each one, say the situation, your task, what you did, and the result."
+  },
+  {
+   "who": "N",
+   "emotion": "excited",
+   "text": "Third, practise with a friend. Do a mock interview, out loud, with real questions. It feels silly, but it works.",
+   "scene": "prep",
+   "pause": 0.3,
+   "say": "Third, practise with a friend. Do a mock interview, out loud, with real questions. It feels silly, but it works."
+  },
+  {
+   "who": "C",
+   "emotion": "worried",
+   "text": "What if I forget everything?",
+   "scene": "prep",
+   "pause": 0.2,
+   "say": "What if I forget everything?"
+  },
+  {
+   "who": "K",
+   "emotion": "calm",
+   "text": "That is why you practise. Out loud.",
+   "scene": "prep",
+   "pause": 0.2,
+   "say": "That is why you practise. Out loud."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Fourth, the day before, plan your journey, or test your camera. And have your right-to-work share code ready.",
+   "scene": "prep",
+   "pause": 0.3,
+   "say": "Fourth, the day before, plan your journey, or test your camera. And have your right-to-work share code ready."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Now, the words you use. This matters more than you think.",
+   "scene": "confident",
+   "pause": 0.4,
+   "say": "Now, the words you use. This matters more than you think."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Try not to say 'I guess', or 'I think maybe', or 'sorry, my English'. They make you sound unsure.",
+   "scene": "confident",
+   "pause": 0.3,
+   "say": "Try not to say 'I guess', or 'I think maybe', or 'sorry, my English'. They make you sound unsure."
+  },
+  {
+   "who": "C",
+   "emotion": "worried",
+   "text": "I guess I am hardworking?",
+   "scene": "confident",
+   "pause": 0.2,
+   "say": "I guess I am hardworking?"
+  },
+  {
+   "who": "K",
+   "emotion": "angry",
+   "text": "No guessing.",
+   "scene": "confident",
+   "pause": 0.2,
+   "say": "No guessing."
+  },
+  {
+   "who": "C",
+   "emotion": "excited",
+   "text": "I managed forty orders an hour in my last job!",
+   "scene": "confident",
+   "pause": 0.2,
+   "say": "I managed forty orders an hour in my last job!"
+  },
+  {
+   "who": "K",
+   "emotion": "cheer",
+   "text": "Better.",
+   "scene": "confident",
+   "pause": 0.2,
+   "say": "Better."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "Say what you did. 'I led a team of four.' 'I solved this problem.' 'I believe I am the right person for this job, because I have done it before.'",
+   "scene": "confident",
+   "pause": 0.3,
+   "say": "Say what you did. 'I led a team of four.' 'I solved this problem.' 'I believe I am the right person for this job, because I have done it before.'"
+  },
+  {
+   "who": "N",
+   "emotion": "angry",
+   "text": "But never lie. Employers check references and documents, and lies are found. A lie can lose you the job, and it can hurt your visa.",
+   "scene": "confident",
+   "pause": 0.4,
+   "say": "But never lie. Employers check references and documents, and lies are found. A lie can lose you the job, and it can hurt your visa."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "If you do not know something, be honest. Say: 'I have not done that yet, but I learn fast, and here is how.' That is confident, and it is true.",
+   "scene": "confident",
+   "pause": 0.3,
+   "say": "If you do not know something, be honest. Say: 'I have not done that yet, but I learn fast, and here is how.' That is confident, and it is true."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "At the end, ask one question. And say thank you.",
+   "scene": "confident",
+   "pause": 0.3,
+   "say": "At the end, ask one question. And say thank you."
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Let us put it all together.",
+   "scene": "finish",
+   "pause": 0.3,
+   "say": "Let us put it all together."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Check your visa rules. Take a survival job if you need one. Write a true, clear, tailored CV. Build your LinkedIn. Apply to jobs that fit you. Prepare. Be confident. And be honest.",
+   "scene": "finish",
+   "pause": 0.3,
+   "say": "Check your visa rules. Take a survival job if you need one. Write a true, clear, tailored CV. Build your Linked In. Apply to jobs that fit you. Prepare. Be confident. And be honest."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Many students pay their fees and their living costs by working part-time, or full-time when their visa allows. It is hard. But people do it every day.",
+   "scene": "finish",
+   "pause": 0.3,
+   "say": "Many students pay their fees and their living costs by working part-time, or full-time when their visa allows. It is hard. But people do it every day."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "There is no shortcut. No course, no agent, and no secret replaces effort.",
+   "scene": "finish",
+   "pause": 0.5,
+   "say": "There is no shortcut. No course, no agent, and no secret replaces effort."
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "But the UK has every kind of job. How far you go depends on how much effort you give.",
+   "scene": "finish",
+   "pause": 0.3,
+   "say": "But the U.K. has every kind of job. How far you go depends on how much effort you give."
+  },
+  {
+   "who": "C",
+   "emotion": "cheer",
+   "text": "Two hundred applications again?",
+   "scene": "finish",
+   "pause": 0.2,
+   "say": "Two hundred applications again?"
+  },
+  {
+   "who": "K",
+   "emotion": "sly",
+   "text": "Ten. Good ones.",
+   "scene": "finish",
+   "pause": 0.2,
+   "say": "Ten. Good ones."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "One last time, because it matters. This is general information, correct as of November 2026. It is not legal advice. Rules change, so always check GOV.UK, your university, and your employer before you act.",
+   "scene": "finish",
+   "pause": 0.4,
+   "say": "One last time, because it matters. This is general information, correct as of November 2026. It is not legal advice. Rules change, so always check gov dot U K, your university, and your employer before you act."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "Whether you came from Dhaka, Delhi, Karachi, Kathmandu, Colombo, Lagos or Accra... you can do this. See you in the next one.",
+   "scene": "finish",
+   "pause": 0.4,
+   "say": "Whether you came from Dah ka, Del ee, Kuh rah chee, Kat man doo, Kuh lum bo, Lay goss or Uh krah... you can do this. See you in the next one."
+  }
+ ]
+}
