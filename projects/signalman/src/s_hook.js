@@ -1,6 +1,6 @@
 // ===== HOOK: the end told first, then the light rewinds =====
 (function () {
-  const c = S('hook'), w = win('hook'), T = w.T, D = w.D, at = (r) => T + r, R = rr(1871);
+  const c = S('hook'), w = win('hook'), T = w.T, D = w.D, at = (r) => T + r * (D / 58.25), R = rr(1871);
   const world = box(c, { left: 0, top: 0, width: W, height: H, transformOrigin: '330px 330px' });
   // sky: cold twilight, with a pale afternoon sky that fades in for the rewind
   sky(world, { top: '#0a1120', mid: '#1b2a44', bot: '#51698a', stars: 38, T, D, seed: 12 });
@@ -44,15 +44,18 @@
     tl.to(g, { opacity: 0, scale: 0.4, duration: 3, ease: 'sine.in', overwrite: 'auto' }, at(40 + i * 1.8));
   });
 
-  // the narrator: coated figure with hat at the cutting edge, head bowed, breath fog
-  const s = 0.7, nx = 320, ny = 330;
-  const nar = box(world, { left: nx - 45 * s, top: ny - 190 * s, width: 90 * s, height: 190 * s, opacity: 0 }, `<svg viewBox="0 0 90 190" width="100%" height="100%" style="overflow:visible"><path d="M30 54 Q45 46 62 54 L69 170 L21 170Z" fill="#05070b" stroke="rgba(150,185,230,0.4)" stroke-width="1.2"/><rect x="31" y="166" width="13" height="24" fill="#05070b"/><rect x="47" y="166" width="13" height="24" fill="#05070b"/><path d="M58 58 L64 112" stroke="#05070b" stroke-width="9" stroke-linecap="round"/><path d="M33 58 L30 112" stroke="#05070b" stroke-width="9" stroke-linecap="round"/><rect x="42" y="42" width="12" height="14" fill="#05070b"/><circle cx="50" cy="37" r="10" fill="#05070b" stroke="rgba(150,185,230,0.4)" stroke-width="1"/><g transform="rotate(8 50 30)"><ellipse cx="50" cy="29" rx="18" ry="4.5" fill="#05070b"/><path d="M38 29 L40 10 Q50 5 60 10 L62 29Z" fill="#05070b" stroke="rgba(150,185,230,0.35)" stroke-width="1"/></g></svg>`);
-  tl.to(nar, { opacity: 1, duration: 4 }, at(16)).to(nar, { opacity: 0, duration: 5, ease: 'sine.in' }, at(44));
-  tl.fromTo(nar, { rotation: -0.6 }, { rotation: 0.8, duration: 4, yoyo: true, repeat: 12, ease: 'sine.inOut', transformOrigin: '50% 100%' }, T);
-  for (let i = 0; i < 8; i++) {
-    const b = box(world, { left: nx + 15 * s - 9, top: ny - 150 * s - 9, width: 18, height: 18, borderRadius: '50%', background: 'rgba(215,225,240,0.5)', filter: 'blur(5px)', opacity: 0 });
-    tl.fromTo(b, { x: 0, y: 0, scale: 0.4, opacity: 0.5 }, { x: 40 + R() * 20, y: -18 - R() * 14, scale: 2.4, opacity: 0, duration: 3.2, ease: 'sine.out' }, at(19 + i * 2.7));
-  }
+  // the narrator: articulated puppet at the cutting edge: breathing, head bowed, then he lifts his eyes to the tunnel, a hand to his hat, a slow step to the edge
+  const nx = 320, ny = 330, nar = puppet(world, { x: nx, y: ny, s: 0.62, hat: 'top', rim: 'rgba(140,175,235,0.6)', opacity: 0 });
+  tl.to(nar.g, { opacity: 1, duration: 4 }, at(16)).to(nar.g, { opacity: 0, duration: 5, ease: 'sine.in' }, at(44));
+  nar.breathe(T, D, 1);
+  nar.head(14, T, 0.1);                                  // head bowed
+  nar.head(-4, at(21), 3.2); nar.head(10, at(27), 2.4); nar.head(-8, at(33), 3);   // looks up at the tunnel, away, back
+  nar.arm('f', -8, -70, at(23.5), 1.8); nar.arm('f', -4, -4, at(26), 1.6);        // hand rises to his hat brim and falls
+  nar.walk(at(30), 3.4, 14, 1.15, 1.2);                  // two slow steps toward the edge
+  breathFog(world, nx + 9, ny - 176 * 0.62, at(19), 24, 2.7, 36);
+  // cold light cone from the tunnel and drifting dust in it
+  lightCone(world, { x: 560, y: 360, len: 330, spread: 190, rot: 0, color: 'rgba(160,190,255,0.35)', op: 0.5, T: at(3), D: 36 });
+  motes(world, { x0: 380, x1: 740, y0: 340, y1: 560, n: 26, color: 'rgba(200,220,255,0.9)', T, D: 40, size: 2.4, rise: -30 });
   // red danger lamp far below him; pulses for 40 s, then burns calm
   const rh = redLamp(world, { x: 500, y: 470, s: 0.9, T, D: 40 });
   tl.to(rh, { opacity: 0.8, duration: 3 }, at(41));

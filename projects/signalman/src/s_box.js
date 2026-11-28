@@ -1,103 +1,239 @@
-// ===== BOX: the signal box interior. Narrator arrives, talks with the signalman, leaves at dusk; red lamp pulses in the window =====
+// ===== BOX v2: the signal box interior. Narrator arrives, the room is shown, they talk and sit, he leaves; the red lamp waits in the window =====
+// All beat times below are RELATIVE seconds inside the scene (matched to the voice lines, window 174.63-294.96).
 (function () {
-  const c = S('box'), w = win('box'), T = w.T, D = w.D, K = D / 98, A = (s) => T + s * K;
-  const cam = box(c, { left: 0, top: 0, width: W, height: H, transformOrigin: '0 0' });
-  const R = rr(77);
-  // ---- back wall: rain-darkened planks, beams, wet stains
-  box(cam, { left: 0, top: 0, width: W, height: 600, background: 'repeating-linear-gradient(90deg,#1c150f 0 58px,#0a0705 58px 61px)' });
-  box(cam, { left: 0, top: 0, width: W, height: 600, background: 'linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,0) 45%,rgba(0,0,0,.35))' });
-  for (let i = 0; i < 9; i++) box(cam, { left: R() * W, top: 0, width: 18 + R() * 40, height: 150 + R() * 320, background: 'linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,0))' });
-  box(cam, { left: 0, top: 0, width: W, height: 38, background: '#0a0705' });
-  box(cam, { left: 0, top: 592, width: W, height: 130, background: 'repeating-linear-gradient(0deg,#0d0906 0 26px,#050302 26px 29px)' });
-  // ---- window to the line: dusk, rails, red lamp
-  box(cam, { left: 690, top: 100, width: 260, height: 250, background: '#0b0806' });
-  const wn = box(cam, { left: 710, top: 120, width: 220, height: 210, overflow: 'hidden', background: 'linear-gradient(#10182e,#2a3350 52%,#6d5048 100%)' });
-  box(wn, { left: 0, top: 118, width: 220, height: 100, background: 'linear-gradient(#0c1018,#05070c)' });
+  const c = S('box'), w = win('box'), T = w.T, D = w.D, a = (r) => T + (r < 18 ? r : r + 3), R = rr(77);   // beats from r=18 on sit 3 s later: the voice lines 29-30 ('I went down') open the scene
+  const NS = 'http://www.w3.org/2000/svg';
+  const rig = box(c, { left: 0, top: 0, width: W, height: H, transformOrigin: '50% 50%', background: '#0a0705' });
+  tl.set(rig, { scale: 1.025 }, 0);
+  tl.fromTo(rig, { rotation: -0.25 }, { rotation: 0.25, duration: 7, yoyo: true, repeat: Math.ceil(D / 7), ease: 'sine.inOut', immediateRender: false }, T);
+  const cam = box(rig, { left: 0, top: 0, width: W, height: H, transformOrigin: '0 0' });
+  const back = box(cam, { left: 0, top: 0, width: W, height: H });
+  const mid = box(cam, { left: 0, top: 0, width: W, height: H });
+  const cl = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  const camXY = (cx, cy, sc) => ({ x: cl(640 - cx * sc, W - W * sc, 0), y: cl(330 - cy * sc, H - H * sc, 0), scale: sc });
+  const cm = (cx, cy, sc, r, d, ease = 'sine.inOut') => { const v = camXY(cx, cy, sc); tl.to(cam, { ...v, duration: d, ease }, a(r)); tl.to(mid, { x: v.x * 0.05, y: v.y * 0.05, duration: d, ease }, a(r)); };
+  const c0 = camXY(700, 380, 1.05);
+  tl.set(cam, c0, 0); tl.set(mid, { x: c0.x * 0.05, y: c0.y * 0.05 }, 0);
+  const pool = (p, x, y, rx, ry, col, op, per) => { const e = box(p, { left: x - rx, top: y - ry, width: rx * 2, height: ry * 2, borderRadius: '50%', background: `radial-gradient(ellipse,${col} 0%,rgba(0,0,0,0) 70%)`, mixBlendMode: 'screen', opacity: op }); if (per) tl.to(e, { opacity: op * 0.7, duration: per, yoyo: true, repeat: Math.ceil(D / per), ease: 'sine.inOut' }, T); return e; };
+
+  // ---------- BACK LAYER: wall, floor, window, door ----------
+  box(back, { left: 0, top: 0, width: W, height: 600, background: 'repeating-linear-gradient(90deg,#43301f 0 58px,#1d140d 58px 61px)' });
+  box(back, { left: 0, top: 0, width: W, height: 600, background: 'linear-gradient(rgba(8,10,22,.6),rgba(0,0,0,0) 48%,rgba(0,0,0,.18))' });
+  for (let i = 0; i < 9; i++) box(back, { left: R() * W, top: 0, width: 18 + R() * 40, height: 150 + R() * 320, background: 'linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,0))' });
+  box(back, { left: 0, top: 0, width: W, height: 38, background: '#1a110b' });
+  box(back, { left: 0, top: 586, width: W, height: 140, background: 'repeating-linear-gradient(0deg,#3a2a1c 0 26px,#17100a 26px 29px)' });
+  box(back, { left: 0, top: 584, width: W, height: 4, background: '#0d0805' });
+  // window to the line (dusk blue, rails, red lamp)
+  box(back, { left: 690, top: 100, width: 260, height: 250, background: '#241810' });
+  const wn = box(back, { left: 710, top: 120, width: 220, height: 210, overflow: 'hidden', background: 'linear-gradient(#233560,#44578a 52%,#9a7468 100%)' });
+  box(wn, { left: 0, top: 118, width: 220, height: 100, background: 'linear-gradient(#18202e,#0c1118)' });
   rails(wn, { vx: 110, vy: 122, x0: -40, x1: 260, y0: 230, T, D });
-  box(wn, { left: 0, top: 100, width: 220, height: 40, background: 'linear-gradient(rgba(150,165,190,0),rgba(150,165,190,.28),rgba(150,165,190,0))', filter: 'blur(6px)' });
+  box(wn, { left: 0, top: 100, width: 220, height: 40, background: 'linear-gradient(rgba(170,185,215,0),rgba(170,185,215,.34),rgba(170,185,215,0))', filter: 'blur(6px)' });
   redLamp(wn, { x: 168, y: 134, s: 0.6, T, D });
-  rain(wn, { n: 34, op: 0.35, len: 22, T, D });
-  box(wn, { left: 0, top: 0, width: 220, height: 210, background: 'linear-gradient(115deg,rgba(255,255,255,.07),rgba(255,255,255,0) 35%)' });
-  box(cam, { left: 806, top: 120, width: 7, height: 210, background: '#0b0806' }); box(cam, { left: 710, top: 216, width: 220, height: 6, background: '#0b0806' }); box(cam, { left: 684, top: 340, width: 272, height: 10, background: '#18100a' });
-  const shaft = box(cam, { left: 640, top: 130, width: 340, height: 470, clipPath: 'polygon(25% 0,75% 0,100% 100%,-10% 100%)', background: 'linear-gradient(rgba(120,150,215,.14),rgba(120,150,215,0))', mixBlendMode: 'screen', filter: 'blur(5px)' });
-  tl.to(shaft, { opacity: 0.55, duration: 5, yoyo: true, repeat: Math.floor(D / 5), ease: 'sine.inOut' }, T);
-  // ---- door to the dusk (left)
-  box(cam, { left: 18, top: 128, width: 176, height: 466, background: '#0a0705' });
-  const dr = box(cam, { left: 32, top: 142, width: 148, height: 452, overflow: 'hidden', background: 'linear-gradient(#1b2644,#3b4562 45%,#7a5f58 100%)' });
-  [[-20, 250, 200], [10, 330, 170], [-30, 390, 190]].forEach(([x, y, wd], i) => { const f = box(dr, { left: x, top: y, width: wd, height: 90, borderRadius: '50%', background: 'radial-gradient(ellipse,rgba(190,200,220,.5),rgba(0,0,0,0) 70%)', filter: 'blur(10px)' }); tl.to(f, { x: 40 - i * 30, duration: D, ease: 'none' }, T); });
-  rain(dr, { n: 22, op: 0.3, len: 20, T, D, seed: 9 });
-  box(cam, { left: 30, top: 592, width: 190, height: 110, clipPath: 'polygon(0 0,100% 0,70% 100%,-30% 100%)', background: 'linear-gradient(rgba(120,140,190,.28),rgba(120,140,190,0))', mixBlendMode: 'screen' });
-  // ---- bell (silent) and telegraph
-  box(cam, { left: 583, top: 40, width: 2, height: 160, background: '#050403' });
-  box(cam, { left: 530, top: 196, width: 110, height: 90, background: '#100b07', borderRadius: 6 });
-  box(cam, { left: 562, top: 200, width: 46, height: 62 }, '<svg viewBox="0 0 50 62" width="100%" height="100%"><defs><linearGradient id="br"><stop offset="0" stop-color="#d9a441"/><stop offset=".6" stop-color="#7a5418"/><stop offset="1" stop-color="#2d1d08"/></linearGradient></defs><path d="M25 4Q7 8 8 36L3 48H47L42 36Q43 8 25 4Z" fill="url(#br)"/><circle cx="25" cy="53" r="5" fill="#5a3d12"/></svg>');
-  box(cam, { left: 500, top: 428, width: 110, height: 30, borderRadius: 4, background: 'linear-gradient(#7a5a22,#2a1a08)' });
-  box(cam, { left: 508, top: 450, width: 50, height: 6, background: '#c9a24a', borderRadius: 3 });
-  const dial = box(cam, { left: 530, top: 372, width: 60, height: 60 }, '<svg viewBox="0 0 60 60" width="100%" height="100%"><circle cx="30" cy="30" r="27" fill="#e0cfa0" stroke="#8a6322" stroke-width="4"/><path d="M12 22L8 18M48 22L52 18M30 6V0" stroke="#4a3010" stroke-width="2"/><line id="ndl" x1="30" y1="34" x2="30" y2="8" stroke="#111" stroke-width="2.4"/><circle cx="30" cy="34" r="3" fill="#111"/></svg>');
-  const ndl = dial.querySelector('#ndl');
-  for (let t = 2; t < D - 3;) { const burst = 2 + Math.floor(R() * 4); for (let i = 0; i < burst; i++) { tl.to(ndl, { rotation: (i % 2 ? -20 : 20), svgOrigin: '30 34', duration: 0.07, ease: 'power1.out' }, T + t + i * 0.26); } t += burst * 0.26 + 3 + R() * 5; }
-  // ---- levers (red / blue tops)
-  box(cam, { left: 196, top: 296, width: 230, height: 296, background: 'rgba(8,6,4,.55)' });
+  rain(wn, { n: 34, op: 0.4, len: 22, T, D });
+  box(wn, { left: 0, top: 0, width: 220, height: 210, background: 'linear-gradient(115deg,rgba(255,255,255,.1),rgba(255,255,255,0) 35%)' });
+  box(back, { left: 806, top: 120, width: 7, height: 210, background: '#241810' }); box(back, { left: 710, top: 216, width: 220, height: 6, background: '#241810' }); box(back, { left: 684, top: 340, width: 272, height: 10, background: '#3a2818' });
+  // cold fill from the window: a shaft and a pool on the floor
+  lightCone(back, { x: 820, y: 330, len: 330, spread: 190, rot: 10, color: 'rgba(120,155,235,0.45)', op: 0.5, T, D });
+  pool(back, 850, 600, 300, 60, 'rgba(110,140,220,.45)', 0.7, 6);
+  // door to the dusk (left)
+  box(back, { left: 18, top: 128, width: 176, height: 466, background: '#1a110b' });
+  const dr = box(back, { left: 32, top: 142, width: 148, height: 452, overflow: 'hidden', background: 'linear-gradient(#2c3d68,#566794 45%,#a58578 100%)' });
+  [[-20, 250, 200], [10, 330, 170], [-30, 390, 190]].forEach(([x, y, wd], i) => { const f = box(dr, { left: x, top: y, width: wd, height: 90, borderRadius: '50%', background: 'radial-gradient(ellipse,rgba(200,210,230,.55),rgba(0,0,0,0) 70%)', filter: 'blur(10px)' }); tl.to(f, { x: 40 - i * 30, duration: D, ease: 'none' }, T); });
+  rain(dr, { n: 22, op: 0.35, len: 20, T, D, seed: 9 });
+  box(back, { left: 30, top: 588, width: 220, height: 120, clipPath: 'polygon(0 0,100% 0,70% 100%,-30% 100%)', background: 'linear-gradient(rgba(130,155,215,.4),rgba(130,155,215,0))', mixBlendMode: 'screen' });
+  pool(back, 110, 360, 150, 260, 'rgba(120,150,220,.28)', 0.8, 7);
+
+  // ---------- MID LAYER: bell, telegraph, levers, stove, desk, lamp ----------
+  box(mid, { left: 196, top: 296, width: 230, height: 296, background: 'rgba(14,10,7,.5)' });
   const lv = [];
-  for (let i = 0; i < 6; i++) { const x = 216 + i * 34, l = box(cam, { left: x - 4, top: 330, width: 8, height: 234, transformOrigin: '50% 100%', background: 'linear-gradient(90deg,#34343a,#0b0b0e)', rotation: (R() - 0.5) * 3 }); box(l, { left: -8, top: -8, width: 24, height: 34, borderRadius: 5, background: [0, 1, 4].includes(i) ? 'linear-gradient(90deg,#b0242a,#5e0e12)' : 'linear-gradient(90deg,#2a62b8,#10305e)' }); lv.push(l); }
-  box(cam, { left: 196, top: 560, width: 230, height: 16, background: '#0d0b0a' });
-  [[3, 54, 64, -17], [1, 58, 68, -15], [4, 76, 90, 16]].forEach(([i, a, b, r]) => { tl.to(lv[i], { rotation: r, duration: 1.8, ease: 'sine.inOut' }, A(a)); tl.to(lv[i], { rotation: 0, duration: 2, ease: 'sine.inOut' }, A(b)); });
-  // ---- stove and pipe with leaking smoke
-  box(cam, { left: 1137, top: 0, width: 16, height: 440, background: 'linear-gradient(90deg,#26221f,#0a0908)' });
-  [150, 290].forEach((y) => box(cam, { left: 1133, top: y, width: 24, height: 8, background: '#050403' }));
-  box(cam, { left: 1078, top: 436, width: 136, height: 14, background: '#0c0a09' }); box(cam, { left: 1088, top: 448, width: 116, height: 144, background: 'linear-gradient(90deg,#241d18,#0f0c0a)' });
-  box(cam, { left: 1110, top: 490, width: 72, height: 62, background: '#080403', border: '3px solid #050302' });
-  fire(cam, { x: 1146, y: 546, s: 1, T, D });
-  steam(cam, { x: 1145, y: 290, n: 5, T, D, dx: -25, dy: -120, s: 0.8, color: 'rgba(150,150,165,0.2)' });
-  steam(cam, { x: 1145, y: 150, n: 4, T, D, dx: 20, dy: -90, s: 0.8, color: 'rgba(150,150,165,0.16)' });
-  // ---- desk, ledger, lamp
-  box(cam, { left: 490, top: 456, width: 414, height: 16, background: '#3a2616' }); box(cam, { left: 500, top: 472, width: 394, height: 28, background: '#150e09' }); box(cam, { left: 640, top: 478, width: 70, height: 16, border: '2px solid #2a1b10', background: '#0b0705' });
-  box(cam, { left: 505, top: 500, width: 14, height: 92, background: '#0d0805' }); box(cam, { left: 874, top: 500, width: 14, height: 92, background: '#0d0805' });
-  box(cam, { left: 624, top: 440, width: 90, height: 17, transform: 'skewX(-18deg)', background: 'linear-gradient(90deg,#cdbd96,#8d7e5c)' }); box(cam, { left: 668, top: 438, width: 3, height: 19, background: '#2a2014' });
-  lamp(cam, { x: 828, y: 420, s: 1.4, r: 330, T, D });
-  glow(cam, { x: 828, y: 440, r: 190, op: 0.5, T, D });
-  // ---- figures
+  for (let i = 0; i < 6; i++) { const x = 216 + i * 34, l = box(mid, { left: x - 4, top: 330, width: 8, height: 234, transformOrigin: '50% 100%', background: 'linear-gradient(90deg,#5a5a64,#1a1a20)', transform: `rotate(${((R() - 0.5) * 3).toFixed(2)}deg)` }); box(l, { left: -8, top: -8, width: 24, height: 34, borderRadius: 5, background: [0, 1, 4].includes(i) ? 'linear-gradient(90deg,#c0303a,#6e1218)' : 'linear-gradient(90deg,#3a76d0,#16407a)' }); lv.push(l); }
+  box(mid, { left: 196, top: 560, width: 230, height: 16, background: '#1c1612' });
+  [[2, 3, -16, 12], [4, 3.6, 15, 12.5], [1, 100.5, -14, 104.5]].forEach(([i, r1, rot, r2]) => { tl.to(lv[i], { rotation: rot, duration: 1.8, ease: 'sine.inOut' }, a(r1)); tl.to(lv[i], { rotation: 0, duration: 2, ease: 'sine.inOut' }, a(r2)); });
+  // bell on the wall (hangs, sways a hair) and telegraph
+  box(mid, { left: 583, top: 40, width: 2, height: 160, background: '#120c08' });
+  box(mid, { left: 530, top: 196, width: 110, height: 90, background: '#22180f', borderRadius: 6 });
+  const bell = box(mid, { left: 562, top: 200, width: 46, height: 62, transformOrigin: '50% 0%' }, '<svg viewBox="0 0 50 62" width="100%" height="100%"><defs><linearGradient id="br"><stop offset="0" stop-color="#f0bd58"/><stop offset=".6" stop-color="#9a6c22"/><stop offset="1" stop-color="#3d280c"/></linearGradient></defs><path d="M25 4Q7 8 8 36L3 48H47L42 36Q43 8 25 4Z" fill="url(#br)"/><circle cx="25" cy="53" r="5" fill="#6e4a16"/></svg>');
+  tl.fromTo(bell, { rotation: -1.1 }, { rotation: 1.1, duration: 3.2, yoyo: true, repeat: Math.ceil(D / 3.2), ease: 'sine.inOut', immediateRender: false }, T);
+  box(mid, { left: 500, top: 428, width: 110, height: 30, borderRadius: 4, background: 'linear-gradient(#9a7430,#3a2610)' });
+  box(mid, { left: 508, top: 450, width: 50, height: 6, background: '#dcb458', borderRadius: 3 });
+  const dial = box(mid, { left: 530, top: 372, width: 60, height: 60 }, '<svg viewBox="0 0 60 60" width="100%" height="100%"><circle cx="30" cy="30" r="27" fill="#eadcae" stroke="#9a722a" stroke-width="4"/><path d="M12 22L8 18M48 22L52 18M30 6V0" stroke="#4a3010" stroke-width="2"/><line id="ndl" x1="30" y1="34" x2="30" y2="8" stroke="#111" stroke-width="2.4"/><circle cx="30" cy="34" r="3" fill="#111"/></svg>');
+  const ndl = dial.querySelector('#ndl');
+  const click = (r, n) => { for (let i = 0; i < n; i++) tl.to(ndl, { rotation: (i % 2 ? -20 : 20), svgOrigin: '30 34', duration: 0.07, ease: 'power1.out' }, a(r) + i * 0.26); };
+  click(5.5, 3); click(17, 2); click(29.3, 3); click(31.6, 2); click(33.1, 4);
+  for (let r = 40; r < D - 4; r += 6 + R() * 6) click(r, 2 + Math.floor(R() * 3));
+  // stove, pipe, fire
+  box(mid, { left: 1137, top: 0, width: 16, height: 440, background: 'linear-gradient(90deg,#4a413b,#17130f)' });
+  [150, 290].forEach((y) => box(mid, { left: 1133, top: y, width: 24, height: 8, background: '#0c0907' }));
+  box(mid, { left: 1078, top: 436, width: 136, height: 14, background: '#241c17' }); box(mid, { left: 1088, top: 448, width: 116, height: 144, background: 'linear-gradient(90deg,#4a3a30,#1c1612)' });
+  box(mid, { left: 1110, top: 486, width: 72, height: 66, background: 'linear-gradient(#a8400e,#3a1206)', border: '3px solid #0c0605' });
+  fire(mid, { x: 1146, y: 548, s: 1.2, T, D });
+  steam(mid, { x: 1145, y: 290, n: 5, T, D, dx: -25, dy: -120, s: 0.8, color: 'rgba(170,170,185,0.24)' });
+  steam(mid, { x: 1145, y: 150, n: 4, T, D, dx: 20, dy: -90, s: 0.8, color: 'rgba(170,170,185,0.2)' });
+  // desk, ledger, lamp
+  box(mid, { left: 490, top: 456, width: 414, height: 16, background: '#7a5632' }); box(mid, { left: 500, top: 472, width: 394, height: 28, background: '#2c1d12' }); box(mid, { left: 640, top: 478, width: 70, height: 16, border: '2px solid #4a3220', background: '#1a110a' });
+  box(mid, { left: 505, top: 500, width: 14, height: 90, background: '#24170d' }); box(mid, { left: 874, top: 500, width: 14, height: 90, background: '#24170d' });
+  box(mid, { left: 624, top: 440, width: 90, height: 17, transform: 'skewX(-18deg)', background: 'linear-gradient(90deg,#e0d0a8,#a39470)' }); box(mid, { left: 668, top: 438, width: 3, height: 19, background: '#3a2c1c' });
+  lamp(mid, { x: 828, y: 418, s: 1.5, r: 340, T, D });
+  glow(mid, { x: 828, y: 420, r: 230, op: 0.55, T, D });
+  // light pools: lamp on wall and floor, fire on the right
+  pool(back, 830, 400, 420, 300, 'rgba(255,165,80,.5)', 0.8, 4.3);
+  pool(back, 830, 600, 360, 55, 'rgba(255,170,90,.5)', 0.8, 3.7);
+  pool(back, 1110, 470, 330, 300, 'rgba(255,100,35,.5)', 0.8, 2.3);
+  pool(back, 1060, 610, 260, 50, 'rgba(255,110,40,.55)', 0.8, 2.9);
+  glow(mid, { x: 1060, y: 380, r: 200, color: 'rgba(255,110,40,0.55)', op: 0.5, T, D });
+
+  // ---------- figures ----------
   let uid = 0;
-  function stander(o) {
-    const s = 1.8, id = 'lg' + uid++, g = box(cam, { left: o.x - 50 * s, top: 590 - 200 * s, width: 100 * s, height: 200 * s, transformOrigin: '50% 100%', filter: 'drop-shadow(4px 0 5px rgba(255,170,70,.45))' });
-    g.innerHTML = `<svg viewBox="0 0 100 200" width="100%" height="100%" style="overflow:visible"><defs><radialGradient id="${id}"><stop offset="0" stop-color="#fff6c8"/><stop offset=".25" stop-color="rgba(255,190,90,.7)"/><stop offset="1" stop-color="rgba(255,150,40,0)"/></radialGradient></defs><g class="la"><rect x="38" y="112" width="11" height="84" rx="4" fill="#06070a"/></g><g class="lb"><rect x="51" y="112" width="11" height="84" rx="4" fill="#0a0b0f"/></g><path d="M27 54Q27 40 50 40Q73 40 73 54L77 128H23Z" fill="#07090e"/><rect x="24" y="48" width="9" height="66" rx="4" fill="#07090e"/><circle cx="50" cy="27" r="11" fill="#0a0b10"/>${o.hat ? '<rect x="39" y="3" width="22" height="14" fill="#05060a"/><rect x="33" y="15" width="34" height="3" fill="#05060a"/>' : '<path d="M39 24Q40 14 51 15Q61 16 61 25Q50 19 39 24Z" fill="#030304"/>'}${o.beard ? '<path d="M40 28Q50 54 60 28Q50 37 40 28Z" fill="#030304"/>' : ''}<g class="arm"><rect x="66" y="48" width="9" height="66" rx="4" fill="#07090e"/>${o.lamp ? `<circle cx="70" cy="118" r="52" fill="url(#${id})"/><rect x="65" y="110" width="10" height="14" fill="#2b2012"/><rect x="67" y="113" width="6" height="8" fill="#fff2b0"/>` : ''}</g></svg>`;
-    if (o.flip) tl.set(g, { scaleX: -1 }, 0);
-    tl.to(g, { scaleY: 1.01, duration: 2.6, yoyo: true, repeat: Math.floor(D / 2.6), ease: 'sine.inOut' }, T);
-    return { g, x: o.x, la: g.querySelector('.la'), lb: g.querySelector('.lb'), arm: g.querySelector('.arm') };
+  const NARR = { coat: '#2d3753', coat2: '#182036', hat: 'top', beard: false }, SIGN = { coat: '#3b3028', coat2: '#201813', hat: 'none', beard: true };
+  function dress(p, o, flip) {
+    const id = 'fc' + uid++, P = p.P;
+    p.g.style.filter = `drop-shadow(${flip ? -2 : 2}px 0 0 rgba(255,172,92,.8)) drop-shadow(${flip ? 1.5 : -1.5}px 0 0 rgba(120,165,245,.55)) drop-shadow(0 0 6px rgba(0,0,0,.5))`;
+    const f = document.createElementNS(NS, 'g');
+    f.innerHTML = `<defs><linearGradient id="${id}s" x1="0" y1="0" x2="1" y2="0.2"><stop offset="0" stop-color="#3a2416"/><stop offset=".5" stop-color="#a06a3c"/><stop offset="1" stop-color="#f4bd7c"/></linearGradient></defs><ellipse cx="62" cy="41" rx="9.5" ry="12.5" fill="url(#${id}s)"/><path d="M59 36.5 L71 34 L71.5 37 L60 39Z" fill="#0b0705"/><circle cx="67" cy="39.5" r="1.2" fill="#fff0cc"/><path d="M71 40 L76 47 L70.5 47Z" fill="#d89c60"/>${o.beard ? '<path d="M50 41 Q52 60 64 58 Q75 56 72 42 Q68 50 61 49 Q54 49 50 41Z" fill="#0b0705"/><path d="M62 47 Q68 45 73 47 Q68 50 62 47Z" fill="#0b0705"/>' : '<path d="M62 47.5 Q68 45.5 73 47.5 Q68 49.5 62 47.5Z" fill="#150d08"/>'}${o.hat === 'none' ? '<path d="M48 38 Q46 19 61 20 Q76 20 72 36 Q69 28 60 28 Q53 29 48 38Z" fill="#0a0705"/>' : ''}`;
+    P.h.insertBefore(f, P.h.children[2] || null);
+    const ov = document.createElementNS(NS, 'path');
+    ov.setAttribute('d', 'M38 64 Q60 55 82 64 L90 160 Q60 170 30 160Z'); ov.setAttribute('fill', `url(#${id}w)`);
+    const dd = document.createElementNS(NS, 'defs'); dd.innerHTML = `<linearGradient id="${id}w" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(255,170,90,0)"/><stop offset="1" stop-color="rgba(255,175,95,.42)"/></linearGradient>`;
+    P.t.insertBefore(dd, P.tail); P.t.insertBefore(ov, P.tail);
+    [P.abf, P.aff].forEach((e) => e.querySelector('circle').setAttribute('fill', '#a56c3c'));
   }
-  function sitter(o) {
-    const s = 1.8, g = box(cam, { left: o.x - 70 * s, top: 590 - 170 * s, width: 140 * s, height: 170 * s, filter: 'drop-shadow(-4px 0 5px rgba(255,170,70,.5)) drop-shadow(3px 0 6px rgba(255,120,40,.3))' });
-    const face = o.face ? '<defs><linearGradient id="sk"><stop offset="0" stop-color="#d89a58"/><stop offset=".45" stop-color="#6a4326"/><stop offset="1" stop-color="#0e0907"/></linearGradient></defs><rect x="76" y="46" width="12" height="14" fill="#0e0907"/><ellipse cx="82" cy="36" rx="13" ry="15" fill="url(#sk)"/><path d="M68 34Q67 17 84 18Q99 20 97 40L92 30Q81 23 70 35Z" fill="#050403"/><path d="M68 30L82 28L81 34L69 35Z" fill="#050403"/><circle cx="74" cy="37" r="1.5" fill="#ffd9a0"/><path d="M68 38L63 45L69 46Z" fill="#c68a4c"/><path d="M69 43Q70 64 84 62Q97 58 96 41Q90 52 82 50Q74 48 69 43Z" fill="#040303"/>' : '<circle cx="82" cy="36" r="12" fill="#0a0b10"/><rect x="71" y="14" width="22" height="14" fill="#05060a"/><rect x="65" y="26" width="34" height="3" fill="#05060a"/>';
-    g.innerHTML = `<svg viewBox="0 0 140 170" width="100%" height="100%" style="overflow:visible"><rect x="96" y="60" width="9" height="108" fill="#0a0806"/><rect x="58" y="120" width="48" height="7" fill="#0a0806"/><rect x="62" y="127" width="5" height="41" fill="#0a0806"/><rect x="98" y="127" width="5" height="41" fill="#0a0806"/><path d="M74 122L76 58Q86 46 100 56L102 122Z" fill="#07090e"/><rect x="30" y="112" width="52" height="14" rx="6" fill="#06070a"/><rect x="26" y="116" width="13" height="52" rx="5" fill="#06070a"/>${face}<path d="M84 62L70 100L48 112" stroke="#07090e" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="46" cy="112" r="6.5" fill="${o.face ? '#7a4d2a' : '#0a0b10'}"/></svg>`;
-    if (o.flip) tl.set(g, { scaleX: -1 }, 0);
-    tl.to(g, { scaleY: 1.012, duration: 3, yoyo: true, repeat: Math.floor(D / 3), ease: 'sine.inOut', transformOrigin: '50% 100%' }, T);
-    return g;
+  function breathe2(p, T0, D0, amt = 1) {
+    const rep = Math.max(1, Math.ceil(D0 / 1.7) - 1);
+    tl.to(p.P.t, { scaleY: 1 + 0.016 * amt, duration: 1.7, yoyo: true, repeat: rep, ease: 'sine.inOut' }, T0);
+    tl.to(p.P.h, { y: -1.4 * amt, duration: 1.7, yoyo: true, repeat: rep, ease: 'sine.inOut' }, T0 + 0.2);
+    tl.to(p.P.tail, { rotation: 1.8, duration: 2.4, yoyo: true, repeat: Math.max(1, Math.ceil(D0 / 2.4) - 1), ease: 'sine.inOut' }, T0);
   }
-  const vis = (el, a, b) => { tl.set(el, { opacity: a ? 0 : 1 }, 0); if (a) tl.to(el, { opacity: 1, duration: 1 }, A(a - 0.5)); if (b) tl.to(el, { opacity: 0, duration: 1 }, A(b - 0.5)); };
-  const walk = (f, x0, x1, a, b) => { const n = Math.max(1, Math.round((b - a) * K / 0.8)), d = (b - a) * K / (n + 1); tl.fromTo(f.g, { x: x0 - f.x }, { x: x1 - f.x, duration: (b - a) * K, ease: 'sine.inOut' }, A(a)); tl.fromTo(f.la, { rotation: 16, svgOrigin: '44 114' }, { rotation: -16, svgOrigin: '44 114', duration: d, repeat: n, yoyo: true, ease: 'sine.inOut' }, A(a)); tl.fromTo(f.lb, { rotation: -16, svgOrigin: '56 114' }, { rotation: 16, svgOrigin: '56 114', duration: d, repeat: n, yoyo: true, ease: 'sine.inOut' }, A(a)); tl.set([f.la, f.lb], { rotation: 0, svgOrigin: '50 114' }, A(b) + 0.02); };
-  // narrator: walks in from the door, offers a hand, walks to his stool, sits; later rises and leaves
-  const NA = stander({ x: 740, hat: 1 }); vis(NA.g, 0, 31.5);
-  tl.set(NA.g, { x: 130 - 740 }, 0); walk(NA, 130, 740, 0.5, 9);
-  tl.to(NA.arm, { rotation: -88, svgOrigin: '70 52', duration: 1.6, ease: 'sine.inOut' }, A(12)); tl.to(NA.arm, { rotation: 0, svgOrigin: '70 52', duration: 1.8, ease: 'sine.inOut' }, A(19.5));
-  tl.to(NA.g, { scaleX: -1, duration: 0.6 }, A(25.2)); walk(NA, 740, 430, 26, 31.5);
-  const NS = sitter({ x: 440, flip: 1 }); vis(NS, 31, 70);
-  const NB = stander({ x: 430, hat: 1 }); vis(NB.g, 70, 0); tl.to(NB.g, { scaleX: -1, duration: 0.6 }, A(73));
-  walk(NB, 430, 130, 74, 85); tl.to(NB.g, { scaleX: 1, duration: 0.8 }, A(86));
-  // signalman: stands unmoving, sits for the talk (the push-in), then stands with the hand-lamp
-  const SA = stander({ x: 890, beard: 1, flip: 1 }); vis(SA.g, 0, 30); tl.to(SA.g, { x: 60, duration: 2.5, ease: 'sine.inOut' }, A(27));
-  const SS = sitter({ x: 955, face: 1 }); vis(SS, 29.5, 84);
-  const SL = stander({ x: 950, beard: 1, flip: 1, lamp: 1 }); vis(SL.g, 83.5, 0);
-  tl.to(SL.arm, { rotation: -148, svgOrigin: '70 52', duration: 3, ease: 'sine.inOut' }, A(88)); tl.to(SL.arm, { rotation: -128, svgOrigin: '70 52', duration: 1.4, yoyo: true, repeat: 5, ease: 'sine.inOut' }, A(91.5));
-  glow(cam, { x: 930, y: 345, r: 130, color: 'rgba(255,165,70,0.55)', op: 0.4, T, D });
-  // red light spilling into the room as he signals
-  const red = box(cam, { left: 560, top: 40, width: 520, height: 460, borderRadius: '50%', background: 'radial-gradient(ellipse,rgba(255,40,30,.55),rgba(0,0,0,0) 68%)', mixBlendMode: 'screen', opacity: 0 });
-  tl.to(red, { opacity: 0.38, duration: 1.2, yoyo: true, repeat: Math.floor((98 - 84) / 1.2), ease: 'sine.inOut' }, A(84));
-  // dust motes in the lamp light
-  for (let i = 0; i < 28; i++) { const m = box(cam, { left: 430 + R() * 640, top: 150 + R() * 400, width: 2 + R() * 2, height: 2 + R() * 2, borderRadius: '50%', background: '#ffe2b0', opacity: 0.15 + R() * 0.4 }), dur = 5 + R() * 5; tl.to(m, { x: (R() - 0.5) * 70, y: -30 - R() * 50, opacity: 0.05, duration: dur, yoyo: true, repeat: Math.floor(D / dur) + 1, ease: 'sine.inOut' }, T); }
-  // ---- slow camera: tiny drift, long push-in on the signalman, pull back to the door
-  tl.fromTo(cam, { scale: 1, x: 0, y: 0 }, { scale: 1.05, x: -32, y: -18, duration: 29 * K, ease: 'none' }, T);
-  tl.to(cam, { scale: 1.8, x: -980, y: -300, duration: 40.5 * K, ease: 'sine.inOut' }, A(29));
-  tl.to(cam, { scale: 1, x: 0, y: 0, duration: 15 * K, ease: 'sine.inOut' }, A(70));
-  tl.to(cam, { scale: 1.04, x: -26, y: -14, duration: 13 * K, ease: 'none' }, A(85));
-  box(c, { left: 0, top: 0, width: W, height: H, background: 'radial-gradient(ellipse at 55% 50%,rgba(0,0,0,0) 35%,rgba(0,0,0,.5) 100%)', zIndex: 5 });
+  function walk2(p, T0, D0, x0, x1, per = 0.72, lean = 2) {
+    const P = p.P, n = Math.max(1, Math.round(D0 / per)), rp = n - 1, dd = n * per, o = { immediateRender: false, yoyo: true, repeat: rp };
+    tl.fromTo(P.lf, { rotation: 24 }, { rotation: -24, duration: per, ease: 'sine.inOut', ...o }, T0);
+    tl.fromTo(P.lb, { rotation: -24 }, { rotation: 24, duration: per, ease: 'sine.inOut', ...o }, T0);
+    tl.fromTo(P.lfs, { rotation: 4 }, { rotation: 32, duration: per, ease: 'sine.in', ...o }, T0);
+    tl.fromTo(P.lbs, { rotation: 32 }, { rotation: 4, duration: per, ease: 'sine.out', ...o }, T0);
+    tl.fromTo(P.af, { rotation: -12 }, { rotation: 12, duration: per, ease: 'sine.inOut', ...o }, T0);
+    tl.fromTo(P.ab, { rotation: 12 }, { rotation: -12, duration: per, ease: 'sine.inOut', ...o }, T0);
+    tl.fromTo(P.t, { rotation: -lean, y: 0 }, { rotation: lean, y: -2.6, duration: per / 2, ease: 'sine.inOut', immediateRender: false, yoyo: true, repeat: n * 2 - 1 }, T0);
+    tl.fromTo(P.tail, { rotation: -5 }, { rotation: 7, duration: per, ease: 'sine.inOut', ...o }, T0);
+    tl.fromTo(p.g, { x: x0 }, { x: x1, duration: dd, ease: 'none', immediateRender: false }, T0);
+    tl.to([P.lf, P.lb, P.lfs, P.lbs, P.t, P.tail], { rotation: 0, y: 0, duration: 0.4, ease: 'sine.out' }, T0 + dd);
+    tl.to(P.af, { rotation: -4, duration: 0.5 }, T0 + dd); tl.to(P.ab, { rotation: 4, duration: 0.5 }, T0 + dd);
+  }
+  const heads = (p, L) => L.forEach(([r, deg, d]) => p.head(deg, a(r), d ?? 2));
+  const fade = (el, r0, r1, d = 1) => { if (r0 != null) tl.to(el, { opacity: 1, duration: d }, a(r0)); if (r1 != null) tl.to(el, { opacity: 0, duration: d }, a(r1)); };
+  function standing(x, o, flip) {
+    const p = puppet(mid, { x, y: 588, s: 1.8, hat: o.hat, coat: o.coat, coat2: o.coat2, flip, opacity: 0 });
+    dress(p, o, flip); breathe2(p, T, D, 1); return p;
+  }
+  function seated(x, dir, o) {
+    const grp = box(mid, { left: 0, top: 0, width: W, height: H, opacity: 0 }), k = dir, col = o.beard ? '#1d1814' : '#1c2234';
+    const pt = (arr) => arr.map(([dx, y]) => `${x + dx * k},${y}`).join(' ');
+    const legs = box(grp, { left: 0, top: 0, width: W, height: H, filter: `drop-shadow(${k > 0 ? 2 : -2}px 0 0 rgba(255,170,90,.55))` });
+    legs.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"><polygon points="${pt([[-8, 480], [74, 484], [74, 510], [-8, 508]])}" fill="${col}"/><polygon points="${pt([[60, 490], [82, 490], [80, 578], [62, 578]])}" fill="${col}"/><polygon points="${pt([[58, 572], [100, 576], [102, 588], [58, 588]])}" fill="#0a0806"/></svg>`;
+    const p = puppet(grp, { x, y: 630, s: 1.8, hat: o.hat, coat: o.coat, coat2: o.coat2, flip: k < 0 });
+    gsap.set([p.P.lb, p.P.lf], { opacity: 0 }); gsap.set(p.P.tail, { opacity: 0 });
+    dress(p, o, k < 0);
+    gsap.set(p.P.af, { rotation: -25 }); gsap.set(p.P.aff, { rotation: 8 });
+    pool(grp, x + k * 8, 306, 100, 100, 'rgba(255,175,95,.5)', 0.55, 1.9);
+    breathe2(p, T, D, 1.1); p.grp = grp; return p;
+  }
+  // furniture the men sit on
+  const stoolX = 700, chairX = 960;
+  box(mid, { left: stoolX - 40, top: 508, width: 80, height: 10, background: '#6a4a2c', borderRadius: 3 });
+  [-32, 26].forEach((dx) => box(mid, { left: stoolX + dx, top: 518, width: 7, height: 68, background: '#2c1e12' })); box(mid, { left: stoolX - 30, top: 548, width: 60, height: 4, background: '#2c1e12' });
+  box(mid, { left: chairX - 44, top: 508, width: 88, height: 10, background: '#6a4a2c', borderRadius: 3 });
+  [-36, 30].forEach((dx) => box(mid, { left: chairX + dx, top: 518, width: 7, height: 68, background: '#2c1e12' }));
+  box(mid, { left: chairX + 48, top: 360, width: 9, height: 160, background: '#4a321e' }); box(mid, { left: chairX + 42, top: 352, width: 22, height: 10, background: '#5a3c24', borderRadius: 3 });
+
+  const NSt = standing(110, NARR, false), SGt = standing(1000, SIGN, true);   // narrator walks in from the door; signalman waits
+  const NQ = seated(stoolX, 1, NARR), SQ = seated(chairX, -1, SIGN);
+  const nx = (x) => x - 110, sx = (x) => x - 1000;
+  // hand lamp for the signalman (hidden until he takes it up)
+  const hx = 84, lg = document.createElementNS(NS, 'g');
+  lg.innerHTML = `<defs><radialGradient id="hlg"><stop offset="0" stop-color="#fff3c4" stop-opacity=".95"/><stop offset=".3" stop-color="#ffbe5c" stop-opacity=".6"/><stop offset="1" stop-color="#ff9628" stop-opacity="0"/></radialGradient></defs><circle cx="${hx}" cy="146" r="44" fill="url(#hlg)"/><line x1="${hx}" y1="127" x2="${hx}" y2="137" stroke="#222" stroke-width="1.4"/><rect x="${hx - 5}" y="137" width="10" height="14" rx="2" fill="#2a1d0f" stroke="#e0b878" stroke-width="1"/><rect x="${hx - 3}" y="140" width="6" height="8" fill="#ffe6a0"/>`;
+  SGt.P.aff.appendChild(lg); gsap.set(lg, { svgOrigin: `${hx} 127`, opacity: 0 });
+
+  // ----- narrator standing: enters from the door, offers a hand that is not taken, looks over the room -----
+  fade(NSt.g, 0.4, null, 1.6);
+  walk2(NSt, a(1.8), 9.6, 0, nx(470), 0.76, 2);
+  NSt.arm('f', -78, -12, a(13.6), 1.5); NSt.arm('f', -4, -4, a(18.2), 1.8);
+  heads(NSt, [[0, 3, 0.1], [4, -3, 2.5], [11.5, -6, 2], [15, 0, 2.2], [19, 5, 2.4], [24, -8, 2.5], [29.5, -14, 2], [34.5, -18, 2], [38, -3, 1.5], [42, 5, 2], [46, -2, 1.5], [47.6, -9, 0.8], [50.5, 3, 1.4], [53, 6, 2.2], [57, 4, 2.2], [60, 0, 1]]);
+  tl.to(NSt.P.t, { y: -3, duration: 0.16, yoyo: true, repeat: 11, ease: 'sine.inOut' }, a(46.7));                  // he laughs a little
+  NSt.arm('f', -40, -50, a(43.5), 1.2); NSt.arm('f', -4, -4, a(45.2), 1.4);                                       // "Who?" with a small gesture
+  walk2(NSt, a(37.3), 4.0, nx(470), nx(650), 0.8, 1.5);                                                          // steps closer to talk, out of the telegraph shots
+  walk2(NSt, a(58.4), 3.0, nx(650), nx(700), 0.75, 1.5);                                                          // to his stool
+  fade(NSt.g, null, 61, 0.7);
+
+  // ----- signalman standing: waits, watches the window, answers, shakes his head -----
+  tl.set(SGt.g, { opacity: 1 }, 0);
+  heads(SGt, [[0, 0, 0.1], [3, -7, 2.5], [8, 0, 2], [12, 6, 2], [18, -3, 2.5], [22, 3, 2.5], [28, -2, 2], [34, -3, 2], [37.2, -6, 1.2], [43, 4, 2], [50, 7, 2.5], [54.2, 8, 0.5], [54.8, -8, 0.5], [55.4, 7, 0.5], [56.1, -2, 0.7], [58, 6, 2], [60, 0, 1]]);
+  SGt.arm('f', -12, -22, a(4.5), 1.6); SGt.arm('f', -4, -4, a(9), 1.8); SGt.arm('f', -8, -30, a(22), 1.6); SGt.arm('f', -4, -4, a(27), 1.8);
+  SGt.arm('f', -158, -18, a(38.2), 1.2); SGt.arm('f', -4, -4, a(41.6), 1.6);                                    // "You spoke from up there": a hand lifted toward the cutting
+  SGt.arm('f', -170, -125, a(54.4), 1.0); SGt.arm('f', -4, -4, a(58.4), 1.6);                                   // "I don't know": hand to the brow
+  walk2(SGt, a(33.8), 3.0, 0, sx(960), 0.9, 1.2);
+  fade(SGt.g, null, 61, 0.7);
+
+  // ----- seated talk 61-98: nods, hands, small turns of the head -----
+  tl.to(NQ.grp, { opacity: 1, duration: 0.9 }, a(60.6)); tl.to(SQ.grp, { opacity: 1, duration: 0.9 }, a(60.8));
+  tl.fromTo(NQ.g, { y: -8 }, { y: 0, duration: 0.8, ease: 'power2.out', immediateRender: false }, a(60.6)); tl.fromTo(SQ.g, { y: -8 }, { y: 0, duration: 0.8, ease: 'power2.out', immediateRender: false }, a(60.8));
+  heads(NQ, [[60, 0, 0.1], [64, 5, 2], [68, -2, 2], [72, 6, 2.5], [77, -4, 2], [81, 3, 2], [86, 7, 2.5], [90, -4, 2], [94, 5, 2.5], [97, 0, 1]]);
+  heads(SQ, [[60, -3, 0.1], [63.5, -7, 2], [67, 2, 2], [70.5, 9, 2.4], [75.5, 14, 2.6], [80, -3, 1.8], [84, 5, 2.2], [89, 1, 2.4], [93.5, -6, 2.4], [97, 2, 1.4]]);
+  NQ.arm('f', -55, -40, a(65.5), 1.2); NQ.arm('f', -25, 8, a(68.5), 1.6); NQ.arm('f', -60, -70, a(75), 1.6); NQ.arm('f', -25, 8, a(79), 1.6); NQ.arm('f', -34, -4, a(88), 1.3); NQ.arm('f', -25, 8, a(91.5), 1.6);
+  SQ.arm('f', -58, -42, a(63.8), 1.2); SQ.arm('f', -25, 8, a(66.5), 1.6); SQ.arm('f', -75, -75, a(70.5), 1.5); SQ.arm('f', -30, -25, a(74), 1.8); SQ.arm('f', -60, -20, a(78), 1.3); SQ.arm('f', -25, 8, a(81), 1.8);
+  SQ.arm('f', -34, -60, a(84), 1.6); SQ.arm('f', -30, -30, a(88), 1.6); SQ.arm('f', -42, -8, a(91.5), 1.4); SQ.arm('f', -25, 8, a(95), 1.6);
+
+  // ----- E: he rises, leaves for the door, turns back; the signalman takes his lamp and waves it -----
+  tl.to(NQ.grp, { opacity: 0, duration: 0.6 }, a(97.8)); tl.to(SQ.grp, { opacity: 0, duration: 0.6 }, a(98.4));
+  tl.set(NSt.g, { opacity: 0, x: nx(700), scaleX: -1 }, a(97.7)); tl.to(NSt.g, { opacity: 1, duration: 0.6 }, a(97.8));
+  heads(NSt, [[98, -4, 1.4], [101, 0, 1.5], [106.2, -6, 1.2], [109.5, 5, 1.8], [113, -3, 2], [117, 4, 2]]);
+  NSt.arm('f', -8, -70, a(98.4), 1.2); NSt.arm('f', -4, -4, a(99.9), 0.8);                           // hand to his hat: "I promised to come back"
+  walk2(NSt, a(100.8), 5.8, nx(700), nx(150), 0.8, 2);
+  tl.to(NSt.g, { scaleX: 1, duration: 0.7, ease: 'sine.inOut' }, a(107.2));                            // turns back at the door
+  fade(NSt.g, null, 118.8, 1.1);
+  tl.set(SGt.g, { opacity: 0, x: sx(960) }, a(98.3)); tl.to(SGt.g, { opacity: 1, duration: 0.6 }, a(98.4));
+  heads(SGt, [[98.5, 2, 0.1], [103, -5, 2], [107.5, 4, 1.6], [110.5, -6, 1.6], [113.5, -10, 1.8], [117, -6, 2.2]]);
+  walk2(SGt, a(101.6), 1.6, sx(960), sx(948), 0.8, 1);
+  tl.to(lg, { opacity: 1, duration: 1.0 }, a(102.4));
+  SGt.arm('f', -30, -40, a(104.2), 1.6); SGt.arm('f', -12, -20, a(108), 1.6);
+  SGt.arm('f', -160, -22, a(113.4), 1.6);                                                              // "I will wave my lamp"
+  for (let i = 0; i < 2; i++) { SGt.arm('f', -140, -22, a(115.2 + i * 1.2), 0.55); SGt.arm('f', -166, -22, a(115.75 + i * 1.2), 0.55); }
+  tl.to(lg, { rotation: 12, duration: 0.8, yoyo: true, repeat: 24, ease: 'sine.inOut' }, a(103));
+  const lampGlow = glow(mid, { x: 850, y: 232, r: 260, color: 'rgba(255,190,100,0.6)', op: 0, T, D: 0.1, flicker: false });
+  tl.to(lampGlow, { opacity: 0.85, duration: 2 }, a(113.6));
+  // red light of the window grows into the room as he signals
+  const red = box(mid, { left: 520, top: 20, width: 620, height: 540, borderRadius: '50%', background: 'radial-gradient(ellipse,rgba(255,50,35,.6),rgba(0,0,0,0) 68%)', mixBlendMode: 'screen', opacity: 0.06 });
+  tl.to(red, { opacity: 0.2, duration: 1.4, yoyo: true, repeat: Math.floor(60 / 1.4), ease: 'sine.inOut' }, a(30));
+  tl.to(red, { opacity: 0.42, duration: 1.2, yoyo: true, repeat: Math.floor(16 / 1.2), ease: 'sine.inOut' }, a(104));
+
+  // ---------- life: dust in the lamp and fire light, cold motes at the window, a foreground blur ----------
+  motes(mid, { x0: 600, x1: 1120, y0: 200, y1: 570, n: 38, color: 'rgba(255,225,170,0.9)', T, D, size: 2.8, rise: -40, seed: 31 });
+  motes(mid, { x0: 690, x1: 960, y0: 120, y1: 420, n: 16, color: 'rgba(190,210,255,0.9)', T, D, size: 2.2, rise: -26, seed: 44 });
+  motes(mid, { x0: 1040, x1: 1210, y0: 300, y1: 540, n: 12, color: 'rgba(255,150,60,0.95)', T, D, size: 2.4, rise: -90, seed: 52 });
+  const fg = box(c, { left: 0, top: 0, width: W, height: H, pointerEvents: 'none' });
+  const fb = box(fg, { left: -120, top: 600, width: 360, height: 160, background: 'radial-gradient(ellipse,rgba(10,6,4,.8),rgba(0,0,0,0) 70%)', filter: 'blur(14px)' });
+  tl.to(fb, { x: 90, duration: D, ease: 'none' }, T);
+  box(c, { left: 0, top: 0, width: W, height: H, background: 'radial-gradient(ellipse at 52% 50%,rgba(0,0,0,0) 45%,rgba(0,0,0,.32) 100%)', zIndex: 5 });
+
+  // ---------- camera ----------
+  cm(560, 390, 1.22, 0, 11);
+  cm(720, 385, 1.1, 11, 9.5);
+  cm(900, 410, 1.12, 20.5, 3.5);
+  cm(1120, 460, 2.0, 24, 1.6, 'power2.inOut');          // a fire
+  cm(790, 410, 1.9, 25.8, 1.2, 'power2.inOut');          // a desk, the lamp
+  cm(670, 420, 2.3, 27.2, 1.4, 'power2.inOut');          // a book to write in
+  cm(560, 395, 2.0, 28.8, 1.5, 'power2.inOut');          // the telegraph
+  cm(555, 385, 2.1, 30.3, 3.4, 'none');
+  cm(590, 235, 2.0, 33.8, 2.0, 'power2.inOut');          // the bell
+  cm(810, 380, 1.38, 37, 3.2);
+  cm(830, 375, 1.5, 40.2, 11.8, 'none');
+  cm(960, 325, 1.95, 52, 3.5);                           // he did not laugh
+  cm(955, 318, 2.05, 55.5, 3.5, 'none');
+  cm(830, 390, 1.3, 59, 4);
+  cm(880, 360, 1.6, 63, 19, 'none');
+  cm(950, 312, 2.15, 82, 7);                             // close-up on the signalman as he confesses
+  cm(952, 306, 2.3, 89, 8.5, 'none');
+  cm(800, 390, 1.25, 97.5, 3.5);
+  cm(430, 400, 1.2, 101, 5.5);
+  cm(250, 380, 1.7, 106.5, 2.5);
+  cm(870, 330, 1.45, 109.2, 3.8);
+  cm(900, 285, 1.75, 113, 7);                            // the lamp is waved
 })();

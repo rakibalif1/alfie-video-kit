@@ -18,7 +18,7 @@ scenes = "\n".join(f'      <div id="s_{n}" class="scene clip" data-start="{v["t0
 head = open("src/head.html").read().replace("{{DUR}}", str(DUR)).replace("{{SCENES}}", scenes)
 data = f"const SC = {json.dumps(SC)};\nconst LINES = {json.dumps(LINES)};\nconst DUR = {DUR};\nconst OFF = {OFF};\n"
 args = sys.argv[1:]; outs = [a for a in args if a.startswith('--out=')]; OUTP = outs[0][6:] if outs else 'index.html'; only = [a for a in args if not a.startswith('--')]   # python3 build.py road --out=/tmp/w_road.html builds only scene file src/s_road.js
-parts = [head, data, open("src/kit.js").read()]
+parts = [head, data, open("src/kit.js").read(), open("src/kit2.js").read()]
 for f in sorted(glob.glob("src/s_*.js")):
     if not only or os.path.basename(f)[2:-3] in only: parts.append(open(f).read())
 parts += [open("src/final.js").read(), "\n    </script>\n  </body>\n</html>\n"]

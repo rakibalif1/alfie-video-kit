@@ -1,76 +1,126 @@
-// ===== ENDING: the first image replayed (narrator ~ ghost), years later on the hill, he walks away, the red lamp fades last =====
+// ===== ENDING v2: the first image replayed (narrator ~ ghost), years later on the hill, he walks away, the red lamp fades last =====
+// beats (scene s): 0 told many times | 6.7 first afternoon | 23.1 "Halloa!" | 25.9 dread | 33.8 which was the ghost | 38.4 hill, years later
+// | 63.7 I know only this | 66 never again called down | 71.4 certain evenings, he walks | 85.6 the call (lamp flares) | 90 "I do not look round"
 (function () {
-  const c = S('ending'), w = win('ending'), T = w.T, D = w.D, K = D / 95, A = (s) => T + s * K, R = rr(88);
-  const root = box(c, { left: 0, top: 0, width: W, height: H, overflow: 'hidden', background: '#02030a' });
+  const c = S('ending'), w = win('ending'), T = w.T, D = w.D, t = (s) => T + Math.min(s, D - 0.3), R = rr(88);
+  const root = box(c, { left: 0, top: 0, width: W, height: H, overflow: 'hidden', background: '#0a0f18' });
   const pa = box(root, { left: 0, top: 0, width: W, height: H }), pb = box(root, { left: 0, top: 0, width: W, height: H, opacity: 0 });
-  // narrator seen from behind; arm group 'arm' pivots at (70,52)
-  function back(p, o) {
-    const s = o.s, g = box(p, { left: o.x - 50 * s, top: o.y - 200 * s, width: 100 * s, height: 200 * s, transformOrigin: '50% 100%', filter: o.rim ? 'drop-shadow(0 0 3px rgba(150,195,255,.85)) drop-shadow(0 0 9px rgba(120,160,255,.4))' : 'drop-shadow(0 0 2px rgba(120,150,210,.35))' });
-    g.innerHTML = `<svg viewBox="0 0 100 200" width="100%" height="100%" style="overflow:visible"><g class="la"><rect x="38" y="112" width="11" height="84" rx="4" fill="#05060a"/></g><g class="lb"><rect x="51" y="112" width="11" height="84" rx="4" fill="#090a0e"/></g><path d="M27 54Q27 40 50 40Q73 40 73 54L79 134L21 134Z" fill="#06080d"/><rect x="24" y="48" width="9" height="68" rx="4" fill="#06080d"/><circle cx="50" cy="27" r="11" fill="#07080d"/><rect x="39" y="3" width="22" height="14" fill="#04050a"/><rect x="33" y="15" width="34" height="3" fill="#04050a"/><g class="arm"><rect x="66" y="48" width="9" height="68" rx="4" fill="#06080d"/></g></svg>`;
-    return { g, x: o.x, arm: g.querySelector('.arm'), la: g.querySelector('.la'), lb: g.querySelector('.lb') };
+  const TB = 37;                                                    // dissolve from part A to part B
+  const ORIA = '650px 470px';
+  const grp = (p, z, o) => box(p, { left: 0, top: 0, width: W, height: H, transformOrigin: o || ORIA, zIndex: z });
+  // multi-layer camera: keys [t, scale, x, y, ease]; k = depth factor
+  function rig(layers, K) {
+    layers.forEach(([el, k]) => {
+      const v = (p) => ({ scale: 1 + (p[1] - 1) * k, x: p[2] * k, y: p[3] * k });
+      gsap.set(el, v(K[0]));
+      for (let i = 1; i < K.length; i++) tl.fromTo(el, v(K[i - 1]), Object.assign(v(K[i]), { duration: K[i][0] - K[i - 1][0], ease: K[i][4] || 'sine.inOut', immediateRender: false }), t(K[i - 1][0]));
+    });
   }
-  // ================= PART A: top of the cutting (0-35) =================
-  const cam = box(pa, { left: 0, top: 0, width: W, height: H, transformOrigin: '650px 470px' });
-  box(cam, { left: -200, top: -300, width: W + 400, height: 800, background: 'linear-gradient(#4f5f74 0%,#33435a 45%,#141b26 100%)' });
-  mist(cam, { y: 60, h: 220, op: 0.4, n: 4, T, D: 35 * K, seed: 12, speed: 0.6 });
-  ridge(cam, { y: 120, h: 200, color: '#0c1118', seed: 7, amp: 34, trees: 18, treeH: 70, T, D });
-  box(cam, { left: -300, top: 320, width: W + 600, height: 800, background: 'linear-gradient(#1b212b 0%,#0d1117 30%,#06080b 100%)' });
-  tunnel(cam, { x: 640, y: 312, w: 200, h: 132, T, D });
-  rails(cam, { vx: 640, vy: 308, x0: 440, x1: 840, y0: H + 120, T, D });
-  box(cam, { left: 640, top: 470, width: 260, height: 120, background: 'radial-gradient(ellipse,rgba(255,50,30,.35),rgba(0,0,0,0) 70%)', mixBlendMode: 'screen' });
-  redLamp(cam, { x: 760, y: 492, s: 0.55, T, D: 35 * K });
-  const sm = box(cam, { left: 690, top: 396, width: 60, height: 100, transformOrigin: '50% 100%' }, '<svg viewBox="0 0 60 100" width="60" height="100" style="overflow:visible"><rect x="20" y="62" width="8" height="36" rx="3" fill="#050608"/><rect x="32" y="62" width="8" height="36" rx="3" fill="#050608"/><path d="M14 22Q14 14 30 14Q46 14 46 24L48 70H12Z" fill="#07090e"/><g class="hd"><circle cx="30" cy="10" r="10" fill="#07090e"/><ellipse class="fc" cx="30" cy="11" rx="5" ry="6" fill="#aab6cc" opacity="0"/></g></svg>');
-  tl.to(sm.querySelector('.fc'), { opacity: 0.8, duration: 3, ease: 'sine.in' }, A(9));
-  tl.to(sm.querySelector('.hd'), { rotation: -14, svgOrigin: '30 20', duration: 3, ease: 'sine.inOut' }, A(8));
-  mist(cam, { y: 380, h: 200, op: 0.35, n: 4, T, D, seed: 14, speed: 0.5 });
-  steam(cam, { x: 640, y: 330, n: 4, s: 2.2, dx: 10, dy: -80, color: 'rgba(160,175,200,0.18)', T, D: 35 * K });
-  cuttingWalls(cam, { innerL: 380, innerR: 900, colorL: '#14100e', colorR: '#0f0c0c', seed: 17 });
-  // narrator at the rim, cold rim light, calling down; ghost pose overlaps him
-  const NA = back(cam, { x: 215, y: 735, s: 1.55, rim: 1 });
-  tl.to(NA.arm, { rotation: -150, svgOrigin: '70 52', duration: 2.4, ease: 'sine.inOut' }, A(5)); tl.to(NA.arm, { rotation: 0, svgOrigin: '70 52', duration: 3, ease: 'sine.inOut' }, A(12));
-  tl.to(NA.g, { scaleY: 1.012, duration: 2.8, yoyo: true, repeat: Math.floor(35 * K / 2.8), ease: 'sine.inOut' }, T);
-  const gs = box(cam, { left: 230 - 50 * 1.55, top: 735 - 200 * 1.55, width: 155, height: 310, opacity: 0, filter: 'drop-shadow(0 0 10px rgba(190,220,255,.95)) blur(.6px)' },
-    '<svg viewBox="0 0 100 200" width="100%" height="100%" style="overflow:visible"><path d="M27 54Q27 40 50 40Q73 40 73 54L79 134L21 134Z" fill="rgba(200,222,255,.62)"/><rect x="38" y="112" width="11" height="84" rx="4" fill="rgba(200,222,255,.5)"/><rect x="51" y="112" width="11" height="84" rx="4" fill="rgba(200,222,255,.5)"/><circle cx="50" cy="27" r="11" fill="rgba(215,232,255,.7)"/><path d="M30 54L42 22L56 28" stroke="rgba(215,232,255,.8)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g class="wv"><rect x="66" y="48" width="9" height="68" rx="4" fill="rgba(215,232,255,.75)" transform="rotate(150 70 52)"/></g></svg>');
-  tl.to(gs, { opacity: 0.5, x: -22, duration: 3, ease: 'sine.inOut' }, A(17)); tl.to(gs, { opacity: 0, x: 20, duration: 4, ease: 'sine.inOut' }, A(24));
-  tl.fromTo(gs.querySelector('.wv'), { rotation: -10, svgOrigin: '70 52' }, { rotation: 12, svgOrigin: '70 52', duration: 1.1, yoyo: true, repeat: 5, ease: 'sine.inOut' }, A(17));
-  tl.fromTo(cam, { scale: 1 }, { scale: 1.12, duration: 35 * K, ease: 'none' }, T);
-  tl.to(pa, { opacity: 0, duration: 3, ease: 'sine.inOut' }, A(33));
-  // ================= PART B: years later, the hill at dusk (35-70) =================
-  const cb = box(pb, { left: 0, top: 0, width: W, height: H, transformOrigin: '600px 420px' });
-  sky(cb, { top: '#03050f', mid: '#14224a', bot: '#5a4650', stars: 50, T, D, seed: 41 });
-  ridge(cb, { y: 372, h: 60, color: '#0a0f1a', seed: 5, amp: 10, jag: 4, T, D });
-  box(cb, { left: 0, top: 428, width: W, height: 300, background: 'linear-gradient(#0c121c,#05080d 40%,#020306)' });
+  const clip = (p) => ({ clipPath: `polygon(${p.split(' ').map((q) => q.replace(',', 'px ') + 'px').join(',')})` });
+
+  // ================= PART A: top of the cutting, the first afternoon replayed (0-40) =================
+  const far = grp(pa, 1), near = grp(pa, 2), mid = grp(pa, 3), fg = grp(pa, 5);
+  rig([[far, 0.45], [near, 1], [mid, 1.4], [fg, 1]], [[0, 1.7, 490, -255], [11, 1.55, 400, -215], [21, 1.06, 0, 0], [30, 1.14, -10, -6, 'none'], [38, 1.5, -125, -118], [41, 1.55, -130, -120, 'none']]);
+  box(far, { left: -200, top: -300, width: W + 400, height: 800, background: 'linear-gradient(#7d93ab 0%, #4a5f78 45%, #1f2b3a 100%)' });
+  glow(far, { x: 650, y: 190, r: 420, color: 'rgba(150,180,230,0.55)', op: 0.6, T, D: 42, flicker: false });
+  mist(far, { y: 60, h: 220, op: 0.45, n: 4, T, D: 42, seed: 12, speed: 0.6 });
+  ridge(near, { y: 120, h: 200, color: '#141d2a', seed: 7, amp: 34, trees: 18, treeH: 70, drift: -40, T, D: 42 });
+  box(near, { left: 0, top: 0, width: W, height: H }, `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"><polygon points="190,430 330,310 520,215 650,180 780,215 950,310 1090,430" fill="#111823"/><path d="M330 310 L520 215 L650 180 L780 215 L950 310" stroke="rgba(140,170,215,0.35)" stroke-width="2" fill="none"/></svg>`);
+  box(near, { left: -300, top: 320, width: W + 600, height: 800, background: 'linear-gradient(#27313f 0%, #151b25 30%, #0a0e14 100%)' });
+  tunnel(near, { x: 640, y: 312, w: 200, h: 132, T, D: 42 });
+  glow(near, { x: 640, y: 300, r: 190, color: 'rgba(130,170,240,0.6)', op: 0.6, T, D: 42, flicker: false });
+  rails(near, { vx: 640, vy: 308, x0: 440, x1: 840, y0: H + 120, T, D: 42 });
+  lightCone(near, { x: 640, y: 300, len: 420, spread: 150, rot: 0, color: 'rgba(130,170,250,0.4)', op: 0.5, T, D: 42 });
+  box(near, { left: 540, top: 462, width: 440, height: 130, background: 'radial-gradient(ellipse, rgba(255,60,40,0.5), rgba(0,0,0,0) 70%)', mixBlendMode: 'screen' });
+  redLamp(near, { x: 782, y: 498, s: 0.62, T, D: 42 });
+  glow(near, { x: 726, y: 452, r: 100, color: 'rgba(120,160,230,0.55)', op: 0.5, T, D: 42, flicker: false });
+  const sm = puppet(near, { x: 726, y: 498, s: 0.5, hat: 'cap', rim: 'rgba(255,110,90,0.7)', coat: '#10151f', coat2: '#090c13' });
+  sm.breathe(T, 42, 0.6);
+  const fcl = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+  Object.entries({ cx: 65, cy: 42, rx: 4.2, ry: 5.4, fill: '#b4c2dc', opacity: 0 }).forEach(([k, v]) => fcl.setAttribute(k, v)); sm.P.h.appendChild(fcl);
+  sm.head(-4, t(24.5), 1.2); sm.head(-16, t(25.9), 2.6);                  // he looks up at the narrator: dread
+  tl.to(fcl, { opacity: 0.85, duration: 2.4, ease: 'sine.in' }, t(26.2));
+  mist(near, { y: 380, h: 200, op: 0.4, n: 4, T, D: 42, seed: 14, speed: 0.5 });
+  steam(near, { x: 640, y: 330, n: 5, s: 2.2, dx: 10, dy: -80, color: 'rgba(170,190,220,0.26)', T, D: 42 });
+  motes(near, { x0: 520, x1: 800, y0: 300, y1: 520, n: 20, color: 'rgba(190,215,255,0.9)', T, D: 42, size: 2.2, rise: -26, seed: 31 });
+  // walls with cold rim light, a weak warm afternoon shaft that thins
+  cuttingWalls(mid, { innerL: 380, innerR: 900, colorL: '#241c19', colorR: '#1d1715', seed: 17 });
+  box(mid, Object.assign({ left: 0, top: 0, width: W, height: H, background: 'linear-gradient(100deg, rgba(20,16,14,0) 25%, rgba(100,125,165,0.5) 100%)' }, clip('0,0 380,374 340,720 0,720')));
+  box(mid, Object.assign({ left: 0, top: 0, width: W, height: H, background: 'linear-gradient(260deg, rgba(20,16,14,0) 25%, rgba(100,125,165,0.42) 100%)' }, clip('1280,0 900,374 940,720 1280,720')));
+  box(mid, { left: 0, top: 0, width: W, height: H }, `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"><path d="M0 0 L380 374 L340 720 M1280 0 L900 374 L940 720" stroke="rgba(160,190,230,0.45)" stroke-width="2.5" fill="none"/></svg>`);
+  const beam = box(mid, Object.assign({ left: 0, top: 0, width: W, height: H, background: 'linear-gradient(115deg, rgba(255,226,160,0.2), rgba(255,226,160,0.03))', mixBlendMode: 'screen', filter: 'blur(5px)', opacity: 0.7 }, clip('380,0 760,0 1060,390 980,230')));
+  tl.to(beam, { opacity: 0.35, duration: 6, yoyo: true, repeat: 3, ease: 'sine.inOut' }, T); tl.to(beam, { opacity: 0, duration: 10, ease: 'sine.in' }, t(26));
+  motes(mid, { x0: 420, x1: 900, y0: 60, y1: 340, n: 20, color: 'rgba(255,230,180,0.9)', T, D: 36, size: 2.4, rise: -24, seed: 91 });
+  for (let i = 0; i < 18; i++) { const s = R() < 0.5, y = 40 + R() * 600, mx = y < 374 ? (380 * y) / 374 : 340, x = s ? 6 + R() * (mx - 12) : W - 6 - R() * (mx - 12); const g = box(mid, { left: x, top: y, width: 2.6, height: 2.6, borderRadius: '50%', background: '#e0ecff', opacity: 0.1, boxShadow: '0 0 7px 2px rgba(190,215,255,0.7)' }); tl.to(g, { opacity: 0.9, duration: 0.5 + R() * 1.4, yoyo: true, repeat: 20, ease: 'sine.inOut', repeatDelay: R() * 2 }, T + R() * 4); }
+  // foreground: the narrator at the rim, from behind; a ghost of him overlaps when he calls
+  box(fg, { left: 0, top: 0, width: W, height: H }, `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"><polygon points="0,650 130,664 330,694 440,730 0,730" fill="#0f131a"/><path d="M0 650 L130 664 L330 694 L440 730" stroke="rgba(160,190,235,0.6)" stroke-width="2.5" fill="none"/></svg>`);
+  glow(fg, { x: 235, y: 470, r: 280, color: 'rgba(150,185,240,0.6)', op: 0.5, T, D: 42, flicker: false });
+  const NA = puppet(fg, { x: 215, y: 700, s: 1.45, hat: 'top', rim: 'rgba(170,205,255,0.9)' });
+  NA.head(14, T, 0.1);
+  NA.breathe(T, 42, 1);
+  NA.head(8, t(3), 4); NA.head(14, t(10), 3); NA.head(2, t(17), 3);
+  NA.arm('f', -4, -4, T, 0.1);
+  NA.arm('f', -40, -118, t(21.6), 1.1);                                   // hand to mouth
+  NA.arm('f', -115, -18, t(23.1), 0.7);                                   // 'Halloa! Below there!'
+  NA.arm('f', -115, -48, t(23.9), 0.4); NA.arm('f', -115, 6, t(24.3), 0.4); NA.arm('f', -115, -48, t(24.7), 0.4); NA.arm('f', -115, 6, t(25.1), 0.4);
+  NA.arm('f', -3, -3, t(26), 1.6);
+  breathFog(fg, 205, 700 - 1.45 * 174, t(2), 30, 2.7, 34);
+  const GH = puppet(fg, { x: 236, y: 700, s: 1.45, hat: 'top', coat: '#c9ddff', coat2: '#aac6f4', rim: 'rgba(235,245,255,0.95)', opacity: 0 });
+  GH.g.style.filter += ' blur(0.7px) drop-shadow(0 0 12px rgba(190,220,255,0.9))'; GH.g.style.mixBlendMode = 'screen';
+  GH.breathe(t(22), 16, 1.4);
+  GH.arm('f', -115, -18, t(23.1), 0.7);
+  for (let i = 0; i < 6; i++) GH.arm('f', -115, i % 2 ? 8 : -48, t(24 + i * 0.5), 0.5);
+  GH.arm('f', -5, -5, t(27.5), 2);
+  tl.to(GH.g, { opacity: 0.38, duration: 2.6, ease: 'sine.inOut' }, t(22.8));
+  tl.to(GH.g, { opacity: 0.22, duration: 2.2, yoyo: true, repeat: 3, ease: 'sine.inOut' }, t(26));
+  tl.to(GH.g, { x: 16, duration: 10, ease: 'sine.inOut' }, t(26));
+  tl.to(GH.g, { opacity: 0, duration: 3.5, ease: 'sine.inOut' }, t(34.5));
+  const fogA = box(pa, { left: 0, top: 0, width: W, height: H, opacity: 0.35, zIndex: 6 });
+  mist(fogA, { y: 200, h: 340, op: 0.5, n: 5, T, D: 42, seed: 31, speed: 0.8, color: 'rgba(150,168,190,0.55)' });
+  box(pa, { left: 0, top: 0, width: W, height: H, background: 'radial-gradient(ellipse at 50% 55%, rgba(60,85,130,0.22) 0%, rgba(20,30,50,0.1) 70%)', mixBlendMode: 'screen', zIndex: 7 });
+  tl.to(pa, { opacity: 0, duration: 3.5, ease: 'sine.inOut' }, t(TB));
+
+  // ================= PART B: years later, the hill at dusk (37-98) =================
+  const cb = grp(pb, 1, '600px 420px');
+  sky(cb, { top: '#0e1832', mid: '#2b3d6c', bot: '#8c6c78', stars: 50, T, D, seed: 41 });
+  glow(cb, { x: 560, y: 400, r: 620, color: 'rgba(200,130,130,0.4)', op: 0.55, T, D, flicker: false });
+  ridge(cb, { y: 372, h: 60, color: '#101827', seed: 5, amp: 10, jag: 4, T, D });
+  box(cb, { left: 0, top: 428, width: W, height: 300, background: 'linear-gradient(#1a2434,#0c121b 40%,#06090f)' });
   let ln = '';
-  for (let i = 0; i < 15; i++) { const x = 60 + i * 80, y = 436 - (x / W) * 16, h = 30 - i * 1.7; ln += `<rect x="${x}" y="${y - h}" width="${2.4 - i * 0.1}" height="${h}" fill="#04060a"/><path d="M${x} ${y - h + 3}Q${x + 40} ${y - h + 9} ${x + 80} ${y - h + 4 + 0.6}" stroke="#04060a" stroke-width="1" fill="none"/>`; }
-  box(cb, { left: 0, top: 0, width: W, height: H }, `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${ln}<path d="M0 438L${W} 421" stroke="#04060a" stroke-width="3.5"/><path d="M0 436L${W} 419" stroke="rgba(150,175,215,.35)" stroke-width="1"/></svg>`);
-  box(cb, { left: 188, top: 421, width: 26, height: 7, background: '#04060a', borderRadius: 2 }); box(cb, { left: 188, top: 423, width: 3, height: 3, borderRadius: '50%', background: '#ffd9a0', opacity: 0.8 });
-  steam(cb, { x: 205, y: 420, n: 5, s: 0.7, dx: 70, dy: -38, color: 'rgba(195,205,225,0.1)', T: A(33), D });
-  mist(cb, { y: 420, h: 110, op: 0.5, n: 6, T, D, seed: 19, speed: 0.7, color: 'rgba(120,140,170,0.5)' });
-  const lampG = box(cb, { left: 1010 - 40, top: 421 - 40, width: 80, height: 80, zIndex: 30, opacity: 0 }, '<div style="position:absolute;left:0;top:0;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(255,70,45,.7),rgba(255,40,30,.15) 40%,rgba(0,0,0,0) 70%);mix-blend-mode:screen"></div><div style="position:absolute;left:37px;top:37px;width:6px;height:6px;border-radius:50%;background:#ff4a38"></div>');
-  const legs = Math.max(2, Math.floor((A(73) - A(35)) / 1.3));
-  tl.set(lampG, { opacity: 0.4 }, A(35)); tl.to(lampG, { opacity: 0.85, duration: 1.3, yoyo: true, repeat: legs - 1, ease: 'sine.inOut' }, A(35));
-  tl.set(lampG, { opacity: 0.45 }, A(74));
-  [[74.1, 77.6], [78.8, 82.4]].forEach(([a, b]) => { tl.to(lampG, { opacity: 1, duration: 0.6, ease: 'sine.out' }, A(a)); tl.to(lampG, { opacity: 0.12, duration: 2.2, ease: 'sine.inOut' }, A(a + 0.7)); });
-  tl.to(lampG, { opacity: 0.55, duration: 2, ease: 'sine.inOut' }, A(83)); tl.to(lampG, { opacity: 0, duration: 4, ease: 'sine.in' }, A(90));
+  for (let i = 0; i < 15; i++) { const x = 60 + i * 80, y = 436 - (x / W) * 16, h = 30 - i * 1.7; ln += `<rect x="${x}" y="${y - h}" width="${2.4 - i * 0.1}" height="${h}" fill="#070a10"/><path d="M${x} ${y - h + 3}Q${x + 40} ${y - h + 9} ${x + 80} ${y - h + 4 + 0.6}" stroke="#070a10" stroke-width="1" fill="none"/>`; }
+  box(cb, { left: 0, top: 0, width: W, height: H }, `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${ln}<path d="M0 438L${W} 421" stroke="#070a10" stroke-width="3.5"/><path d="M0 436L${W} 419" stroke="rgba(160,185,225,.5)" stroke-width="1"/></svg>`);
+  box(cb, { left: 188, top: 421, width: 26, height: 7, background: '#070a10', borderRadius: 2 }); box(cb, { left: 188, top: 423, width: 3, height: 3, borderRadius: '50%', background: '#ffd9a0', opacity: 0.9 });
+  steam(cb, { x: 205, y: 420, n: 5, s: 0.7, dx: 70, dy: -38, color: 'rgba(195,205,225,0.16)', T: t(TB), D });
+  mist(cb, { y: 420, h: 110, op: 0.5, n: 6, T, D, seed: 19, speed: 0.7, color: 'rgba(130,150,185,0.55)' });
+  box(cb, { left: 800, top: 400, width: 420, height: 100, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(255,60,40,0.35), rgba(0,0,0,0) 70%)', mixBlendMode: 'screen' });
+  const lampG = box(cb, { left: 1010 - 40, top: 421 - 40, width: 80, height: 80, zIndex: 30, opacity: 0 }, '<div style="position:absolute;left:0;top:0;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(255,70,45,.8),rgba(255,40,30,.2) 40%,rgba(0,0,0,0) 70%);mix-blend-mode:screen"></div><div style="position:absolute;left:37px;top:37px;width:6px;height:6px;border-radius:50%;background:#ff4a38"></div>');
+  tl.set(lampG, { opacity: 0.45 }, t(TB));
+  tl.to(lampG, { opacity: 0.85, duration: 1.3, yoyo: true, repeat: Math.floor((85 - TB) / 1.3), ease: 'sine.inOut' }, t(TB));
+  tl.to(lampG, { opacity: 1, duration: 0.6, ease: 'sine.out' }, t(85.6)); tl.to(lampG, { opacity: 0.2, duration: 1.8, ease: 'sine.inOut' }, t(86.3));   // the call
+  tl.to(lampG, { opacity: 1, duration: 0.6, ease: 'sine.out' }, t(88)); tl.to(lampG, { opacity: 0.55, duration: 2, ease: 'sine.inOut' }, t(88.7));
+  tl.to(lampG, { opacity: 0, duration: 7, ease: 'sine.in' }, t(91));                                      // the red lamp goes last
   // hill, grass, narrator
-  box(cb, { left: -260, top: 520, width: 1100, height: 600, borderRadius: '50%', background: 'radial-gradient(ellipse at 50% 0%,#0b1018,#03050a 60%)' });
-  for (let i = 0; i < 70; i++) { const x = -40 + R() * 740, k = (x - 290) / 550, y = 520 + (Math.abs(k) < 1 ? 300 * (1 - Math.sqrt(1 - k * k)) : 300) + 6, h = 18 + R() * 30, b = box(cb, { left: x, top: y - h, width: 2.2, height: h, background: '#030509', transformOrigin: '50% 100%', rotation: (R() - 0.5) * 8 }); tl.to(b, { rotation: 9 + R() * 8, duration: 1.4 + R() * 1.4, yoyo: true, repeat: Math.floor(D / 2), ease: 'sine.inOut' }, T + R()); }
-  const NB = back(cb, { x: 330, y: 540, s: 1.3, rim: 0 });
-  tl.set(NB.g, { scaleX: 0.78 }, 0);
-  tl.to(NB.g, { skewX: 1.6, duration: 2.2, yoyo: true, repeat: Math.floor(D / 2.2), ease: 'sine.inOut' }, T);
-  tl.to(NB.g, { scaleY: 1.01, duration: 3, yoyo: true, repeat: Math.floor((A(69) - T) / 3), ease: 'sine.inOut' }, T);
+  box(cb, { left: -260, top: 520, width: 1100, height: 600, borderRadius: '50%', background: 'radial-gradient(ellipse at 50% 0%,#18223a,#070a12 60%)' });
+  for (let i = 0; i < 70; i++) { const x = -40 + R() * 740, k = (x - 290) / 550, y = 520 + (Math.abs(k) < 1 ? 300 * (1 - Math.sqrt(1 - k * k)) : 300) + 6, h = 18 + R() * 30, b = box(cb, { left: x, top: y - h, width: 2.2, height: h, background: '#060a12', transformOrigin: '50% 100%', rotation: (R() - 0.5) * 8 }); tl.to(b, { rotation: 9 + R() * 8, duration: 1.4 + R() * 1.4, yoyo: true, repeat: Math.floor(D / 2), ease: 'sine.inOut' }, T + R()); }
+  glow(cb, { x: 345, y: 400, r: 300, color: 'rgba(150,185,245,0.5)', op: 0.5, T, D, flicker: false });   // cold backlight behind him
+  const NB = puppet(cb, { x: 330, y: 540, s: 1.3, hat: 'top', rim: 'rgba(170,205,255,0.9)' });
+  gsap.set(NB.g, { transformOrigin: '50% 100%' });
+  NB.breathe(t(TB), 36, 1);
+  NB.head(10, t(TB), 0.1); NB.head(-4, t(42), 4); NB.head(8, t(52), 3.5); NB.head(-2, t(60), 3);
+  NB.head(10, t(64), 2.4);                                                 // 'I have never again called down'
+  NB.head(-6, t(71.4), 2.4);                                               // 'on certain evenings... I think I hear'
+  NB.arm('f', -6, -4, t(TB + 3), 1); NB.arm('f', -10, -75, t(66), 2.2); NB.arm('f', -4, -4, t(70), 1.6);   // a hand half-lifts, falls
+  breathFog(cb, 322, 540 - 1.3 * 174, t(TB + 2), 33, 2.8, -30);
   // he walks away over the crest, never looking round
-  const n = 12, d = (23 * K) / (n + 1);
-  tl.to(NB.g, { x: -230, y: 70, scaleX: 0.62, scaleY: 0.8, duration: 23 * K, ease: 'sine.inOut' }, A(70));
-  tl.fromTo(NB.la, { rotation: 14, svgOrigin: '44 114' }, { rotation: -14, svgOrigin: '44 114', duration: d, repeat: n, yoyo: true, ease: 'sine.inOut' }, A(70));
-  tl.fromTo(NB.lb, { rotation: -14, svgOrigin: '56 114' }, { rotation: 14, svgOrigin: '56 114', duration: d, repeat: n, yoyo: true, ease: 'sine.inOut' }, A(70));
-  // wind-driven dusk particles
-  for (let i = 0; i < 16; i++) { const m = box(cb, { left: R() * W, top: 300 + R() * 250, width: 2, height: 2, borderRadius: '50%', background: '#b6c6e6', opacity: 0.2 }); tl.fromTo(m, { x: 0 }, { x: -200 - R() * 200, duration: 10 + R() * 8, repeat: Math.floor(D / 10), ease: 'none' }, T); }
-  // darken everything but the lamp
-  const blk = box(cb, { left: -200, top: -200, width: W + 400, height: H + 400, background: '#000', opacity: 0, zIndex: 20 });
-  tl.to(blk, { opacity: 0.97, duration: 7 * K, ease: 'sine.in' }, A(80));
-  tl.fromTo(pb, { opacity: 0 }, { opacity: 1, duration: 3, ease: 'sine.inOut', immediateRender: false }, A(33));
-  tl.set(pb, { opacity: 0 }, 0);
-  tl.fromTo(cb, { scale: 1 }, { scale: 1.05, duration: 37 * K, ease: 'none' }, A(33));
-  tl.to(cb, { scale: 1.45, x: -480, y: -85, duration: 28 * K, ease: 'sine.inOut' }, A(69));
+  const w0 = 73.5, wd = 22;
+  tl.to(NB.g, { x: -230, y: 70, scale: 0.7, duration: wd, ease: 'sine.inOut' }, t(w0));
+  NB.walk(t(w0), wd - 1, 0, 1.25, 1.2);
+  NB.head(0, t(w0 + 0.1), 0.8);
+  NB.head(3, t(85.6), 0.5); NB.head(0, t(86.4), 1.4);                       // the call reaches him; he does not turn
+  for (let i = 0; i < 16; i++) { const m = box(cb, { left: R() * W, top: 300 + R() * 250, width: 2, height: 2, borderRadius: '50%', background: '#c0cfee', opacity: 0.3 }); tl.fromTo(m, { x: 0 }, { x: -200 - R() * 200, duration: 10 + R() * 8, repeat: Math.floor(D / 10), ease: 'none' }, T); }
+  // darkness closes in, but the lamp stays above it
+  const blk = box(cb, { left: -200, top: -200, width: W + 400, height: H + 400, background: '#03050b', opacity: 0, zIndex: 20 });
+  tl.to(blk, { opacity: 0.88, duration: 9, ease: 'sine.in' }, t(84));
+  tl.fromTo(pb, { opacity: 0 }, { opacity: 1, duration: 3.5, ease: 'sine.inOut', immediateRender: false }, t(TB));
+  rig([[cb, 1]], [[TB, 1.0, 0, 0], [58, 1.06, 0, 0, 'none'], [64, 1.5, 255, -90], [72, 1.55, 265, -90, 'none'], [98.3, 1.5, -480, -85]]);
 })();

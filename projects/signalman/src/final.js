@@ -7,6 +7,8 @@
     const chunks = []; let cur = '';
     raw.forEach((p) => { cur += p; if (cur.split(/\s+/).filter(Boolean).length >= 5) { chunks.push(cur.trim()); cur = ''; } });
     if (cur.trim()) { if (chunks.length && cur.split(/\s+/).filter(Boolean).length < 3) chunks[chunks.length - 1] += ' ' + cur.trim(); else chunks.push(cur.trim()); }
+    const cap8 = (ch) => { const w = ch.split(/\s+/); if (w.length <= 9) return [ch]; const n = Math.ceil(w.length / 8), sz = Math.ceil(w.length / n); const o = []; for (let i = 0; i < w.length; i += sz) o.push(w.slice(i, i + sz).join(' ')); return o; };
+    const flat = []; chunks.forEach((ch) => cap8(ch).forEach((x) => flat.push(x))); chunks.length = 0; flat.forEach((x) => chunks.push(x));
     const total = chunks.reduce((a, b) => a + b.length, 0); let t = l.start + 0.05;
     chunks.forEach((ch) => {
       const d = (l.dur - 0.1) * (ch.length / total), e = mk(caps, 'cap ' + l.who, null, ch);
