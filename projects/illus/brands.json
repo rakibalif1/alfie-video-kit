@@ -1,0 +1,17 @@
+{
+  "shops": ["Tesco", "Sainsbury's", "Aldi", "Lidl", "Boots", "Greggs", "Costa", "Pret", "Primark", "Argos", "Poundland", "Waterstones", "WHSmith", "Superdrug", "Nando's", "Co-op",
+            "Morrisons", "Asda", "Marks & Spencer", "Iceland", "B&M", "Wilko", "Card Factory", "Halfords", "Specsavers", "Timpson", "Holland & Barrett", "Subway", "Wetherspoons"],
+  "banks": ["Barclays", "HSBC", "Lloyds", "NatWest", "Santander", "Monzo", "Starling"],
+  "airlines": ["British Airways", "easyJet", "Ryanair", "Virgin Atlantic", "Jet2", "TUI"],
+  "generic": ["The Red Lion", "Chippy", "Kebab House", "Newsagent", "Barber", "Launderette", "Pharmacy", "Charity Shop", "Phone Repair", "Estate Agent", "Money Transfer", "Halal Butcher", "Afro-Caribbean Foods", "Sari & Fabrics", "SUPERMARKET", "BANK", "COFFEE", "BAKERY", "AIRLINE"],
+  "genericReplacements": {
+    "Tesco": "SUPERMARKET", "Sainsbury's": "SUPERMARKET", "Aldi": "SUPERMARKET", "Lidl": "SUPERMARKET", "Co-op": "SUPERMARKET", "Morrisons": "SUPERMARKET", "Asda": "SUPERMARKET", "Iceland": "FROZEN FOODS",
+    "Boots": "PHARMACY", "Superdrug": "PHARMACY", "Holland & Barrett": "HEALTH FOODS",
+    "Greggs": "BAKERY", "Costa": "COFFEE", "Pret": "COFFEE", "Subway": "SANDWICHES", "Nando's": "CHICKEN SHOP", "Wetherspoons": "THE PUB",
+    "Primark": "CLOTHES", "Marks & Spencer": "DEPARTMENT STORE", "Argos": "CATALOGUE STORE", "Poundland": "DISCOUNT STORE", "B&M": "DISCOUNT STORE", "Wilko": "HOMEWARE",
+    "Waterstones": "BOOKSHOP", "WHSmith": "NEWSAGENT", "Card Factory": "CARDS & GIFTS", "Halfords": "CYCLE & MOTOR", "Specsavers": "OPTICIAN", "Timpson": "KEY CUTTING",
+    "Barclays": "BANK", "HSBC": "BANK", "Lloyds": "BANK", "NatWest": "BANK", "Santander": "BANK", "Monzo": "BANK", "Starling": "BANK",
+    "British Airways": "AIRLINE", "easyJet": "AIRLINE", "Ryanair": "AIRLINE", "Virgin Atlantic": "AIRLINE", "Jet2": "AIRLINE", "TUI": "AIRLINE"
+  },
+  "usage": "Use as plain text in our own lettering only. If window.NO_BRANDS is true, replace every brand with genericReplacements[name]. Never place a brand name beside litter, scams, accidents, mess or crime; those gags go on generic places."
+}

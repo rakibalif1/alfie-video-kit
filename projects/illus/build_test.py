@@ -16,7 +16,7 @@ html=f'''<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name=
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR}" data-width="1280" data-height="720">
 <div id="s_a" class="scene clip" data-start="0" data-duration="{DUR}" data-track-index="1"></div><div id="cap"></div>
 <audio id="vo" src="assets/vo.wav" data-start="0" data-duration="{DUR}" data-track-index="5" data-volume="1"></audio></div>
-<script>window.__timelines=window.__timelines||{{}};const tl=gsap.timeline({{paused:true}});const DUR={DUR},LINES={json.dumps(d['lines'])};</script>
+<script>window.__timelines=window.__timelines||{{}};const tl=gsap.timeline({{paused:true}});window.__timelines['main']=tl;const DUR={DUR},LINES={json.dumps(d['lines'])};</script>
 <script>{kit}
 {ill}
 function BASIC_BG(w){{box(w,{{left:0,top:0,width:W,height:470,background:'linear-gradient(#7ec8f0,#d4efff)'}});box(w,{{left:0,top:470,width:W,height:250,background:'linear-gradient(#d9d2c3,#bdb5a2)'}});}}
@@ -25,9 +25,9 @@ function BASIC_BG(w){{box(w,{{left:0,top:0,width:W,height:470,background:'linear
 (function(){{
 const c=document.getElementById('s_a'),w=box(c,{{left:0,top:0,width:W,height:H,transformOrigin:'640px 420px'}});
 {basic}{''.join(calls)}
-const cast=[['priya',330],['emma',640],['ada',950]],P={{}};
-cast.forEach(([k,x])=>{{P[k]=illus(w,Object.assign({{x,y:700,s:1.6,T:0,D:DUR}},ICAST[k]));P[k].breathe(0,DUR);}});
-const NM={{priya:['PRIYA','#2a9d8f'],emma:['EMMA','#1d3557'],ada:['ADA','#e63946']}},EM=['happy','happy','angry','happy'],X={{priya:330,emma:640,ada:950}};
+const cast=[['priya',360],['emma',640],['ada',920]],P={{}};
+cast.forEach(([k,x])=>{{P[k]=illus(w,Object.assign({{x,y:702,s:1.3,T:0,D:DUR}},ICAST[k]));P[k].breathe(0,DUR);}});
+const NM={{priya:['PRIYA','#2a9d8f'],emma:['EMMA','#1d3557'],ada:['ADA','#e63946']}},EM=['happy','happy','angry','happy'],X={{priya:360,emma:640,ada:920}};
 LINES.forEach((l,i)=>{{const sp=P[l.who];sp.emote(EM[i],l.start);sp.talk(l.start,l.dur);sp.gesture(l.start+0.3,l.dur);sp.emote('normal',l.start+l.dur+0.1);
  Object.keys(P).forEach((k)=>{{if(k===l.who)return;const dir=X[l.who]>X[k]?1:-1;P[k].look(dir*1.6,0,l.start,0.3);P[k].head(dir*4,l.start,0.7);P[k].emote(EM[i]==='angry'?'surprised':'normal',l.start+0.2);P[k].emote('normal',l.start+l.dur*0.7);}});
  const e=document.createElement('div');e.className='capl';e.innerHTML=`<span class="nm" style="background:${{NM[l.who][1]}}">${{NM[l.who][0]}}</span>${{l.text}}`;document.getElementById('cap').appendChild(e);gsap.set(e,{{opacity:0}});tl.to(e,{{opacity:1,duration:0.15}},l.start);tl.to(e,{{opacity:0,duration:0.15}},l.start+l.dur);}});
