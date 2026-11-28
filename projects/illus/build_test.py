@@ -30,15 +30,16 @@ function BASIC_BG(w){{box(w,{{left:0,top:0,width:W,height:470,background:'linear
 </script><script>
 (function(){{
 const c=document.getElementById('s_a'),w=box(c,{{left:0,top:0,width:W,height:H,transformOrigin:'640px 420px'}});
-{basic}{''.join(calls)}
-const cast=[['priya',360],['emma',640],['ada',920]],P={{}};
-cast.forEach(([k,x])=>{{P[k]=illus(w,Object.assign({{x,y:702,s:1.3,T:0,D:DUR}},ICAST[k]));P[k].breathe(0,DUR);P[k].weight(0,DUR);P[k].saccades(0,DUR);}});
-const NM={{priya:['PRIYA','#2a9d8f'],emma:['EMMA','#1d3557'],ada:['ADA','#e63946']}},EM=['happy','happy','angry','happy'],X={{priya:360,emma:640,ada:920}};
+const bgw=box(w,{{left:0,top:0,width:W,height:H}});bgw.style.filter='saturate(.7) contrast(.84) blur(1.3px)';{basic.replace('(w)','(bgw)')}{''.join(calls).replace('(w,','(bgw,')}
+const cast=[['priya',380,626],['emma',650,634],['ada',915,616]],P={{}},SC_=(y)=>0.86*(y-360)/260;
+cast.forEach(([k,x,y])=>{{P[k]=illus(w,Object.assign({{x,y,s:SC_(y),T:0,D:DUR}},ICAST[k]));P[k].breathe(0,DUR);P[k].weight(0,DUR);P[k].saccades(0,DUR);}});
+const NM={{priya:['PRIYA','#2a9d8f'],emma:['EMMA','#1d3557'],ada:['ADA','#e63946']}},EM=['happy','happy','angry','happy'],X={{priya:380,emma:650,ada:915}},HY={{priya:626,emma:634,ada:616}};
 LINES.forEach((l,i)=>{{const sp=P[l.who];sp.emote(EM[i],l.start);sp.speak(l.start,l.env,30);sp.emote('normal',l.start+l.dur+0.1);
- Object.keys(P).forEach((k)=>{{if(k===l.who)return;const dir=X[l.who]>X[k]?1:-1;P[k].look(dir*1.6,0,l.start,0.3);P[k].head(dir*4,l.start,0.7);P[k].emote(EM[i]==='angry'?'surprised':'normal',l.start+0.2);P[k].emote('normal',l.start+l.dur*0.7);}});
+ Object.keys(P).forEach((k)=>{{if(k===l.who)return;const dir=X[l.who]>X[k]?1:-1;P[k].turn(dir,l.start+0.08,Math.max(0.8,l.dur-0.3));P[k].emote(EM[i]==='angry'?'surprised':'normal',l.start+0.2);P[k].emote('normal',l.start+l.dur*0.7);}});
  const e=document.createElement('div');e.className='capl';e.innerHTML=`<span class="nm" style="background:${{NM[l.who][1]}}">${{NM[l.who][0]}}</span>${{l.text}}`;document.getElementById('cap').appendChild(e);gsap.set(e,{{opacity:0}});tl.to(e,{{opacity:1,duration:0.15}},l.start);tl.to(e,{{opacity:0,duration:0.15}},l.start+l.dur);}});
 const last=LINES[LINES.length-1];Object.keys(P).forEach((k,i)=>P[k].laugh(last.start+last.dur-0.6+i*0.15,2.2));
-tl.fromTo(w,{{scale:1}},{{scale:1.06,duration:DUR,ease:'none'}},0);
+const shot=(t,k,fx,fy,push,cy=290)=>{{const tx=-k*(fx-640),ty=cy-(420+k*(fy-420));tl.set(w,{{scale:k,x:tx,y:ty}},t);if(push)tl.to(w,{{scale:k*push,x:-k*push*(fx-640),y:cy-(420+k*push*(fy-420)),duration:push>1?3.4:3.4,ease:'sine.inOut'}},t);bgw.style.filter=bgw.style.filter;tl.set(bgw,{{filter:'saturate(.7) contrast(.84) blur('+(k>1.5?3:1.3)+'px)'}},t);}};
+shot(0,1,640,420,1.03,420);LINES.forEach((l,i)=>{{const fx=X[l.who],fy=HY[l.who]-0.92*SC_(HY[l.who])*326*0.9;if(i===LINES.length-1)shot(l.start+l.dur*0.35,1.0,640,420,1.03,420);else shot(l.start-0.1,2.0,fx,fy,1.07);}});
 }})();
 tl.set({{}},{{}},DUR);window.__timelines["main"]=tl;
 </script></body></html>'''

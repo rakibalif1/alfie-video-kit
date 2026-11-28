@@ -79,15 +79,19 @@ function illus(c, o) {
   const legA = q('l1'), legB = q('l2'); if (legA) { gsap.set(legA, { svgOrigin: '68 198' }); gsap.set(legB, { svgOrigin: '92 198' }); }
   const irs = [...g.querySelectorAll('[class$="_ir"]')];
   // idle life: breathing, weight shift, torso lean, head micro-motion, arm and cloth sway (never frozen)
-  api.breathe = (T, D) => { const n = Math.max(1, Math.floor(D / 3.4)), r = (a, b) => a + rnd() * (b - a);
-    tl.to(P.t, { scaleY: 1.014, duration: 1.7, yoyo: true, repeat: n * 2, ease: 'sine.inOut' }, T);
-    tl.to(P.h, { y: -1.2, duration: 1.7, yoyo: true, repeat: n * 2, ease: 'sine.inOut' }, T + 0.2);
-    tl.to(P.t, { rotation: r(1, 1.8), x: r(1.5, 3), duration: r(2.6, 3.4), yoyo: true, repeat: Math.floor(D / 3), ease: 'sine.inOut' }, T);          // weight shift / lean
-    tl.to(P.h, { rotation: r(1.5, 3), duration: r(2.2, 3), yoyo: true, repeat: Math.floor(D / 2.6), ease: 'sine.inOut' }, T + 0.4);
-    tl.to(P.af, { rotation: -6, duration: r(2, 3), yoyo: true, repeat: Math.floor(D / 2.5), ease: 'sine.inOut' }, T + 0.3); tl.to(P.ab, { rotation: 6, duration: r(2, 3), yoyo: true, repeat: Math.floor(D / 2.5), ease: 'sine.inOut' }, T + 0.7);
-    tl.to([P.dr0, P.dr1], { rotation: 1.8, duration: 2.2, yoyo: true, repeat: Math.floor(D / 2.2), ease: 'sine.inOut' }, T); };
-  api.blink = (T, D) => { for (let t = T + 1.3; t < T + D; t += 2.6 + rnd() * 2.4) { tl.to(eyes, { scaleY: 0.1, duration: 0.07, yoyo: true, repeat: 1 }, t); if (rnd() < 0.2) tl.to(eyes, { scaleY: 0.1, duration: 0.07, yoyo: true, repeat: 1 }, t + 0.3); } };
+  api.breathe = (T, D) => { const r = (x, y) => x + rnd() * (y - x), pb = r(3.7, 4.2), ph = r(2.7, 3.1), n = Math.max(1, Math.floor(D / pb));
+    tl.to(P.t, { scaleY: 1.015, duration: pb * 0.42, yoyo: true, repeat: n * 2, ease: 'sine.inOut', repeatDelay: pb * 0.08 }, T + r(0, 1));            // inhale shorter than exhale
+    tl.to(P.h, { y: -0.8, duration: pb * 0.42, yoyo: true, repeat: n * 2, ease: 'sine.inOut', repeatDelay: pb * 0.08 }, T + 0.25);
+    tl.to(P.h, { rotation: r(1, 1.8), duration: ph, yoyo: true, repeat: Math.floor(D / ph), ease: 'sine.inOut' }, T + r(0, 1.2));                         // head drift on its own period
+    tl.to(P.af, { rotation: -r(1.5, 2.6), duration: r(2.6, 3.4), yoyo: true, repeat: Math.floor(D / 2.6), ease: 'sine.inOut' }, T + r(0, 0.8));          // arms barely move at rest
+    tl.to(P.ab, { rotation: r(1.5, 2.6), duration: r(2.9, 3.7), yoyo: true, repeat: Math.floor(D / 2.9), ease: 'sine.inOut' }, T + r(0.6, 1.4)); };
+  const blinkAt = (t) => { tl.to(eyes, { scaleY: 0.08, duration: 0.1, ease: 'power2.in' }, t); tl.to(eyes, { scaleY: 1, duration: 0.13, ease: 'power2.out' }, t + 0.11); };
+  api.blink = (T, D) => { for (let t = T + RR(1, 2.4); t < T + D; t += RR(2.4, 4.6)) { blinkAt(t); if (rnd() < 0.18) blinkAt(t + RR(0.28, 0.4)); } };
+  api.blinkAt = blinkAt;
   api.look = (dx, dy, T, d = 0.3) => tl.to(irs, { x: dx, y: dy || 0, duration: d, ease: 'power2.out' }, T);
+  api.turn = (dir, T, hold = 1.4) => { api.look(dir * 2.2, 0, T, 0.08); tl.to(P.h, { rotation: dir * 9, x: dir * 2, duration: 0.42, ease: 'power2.inOut' }, T + 0.08); tl.to(P.h, { rotation: dir * 8, duration: 0.15 }, T + 0.5);
+    tl.to(P.t, { rotation: dir * 2.5, duration: 0.55, ease: 'power2.inOut' }, T + 0.16); if (rnd() < 0.4) blinkAt(T + 0.5);
+    api.look(0, 0, T + hold, 0.1); tl.to(P.h, { rotation: 0, x: 0, duration: 0.5, ease: 'power2.inOut' }, T + hold + 0.06); tl.to(P.t, { rotation: 0, duration: 0.6, ease: 'power2.inOut' }, T + hold + 0.16); };
   api.emote = (name, T) => { const b = IBROW[{ angry: 'angry', sad: 'sad', surprised: 'surp', sly: 'sly', happy: 'happy', laugh: 'happy', normal: 'norm' }[name] || 'norm'];
     const m = { angry: IMOUTH.frown, sad: IMOUTH.frown, surprised: IMOUTH.o, sly: IMOUTH.smirk, happy: IMOUTH.grin, laugh: IMOUTH.laugh, normal: IMOUTH.smile }[name] || IMOUTH.smile;
     tl.set(bl, { attr: { d: b[0] } }, T); tl.set(br, { attr: { d: b[1] } }, T); tl.set(mouth, { attr: { d: m } }, T);
@@ -114,7 +118,7 @@ function illus(c, o) {
   api.gesture = (T, D) => { const keys = Object.keys(GEST); let t = T; while (t < T + D - 1.3) { const k = keys[Math.floor(rnd() * keys.length)], side = rnd() < 0.28 ? 'b' : 'f'; t = api.pose(side, t, GEST[k]) + RR(0.25, 1.1); } };
   // speech: env = loudness per frame (0..1) at fps. Mouth shapes follow loudness; peaks give a head nod, brow lift and (sometimes) a gesture beat.
   api.speak = (T, env, fps = 30, o = {}) => { let last = '', lastPeak = -9, lastG = -9; const sm = env.map((v, i) => (v + (env[i - 1] ?? v) + (env[i + 1] ?? v)) / 3);
-    sm.forEach((a, i) => { const t = T + i / fps, shape = a < 0.07 ? IMOUTH.smile : a < 0.2 ? IMOUTH.o : a < 0.45 ? IMOUTH.open : IMOUTH.grin; if (shape !== last) { tl.set(mouth, { attr: { d: shape } }, t); last = shape; }
+    sm.forEach((a, i) => { const t = T + i / fps - 0.04, shape = a < 0.07 ? IMOUTH.smile : a < 0.2 ? IMOUTH.o : a < 0.45 ? IMOUTH.open : IMOUTH.grin; if (shape !== last && t - (api._lm ?? -9) >= 0.07) { tl.set(mouth, { attr: { d: shape } }, t); last = shape; api._lm = t; }
       if (i > 2 && i < sm.length - 2 && a > 0.55 && a >= sm[i - 1] && a >= sm[i + 1] && t - lastPeak > 0.5) { lastPeak = t;
         tl.to(P.h, { y: 2.6, rotation: RR(-3.5, 3.5), duration: 0.1, ease: 'power2.out' }, t - 0.04); tl.to(P.h, { y: -0.4, duration: 0.3, ease: 'sine.inOut' }, t + 0.08);
         tl.set(bl, { attr: { d: IBROW.surp[0] } }, t - 0.05); tl.set(br, { attr: { d: IBROW.surp[1] } }, t - 0.05); tl.set(bl, { attr: { d: IBROW.norm[0] } }, t + 0.3); tl.set(br, { attr: { d: IBROW.norm[1] } }, t + 0.3);
@@ -122,8 +126,9 @@ function illus(c, o) {
     tl.set(mouth, { attr: { d: IMOUTH.smile } }, T + env.length / fps); };
   api.saccades = (T, D) => { for (let t = T + RR(0.3, 1); t < T + D; t += RR(0.7, 2)) api.look(RR(-1.3, 1.3), RR(-0.6, 0.6), t, 0.08); };
   // weight shift: legs and hips alternate every few seconds; cloth drags behind the torso
-  api.weight = (T, D) => { let t = T, k = 0; while (t < T + D - 1) { const d = RR(3.2, 5), s = k % 2 ? 1 : -1; tl.to(P.t, { x: s * RR(2, 3.4), duration: 0.9, ease: 'sine.inOut' }, t); if (legA) { tl.to(legA, { rotation: s * 2.6, duration: 0.9, ease: 'sine.inOut' }, t); tl.to(legB, { rotation: s * -1.4, duration: 0.9, ease: 'sine.inOut' }, t); }
-      tl.to([P.dr0, P.dr1], { rotation: s * 2.2, duration: 1.2, ease: 'sine.inOut' }, t + 0.12); t += d; k++; } };
+  api.weight = (T, D) => { let t = T + RR(0.5, 2.5), k = Math.floor(rnd() * 2); while (t < T + D - 1) { const s = k % 2 ? 1 : -1, d = RR(6, 9); tl.to(P.t, { x: s * RR(3, 5), rotation: s * -RR(1, 1.6), duration: RR(0.9, 1.4), ease: 'power2.inOut' }, t);   // hips shift, shoulders counter-tilt
+      tl.to(P.h, { rotation: s * RR(1, 2), duration: 1.1, ease: 'power2.inOut' }, t + 0.1); if (legA) { tl.to(legA, { rotation: s * 3.5, duration: 1.1, ease: 'power2.inOut' }, t); tl.to(legB, { rotation: s * -1.8, duration: 1.1, ease: 'power2.inOut' }, t); }
+      tl.to([P.dr0, P.dr1], { rotation: s * 3.2, duration: 0.9, ease: 'elastic.out(1,0.5)' }, t + 0.22); t += d; k++; } };
   api.head = (deg, T, d = 1.2) => tl.to(P.h, { rotation: deg, duration: d, ease: 'sine.inOut' }, T);
   api.arm = (side, sh, el, T, d = 0.8) => { if (side === 'b') { sh = -sh; el = -el; } tl.to(side === 'f' ? P.af : P.ab, { rotation: sh, duration: d, ease: 'sine.inOut' }, T); tl.to(side === 'f' ? P.aff : P.abf, { rotation: el, duration: d, ease: 'sine.inOut' }, T); };
   api.laugh = (T, D) => { api.emote('laugh', T); for (let t = T; t < T + D; t += 0.2) { tl.to(P.t, { y: 3, duration: 0.1, yoyo: true, repeat: 1 }, t); tl.set(mouth, { attr: { d: t % 0.4 < 0.2 ? IMOUTH.laugh : IMOUTH.open } }, t); }
