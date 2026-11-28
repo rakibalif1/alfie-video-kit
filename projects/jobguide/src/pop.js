@@ -9,7 +9,11 @@ const LS = (scene, who) => LINES.filter((l) => l.scene === scene && (!who || l.w
 // flat colour background with halftone dots that drift slowly
 function bgPop(c, o) {
   const e = box(c, { left: -60, top: -60, width: W + 120, height: H + 120, background: `radial-gradient(circle, ${o.dot || 'rgba(20,16,28,0.13)'} 2.6px, transparent 3px) 0 0/${o.size || 26}px ${o.size || 26}px, ${o.color || PP.yellow}` });
-  tl.to(e, { x: -26, y: -26, duration: o.D || 60, ease: 'none' }, o.T || 0); return e;
+  tl.to(e, { x: -26, y: -26, duration: o.D || 60, ease: 'none' }, o.T || 0);
+  const cols = [PP.pink, PP.blue, PP.orange, PP.green, PP.purple, PP.red];
+  for (let i = 0; i < (o.deco ?? 9); i++) { const sz = 26 + rnd() * 50, sh = box(e, { left: 60 + rnd() * W, top: 60 + rnd() * H, width: sz, height: sz, background: cols[i % cols.length], opacity: 0.16, borderRadius: i % 3 === 0 ? '50%' : i % 3 === 1 ? '8px' : '0', transform: `rotate(${rnd() * 90}deg)`, border: `4px solid ${INK}` });
+    tl.to(sh, { y: -120 - rnd() * 160, rotation: 90 + rnd() * 180, duration: 14 + rnd() * 14, repeat: Math.max(1, Math.floor((o.D || 60) / 20)), yoyo: true, ease: 'sine.inOut' }, (o.T || 0) + rnd() * 3); }
+  return e;
 }
 // pop an element in (scale + fade with overshoot) at T, optionally pop out at `out`
 function pop(el, T, o = {}) {
@@ -28,7 +32,7 @@ function slide(el, T, o = {}) {
 // rounded card with thick outline and hard shadow. o: {x,y (centre), w,h, html, bg, color, size, rot, T, out}
 function card(c, o) {
   const e = box(c, { left: o.x - o.w / 2, top: o.y - o.h / 2, width: o.w, height: o.h, background: o.bg || PP.white, color: o.color || INK, border: `5px solid ${INK}`, borderRadius: o.r ?? 18, boxShadow: `7px 7px 0 ${INK}`,
-    font: `${o.weight || 900} ${o.size || 30}px/${(o.size || 30) * 1.15}px ${FONT}`, textAlign: o.align || 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px 16px', boxSizing: 'border-box', opacity: 0 }, o.html || '');
+    font: `${o.weight || 900} ${o.size || 30}px/${(o.size || 30) * 1.15}px ${FONT}`, textAlign: o.align || 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px 16px', boxSizing: 'border-box', opacity: 0 }, o.html ? '<div>' + o.html + '</div>' : '');
   pop(e, o.T, { rot: o.rot ?? 0, out: o.out, sfx: o.sfx }); return e;
 }
 // slam-down stamp (RED by default). o: {x,y,text,color,rot,w,size,T,out}
@@ -145,11 +149,11 @@ const KEYOF = { K: 'kiran', C: 'chidi', S: 'mrdeal', A: 'slick', L: 'mrrush', P:
 const BUB = { kiran: ['KIRAN', '#2a9d8f'], chidi: ['CHIDI', '#ff7b00'], mrdeal: ['MR DEAL', '#d00000'], slick: ['SLICK SID', '#7b2cbf'], mrrush: ['MR RUSH', '#6c757d'], fake: ['OFFICER FAKE', '#1d3557'] };
 const EMAP = { angry: 'angry', sad: 'sad', surprised: 'surprised', sly: 'sly', excited: 'happy', cheer: 'happy', panic: 'surprised', worried: 'sad', calm: 'normal', hush: 'normal', story: 'normal' };
 function listCard(c, o) {   // o: {x,y,w,title,items:['+ok','-bad','plain'],size,rowh,stagger,bg,T,out}
-  const rowh = o.rowh || 52, w = o.w || 420, h = o.h || ((o.title ? 64 : 20) + o.items.length * rowh + 18);
+  const rowh = Math.round((o.rowh || 52) * 1.15), SZ = Math.round((o.size || 24) * 1.2), w = o.w || 420, h = o.h || ((o.title ? 64 : 20) + o.items.length * rowh + 18);
   const e = card(c, { x: o.x, y: o.y, w, h, html: '', bg: o.bg || PP.white, T: o.T, rot: o.rot ?? 0, out: o.out });
-  if (o.title) box(e, { left: 0, top: 12, width: '100%', textAlign: 'center', font: `900 ${o.tsize || 28}px ${FONT}`, color: o.tcolor || INK }, o.title);
+  if (o.title) box(e, { left: 0, top: 12, width: '100%', textAlign: 'center', font: `900 ${o.tsize || 32}px ${FONT}`, color: o.tcolor || INK }, o.title);
   o.items.forEach((r, i) => { const k = r[0], mark = k === '+' || k === '-', txt = mark ? r.slice(1).trim() : r;
-    const row = box(e, { left: 18, top: (o.title ? 60 : 12) + i * rowh, width: w - 36, height: rowh - 6, font: `800 ${o.size || 24}px/1.1 Arial`, color: INK, display: 'flex', alignItems: 'center', gap: '12px', opacity: 0 }, (mark ? `<span style="flex:none">${icon(k === '+' ? 'tick' : 'xmark', 34)}</span>` : '') + `<span>${txt}</span>`);
+    const row = box(e, { left: 18, top: (o.title ? 60 : 12) + i * rowh, width: w - 36, height: rowh - 6, font: `800 ${SZ}px/1.1 Arial`, color: INK, display: 'flex', alignItems: 'center', gap: '12px', opacity: 0 }, (mark ? `<span style="flex:none">${icon(k === '+' ? 'tick' : 'xmark', 38)}</span>` : '') + `<span>${txt}</span>`);
     tl.to(row, { opacity: 1, x: 0, duration: 0.25 }, o.T + 0.35 + i * (o.stagger ?? 0.8)); sfx('tick', o.T + 0.35 + i * (o.stagger ?? 0.8), 0.8); });
   return e;
 }
@@ -161,14 +165,14 @@ function buildScene(name, sp) {
   else if (sp.set === 'room') { box(world, { left: 0, top: 0, width: W, height: 540, background: sp.wall || '#ffd6a5' }); box(world, { left: 0, top: 500, width: W, height: 14, background: 'rgba(20,16,28,.25)' }); ground(world, { y: 540, color: sp.ground || '#a98467' }); }
   else ground(world, { y: 560, color: sp.ground || '#ffb703' });
   const P = {}, X = {};
-  (sp.cast || []).forEach((o) => { const p = cast(world, o.key, { x: o.x, y: o.y ?? 560, s: o.s || 1.25, flip: o.flip, T, D }); p.breathe(T, D); P[o.key] = p; X[o.key] = o.x; if (o.hide) p.g.style.opacity = 0; });
+  (sp.cast || []).forEach((o) => { const p = cast(world, o.key, { x: o.x, y: o.y ?? 575, s: o.s || 1.5, flip: o.flip, T, D }); p.breathe(T, D); P[o.key] = p; X[o.key] = o.x; if (o.hide) p.g.style.opacity = 0; });
   L.forEach((l, i) => { const key = KEYOF[l.who]; if (!key) return; const p = P[key], gi = LINES.indexOf(l), emo = EMAP[(EPLINES[gi] || {}).emotion] || 'normal';
     if (p) { p.emote(emo, l.start); p.talk(l.start, l.dur); p.emote('normal', l.start + l.dur + 0.1); }
     const bx = p ? Math.min(1060, Math.max(230, X[key] + 40)) : 640, nm = BUB[key];
-    speech(world, { x: bx, y: sp.bubY || 150, w: l.text.length > 60 ? 480 : 400, text: l.text, who: nm[0], color: nm[1], tail: p ? (bx < 640 ? 'left' : 'right') : undefined, T: l.start, D: l.dur + 0.2, size: 28 }); });
+    speech(world, { x: bx, y: sp.bubY || 140, w: l.text.length > 60 ? 480 : 400, text: l.text, who: nm[0], color: nm[1], tail: p ? (bx < 640 ? 'left' : 'right') : undefined, T: l.start, D: l.dur + 0.2, size: 28 }); });
   (sp.beats || []).forEach((b) => {
     const t = (b.l === undefined ? T : st(b.l)) + (b.dt || 0), out = b.until === undefined ? undefined : (b.until === 'end' ? T + D - 0.4 : en(b.until) + 0.4), a = Object.assign({}, b, { T: t, out });
-    if (b.t === 'card') card(world, a); else if (b.t === 'list') listCard(world, a); else if (b.t === 'icon') iconBox(world, a); else if (b.t === 'stamp') stamp(world, a); else if (b.t === 'head') headline(world, a); else if (b.t === 'burst') burst(world, a);
+    if (b.t === 'stamp' && a.out === undefined) a.out = t + 3.4; if (b.t === 'card') { a.size = Math.round((b.size || 30) * 1.12); card(world, a); } else if (b.t === 'list') listCard(world, a); else if (b.t === 'icon') iconBox(world, a); else if (b.t === 'stamp') stamp(world, a); else if (b.t === 'head') headline(world, a); else if (b.t === 'burst') burst(world, a);
     else if (b.t === 'phone') { const ph = phone(world, a); if (out !== undefined) tl.to(ph.el, { opacity: 0, duration: 0.3 }, out); }
     else if (b.t === 'sfx') sfx(b.name, t, b.vol); else if (b.t === 'cam') tl.to(world, { scale: b.s, x: b.x || 0, y: b.y || 0, duration: b.d || 3, ease: 'sine.inOut' }, t);
     else if (b.t === 'emote') P[b.key].emote(b.e, t); else if (b.t === 'arm') P[b.key].arm(b.side || 'f', b.sh, b.el || 0, t, b.d || 0.6); else if (b.t === 'head2') P[b.key].head(b.deg, t, b.d || 1);
