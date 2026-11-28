@@ -46,10 +46,10 @@ function burst(c, o) {
 }
 // speech bubble with name tag. o: {x,y (bubble centre), w, text, who:'KIRAN', color (tag), tail:'left'|'right'|'down', T, D}
 function speech(c, o) {
-  const w = o.w || 380, h = o.h || 110, e = box(c, { left: o.x - w / 2, top: o.y - h / 2, width: w, height: h, opacity: 0 });
+  const w = o.w || 380, cpl = Math.floor((w - 44) / (0.56 * (o.size || 28))), h = o.h || Math.max(86, 40 + (o.size || 28) * 1.25 * Math.ceil(o.text.length / cpl)), e = box(c, { left: o.x - w / 2, top: o.y - h / 2, width: w, height: h, opacity: 0 });
   const tail = o.tail === 'right' ? `<polygon points="${w - 70},${h - 4} ${w - 30},${h + 36} ${w - 36},${h - 4}" fill="#fff" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>` : o.tail === 'left' ? `<polygon points="36,${h - 4} 28,${h + 36} 76,${h - 4}" fill="#fff" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>` : '';
   e.innerHTML = `<svg viewBox="0 0 ${w} ${h + 40}" width="${w}" height="${h + 40}" style="position:absolute;left:0;top:0;overflow:visible"><rect x="3" y="3" width="${w - 6}" height="${h - 6}" rx="26" fill="#fff" stroke="${INK}" stroke-width="5"/>${tail}<rect x="30" y="${h - 8}" width="${o.tail ? 46 : 0}" height="10" fill="#fff"/></svg>`;
-  box(e, { left: 0, top: 0, width: w, height: h, font: `800 ${o.size || 28}px/1.15 Arial, sans-serif`, color: INK, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 22px', boxSizing: 'border-box' }, o.text);
+  box(e, { left: 0, top: 0, width: w, height: h, font: `800 ${o.size || 28}px/1.15 Arial, sans-serif`, color: INK, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 22px 8px', boxSizing: 'border-box' }, o.text);
   if (o.who) box(e, { left: 18, top: -22, background: o.color || PP.blue, color: '#fff', font: `900 20px/1 ${FONT}`, padding: '6px 14px', border: `4px solid ${INK}`, borderRadius: 10, letterSpacing: '1px' }, o.who);
   pop(e, o.T, { out: o.T + (o.D ?? 3), sfx: false, d: 0.3 }); return e;
 }
