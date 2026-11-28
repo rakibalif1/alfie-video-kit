@@ -94,6 +94,7 @@ window.ukShops = function ukShops(w, o) {
       tl.fromTo(st, { y: 3, opacity: 0.9 }, { y: -6, opacity: 0, duration: 1.6, repeat: rep(1.6), ease: 'sine.out' }, T + R());
       osc(pp.head, 'y', 1, 2.2);
     }
+    box(fr, { left: ww / 2 - 0.6, top: 2, width: 1.2, height: wh - 4, background: 'rgba(246,241,228,.85)', zIndex: 3 }); box(fr, { left: 2, top: wh * 0.46, width: ww - 4, height: 1.4, background: 'rgba(246,241,228,.9)', zIndex: 3 });
     box(p, { left: x - 2, top: y + wh, width: ww + 4, height: 3, background: '#e6dcc3', boxShadow: '0 1px 1px rgba(0,0,0,.2)' });
     if (R() < 0.28) { const fb = box(p, { left: x - 1, top: y + wh + 3, width: ww + 2, height: 5, background: '#8a5a3a' }); for (let i = 0; i < 6; i++) box(fb, { left: 1 + i * 3.4, top: -3 - (i % 2) * 2, width: 4, height: 4, borderRadius: '50%', background: pick(['#e9577a', '#f5c43c', '#fff', '#b46be0']) }); }
   }
@@ -180,46 +181,114 @@ window.ukShops = function ukShops(w, o) {
     if (sp.aboard) { const ab = box(b, { left: sx + (door === 'l' ? sw - 22 : 6), top: sy + 112 - 22, width: 17, height: 22, background: '#2b3a34', border: '1px solid #cdb', transform: `rotate(${(R() - 0.5) * 6}deg)`, zIndex: 8 }); txt(ab, { left: 0, top: 0, width: 17, height: 22, color: '#fff', fontSize: 5.2, fontFamily: 'Arial, sans-serif', fontWeight: 'bold', whiteSpace: 'normal', lineHeight: '1.05' }, sp.aboard); }
   }
 
-  // ---------- upper floors + roof of one building ----------
+  // ---------- roofs, chimneys, aerials (two floors in total: shopfront + ONE upper floor) ----------
+  const SLATE = (k) => `repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 1px, transparent 1px 9px), linear-gradient(180deg, rgba(255,255,255,.12), rgba(0,0,0,.1)), ${k}`;
+  function chimney(b, cx, top, ht, smoke) {
+    box(b, { left: cx, top, width: 15, height: ht, background: brickBg('#c28b73', 0.28), boxShadow: 'inset 0 0 0 1px rgba(70,40,30,.3), inset -3px 0 0 rgba(0,0,0,.08)' });
+    box(b, { left: cx - 2, top: top - 3, width: 19, height: 4, background: '#eee3cc', boxShadow: '0 1px 1px rgba(0,0,0,.2)' });
+    [[2, '#c9663a'], [9, '#d37444']].forEach((pp) => { box(b, { left: cx + pp[0], top: top - 11, width: 4, height: 8, background: pp[1] }); box(b, { left: cx + pp[0] - 1, top: top - 12, width: 6, height: 2, background: '#a8502c' }); });
+    if (smoke) for (let k = 0; k < 2; k++) { const sm = box(b, { left: cx + 2, top: top - 24, width: 11, height: 11, borderRadius: '50%', background: 'rgba(235,235,240,.8)', opacity: 0 }); tl.fromTo(sm, { x: 0, y: 0, scale: 0.5, opacity: 0.7 }, { x: 22 + R() * 14, y: -50 - R() * 12, scale: 2.1, opacity: 0, duration: 4, repeat: rep(4), ease: 'sine.out', immediateRender: false }, T + k * 2 + R() * 0.3); }
+  }
+  function aerial(b, ax, ay) { const c = '#5d5d66'; box(b, { left: ax, top: ay - 26, width: 1.6, height: 26, background: c }); [[16, 26], [13, 20], [10, 14]].forEach((q) => box(b, { left: ax + 0.8 - q[0] / 2, top: ay - q[1], width: q[0], height: 1.3, background: c })); box(b, { left: ax - 3, top: ay - 2, width: 8, height: 2, background: c }); }
+  function dish(b, x, y) { box(b, { left: x + 4, top: y + 5, width: 1.5, height: 7, background: '#777' }); box(b, { left: x, top: y, width: 11, height: 9, background: 'radial-gradient(circle at 40% 40%, #fff, #d9d9d9)', borderRadius: '50%', transform: 'rotate(-28deg)', boxShadow: '0 0 0 1px #999' }); }
+  function dormer(b, x, rh, wallCol) {
+    const dw = 24, dh = 21, by = -2; // base on the eave line
+    box(b, { left: x - 3, top: by - dh - 11, width: dw + 6, height: 12, background: SLATE('#4f5864'), clipPath: 'polygon(0 100%, 50% 0, 100% 100%)' });
+    box(b, { left: x, top: by - dh, width: dw, height: dh, background: '#f3ecd8', boxShadow: '0 0 0 1px rgba(60,40,30,.3)' });
+    const g = box(b, { left: x + 4, top: by - dh + 4, width: dw - 8, height: dh - 6, overflow: 'hidden', background: '#a9cbe0' });
+    const kind = Math.floor(R() * 3);
+    if (kind === 0) { g.style.background = '#e6d9a8'; const c1 = pick(['#c75d5d', '#5d86c7', '#5dab7e']); const l = box(g, { left: 0, top: 0, width: 7, height: dh, background: c1, transformOrigin: '0 0' }); box(g, { left: 9, top: 0, width: 7, height: dh, background: c1 }); osc2(l, { scaleX: 1 }, { scaleX: 0.5 }, 3 + R() * 2); }
+    else if (kind === 1) { g.style.background = '#d4e6ee'; box(g, { left: 4, top: 8, width: 8, height: 7, background: '#c7683e' }); const lv = box(g, { left: 5, top: 0, width: 6, height: 9, background: '#4e9a52', borderRadius: '50%', transformOrigin: '50% 100%' }); osc(lv, 'rotation', 7, 2 + R() * 2); }
+    else { g.style.background = '#ffe08a'; const gv = box(g, { left: 0, top: 0, width: 16, height: 16, background: 'radial-gradient(circle at 50% 40%, #fff6c8, rgba(255,200,90,0) 80%)' }); flick(gv, 1, 0.5, 0.6); }
+    box(g, { left: 7.5, top: 0, width: 1, height: dh, background: 'rgba(246,241,228,.9)' }); box(b, { left: x - 2, top: by, width: dw + 4, height: 2, background: '#e6dcc3' });
+  }
+  function roofOf(b, sp, bgCss) {
+    const w = sp.w, kind = sp.roof;
+    if (kind === 'slate' || kind === 'hip') {
+      const rh = kind === 'hip' ? 30 : 34, a = kind === 'hip' ? 22 : 6;
+      (sp.chim || []).forEach((cx) => chimney(b, cx, -rh - 12, rh * 0.6 + 12, cx === sp.chim[0]));
+      if (sp.aerial !== undefined) aerial(b, sp.aerial, -rh + 4);
+      box(b, { left: -5, top: -rh, width: w + 10, height: rh, background: SLATE('#5f6975'), clipPath: `polygon(0 100%, ${a}% 0, ${100 - a}% 0, 100% 100%)` });
+      box(b, { left: -5 + (w + 10) * a / 100 - 2, top: -rh - 2, width: (w + 10) * (100 - 2 * a) / 100 + 4, height: 3, background: '#454c56' });
+      box(b, { left: -5, top: -2, width: w + 10, height: 3, background: '#4c4c52' });
+      (sp.dormers || []).forEach((dx) => dormer(b, dx, rh, bgCss));
+      return rh;
+    }
+    if (kind === 'gable') {
+      const rh = 36, n = sp.gables || 1, gw = w / n;
+      (sp.chim || []).forEach((cx) => chimney(b, cx, -rh - 12, rh + 12, cx === sp.chim[0]));
+      for (let i = 0; i < n; i++) {
+        box(b, { left: i * gw - 3, top: -rh, width: gw + 6, height: rh, background: SLATE('#58616d'), clipPath: 'polygon(0 100%, 50% 0, 100% 100%)' });
+        box(b, { left: i * gw + 7, top: -rh + 10, width: gw - 14, height: rh - 10, background: bgCss, clipPath: 'polygon(0 100%, 50% 0, 100% 100%)' });
+        box(b, { left: i * gw + gw / 2 - 5, top: -rh * 0.38, width: 10, height: 10, borderRadius: '50%', background: '#a9cbe0', boxShadow: '0 0 0 2px #f3ecd8' });
+      }
+      box(b, { left: -3, top: -2, width: w + 6, height: 3, background: '#4c4c52' });
+      return rh;
+    }
+    // flat roof behind a brick parapet with stone coping
+    (sp.chim || []).forEach((cx) => chimney(b, cx, -34, 28, cx === sp.chim[0]));
+    if (sp.aerial !== undefined) aerial(b, sp.aerial, -9);
+    box(b, { left: -1, top: -9, width: w + 2, height: 10, background: bgCss });
+    box(b, { left: -3, top: -12, width: w + 6, height: 4, background: '#efe6d2', boxShadow: '0 1px 2px rgba(0,0,0,.25)' });
+    return 12;
+  }
+
+  // sash window scaled up (wrapper scale is static, no tween cost) with glazing bars, lintel and sill
+  function sashWin(p, x, y, kind, arch, sc, lintel) {
+    const wr = box(p, { left: x, top: y, width: 22, height: 31, transformOrigin: '0 0' }); wr.style.transform = `scale(${sc})`;
+    upWin(wr, 0, 0, kind, arch);
+    if (lintel) box(p, { left: x - 2, top: y - 3, width: 22 * sc + 4, height: 3.5, background: '#e8dfca', boxShadow: '0 1px 1px rgba(0,0,0,.2)' });
+  }
+
+  // ---------- upper floor + roof of one building (two floors in total) ----------
+  const INFO = [];
   function building(sp) {
-    const h = G - sp.top, upper = h - 112, b = box(row, { left: sp.x, top: sp.top, width: sp.w, height: h });
+    const nf = sp.floors || 1, FH = nf > 1 ? 68 : (sp.fh || 84), uf = nf * FH, h = uf + 112, top = G - h;
+    const b = box(row, { left: sp.x, top, width: sp.w, height: h });
     const bg = sp.style === 'brick' ? brickBg(sp.col, 0.2) : renderBg(sp.col);
-    const body = box(b, { left: 0, top: 0, width: sp.w, height: h, background: bg, boxShadow: 'inset 1px 0 0 rgba(70,40,30,.35), inset -1px 0 0 rgba(70,40,30,.35)' });
-    if (sp.style === 'glass') return glassBldg(sp, b, h, upper);
-    // cornice + parapet
+    box(b, { left: 0, top: 0, width: sp.w, height: h, background: bg, boxShadow: 'inset 1px 0 0 rgba(70,40,30,.35), inset -1px 0 0 rgba(70,40,30,.35)' });
+    if (sp.style === 'stone') { const rh0 = bankBldg(sp, b, h, uf); INFO.push({ name: sp.shops[0].name, floors: 2, wall: h, top: G - h - rh0, total: h + rh0 }); return b; }
+    const rh = roofOf(b, sp, bg);
+    // cornice, string course above the fascia, house numbers
     box(b, { left: -2, top: 0, width: sp.w + 4, height: 6, background: '#efe6d2', boxShadow: '0 2px 2px rgba(0,0,0,.18)' });
     box(b, { left: -2, top: 6, width: sp.w + 4, height: 2, background: 'rgba(60,40,30,.25)' });
-    // chimneys
-    (sp.chim || []).forEach((cx) => {
-      const ch = box(b, { left: cx, top: -26, width: 15, height: 27, background: brickBg('#c28b73', 0.28), boxShadow: 'inset 0 0 0 1px rgba(70,40,30,.3)' });
-      box(ch, { left: -2, top: -3, width: 19, height: 4, background: '#eee3cc' });
-      box(b, { left: cx + 2, top: -33, width: 4, height: 8, background: '#c9663a' }); box(b, { left: cx + 9, top: -31, width: 4, height: 6, background: '#d37444' });
-      for (let k = 0; k < 3; k++) { const sm = box(b, { left: cx + 2, top: -40, width: 11, height: 11, borderRadius: '50%', background: 'rgba(235,235,240,.8)', opacity: 0, filter: 'blur(1.5px)' }); tl.fromTo(sm, { x: 0, y: 0, scale: 0.5, opacity: 0.7 }, { x: 22 + R() * 14, y: -55 - R() * 12, scale: 2.1, opacity: 0, duration: 4, repeat: rep(4), ease: 'sine.out', immediateRender: false }, T + k * 1.33 + R() * 0.3); }
-    });
-    // roof extras
-    if (sp.dish) { const dd = box(b, { left: sp.dish, top: 78, width: 10, height: 8, background: '#f0f0f0', borderRadius: '50% 50% 50% 50%', transform: 'rotate(-25deg)', boxShadow: '0 0 0 1px #999' }); box(b, { left: sp.dish + 4, top: 81, width: 1.5, height: 5, background: '#666' }); }
-    if (sp.cat) { const c = sp.cat, ct = box(b, { left: c, top: -12, width: 16, height: 12 }); box(ct, { left: 0, top: 4, width: 11, height: 8, background: '#e08a3c', borderRadius: '50% 50% 20% 20%' }); box(ct, { left: 8, top: 0, width: 7, height: 7, background: '#e08a3c', borderRadius: '50%' }); const tt = box(ct, { left: -3, top: 2, width: 3, height: 11, background: '#e08a3c', borderRadius: 3, transformOrigin: '50% 100%' }); osc(tt, 'rotation', 30, 0.8); osc(ct, 'x', 6, 6 + R() * 3); }
-    if (sp.flag) { const fp = box(b, { left: sp.flag, top: -34, width: 2, height: 36, background: '#777' }); const fl = box(b, { left: sp.flag + 2, top: -34, width: 28, height: 17, transformOrigin: '0 50%' }); fl.innerHTML = sp.flagSvg || ukFlag(); osc2(fl, { scaleX: 1, skewY: -3 }, { scaleX: 0.82, skewY: 4 }, 0.7 + R() * 0.3); }
-    if (sp.drain) box(b, { left: sp.w - 5, top: 8, width: 3, height: upper - 6, background: 'linear-gradient(90deg,#4c4c52,#8a8a90)' });
-    // floors
-    if (sp.band) { const bd = txt(b, { left: 4, top: 9, width: sp.w - 8, height: upper - 8, background: 'linear-gradient(#f4f1e2,#e2decb)', color: '#1f6b64', fontSize: 22, letterSpacing: '2px', boxShadow: 'inset 0 0 0 2px #2f9c8f' }, BR('tesco')); box(b, { left: 4, top: upper - 1, width: sp.w - 8, height: 3, background: '#e07a3a' }); }
-    const nf = sp.floors || Math.max(1, Math.round(upper / 50)), fh = upper / nf;
-    const cols = Math.max(1, Math.round((sp.w - 8) / 38)), sp2 = sp.w / cols;
-    for (let f = 0; f < (sp.band ? 0 : nf); f++) {
-      if (f > 0) box(b, { left: 0, top: 8 + f * fh - 2, width: sp.w, height: 3, background: 'rgba(240,230,205,.8)' });
-      for (let c = 0; c < cols; c++) {
-        const k = Math.floor(R() * 8), arch = sp.style === 'brick' && R() < 0.5;
-        if (sp.tudor) { const wx = c * sp2 + (sp2 - 22) / 2, wy = 8 + f * fh + (fh - 31) / 2; upWin(b, wx, wy, k, false); }
-        else upWin(b, c * sp2 + (sp2 - 22) / 2, 8 + f * fh + (fh - 31) / 2 + 2, k, arch);
+    box(b, { left: 0, top: h - 112 - 3, width: sp.w, height: 3, background: 'rgba(240,230,205,.85)' });
+    // flags, cat
+    if (sp.flag) { const base = sp.roof === 'slate' ? -rh + 4 : -rh + 3; box(b, { left: sp.flag, top: base - 36, width: 2, height: 38, background: '#777' }); const fl = box(b, { left: sp.flag + 2, top: base - 36, width: 28, height: 17, transformOrigin: '0 50%' }); fl.innerHTML = sp.flagSvg || ukFlag(); osc2(fl, { scaleX: 1, skewY: -3 }, { scaleX: 0.82, skewY: 4 }, 0.7 + R() * 0.3); }
+    if (sp.cat) { const ct = box(b, { left: sp.cat, top: -24, width: 16, height: 12 }); box(ct, { left: 0, top: 4, width: 11, height: 8, background: '#e08a3c', borderRadius: '50% 50% 20% 20%' }); box(ct, { left: 8, top: 0, width: 7, height: 7, background: '#e08a3c', borderRadius: '50%' }); box(ct, { left: 8, top: -2, width: 0, height: 0, borderLeft: '1.5px solid transparent', borderRight: '1.5px solid transparent', borderBottom: '3px solid #e08a3c' }); const tt = box(ct, { left: -3, top: 2, width: 3, height: 11, background: '#e08a3c', borderRadius: 3, transformOrigin: '50% 100%' }); osc(tt, 'rotation', 30, 0.8); osc(ct, 'x', 6, 6 + R() * 3); }
+    // upper-floor wall
+    if (sp.band) {
+      txt(b, { left: 4, top: 10, width: sp.w - 8, height: uf - 18, background: 'linear-gradient(#f4f1e2,#e2decb)', color: '#1f6b64', fontSize: 22, letterSpacing: '2px', boxShadow: 'inset 0 0 0 2px #2f9c8f' }, BR('tesco')); box(b, { left: 4, top: uf - 8, width: sp.w - 8, height: 3, background: '#e07a3a' });
+      // rooftop plant box and extractor
+      box(b, { left: sp.w - 36, top: -22, width: 24, height: 11, background: 'repeating-linear-gradient(90deg,#8d969c 0 3px,#a7b0b5 3px 6px)' });
+    } else {
+      const cols = Math.max(1, Math.round((sp.w - 8) / 44)), sp2 = sp.w / cols, sc = nf > 1 ? 1.08 : 1.25;
+      for (let f = 0; f < nf; f++) {
+        if (f > 0) box(b, { left: 0, top: 8 + f * FH - 3, width: sp.w, height: 3, background: 'rgba(240,230,205,.85)' });
+        for (let c = 0; c < cols; c++) {
+          const k = Math.floor(R() * 8), arch = sp.style === 'brick' && !sp.tudor && R() < 0.5;
+          const wh = 31 * sc, wy = 8 + f * FH + (FH - 8 - wh - 8) / 2 - 1;
+          sashWin(b, c * sp2 + (sp2 - 22 * sc) / 2, wy, k, arch, sc, !sp.tudor && !arch);
+        }
+      }
+      if (sp.tudor) {
+        for (let f = 0; f <= nf; f++) box(b, { left: 0, top: 8 + f * FH - 1, width: sp.w, height: 3, background: '#6d5040' });
+        for (let c = 0; c <= cols; c++) box(b, { left: c * sp2 - 1.5, top: 8, width: 3, height: uf - 8, background: '#6d5040' });
+        for (let f = 0; f < nf; f++) for (let c = 0; c < cols; c++) box(b, { left: c * sp2 + 2, top: 8 + f * FH + 3, width: 2, height: FH - 8, background: '#6d5040', transform: `rotate(${f % 2 ? 24 : -24}deg)`, opacity: 0.5 });
       }
     }
-    if (sp.tudor) { // timber frame
-      for (let f = 0; f <= nf; f++) box(b, { left: 0, top: 8 + f * fh - 1, width: sp.w, height: 3, background: '#6d5040' });
-      for (let c = 0; c <= cols; c++) box(b, { left: c * sp2 - 1.5, top: 8, width: 3, height: upper, background: '#6d5040' });
-      for (let f = 0; f < nf; f++) for (let c = 0; c < cols; c++) box(b, { left: c * sp2 + 2, top: 8 + f * fh + 2, width: 2, height: fh - 4, background: '#6d5040', transform: `rotate(${f % 2 ? 24 : -24}deg)`, opacity: 0.5 });
-    }
-    if (sp.toLet) { const tl2 = box(b, { left: sp.toLet, top: 8 + fh + 4, width: 22, height: 13, transformOrigin: '50% 0', zIndex: 4 }); txt(tl2, { left: 0, top: 0, width: 22, height: 13, background: '#fff', color: '#c33', fontSize: 6.5, border: '1px solid #c33' }, 'TO LET'); osc(tl2, 'rotation', 9, 1.9 + R()); }
+    if (sp.dish !== undefined) dish(b, sp.dish, 30);
+    if (sp.toLet) { const tl2 = box(b, { left: sp.toLet, top: 8 + 24, width: 22, height: 13, transformOrigin: '50% 0', zIndex: 4 }); txt(tl2, { left: 0, top: 0, width: 22, height: 13, background: '#fff', color: '#c33', fontSize: 6.5, border: '1px solid #c33' }, 'TO LET'); osc(tl2, 'rotation', 9, 1.9 + R()); }
     sp.shops.forEach((s) => { if (s.k === 'atm' || s.k === 'wall') return; shop(b, s.x, s.w, h - 112, s); });
+    // house numbers on small enamel plates just above each fascia
+    let n = sp.num || 1;
+    sp.shops.forEach((s) => { if (s.k === 'atm' || s.k === 'wall') return; txt(b, { left: s.x + s.w / 2 - 6, top: h - 112 - 12, width: 12, height: 8, background: '#f6f4ec', color: '#244a7a', fontSize: 6, fontFamily: 'Arial, sans-serif', fontWeight: 'bold', boxShadow: '0 0 0 1px #244a7a' }, String(n)); n += 2; });
+    // hanging (projecting) sign on a bracket
+    if (sp.hang) { const hg = sp.hang, hy = hg.y || 22; box(b, { left: hg.x, top: hy, width: 16, height: 2, background: '#2a2a2a' }); const sg = box(b, { left: hg.x + 2, top: hy + 2, width: 14, height: 20, transformOrigin: '50% 0', background: hg.col, boxShadow: '0 0 0 1px #2a2a2a, 0 1px 2px rgba(0,0,0,.3)', borderRadius: hg.round ? '50%' : 1 }); txt(sg, { left: 0, top: 0, width: 14, height: 20, color: hg.fg || '#fff', fontSize: 5, fontFamily: 'Arial, sans-serif', fontWeight: 'bold', whiteSpace: 'normal', lineHeight: '1.1' }, hg.text); osc(sg, 'rotation', 7, 2 + R() * 1.5); }
+    // gutter hopper and drainpipe (right side, and left on some)
+    const dp = (x) => { box(b, { left: x - 3, top: 1, width: 9, height: 6, background: '#3c3c42', borderRadius: 1 }); box(b, { left: x, top: 7, width: 3, height: h - 112 - 7, background: 'linear-gradient(90deg,#4c4c52,#8a8a90)' }); for (let y = 16; y < h - 112 - 6; y += 22) box(b, { left: x - 1, top: y, width: 5, height: 1.6, background: '#2a2a30' }); };
+    if (sp.drain) dp(sp.w - 6); if (sp.drainL) dp(2);
+    INFO.push({ name: (sp.shops[0] && sp.shops[0].name) || '', floors: nf + 1, wall: h, top: G - h - rh - (sp.chim ? 22 : 0), total: h + rh + (sp.chim ? 22 : 0) });
     return b;
   }
 
@@ -228,94 +297,99 @@ window.ukShops = function ukShops(w, o) {
   }
   function gFlag() { return '<svg viewBox="0 0 28 17" width="28" height="17"><rect width="28" height="17" fill="#fff" stroke="#bbb"/><path d="M14 0V17M0 8.5H28" stroke="#c8333b" stroke-width="4"/></svg>'; }
 
-  // ---------- modern glass block ----------
-  function glassBldg(sp, b, h, upper) {
-    const sw = sp.w;
-    box(b, { left: 0, top: 0, width: sw, height: h, background: 'linear-gradient(135deg,#bcdcea 0%,#8fbbd2 55%,#a9cfe0 100%)', boxShadow: 'inset 0 0 0 2px #dfe9ef' });
-    box(b, { left: -2, top: -4, width: sw + 4, height: 6, background: '#cfd6db' });
-    // roof plant, aerial, window-cleaning cradle
-    box(b, { left: 12, top: -14, width: 34, height: 12, background: 'repeating-linear-gradient(90deg,#8d969c 0 3px,#a7b0b5 3px 6px)' });
-    const fan = box(b, { left: 60, top: -12, width: 14, height: 10, background: '#9aa4aa', borderRadius: '50% 50% 0 0' }); box(fan, { left: 3, top: 2, width: 8, height: 2, background: '#556', transformOrigin: '50% 50%' }); osc(fan.firstChild, 'rotation', 180, 0.5);
-    box(b, { left: 96, top: -30, width: 1.5, height: 30, background: '#667' }); const bl = box(b, { left: 94, top: -33, width: 5, height: 5, borderRadius: '50%', background: '#f55' }); flick(bl, 1, 0.1, 0.5);
-    const cols = 5, nf = Math.round(upper / 40), fh = upper / nf, cw = sw / cols;
-    for (let f = 0; f < nf; f++) for (let c = 0; c < cols; c++) {
-      const cx = c * cw + 3, cy = 8 + f * fh + 3, cell = box(b, { left: cx, top: cy, width: cw - 6, height: fh - 7, overflow: 'hidden', background: R() < 0.25 ? 'linear-gradient(#fff3c4,#f6dc8b)' : 'linear-gradient(180deg,#d6ecf6,#9cc4d8)', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,.6)' });
-      if (R() < 0.36) { const pp = person(cell, 7 + R() * (cw - 20), fh - 6, { s: 1.5 }); osc(pp.head, 'y', 1.2, 1 + R()); osc2(pp.arm, { rotation: -10 }, { rotation: 40 }, 0.4 + R() * 0.3); } else if (R() < 0.3) { const lt = box(cell, { left: 0, top: 0, width: cw - 6, height: fh - 7, background: 'rgba(255,240,170,.6)' }); flick(lt, 1, 0.3, 0.7); }
+  // ---------- stone-fronted bank: shopfront + one tall upper floor, balustrade parapet and clock pediment ----------
+  function bankBldg(sp, b, h, uf) {
+    const sw = sp.w, gy = h - 112;
+    box(b, { left: 0, top: 0, width: sw, height: gy, background: 'repeating-linear-gradient(0deg, rgba(0,0,0,.06) 0 1px, transparent 1px 11px), linear-gradient(90deg, rgba(255,255,255,.18), rgba(0,0,0,.06)), #d9d1be' });
+    // balustrade parapet + pediment with clock
+    box(b, { left: -2, top: -10, width: sw + 4, height: 4, background: '#efe6d2', boxShadow: '0 1px 2px rgba(0,0,0,.25)' });
+    box(b, { left: 0, top: -7, width: sw, height: 8, background: 'repeating-linear-gradient(90deg, #e9e2cf 0 3px, #bdb59f 3px 5px)' });
+    box(b, { left: sw / 2 - 30, top: -34, width: 60, height: 24, background: '#e9e2cf', clipPath: 'polygon(0 100%, 50% 0, 100% 100%)' });
+    const cf = box(b, { left: sw / 2 - 7, top: -22, width: 14, height: 14, borderRadius: '50%', background: '#fffdf0', boxShadow: '0 0 0 1.5px #7a6a3a' });
+    box(cf, { left: 6.5, top: 2, width: 1, height: 5.5, background: '#222' }); box(cf, { left: 6.5, top: 6.5, width: 4, height: 1, background: '#222' });
+    box(b, { left: -2, top: 0, width: sw + 4, height: 6, background: '#efe6d2', boxShadow: '0 2px 2px rgba(0,0,0,.18)' });
+    box(b, { left: 0, top: gy - 3, width: sw, height: 3, background: 'rgba(240,230,205,.9)' });
+    const cols = 3, sp2 = sw / cols;
+    for (let c = 0; c < cols; c++) {
+      const sc = 1.28, wh = 31 * sc, wy = 8 + (gy - 8 - wh - 8) / 2 - 1; sashWin(b, c * sp2 + (sp2 - 22 * sc) / 2, wy, [0, 3, 5][c], true, sc, false);
+      if (c > 0) box(b, { left: c * sp2 - 2, top: 8, width: 4, height: gy - 11, background: 'linear-gradient(90deg,#f2ecda,#d3cbb6)' });
     }
-    const sheen = box(b, { left: 0, top: 0, width: sw, height: h - 112, overflow: 'hidden', pointerEvents: 'none' }); const sb = box(sheen, { left: -60, top: -10, width: 30, height: h, background: 'linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0))', transform: 'skewX(-20deg)' });
-    tl.fromTo(sb, { x: 0 }, { x: sw + 120, duration: 4, repeat: rep(4), repeatDelay: 2.5, ease: 'sine.inOut' }, T + 1);
-    // cleaner's cradle
-    const cr = box(b, { left: sw - 34, top: 10, width: 24, height: 12, zIndex: 3 }); box(cr, { left: 3, top: -10, width: 1, height: 10, background: '#333' }); box(cr, { left: 20, top: -10, width: 1, height: 10, background: '#333' }); box(cr, { left: 0, top: 8, width: 24, height: 4, background: '#e0a020' }); const cp = person(cr, 12, 9, { s: 1.1, col: '#f08a4b' }); osc2(cp.arm, { rotation: 0 }, { rotation: 70 }, 0.6);
-    osc2(cr, { y: 0 }, { y: upper - 60 }, 9 + R() * 3);
-    // sign and bank ground floor
-    const gy = h - 112;
+    dish(b, sw - 22, 12);
+    // ground floor: polished stone bank front, ATM bay and queue
     box(b, { left: 0, top: gy, width: sw, height: 112, background: '#8b9aa6' });
     const bk = sp.shops[0], bw = bk.w;
-    const fs = fascia(b, 2, gy, bw - 2, 27, bk.name, bk.fas[0], bk.fas[1]);
+    fascia(b, 2, gy, bw - 2, 27, bk.name, bk.fas[0], bk.fas[1]);
     const win = box(b, { left: 5, top: gy + 29, width: bw - 8 - 22, height: 76, overflow: 'hidden', background: '#e8eef5', boxShadow: '0 0 0 2px rgba(255,255,255,.6)' }); interior(win, 'bank', bw - 8 - 22, 76);
     const sh = box(win, { left: -30, top: 0, width: 16, height: 76, background: 'linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.35),rgba(255,255,255,0))', transform: 'skewX(-18deg)', zIndex: 6 }); tl.fromTo(sh, { x: 0 }, { x: bw + 20, duration: 4, repeat: rep(4), repeatDelay: 4, ease: 'sine.inOut' }, T + 2);
-    const door = box(b, { left: bw - 20, top: gy + 29, width: 18, height: 83, background: '#4a5a6a' }); box(door, { left: 2, top: 3, width: 14, height: 54, background: 'linear-gradient(135deg,#e8f2f8,#bcd4e2)' });
-    const aw = box(b, { left: 1, top: gy + 27, width: bw, height: 20, transformOrigin: '50% 0', zIndex: 5 }); box(aw, { left: 0, top: 0, width: bw, height: 12, background: `repeating-linear-gradient(90deg,#5b6f86 0 9px,#8aa0b8 9px 18px)`, boxShadow: '0 2px 3px rgba(0,0,0,.25)' }); osc(aw, 'skewX', 1.2, 2.6);
-    // ATM bay
+    box(b, { left: bw - 20, top: gy + 29, width: 18, height: 83, background: '#4a5a6a' }); box(b, { left: bw - 18, top: gy + 32, width: 14, height: 54, background: 'linear-gradient(135deg,#e8f2f8,#bcd4e2)' });
+    const aw = box(b, { left: 1, top: gy + 27, width: bw, height: 20, transformOrigin: '50% 0', zIndex: 5 }); box(aw, { left: 0, top: 0, width: bw, height: 12, background: 'repeating-linear-gradient(90deg,#5b6f86 0 9px,#8aa0b8 9px 18px)', boxShadow: '0 2px 3px rgba(0,0,0,.25)' }); osc(aw, 'skewX', 1.2, 2.6);
     const ax = bw + 2, aw2 = sw - ax;
     box(b, { left: ax, top: gy + 30, width: aw2 - 2, height: 82, background: '#6f7f8c' });
     const atm = box(b, { left: ax + 6, top: gy + 40, width: 24, height: 46, background: 'linear-gradient(#b9c3cb,#8e99a3)', borderRadius: 2, boxShadow: '0 0 0 1px #556' });
     const scr = box(atm, { left: 3, top: 4, width: 18, height: 12, background: '#7fd3ff' }); flick(scr, 1, 0.55, 0.9); txt(atm, { left: 3, top: 4, width: 18, height: 12, fontSize: 5.5, color: '#134', fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }, 'CASH');
     for (let i = 0; i < 6; i++) box(atm, { left: 4 + (i % 3) * 6, top: 20 + Math.floor(i / 3) * 5, width: 4, height: 3, background: '#445' });
     const slot = box(atm, { left: 4, top: 37, width: 16, height: 3, background: '#2c3a2c' }); flick(slot, 1, 0.2, 0.4);
-    // queue at the ATM, standing on the pavement line
     for (let i = 0; i < 3; i++) { const pp = person(front, sp.x + ax + 36 + i * 13, G + 2, { s: 1.9 }); pp.g.style.zIndex = 9; osc(pp.g, 'x', 1.6, 1.5 + R()); osc(pp.head, 'rotation', 9, 1.6 + R()); if (i === 0) osc2(pp.g, { y: 0 }, { y: -3 }, 0.6); }
-    return b;
+    // drainpipe + number plate
+    box(b, { left: sw - 5, top: 8, width: 3, height: gy - 8, background: 'linear-gradient(90deg,#4c4c52,#8a8a90)' });
+    txt(b, { left: 20, top: gy - 12, width: 12, height: 8, background: '#f6f4ec', color: '#244a7a', fontSize: 6, fontFamily: 'Arial, sans-serif', fontWeight: 'bold', boxShadow: '0 0 0 1px #244a7a' }, '12');
+    return 34;
   }
 
   // =============== BUILD ===============
-  // distant roofline behind everything (soft, light)
+  // far background: hazy terrace of 2-3 floor houses with slate roofs, and a church with a spire (landmark 1)
   (function () {
     let x = -20;
     while (x < W) {
-      const ww = 56 + R() * 56, top = 140 + R() * 130, c = pick(['#d8cabc', '#cfc3bd', '#d3d0c6', '#dccbb8']);
-      const d = box(far, { left: x, top, width: ww, height: G - top, background: `repeating-linear-gradient(0deg, ${c} 0 9px, transparent 9px 19px), repeating-linear-gradient(90deg, rgba(120,150,180,.5) 0 7px, transparent 7px 15px), ${c}`, opacity: 0.95 });
-      box(far, { left: x - 2, top: top - 4, width: ww + 4, height: 5, background: '#c9bbb0' });
-      if (R() < 0.5) box(far, { left: x + R() * (ww - 12), top: top - 16, width: 9, height: 14, background: '#bda99c' });
-      if (R() < 0.3) { const sm = box(far, { left: x + ww * 0.5, top: top - 24, width: 9, height: 9, borderRadius: '50%', background: 'rgba(240,240,245,.8)', opacity: 0, filter: 'blur(1.5px)' }); tl.fromTo(sm, { x: 0, y: 0, scale: 0.5, opacity: 0.6 }, { x: 18, y: -40, scale: 2, opacity: 0, duration: 4.5, repeat: rep(4.5), ease: 'sine.out', immediateRender: false }, T + R() * 3); }
+      const ww = 44 + R() * 40, wallTop = G - (196 + R() * 46), c = pick(['#d8cabc', '#cfc3bd', '#d3d0c6', '#dccbb8', '#c9c6c9']), rh = 26 + R() * 10, gable = R() < 0.4;
+      box(far, { left: x, top: wallTop, width: ww, height: G - wallTop, background: `linear-gradient(90deg, rgba(255,255,255,.12), rgba(0,0,0,.08)), ${c}`, boxShadow: 'inset 1px 0 0 rgba(90,70,60,.25)' });
+      for (let r = 0; r < 3; r++) box(far, { left: x + 6, top: wallTop + 12 + r * 30, width: ww - 12, height: 13, background: 'repeating-linear-gradient(90deg, rgba(110,140,170,.65) 0 7px, transparent 7px 15px)' });
+      box(far, { left: x - 2, top: wallTop - 3, width: ww + 4, height: 4, background: '#c3b6aa' });
+      box(far, { left: x - 3, top: wallTop - rh, width: ww + 6, height: rh, background: gable ? '#7b8793' : '#6e7a87', clipPath: gable ? 'polygon(0 100%, 50% 0, 100% 100%)' : 'polygon(0 100%, 12% 0, 88% 0, 100% 100%)' });
+      if (R() < 0.6) { const cx = x + 6 + R() * (ww - 22); box(far, { left: cx, top: wallTop - rh - 14, width: 10, height: 20, background: '#b79c8d' }); box(far, { left: cx - 1, top: wallTop - rh - 16, width: 12, height: 3, background: '#d9ccb9' }); }
       x += ww + 1;
     }
-    // church clock tower
-    const tx = 600, tw = 44;
-    box(far, { left: tx, top: 70, width: tw, height: G - 70, background: brickBg('#e3d3b6', 0.2), boxShadow: 'inset 0 0 0 1px rgba(80,60,40,.3)' });
-    box(far, { left: tx - 3, top: 66, width: tw + 6, height: 6, background: '#efe6d2' });
-    box(far, { left: tx + 3, top: 14, width: 0, height: 0, borderLeft: `${tw / 2 - 3}px solid transparent`, borderRight: `${tw / 2 - 3}px solid transparent`, borderBottom: '54px solid #8fa0ad' });
-    const vane = box(far, { left: tx + tw / 2 - 5, top: 2, width: 10, height: 12, transformOrigin: '50% 100%' }); box(vane, { left: 4.5, top: 0, width: 1.2, height: 12, background: '#555' }); box(vane, { left: 0, top: 1, width: 10, height: 4, background: '#d9a520', borderRadius: '0 50% 50% 0' }); osc(vane, 'skewX', 28, 3);
-    const cf = box(far, { left: tx + 6, top: 82, width: 32, height: 32, borderRadius: '50%', background: '#fffdf0', boxShadow: '0 0 0 2px #7a6a3a' });
+    // church: tower, clock, belfry, spire, nave
+    const tx = 868, tw = 46;
+    box(far, { left: tx - 78, top: 238, width: 80, height: G - 238, background: brickBg('#d9cdb6', 0.16) });
+    box(far, { left: tx - 82, top: 216, width: 88, height: 24, background: '#6f7b88', clipPath: 'polygon(0 100%, 14% 0, 86% 0, 100% 100%)' });
+    box(far, { left: tx, top: 186, width: tw, height: G - 186, background: brickBg('#d6c8ac', 0.18), boxShadow: 'inset 0 0 0 1px rgba(80,60,40,.3)' });
+    box(far, { left: tx - 3, top: 182, width: tw + 6, height: 6, background: '#e6dcc6' });
+    for (let i = 0; i < 4; i++) box(far, { left: tx - 3 + i * 14, top: 176, width: 8, height: 7, background: '#e6dcc6' });
+    box(far, { left: tx + 3, top: 120, width: tw - 6, height: 58, background: '#8fa0ad', clipPath: 'polygon(50% 0, 100% 100%, 0 100%)' });
+    const vane = box(far, { left: tx + tw / 2 - 5, top: 106, width: 10, height: 14, transformOrigin: '50% 100%' }); box(vane, { left: 4.5, top: 0, width: 1.2, height: 14, background: '#555' }); box(vane, { left: 0, top: 1, width: 10, height: 4, background: '#d9a520', borderRadius: '0 50% 50% 0' }); osc(vane, 'skewX', 28, 3);
+    const cf = box(far, { left: tx + 7, top: 196, width: 32, height: 32, borderRadius: '50%', background: '#fffdf0', boxShadow: '0 0 0 2px #7a6a3a' });
     for (let i = 0; i < 12; i++) box(cf, { left: 15, top: 2, width: 1.5, height: i % 3 === 0 ? 5 : 3, background: '#555', transformOrigin: '0.75px 14px', transform: `rotate(${i * 30}deg)` });
     const mh = box(cf, { left: 15.2, top: 4, width: 1.6, height: 12, background: '#222', transformOrigin: '50% 100%' }); const hh = box(cf, { left: 15, top: 7, width: 2.2, height: 9, background: '#222', transformOrigin: '50% 100%' });
     tl.fromTo(mh, { rotation: 0 }, { rotation: 360, duration: 12, repeat: rep(12), ease: 'none' }, T); tl.fromTo(hh, { rotation: 0 }, { rotation: 360, duration: 144, repeat: 1, ease: 'none' }, T);
-    for (let i = 0; i < 3; i++) box(far, { left: tx + 8 + i * 11, top: 128 + 0, width: 7, height: 22, background: '#7a8a9a', borderRadius: '4px 4px 0 0' });
+    for (let i = 0; i < 3; i++) box(far, { left: tx + 8 + i * 11, top: 236, width: 7, height: 20, background: '#7a8a9a', borderRadius: '4px 4px 0 0' });
+    // atmospheric haze over the whole far plane
+    box(far, { left: 0, top: 90, width: W, height: G - 90, background: 'linear-gradient(rgba(226,238,248,.28), rgba(226,238,248,.5))' });
   })();
 
-  const BW = [ // buildings, left to right; shop widths sum to building width
-    { x: 0, w: 216, top: 150, style: 'brick', col: '#d6a089', chim: [26, 120], dish: 150, drain: true, toLet: 100, flag: 190, flagSvg: gFlag(), shops: [
+  const BW = [ // buildings, left to right; shop widths sum to building width. Every building = shopfront (112) + ONE upper floor.
+    { x: 0, w: 216, style: 'brick', col: '#d6a089', roof: 'slate', dormers: [58, 134], chim: [26, 168], aerial: 33, dish: 99, drain: true, drainL: false, toLet: 124, flag: 192, flagSvg: gFlag(), num: 21, shops: [
       { x: 0, w: 78, name: BR('boots') === 'BOOTS' ? 'BOOTS' : BR('boots'), kind: 'pharm', fas: ['#bfe3cf', '#1d4a36'], awn: ['#5cae86', '#e9f5ee'], door: 'r', aboard: 'Flu jab? Just ask', basket: true },
       { x: 78, w: 66, name: 'Newsagent', kind: 'news', fas: ['#f5d99a', '#6a3b1e'], awn: ['#d9733d', '#f6e2c4'], door: 'l', aboard: 'WEATHER: still rain' },
       { x: 144, w: 72, name: BR('greggs'), kind: 'bakery', fas: ['#f2b86b', '#5a2d0f'], awn: ['#c8693a', '#f9e3c0'], door: 'r', aboard: 'Hot pies. Hot take: tea.' }] },
-    { x: 216, w: 132, top: 66, style: 'glass', col: '#9bc', shops: [
+    { x: 216, w: 132, style: 'stone', col: '#d9d1be', shops: [
       { x: 0, w: 92, name: BR('hsbc'), kind: 'bank', fas: ['#6c7b8a', '#fff'], awn: ['#5b6f86', '#8aa0b8'], door: 'r' }, { k: 'atm', x: 92, w: 40 }] },
-    { x: 348, w: 108, top: 170, style: 'render', col: '#efe6d0', tudor: true, floors: 3, chim: [20, 74], flag: 80, drain: false, shops: [
+    { x: 348, w: 108, style: 'render', col: '#efe6d0', tudor: true, floors: 2, roof: 'hip', chim: [14, 80], aerial: 21, flag: 56, num: 1, hang: { x: 46, y: 18, col: '#7a2a24', text: 'RED LION', fg: '#f2d98a' }, shops: [
       { x: 0, w: 108, name: 'The Red Lion', serif: true, kind: 'pub', fas: ['#4d7a58', '#f2d98a'], awn: ['#7a3b3b', '#e8d6c0'], door: 'l', aboard: 'QUIZ NIGHT: wrong answers welcome', basket: true, wall: '#6e5a4a' }] },
-    { x: 456, w: 124, top: 326, style: 'render', col: '#e8e2cf', floors: 1, band: true, shops: [
+    { x: 456, w: 124, style: 'render', col: '#e8e2cf', band: true, roof: 'flat', num: 40, shops: [
       { x: 0, w: 124, name: 'OPEN LATE · FRESH · LOCAL', kind: 'super', fas: ['#d9efe9', '#1f6b64'], awn: ['#2f9c8f', '#f6efd9'], door: 'r', aboard: '3 for 2 on hope' }] },
-    { x: 580, w: 228, top: 118, style: 'brick', col: '#e1c58a', chim: [30, 100, 190], dish: 60, drain: true, shops: [
+    { x: 580, w: 228, style: 'brick', col: '#e1c58a', roof: 'gable', gables: 2, chim: [4, 209], dish: 100, drain: true, num: 55, shops: [
       { x: 0, w: 68, name: 'Halal Butcher', kind: 'butcher', fas: ['#2e8b57', '#fff'], awn: ['#2e8b57', '#f4f4f4'], door: 'r', aboard: 'FRESH TODAY' },
       { x: 68, w: 90, name: 'Afro-Caribbean Foods', kind: 'afro', fas: ['#e6b422', '#3b1f0b'], awn: ['#2e8b57', '#e6b422'], door: 'l', aboard: 'Yam. Plantain. Joy.', basket: true },
       { x: 158, w: 70, name: 'Sari & Fabrics', kind: 'sari', fas: ['#c2185b', '#ffe9a8'], awn: ['#7b2fbf', '#f5c542'], door: 'r', aboard: 'Wedding season: panic early' }] },
-    { x: 808, w: 140, top: 205, style: 'render', col: '#bcd3bb', chim: [100], cat: 20, shops: [
+    { x: 808, w: 140, style: 'render', col: '#bcd3bb', roof: 'flat', chim: [100], aerial: 112, cat: 20, drainL: true, num: 77, shops: [
       { x: 0, w: 76, name: BR('poundland'), kind: 'discount', fas: ['#ffe27a', '#6a2b8a'], awn: ['#8a4fbf', '#ffe27a'], door: 'r' },
       { x: 76, w: 64, name: 'Chippy', kind: 'chippy', fas: ['#2f4d77', '#ffe9a8'], awn: ['#2f6d9a', '#f4f4f4'], door: 'l', neon: true, aboard: 'Salt & vinegar: ask for "plenty"' }] },
-    { x: 948, w: 202, top: 160, style: 'brick', col: '#c99a86', chim: [18, 150], dish: 100, drain: true, toLet: 70, shops: [
+    { x: 948, w: 202, style: 'brick', col: '#c99a86', roof: 'slate', dormers: [90], chim: [18, 170], dish: 38, drain: true, toLet: 120, num: 91, hang: { x: 40, y: 20, col: '#2f6d9a', text: 'WASH', fg: '#fff' }, shops: [
       { x: 0, w: 70, name: 'Kebab House', kind: 'kebab', fas: ['#7a2a2a', '#ffd9a0'], awn: ['#a8322b', '#ffd9a0'], door: 'r', neon: true },
       { x: 70, w: 66, name: 'Launderette', kind: 'launder', fas: ['#bfe3f2', '#1a4d70'], awn: ['#3a8fc2', '#fff'], door: 'l', closed: false, aboard: 'Tumble dry: £3. Dignity: free' },
       { x: 136, w: 66, name: 'Money Transfer', kind: 'money', fas: ['#1f5a3a', '#bff5cc'], awn: ['#2e8b57', '#f4f4f4'], door: 'r', aboard: 'Home in 5 min*' }] },
-    { x: 1150, w: 130, top: 230, style: 'render', col: '#bfd3e6', chim: [14], flag: 92, shops: [
+    { x: 1150, w: 130, style: 'render', col: '#bfd3e6', roof: 'flat', chim: [14], flag: 92, num: 105, shops: [
       { x: 0, w: 72, name: BR('costa'), kind: 'coffee', fas: ['#6a3a22', '#f8e3c0'], awn: ['#8a4a2a', '#f8e3c0'], door: 'r', basket: true, aboard: 'Flat white. Flat wallet.' }, { k: 'wall', x: 72, w: 58 }] },
   ];
   BW.forEach((sp) => { sp.shops.forEach((s) => { if (!s.k) s.k = 'shop'; }); building(sp); });
@@ -330,8 +404,8 @@ window.ukShops = function ukShops(w, o) {
 
   // ---------- roof billboard above the low supermarket block ----------
   (function () {
-    const bx = 470, by = 246;
-    box(front, { left: bx + 20, top: by + 56, width: 3, height: 26, background: '#666' }); box(front, { left: bx + 94, top: by + 56, width: 3, height: 26, background: '#666' });
+    const bx = 470, by = 198;
+    box(front, { left: bx + 20, top: by + 56, width: 3, height: 10, background: '#666' }); box(front, { left: bx + 94, top: by + 56, width: 3, height: 10, background: '#666' });
     const bd = box(front, { left: bx, top: by, width: 118, height: 58, background: '#2a2f38', padding: 0, boxShadow: '0 2px 4px rgba(0,0,0,.25)', overflow: 'hidden' });
     const ads = [['TEA:', 'the original hot drink', '#f4d98a', '#5a3010'], ['Queue here for', 'nothing in particular', '#cfe6f5', '#1f3d5a'], ["Sorry,", "we're open", '#f6c7d0', '#7a1f3a'], ['Umbrellas:', '4 seasons a day', '#d4efd0', '#1f5a2a'], ['Now with 12%', 'more weather', '#e6d8f5', '#472a7a']];
     const els = ads.map((a) => box(bd, { left: 2, top: 2, width: 114, height: 54, background: a[2] }, `<div style="font:bold 12px Georgia,serif;color:${a[3]};text-align:center;margin-top:8px">${a[0]}</div><div style="font:italic bold 12px Georgia,serif;color:${a[3]};text-align:center;margin-top:4px">${a[1]}</div><div style="font:8px Arial;color:${a[3]};text-align:center;margin-top:6px">a Public Information Poster</div>`));
@@ -364,9 +438,10 @@ window.ukShops = function ukShops(w, o) {
     }
     box(front, { left: x0, top: y - 1, width: x1 - x0, height: 1, background: 'rgba(60,40,30,.5)', transformOrigin: '0 0' });
   }
-  bunting(350, 454, 330, 9); bunting(812, 946, 300, 11); bunting(1000, 1148, 320, 12);
+  bunting(352, 454, 292, 9); bunting(812, 946, 272, 11); bunting(1000, 1148, 276, 12);
 
   tl.set({}, {}, T + D);
-  return { root, far, row, front };
+  window.ukShops.info = INFO;
+  return { root, far, row, front, info: INFO };
 };
 })();

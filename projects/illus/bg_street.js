@@ -82,80 +82,95 @@ const VT = {
       <path d="M58 18 L72 31" stroke="#e6ff1f" stroke-width="5" stroke-linecap="round"/><circle cx="64" cy="8" r="6.4" fill="${SK[o.sk || 4]}"/><path d="M57 8 Q58 -1 65 0 Q72 1 71 8Z" fill="#2a8be8"/><rect x="2" y="48" width="7" height="3.4" fill="#e8281f"/><ellipse class="brk" cx="3" cy="49" rx="8" ry="6" fill="rgba(255,50,40,.7)" style="opacity:0"/>` }; }
 };
 
-// ---------- pedestrians (walk cycles) ----------
-function wk(o) {
-  const sk = o.skin, hr = o.hair || '#1b1410', top = o.top, bot = o.bot || '#33384a', shoe = o.shoe || '#2a2a2e', ty = o.type || 'trou', acc = o.acc || 'none', hdt = o.head || 'hair', slv = o.sleeve || 'short';
-  let vw = 44; if (acc === 'push') vw = 82; if (acc === 'dog') vw = 96; if (acc === 'umb') vw = 56;
-  const idle = !!o.idle, dk = c => shade(c, -.2);
-  const arm = (cls, col, extra, rot) => `<g transform="translate(22 26)"><g class="${cls}" ${rot ? `transform="rotate(${rot})"` : ''}><rect x="-2.6" y="-1" width="5.2" height="17" rx="2.6" fill="${col}"/><rect x="-2.3" y="14" width="4.6" height="12" rx="2.3" fill="${slv === 'long' ? col : sk}"/><circle cx="0" cy="27.5" r="2.7" fill="${sk}"/>${extra || ''}</g></g>`;
-  const leg = (cls, col, rot) => { const wd = ty === 'kurta' ? 9 : 7.2, up = ty === 'shorts' ? 18 : (ty === 'dress' || ty === 'sari') ? 0 : 38;
-    return `<g transform="translate(22 54)"><g class="${cls}" ${rot ? `transform="rotate(${rot})"` : ''}><rect x="${-wd / 2}" y="-2" width="${wd}" height="40" rx="3" fill="${up >= 38 ? col : sk}"/>${up > 0 && up < 38 ? `<rect x="${-wd / 2}" y="-2" width="${wd}" height="${up + 2}" rx="3" fill="${col}"/>` : ''}<path d="M-4 36 h8 q5 0 7 5 v3 h-15z" fill="${shoe}"/></g></g>`; };
-  let torso;
-  if (ty === 'dress') torso = `<g transform="translate(22 54)"><g class="sk"><path d="M-8 -28 Q0 -34 8 -28 L8 -10 L16 26 Q0 31 -16 26 L-8 -10Z" fill="${top}"/><path d="M-16 24 Q0 29 16 24 L16 26 Q0 31 -16 26Z" fill="${o.trim || dk(top)}"/>${o.pat ? `<g fill="${o.pat}" opacity=".8"><circle cx="-6" cy="4" r="2.4"/><circle cx="5" cy="10" r="2.4"/><circle cx="-2" cy="19" r="2.4"/><circle cx="9" cy="-2" r="2"/><circle cx="-9" cy="16" r="2"/></g>` : ''}</g></g>`;
-  else if (ty === 'sari') torso = `<path d="M15 26 Q22 21 29 26 L30 46 L14 46Z" fill="${o.blouse || dk(top)}"/><g transform="translate(22 54)"><g class="sk"><path d="M-9 -10 L9 -10 L13 36 Q0 40 -13 36Z" fill="${top}"/><path d="M-13 33 Q0 37 13 33 L13 36 Q0 40 -13 36Z" fill="${o.trim || '#e6b84a'}"/><path d="M-5 -30 L1 -32 L10 4 L3 8Z" fill="${top}" stroke="${o.trim || '#e6b84a'}" stroke-width="1.4"/><path d="M-9 -10 L9 -10" stroke="${o.trim || '#e6b84a'}" stroke-width="2"/></g></g>`;
-  else if (ty === 'kurta') torso = `<g transform="translate(22 54)"><g class="sk"><path d="M-7 -28 Q0 -34 7 -28 L9 20 L-9 20Z" fill="${top}"/><rect x="-1" y="-30" width="2" height="16" fill="${dk(top)}" opacity=".5"/></g></g>`;
-  else torso = `<path d="M15 26 Q22 21 29 26 L30 56 Q22 59 14 56Z" fill="${top}"/>${o.vest ? `<path d="M15 26 Q22 21 29 26 L30 56 Q22 59 14 56Z" fill="${o.vest}"/><rect x="14" y="36" width="16" height="3" fill="#f2f5d0"/>` : ''}${ty === 'shorts' || o.lanyard ? '' : `<rect x="14" y="52" width="16" height="4" fill="${bot}"/>`}${o.lanyard ? '<path d="M20 24 L22 38 L24 24" stroke="#2a8be8" stroke-width="1.4" fill="none"/><rect x="21" y="38" width="4" height="5" fill="#fff"/>' : ''}`;
-  const rk = acc === 'rucksack' ? `<rect x="9" y="26" width="9" height="19" rx="3.5" fill="${o.bagc || '#c8482b'}"/>` : '';
-  let head = '';
-  const face = `<circle cx="29.2" cy="14.4" r="1.8" fill="${sk}"/><circle cx="26.2" cy="12" r="1" fill="#1a1210"/><path d="M26 17.2 q2 1 3.6 0" stroke="${shade(sk, -.35)}" stroke-width=".8" fill="none"/>`;
-  const hcol = o.hcol || '#d65a1b';
-  if (hdt === 'hijab') head = `<path d="M13 14 Q12 3 22 3 Q31 3 30 14 L32 22 Q31 31 24 34 L13 34 Q10 23 13 14Z" fill="${hcol}"/><circle cx="23.2" cy="13.6" r="6.3" fill="${sk}"/><circle cx="29" cy="14.6" r="1.6" fill="${sk}"/><circle cx="26.4" cy="12.4" r="1" fill="#1a1210"/><path d="M15 9 Q22 2 30 9 L29.4 11 Q23 6 16 12Z" fill="${hcol}"/>`;
-  else if (hdt === 'gele') head = `<rect x="19" y="20" width="4" height="7" fill="${sk}"/><circle cx="22" cy="13.5" r="7.2" fill="${sk}"/>${face}<ellipse cx="20" cy="4.5" rx="11.5" ry="6.2" fill="${hcol}"/><path d="M10 6 Q20 11 30 5" stroke="${shade(hcol, -.3)}" stroke-width="1.2" fill="none"/><path d="M13 1.5 Q20 6 28 2" stroke="${shade(hcol, .35)}" stroke-width="1.2" fill="none"/><path d="M26 2 Q36 -3 34 6 Q31 3 27 7Z" fill="${hcol}"/>`;
-  else if (hdt === 'topi') head = `<rect x="19" y="20" width="4" height="7" fill="${sk}"/><circle cx="22" cy="13.5" r="7.2" fill="${sk}"/>${face}<path d="M14.8 11 Q14 5 22 5 Q27 5 29 9 Q22 7 18 12Z" fill="${hr}"/><path d="M14.5 8.5 Q15 2 22 2.4 Q29 3 29.5 8.5 L29.5 9.4 L14.5 9.4Z" fill="#f3f0e4"/><path d="M15 6.6 h14" stroke="#c9b87a" stroke-width="1"/>`;
-  else if (hdt === 'cap') head = `<rect x="19" y="20" width="4" height="7" fill="${sk}"/><circle cx="22" cy="13.5" r="7.2" fill="${sk}"/>${face}<path d="M14.8 10 Q14 3.4 22 3.4 Q30 3.4 29.6 9.6 L32 10 Q31 12 28 11 L15 11Z" fill="${o.hcol || '#5a5d66'}"/>`;
-  else if (hdt === 'hood') head = `<rect x="19" y="20" width="4" height="7" fill="${sk}"/><circle cx="19.5" cy="14" r="10" fill="${top}"/><circle cx="22.5" cy="13.6" r="6.6" fill="${sk}"/><circle cx="28.3" cy="14.6" r="1.6" fill="${sk}"/><circle cx="26" cy="12.2" r="1" fill="#1a1210"/>`;
-  else head = `<rect x="19" y="20" width="4" height="7" fill="${sk}"/><path d="M14.5 11 q-2 8 1 15 q-3 -6 -1.5 -15Z" fill="${hr}" ${hdt === 'long' ? '' : 'opacity="0"'}/>${hdt === 'long' ? `<path d="M15 11 Q13 3 22 3.4 Q30 4 29 11 Q22 7 17 12 L18 30 Q12 30 14 12Z" fill="${hr}"/>` : ''}<circle cx="22" cy="13.5" r="7.2" fill="${sk}"/>${face}${hdt === 'bun' ? `<circle cx="15.5" cy="6" r="3.6" fill="${hr}"/>` : ''}${hdt === 'long' ? '' : `<path d="M14.8 12 Q13.6 4 22 4.2 Q30 5 29 10 Q26 6.6 22 7.4 Q18 8 16.5 14Z" fill="${hr}"/>`}${hdt === 'headband' ? `<path d="M15 8.4 Q22 4.6 29.4 8.6" stroke="#e8281f" stroke-width="2.2" fill="none"/>` : ''}`;
-  // accessories
-  let aF = '', extraBody = '', fixedArmF = null;
-  if (acc === 'bag') aF = `<rect x="-3" y="28" width="12" height="14" rx="1.6" fill="${o.bagc || '#2b8c5a'}"/><path d="M0 28 Q3 22 6 28" stroke="#222" stroke-width="1" fill="none"/>`;
-  if (acc === 'bags') aF = `<rect x="-3" y="28" width="12" height="15" rx="1.6" fill="${o.bagc || '#e0b020'}"/><path d="M0 28 Q3 22 6 28" stroke="#222" stroke-width="1" fill="none"/>`;
-  if (acc === 'umb') fixedArmF = `<g transform="translate(22 26)"><path d="M0 0 L8 12 L11 -2" stroke="${top}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="11" cy="-3" r="2.7" fill="${sk}"/></g><g transform="translate(33 -3)"><g class="ub"><path d="M0 0 V-34" stroke="#333" stroke-width="1.6"/><path d="M-21 -34 Q0 -54 21 -34 Q10 -39 0 -37 Q-10 -39 -21 -34Z" fill="${o.ubc || '#1f2a44'}"/><path d="M-21 -34 Q-10 -39 0 -37 Q10 -39 21 -34" stroke="rgba(255,255,255,.35)" stroke-width="1" fill="none"/></g></g>`;
-  if (acc === 'phone') fixedArmF = `<g transform="translate(22 26)"><path d="M0 0 L5 16 L9 -5" stroke="${top}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="9.4" cy="-6" r="2.6" fill="${sk}"/><rect x="9" y="-14" width="4" height="9" rx="1" fill="#1a1d24"/><rect x="9.8" y="-12.6" width="2.4" height="5.6" fill="#8ad4ff"/></g>`;
-  if (acc === 'push') fixedArmF = `<g transform="translate(22 26)"><path d="M0 0 L13 12 L17 18" stroke="${top}" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="18" cy="19" r="2.6" fill="${sk}"/></g><path d="M38 44 H46 L52 64" stroke="#444" stroke-width="2.4" fill="none"/><path d="M46 60 Q62 56 76 64 L76 78 L52 78Z" fill="${o.pc || '#3b6fc0'}"/><path d="M50 60 Q56 40 76 52 Q70 58 62 60Z" fill="${shade(o.pc || '#3b6fc0', -.25)}"/><circle cx="64" cy="58" r="5" fill="${SK[1]}"/><path d="M52 78 L50 90 M72 78 L74 90" stroke="#444" stroke-width="2"/>${whl(50, 91, 7)}${whl(76, 91, 7)}`;
-  if (acc === 'dog') extraBody = `<path d="M33 54 Q48 62 66 74" stroke="#d33" stroke-width="1" fill="none"/><g transform="translate(0 0)"><g transform="translate(55 70)"><g class="tail"><path d="M0 0 Q1 -8 5 -7" stroke="#b9854e" stroke-width="3" fill="none" stroke-linecap="round"/></g></g><g transform="translate(60 84)"><g class="dA"><rect x="-2" y="-4" width="4" height="14" rx="2" fill="#a2713f"/></g></g><g transform="translate(78 84)"><g class="dB"><rect x="-2" y="-4" width="4" height="14" rx="2" fill="#a2713f"/></g></g><ellipse cx="70" cy="76" rx="15" ry="7.5" fill="#c4915a"/><g transform="translate(62 84)"><g class="dB"><rect x="-2" y="-4" width="4" height="14" rx="2" fill="#c4915a"/></g></g><g transform="translate(80 84)"><g class="dA"><rect x="-2" y="-4" width="4" height="14" rx="2" fill="#c4915a"/></g></g><circle cx="86" cy="70" r="6.5" fill="#c4915a"/><path d="M89 72 L96 74 L90 77Z" fill="#c4915a"/><circle cx="96" cy="74" r="1.3" fill="#222"/><path d="M82 66 Q80 76 84 78 Q86 70 86 65Z" fill="#7d5128"/><circle cx="87" cy="68" r="1" fill="#222"/><rect x="79" y="74" width="5" height="2" fill="#d33"/></g>`;
-  if (acc === 'dog') fixedArmF = `<g transform="translate(22 26)"><path d="M0 0 L9 14 L13 22" stroke="${top}" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="14" cy="23.5" r="2.6" fill="${sk}"/></g>`;
-  const lr = o.lean ? ` transform="rotate(${o.lean} 22 98)"` : '';
-  let s = `<ellipse cx="22" cy="98" rx="${o.shw || 15}" ry="2.8" fill="rgba(40,35,30,.22)"/><g${lr}><g class="bodyg">${rk}`;
-  const skirtT = ty === 'dress' || ty === 'sari' || ty === 'kurta';
-  const bk = idle ? ' ' : '';
-  s += arm('aB', dk(slv === 'long' || true ? top : top), '', idle ? -6 : 0);
-  if (!skirtT) s += leg('gB', dk(bot), idle ? -5 : 0) + torso + leg('gF', bot, idle ? 5 : 0);
-  else s += leg('gB', dk(bot), idle ? -5 : 0) + leg('gF', bot, idle ? 5 : 0) + torso;
-  s += `<g class="hdg">${head}</g>`;
-  s += extraBody;
-  s += fixedArmF || arm('aF', top, aF, idle ? 8 : 0);
-  s += '</g></g>';
-  return { svg: s, vw };
+// ---------- pedestrians: REAL illus() characters on the shared ground plane (perspective.js) ----------
+// Same rig, same proportions, same halo as the heroes; only the size comes from scaleAt(y). Cheap mode: no talk/blink loops (blink only for the 3 nearest).
+const K = { b1: '#f4d3bc', b2: '#efc4a4', b3: '#e6b894', a1: '#d9a074', a2: '#c68e63', a3: '#b07a50', f1: '#8a5a3b', f2: '#6e4529', f3: '#573520' };
+const PED = [   // 14 everyday outfits: ICAST outfits recoloured + new option sets, mixed skin tones
+  { outfit: 'blazer', skin: K.a3, hairStyle: 'short', hair: '#14100e', facial: 'stubble', c1: '#2b2d42' },                                                  // 0 commuter, navy suit
+  { outfit: 'jumper', skin: K.f2, hairStyle: 'none', hair: '#0b0b10', cover: 'cap', cc1: '#1d1d24', cc2: '#e63946', c1: '#dfe7ef', c3: '#3a86ff', brow: '#0b0b10' }, // 1 hoodie + cap
+  { outfit: 'blazer', skin: K.b3, hairStyle: 'bun', hair: '#4a2c17', c1: '#2a9d8f', lip: '#c4545f' },                                                  // 2 teal blazer, bun
+  { outfit: 'jumper', skin: K.b2, hairStyle: 'pony', hair: '#c9a227', c1: '#ffffff', c3: '#2a7f62', eye: '#5b7fa6' },                                     // 3 green jumper, blonde pony
+  { outfit: 'jumper', skin: K.b1, hairStyle: 'short', hair: '#cfcfcf', c1: '#cfe8ff', c3: '#6d597a', glasses: true },                                       // 4 older man, glasses
+  { outfit: 'blazer', skin: K.a1, hairStyle: 'plait', hair: '#1a1210', c1: '#e07a5f', glasses: true, lip: '#b5485a' },                                     // 5 student, coral blazer
+  Object.assign({}, ICAST.rahim, { skin: K.a2, c1: '#bde0fe', c3: '#1d3557', facial: undefined }),                                                           // 6 kurta, blue
+  Object.assign({}, ICAST.amina, { cc1: '#0b7285', cc2: '#15aabf', c1: '#0b7285', c2: '#ffd166', c3: '#5f3dc4', skin: K.a1 }),                                // 7 hijab + kameez, teal
+  Object.assign({}, ICAST.priya, { c1: '#d6336c', c2: '#ffd43b', c3: '#862e9c', skin: K.a2 }),                                                               // 8 saree, pink
+  Object.assign({}, ICAST.ada, { c1: '#087f5b', c2: '#fcc419', c3: '#e8590c', cc1: '#e8590c', cc2: '#fcc419', skin: K.f3 }),                                 // 9 ankara + gele, green
+  Object.assign({}, ICAST.kofi, { c1: '#1c3d8f', skin: K.f1 }),                                                                                              // 10 kaftan, blue
+  Object.assign({}, ICAST.tom, { c3: '#2b6cb0', hair: '#3b2a1a', skin: K.b3, facial: undefined }),                                                           // 11 shirt + blue jumper
+  { outfit: 'jumper', skin: K.b1, hairStyle: 'bob', hair: '#9e9e9e', c1: '#fff', c3: '#c2255c', lip: '#c4545f' },                                          // 12 older woman, magenta jumper
+  Object.assign({}, ICAST.emma, { c1: '#6a4c93', hair: '#1a1210', skin: K.b2 })                                                                              // 13 plum blazer
+];
+window.PED_SETS = PED;
+const MOUTH_A = 'M42 77 Q50 82 58 77', MOUTH_B = 'M42 77 Q50 88 58 77';
+function propHtml(kind, col, hand) {   // appended INTO the rig's forearm / back groups so they swing with the body
+  if (kind === 'bag') return `<path d="M${hand} 198 V208" stroke="#222" stroke-width="2"/><path d="M${hand - 8} 216 Q${hand} 200 ${hand + 8} 216" fill="none" stroke="#222" stroke-width="2"/><rect x="${hand - 12}" y="214" width="24" height="28" rx="3" fill="${col}"/><rect x="${hand - 12}" y="214" width="24" height="6" fill="rgba(255,255,255,.35)"/>`;
+  if (kind === 'cup') return `<path d="M${hand - 5} 184 h11 l-1.5 15 h-8z" fill="#f4f1e8" stroke="#8a5a2c" stroke-width="1"/><rect x="${hand - 5.5}" y="184" width="12" height="3.5" fill="#8a5a2c"/>`;
+  if (kind === 'phone') return `<rect x="${hand - 6}" y="188" width="12" height="20" rx="2.2" fill="#15171d"/><rect x="${hand - 4}" y="191" width="8" height="14" rx="1" fill="#7cc8ff"/>`;
+  return '';
+}
+function dogSvg(col) {   // side view, faces right, 70 x 44
+  return `<g class="dgA"><rect x="48" y="26" width="6" height="16" rx="2.5" fill="${col}"/></g><g class="dgB"><rect x="40" y="26" width="6" height="16" rx="2.5" fill="${shade(col, -.2)}"/></g>
+   <ellipse cx="34" cy="24" rx="22" ry="11" fill="${col}"/><g class="dgB"><rect x="14" y="26" width="6" height="16" rx="2.5" fill="${shade(col, -.2)}"/></g><g class="dgA"><rect x="22" y="26" width="6" height="16" rx="2.5" fill="${col}"/></g>
+   <g transform="translate(10 18)"><g class="tail"><path d="M0 0 Q-8 -8 -6 -16" stroke="${col}" stroke-width="5" fill="none" stroke-linecap="round"/></g></g>
+   <circle cx="58" cy="14" r="9" fill="${col}"/><path d="M62 16 L72 19 L63 23Z" fill="${shade(col, -.15)}"/><path d="M52 8 Q49 -1 56 3Z" fill="${shade(col, -.35)}"/><circle cx="61" cy="12" r="1.6" fill="#1a1210"/><circle cx="71" cy="18.5" r="1.8" fill="#1a1210"/><path d="M50 22 Q56 27 62 23" stroke="#c8202a" stroke-width="2.2" fill="none"/>`;
+}
+// person(layer, set, {x|at, y, dir, v, mode:'walk'|'stand'|'chat'|'listen'|'phone'|'cross', prop, pc, y1, blink, ph, gap, hs}, T, D) -> wrapper (carries the contact shadow)
+function person(layer, set, o, T, D) {
+  const y = o.y, s = scaleAt(y) * (o.hs || 1), dir = o.dir || 1, mode = o.mode || 'walk';
+  const wrap = box(layer, { left: 0, top: 0, width: 1, height: 1 }); wrap.setAttribute('data-ped', '1');
+  contactShadow(wrap, 0, y, s);
+  const api = dropRigShadow(illus(wrap, Object.assign({ x: 0, y, s }, set)));
+  api.g.style.filter = 'drop-shadow(0 0 2px rgba(255,255,255,.9))';   // same sticker halo as the heroes
+  const P = api.P, ph = o.ph || 0;
+  if (o.prop === 'bag' || o.prop === 'cup' || o.prop === 'phone') P.aff.insertAdjacentHTML('beforeend', propHtml(o.prop, o.pc || '#e0b020', 112));
+  if (o.prop === 'rucksack') {
+    const c = o.pc || '#c8482b';
+    P.dr0.insertAdjacentHTML('beforeend', `<rect x="36" y="96" width="88" height="92" rx="16" fill="${c}"/><rect x="48" y="150" width="64" height="26" rx="6" fill="${shade(c, -.2)}"/>`);
+    P.dr1.insertAdjacentHTML('beforeend', `<path d="M58 86 Q54 130 62 174 M102 86 Q106 130 98 174" stroke="${shade(c, -.3)}" stroke-width="6" fill="none"/>`);
+  }
+  if (o.prop === 'dog') {
+    const dx = dir * 92 * s, ds = s * .95, col = o.pc || '#b9854e', hx = (dir > 0 ? 32 : -32) * s, hy = y - 127 * s;
+    box(wrap, { left: 0, top: 0, width: 1, height: 1 }, `<svg width="1" height="1" style="overflow:visible"><path d="M${hx} ${hy} Q${(hx + dx + (dir > 0 ? 18 : -18) * ds) / 2} ${hy + 40 * s} ${dx + (dir > 0 ? 54 : -54) * ds} ${y - 34 * ds}" stroke="#c8202a" stroke-width="${Math.max(1, 1.6 * s)}" fill="none"/></svg>`);
+    const dg = box(wrap, { left: dx - 35 * ds, top: y - 44 * ds, width: 70 * ds, height: 44 * ds, transform: dir < 0 ? 'scaleX(-1)' : 'none' }, `<svg viewBox="0 0 70 44" width="${70 * ds}" height="${44 * ds}" style="overflow:visible;display:block">${dogSvg(col)}</svg>`);
+    contactShadow(wrap, dx, y, ds, { rx: 30, ry: 5 });
+    const pp = o.p || .6;
+    lp(dg.querySelectorAll('.dgA'), { rotation: 24 }, { rotation: -24, yoyo: true, ease: 'sine.inOut' }, pp / 2, T, D); lp(dg.querySelectorAll('.dgB'), { rotation: -24 }, { rotation: 24, yoyo: true, ease: 'sine.inOut' }, pp / 2, T, D);
+    lp(dg.querySelectorAll('.tail'), { rotation: -14 }, { rotation: 18, yoyo: true, ease: 'sine.inOut' }, .2, T, D);
+    dg.querySelectorAll('g').forEach(g => g.setAttribute('data-svg-origin', '0 0'));
+    dg.querySelectorAll('.dgA,.dgB').forEach(g => { const r = g.firstElementChild; gsap.set(g, { svgOrigin: `${+r.getAttribute('x') + 3} 26` }); });
+    dg.querySelectorAll('.tail').forEach(g => gsap.set(g, { svgOrigin: '0 0' }));
+  }
+  if (o.blink) api.blink(T, D);
+  const wp = o.p || (0.78 - (1 - Math.min(1, scaleAt(y))) * 0.25);
+  if (mode === 'walk') {
+    api.walk(T, D, 0, wp);
+    const v = (o.v || 85) * s, x0 = dir > 0 ? -80 * s - 30 : W + 80 * s + 30, S = W + 160 * s + 60 + (o.gap || 160);
+    conv(wrap, x0, x0 + dir * S, prog(o.at || 0, x0, dir, S), v, T, D);
+  } else if (mode === 'cross') {   // walks toward camera across the zebra: y and size follow scaleAt, fades at both ends
+    api.walk(T, D, 0, wp);
+    const y1 = o.y1, r = scaleAt(y1) / scaleAt(y), dur = o.dur || 6, n = Math.max(0, Math.floor((D - ph) / dur) - 1);
+    gsap.set(wrap, { x: o.x, transformOrigin: `0px ${y}px` });
+    tl.fromTo(wrap, { y: 0, scale: 1 }, { y: y1 - y, scale: r, duration: dur, ease: 'none', repeat: n, immediateRender: true }, T + ph);
+    tl.fromTo(wrap, { opacity: 0 }, { keyframes: { opacity: [0, 1, 1, 0], easeEach: 'none' }, duration: dur, ease: 'none', repeat: n, immediateRender: false }, T + ph);
+    if (ph) tl.set(wrap, { opacity: 0 }, T);
+  } else {
+    gsap.set(wrap, { x: o.x });
+    if (mode === 'phone') {
+      tl.set(P.af, { rotation: -38 }, T); tl.set(P.aff, { rotation: -118 }, T);
+      tl.to(P.h, { rotation: 5, y: 2, duration: 2.2, yoyo: true, repeat: Math.floor(D / 2.2), ease: 'sine.inOut' }, T + ph * .3);
+      tl.to(P.t, { rotation: 1.2, x: 1.5, duration: 2.8, yoyo: true, repeat: Math.floor(D / 2.8), ease: 'sine.inOut' }, T);
+    } else api.breathe(T, D);
+    if (mode === 'chat') {
+      api.gesture(T + ph, Math.max(2, D - ph));
+      tl.fromTo(api.face.mouth, { attr: { d: MOUTH_A } }, { attr: { d: MOUTH_B }, duration: .22, yoyo: true, repeat: Math.max(1, Math.floor(D / .22) - 1), ease: 'none' }, T);
+    }
+    if (mode === 'listen') tl.to(P.h, { rotation: 4, y: 1, duration: .5, yoyo: true, repeat: Math.max(1, Math.floor(D / 2.4) - 1), repeatDelay: 1.4, ease: 'sine.inOut' }, T + 1 + ph);
+    if (o.look) api.look(o.look, 0, T, .01);
+  }
+  return wrap;
 }
 
-// ---------- tiny helper: instantiate a walker ----------
-function addWalker(layer, o, T, D) {
-  const b = wk(o), sc = o.sc, ww = b.vw * sc, hh = 100 * sc;
-  const el = box(layer, { left: 0, top: o.y - hh, width: ww, height: hh });
-  const inner = box(el, { left: 0, top: 0, width: ww, height: hh, transformOrigin: `${22 / b.vw * 100}% 50%`, transform: o.dir < 0 ? 'scaleX(-1)' : 'none' }, `<svg viewBox="0 0 ${b.vw} 100" width="${ww}" height="${hh}" style="overflow:visible;display:block">${b.svg}</svg>`);
-  const q = c => el.querySelectorAll('.' + c), run = !!o.run, per = run ? 0.17 : (o.per || 0.34), amp = o.idle ? 0 : (run ? 44 : (o.amp || 25));
-  if (!o.idle) {
-    const lF = q('gF'), lB = q('gB'), aF = q('aF'), aB = q('aB');
-    const A = [...lF, ...(o.acc === 'push' || o.acc === 'umb' || o.acc === 'phone' || o.acc === 'dog' ? [] : []), ...aB], B = [...lB, ...aF];
-    if (o.acc === 'push' || o.acc === 'umb' || o.acc === 'phone' || o.acc === 'dog') { A.length = 0; B.length = 0; A.push(...lF, ...aB); B.push(...lB); }
-    lp(A, { rotation: amp }, { rotation: -amp, yoyo: true, ease: 'sine.inOut' }, per, T, D);
-    lp(B, { rotation: -amp }, { rotation: amp, yoyo: true, ease: 'sine.inOut' }, per, T, D);
-    lp(el, { y: 0 }, { y: -(run ? 3.4 : 1.8) * sc, yoyo: true, ease: 'sine.inOut' }, per, T, D);
-    const skg = q('sk'); if (skg.length) lp(skg, { skewX: -3 }, { skewX: 3, yoyo: true, ease: 'sine.inOut' }, per * 2, T, D);
-    if (run) lp(q('bodyg'), { rotation: 1 }, { rotation: -1, yoyo: true, ease: 'sine.inOut' }, per, T, D);
-  } else {
-    lp(q('bodyg'), { y: 0 }, { y: -0.7, yoyo: true, ease: 'sine.inOut' }, 1.3 + (o.ph || 0) * .3, T + (o.ph || 0) * .4, D);
-  }
-  const ub = q('ub'); if (ub.length) lp(ub, { rotation: -3 }, { rotation: 3, yoyo: true, ease: 'sine.inOut' }, 1.4, T, D);
-  const tail = q('tail'); if (tail.length) lp(tail, { rotation: -14 }, { rotation: 18, yoyo: true, ease: 'sine.inOut' }, 0.18, T, D);
-  const dA = q('dA'), dB = q('dB'); if (dA.length) { lp(dA, { rotation: 30 }, { rotation: -30, yoyo: true, ease: 'sine.inOut' }, per, T, D); lp(dB, { rotation: -30 }, { rotation: 30, yoyo: true, ease: 'sine.inOut' }, per, T, D); }
-  const wh = q('wh'); if (wh.length) lp(wh, { rotation: 0 }, { rotation: 360 }, 2 * Math.PI * 7 * sc / o.v, T, D);
-  if (!o.idle) {
-    const gap = o.gap || 300, x0 = o.dir > 0 ? -ww - 20 : W + 20, S = W + ww + 40 + gap, x1 = x0 + o.dir * S;
-    conv(el, x0, x1, prog(o.at, x0, o.dir, S), o.v, T, D);
-  } else tl.set(el, { x: o.at }, T);
-  return el;
-}
 
 // ---------- static decor builders ----------
 function pigeon(p, x, y, sc, flip, T, D, seed, o) {
@@ -237,7 +252,7 @@ function busStop(p, x, y, T, D) {
   return el;
 }
 function drift(layer, kind, o, T, D) {   // blown litter / leaves; generic places only
-  const R = rr(o.seed), sc = o.sc || 1, dir = o.dir || 1; let svg, w, h;
+  const R = rr(o.seed), sc = (o.sc || 1) * 2 * scaleAt(o.y), dir = o.dir || 1; let svg, w, h;
   if (kind === 'crisps') { w = 18; h = 14; svg = `<path d="M1 3 L16 1 L17 11 L2 13Z" fill="#d9a21b"/><path d="M1 3 L16 1" stroke="#fff" stroke-width="1.5" stroke-dasharray="1.5 1"/><path d="M5 7 q4 -3 8 0 q-4 3 -8 0" fill="#e8442c"/>`; }
   else if (kind === 'news') { w = 30; h = 22; svg = `<path d="M2 3 L28 1 L29 20 L3 21Z" fill="#efeee6"/><path d="M5 6 H25 M5 10 H25 M5 14 H18" stroke="#777" stroke-width="1.4"/><rect x="5" y="5" width="9" height="6" fill="#999" opacity=".7"/>`; }
   else if (kind === 'bag') { w = 26; h = 30; svg = `<path d="M13 1 Q3 4 3 16 Q4 27 13 29 Q22 27 23 16 Q23 4 13 1Z" fill="rgba(255,255,255,.55)" stroke="rgba(190,210,225,.9)" stroke-width="1"/><path d="M9 1 Q13 -5 17 1" stroke="rgba(255,255,255,.8)" stroke-width="1.6" fill="none"/>`; }
@@ -356,20 +371,20 @@ window.ukStreet = function (w, o) {
     for (let k = 0; k < 2; k++) { const rg = box(root, { left: x - rx * .5 + (k ? 18 : -14), top: y - ry * .5, width: rx, height: ry, borderRadius: '50%', border: '1.5px solid rgba(255,255,255,.8)', opacity: 0 });
       tl.fromTo(rg, { scale: .2, opacity: .9 }, { scale: 1, opacity: 0, duration: 1.1, repeat: Math.max(0, Math.floor(D / 1.7) - 1), repeatDelay: .6, ease: 'sine.out', immediateRender: false }, T + k * .8 + i * .3); }
   });
-  // far pavement walkers (tiny)
+  // ---- far pavement walkers: same rig, size from scaleAt(484) = 0.46 (they stand on the far kerb behind the road)
   const far = box(root, { left: 0, top: 0, width: W, height: H });
-  const fcols = [['#c0392b', '#2d3550'], ['#2c8a6b', '#4a4a52'], ['#e0a526', '#33384a'], ['#6a4fb0', '#2d3550'], ['#d4604a', '#3a3a40']];
-  for (let i = 0; i < 6; i++) addWalker(far, { skin: SK[(i * 2 + 1) % 7], top: fcols[i % 5][0], bot: fcols[i % 5][1], hair: '#1d1612', type: i % 3 === 2 ? 'dress' : 'trou', head: i % 4 === 1 ? 'hijab' : 'hair', hcol: '#3a6ea5', acc: i % 3 === 0 ? 'bag' : 'none', sc: .27, y: 483, dir: i % 2 ? -1 : 1, v: 14 + i * 3, at: 100 + i * 210, gap: 150, per: .5, amp: 22 }, T, D);
+  [[6, 1, 40, 60], [13, -1, 520, 80], [8, 1, 700, 40], [3, -1, 1000, 90]].forEach(([k, dir, at, v], i) => person(far, PED[k], { y: 484, dir, at, v, gap: 300, prop: i === 1 ? 'bag' : undefined, pc: '#2b8c5a' }, T, D));
 
   const lanes = {};
   const lane = (name) => lanes[name] = box(root, { left: 0, top: 0, width: W, height: H });
-  const farSlow = lane('farSlow'), farFast = lane('farFast'), nearSlow = lane('nearSlow'), nearFast = lane('nearFast');
+  const farSlow = lane('farSlow'), farFast = lane('farFast');
   let vid = 0;
   function veh(parent, o) {
     const f = o.dir < 0, b = VT[o.t](f, o), ww = b.w * o.sc, hh = b.h * o.sc, R = rr(300 + (vid++) * 17);
     const el = box(parent, { left: 0, top: o.base - hh + 1, width: ww, height: hh });
     const svg = `<svg viewBox="0 0 ${b.w} ${b.h}" width="${ww}" height="${hh}" style="overflow:visible;display:block"><g ${f ? `transform="translate(${b.w} 0) scale(-1 1)"` : ''}><g class="bd">${b.body}</g>${b.wheels.map(q => whl(q[0], q[1], q[2])).join('')}</g></svg>`;
     el.insertAdjacentHTML('afterbegin', svg);
+    const shd = contactShadow(el, ww / 2, hh - 1, 1, { rx: ww * .52, ry: Math.max(5, hh * .09), op: .4 }); el.insertBefore(shd, el.firstChild);
     const q = c => el.querySelectorAll('.' + c);
     lp(q('wh'), { rotation: 0 }, { rotation: 360 }, 2 * Math.PI * b.wheels[0][2] * o.sc / o.v, T, D);
     lp(q('bd'), { y: 0 }, { y: o.t === 'bike' ? -1.8 : -1.5, yoyo: true, ease: 'sine.inOut' }, o.t === 'bike' ? .3 : .28 + R() * .18, T, D);
@@ -385,63 +400,49 @@ window.ukStreet = function (w, o) {
     conv(el, x0, x1, s0, o.v, T, D);
     return el;
   }
-  // far lane (cars go LEFT TO RIGHT), fast convoy, S common so nobody overlaps
-  const FF = { dir: 1, base: 556, v: 168, S: 3000 };
-  veh(farFast, Object.assign({ t: 'hatch', col: '#c9ccd2', sc: .78, s: 380, sk: 1 }, FF));
-  veh(farFast, Object.assign({ t: 'taxi', sc: .76, s: 900 }, FF));
-  veh(farFast, Object.assign({ t: 'van', sc: .74, s: 1350, b: 0, st: '#2b6cb0' }, FF));
-  veh(farFast, Object.assign({ t: 'bus', rt: '88', col: '#cf2a31', sc: .66, s: 1950 }, FF));
-  veh(farFast, Object.assign({ t: 'hatch', col: '#d95a2b', sc: .78, s: 2550, sk: 4 }, FF));
-  veh(farSlow, { t: 'bike', dir: 1, base: 540, sc: .74, v: 78, S: 2100, s: 500, sk: 3 });
-  veh(farSlow, { t: 'bike', dir: 1, base: 541, sc: .72, v: 78, S: 2100, s: 1400, sk: 1 });
-  const NF = { dir: -1, base: 608, v: 236, S: 3400 };
-  veh(nearFast, Object.assign({ t: 'hatch', col: '#2f6fc4', sc: 1, s: 60, sk: 3 }, NF));
-  veh(nearFast, Object.assign({ t: 'bus', rt: '25', col: '#d6232b', sc: 1, s: 560 }, NF));
-  veh(nearFast, Object.assign({ t: 'taxi', sc: 1, s: 1100 }, NF));
-  veh(nearFast, Object.assign({ t: 'moped', sc: .95, s: 1650 }, NF));
-  veh(nearFast, Object.assign({ t: 'van', sc: 1, s: 2250, b: 0, col: '#f6f6f2', st: '#d93a2b' }, NF));
-  veh(nearFast, Object.assign({ t: 'hatch', col: '#e1b21a', sc: 1, s: 2850, sk: 5 }, NF));
-  veh(nearSlow, { t: 'lorry', dir: -1, base: 588, sc: .92, v: 58, S: 2300, s: 300 });
+  // vehicle size follows the SAME ground plane: H = person height at the lane (330*scaleAt(base)).  car length ~1.5 H, bus height ~1.1 H, lorry height ~1.05 H
+  const WD = { hatch: 180, taxi: 190, van: 236, bus: 334, lorry: 290, moped: 112, bike: 102 };
+  const vsc = (t, base) => { const Hh = personPx(base); return { hatch: 1.5 * Hh / 180, taxi: 1.55 * Hh / 190, van: 1.7 * Hh / 236, bus: 1.1 * Hh / 126, lorry: 1.05 * Hh / 118, moped: .9 * Hh / 80, bike: .95 * Hh / 86 }[t]; };
+  function convoy(parent, list, base, dir, v, gap, off) {
+    let cum = off || 0; const its = list.map(l => { const sc = vsc(l.t, base), ww = WD[l.t] * sc, it = { l, sc, ww, s: dir > 0 ? cum + ww : cum }; cum += ww + gap; return it; });
+    const S = Math.max(cum, W + Math.max(...its.map(i => i.ww)) + 80);
+    its.forEach(i => veh(parent, Object.assign({ dir, base, v, S, sc: i.sc, s: i.s % S }, i.l)));
+  }
+  // far lane (cars go LEFT TO RIGHT), lane y 548; far slow lane (bikes) y 536
+  convoy(farFast, [{ t: 'hatch', col: '#c9ccd2', sk: 1 }, { t: 'taxi' }, { t: 'van', b: 0, st: '#2b6cb0' }, { t: 'bus', rt: '88', col: '#cf2a31' }, { t: 'hatch', col: '#d95a2b', sk: 4 }], 548, 1, 215, 220, 300);
+  convoy(farSlow, [{ t: 'bike', sk: 3 }, { t: 'bike', sk: 1 }], 536, 1, 100, 700, 200);
+  // mid layer: pedestrians on the zebra (between the two traffic lanes), then 12% haze over everything farther than y=560
+  const mid = box(root, { left: 0, top: 0, width: W, height: H });
+  person(mid, PED[1], { x: 905, y: 556, y1: 602, mode: 'cross', dur: 6.5, ph: 0, prop: 'cup' }, T, D);
+  person(mid, PED[13], { x: 968, y: 562, y1: 606, mode: 'cross', dur: 6.5, ph: 3.2, prop: 'bag', pc: '#e63946' }, T, D);
+  box(root, { left: 0, top: 470, width: W, height: 130, background: `linear-gradient(to bottom, rgba(208,228,240,${hazeFor(500)}) 0%, rgba(208,228,240,${hazeFor(500)}) 68%, rgba(208,228,240,0) 100%)`, pointerEvents: 'none' });
+  const nearSlow = lane('nearSlow'), nearFast = lane('nearFast');
+  convoy(nearFast, [{ t: 'hatch', col: '#2f6fc4', sk: 3 }, { t: 'bus', rt: '25', col: '#d6232b' }, { t: 'taxi' }, { t: 'moped' }, { t: 'van', b: 0, col: '#f6f6f2', st: '#d93a2b' }, { t: 'hatch', col: '#e1b21a', sk: 5 }], 608, -1, 330, 260, 500);
+  convoy(nearSlow, [{ t: 'lorry' }], 588, -1, 80, 600, 300);
 
   // pavement
   const pave = box(root, { left: 0, top: 620, width: W, height: 100 }); pave.innerHTML = `<svg viewBox="0 620 1280 100" width="1280" height="100" style="display:block">${paveSvg()}</svg>`;
   const items = [], P = box(root, { left: 0, top: 0, width: W, height: H });
-  const add = (y, fn) => items.push([y, fn]);
-  // furniture
+  const add = (y, fn, raw) => items.push([y, fn, raw]);                  // furniture is scaled by FK*scaleAt(y) about its feet; raw = already sized
+  const FK = 1.6;                                                      // furniture was drawn for a 100 px person; heroes are 330 px, so a true x3.3 would swamp the frame: x1.6 compromise
   add(640, p => lampPost(p, 90, 640, T, D)); add(640, p => lampPost(p, 745, 640, T, D)); add(640, p => lampPost(p, 1215, 640, T, D));
   add(646, p => litterBin(p, 330, 648, T, D, '#c8202a', 1)); add(646, p => blackBin(p, 1060, 648, T, D));
   add(650, p => recyc(p, 1150, 652)); add(650, p => postbox(p, 255, 650));
   add(648, p => busStop(p, 560, 650, T, D)); add(648, p => bollards(p, 395, 640, 4));
   add(652, p => bench(p, 905, 656)); add(656, p => oldMan(p, 906, 656, T, D)); add(664, p => aboard(p, 800, 668, T, D));
   add(650, p => cycleRack(p, 1105, 652)); add(640, p => belisha(p, 826, 642, T, D)); add(640, p => pelican(p, 1022, 642, T, D));
-  add(660, p => pigeon(p, 955, 689, 1, false, T, D, 11)); add(660, p => pigeon(p, 986, 696, .9, true, T, D, 12)); add(660, p => pigeon(p, 930, 700, .95, false, T, D, 13));
-  add(716, p => pigeon(p, 612, 712, 1.1, true, T, D, 14)); add(716, p => pigeon(p, 220, 700, 1, false, T, D, 15));
-  // pigeon perched on a lamp head
-  add(300, p => pigeon(p, 818, 424, .8, true, T, D, 16));
-  // waiting queue at the bus stop (idle)
-  const Q = [{ skin: SK[1], top: '#2f6f9f', bot: '#2b2d3a', hair: '#2a1a12', head: 'long', acc: 'phone', sc: .98, y: 668, at: 520 }, { skin: SK[4], top: '#c8c3b4', bot: '#2e3a52', hair: '#111', head: 'hair', acc: 'rucksack', bagc: '#c8482b', sc: .96, y: 672, at: 548, ph: 1 }, { skin: SK[2], top: '#7b3b91', bot: '#7b3b91', type: 'dress', hair: '#111', head: 'hijab', hcol: '#e9e1ce', acc: 'bag', bagc: '#d14', sc: .94, y: 670, at: 576, ph: 2 }];
-  Q.forEach(q => add(q.y, p => addWalker(p, Object.assign({ idle: true, dir: 1, v: 1 }, q), T, D)));
-  const WK = [
-    { skin: SK[2], top: '#e0457b', trim: '#e6b84a', type: 'sari', hair: '#1a110c', head: 'bun', acc: 'bag', bagc: '#2b8c5a', sc: .8, y: 654, dir: 1, v: 46, at: 160, blouse: '#8a2342' },
-    { skin: SK[3], top: '#8fc3e6', bot: '#8fc3e6', type: 'kurta', hair: '#161616', head: 'topi', acc: 'none', sc: 1.04, y: 708, dir: -1, v: 62, at: 1010, shoe: '#6d4a2a' },
-    { skin: SK[1], top: '#1d6e6b', bot: '#1d6e6b', type: 'dress', hair: '#111', head: 'hijab', hcol: '#14304f', sleeve: 'long', acc: 'push', pc: '#3b6fc0', sc: .95, y: 692, dir: 1, v: 40, at: 330 },
-    { skin: SK[6], top: '#e9ab1d', bot: '#c7371d', type: 'dress', pat: '#2b1d8a', trim: '#2b1d8a', hair: '#111', head: 'gele', hcol: '#e86a17', acc: 'bags', sc: .88, y: 674, dir: -1, v: 52, at: 700 },
-    { skin: SK[0], top: '#232a3a', bot: '#232a3a', hair: '#7b5a2a', head: 'hair', sleeve: 'long', acc: 'umb', ubc: '#c8202a', sc: .64, y: 642, dir: 1, v: 38, at: 420 },
-    { skin: SK[5], top: '#3b3f4a', bot: '#2a4a8a', hair: '#111', head: 'hood', acc: 'phone', sc: .78, y: 664, dir: -1, v: 55, at: 1160 },
-    { skin: SK[3], top: '#16a39a', bot: '#222', type: 'shorts', hair: '#111', head: 'headband', run: true, lean: 6, vest: '#ffe14a', sc: 1, y: 700, dir: 1, v: 150, at: 80, gap: 700 },
-    { skin: SK[1], top: '#f2efe4', bot: '#4a4f6e', hair: '#3a2a1a', head: 'hair', sleeve: 'long', acc: 'dog', sc: .7, y: 647, dir: -1, v: 36, at: 880 },
-    { skin: SK[4], top: '#2e4d3a', bot: '#c8b48a', hair: '#0f0f0f', head: 'cap', hcol: '#d9c38c', sleeve: 'long', acc: 'none', sc: .78, y: 664, dir: 1, v: 50, at: 640, lanyard: false },
-    { skin: SK[2], top: '#2fa0d8', bot: '#2fa0d8', hair: '#111', head: 'bun', lanyard: true, acc: 'bag', bagc: '#333', sc: .62, y: 641, dir: -1, v: 44, at: 330 },
-    { skin: SK[3], top: '#3a3a42', bot: '#1d1d24', hair: '#111', head: 'cap', hcol: '#c8462b', sleeve: 'long', acc: 'bag', bagc: '#c7c7c0', sc: 1.02, y: 703, dir: 1, v: 58, at: 540 },
-    { skin: SK[2], top: '#2e8b6b', trim: '#d0a030', type: 'sari', blouse: '#7a2a2a', hair: '#161616', head: 'long', acc: 'bags', sc: .92, y: 686, dir: -1, v: 50, at: 1100 },
-    { skin: SK[5], top: '#f2f2f2', bot: '#2d3550', hair: '#111', head: 'hair', acc: 'rucksack', bagc: '#2a8be8', sc: .74, y: 656, dir: 1, v: 54, at: 40, per: .3 },
-    { skin: SK[0], top: '#6d5a44', bot: '#51565f', hair: '#bbbbbb', head: 'cap', hcol: '#6b6f78', sleeve: 'long', acc: 'none', sc: .76, y: 662, dir: -1, v: 28, at: 760, per: .46, amp: 18 },
-    { skin: SK[4], top: '#ffdf2b', vest: '#ffdf2b', bot: '#33384a', hair: '#111', head: 'hair', acc: 'rucksack', bagc: '#1b6bd0', sc: .86, y: 678, dir: 1, v: 60, at: 940 }
-  ];
-  WK.forEach(q => add(q.y, p => addWalker(p, q, T, D)));
-  add(676, p => mobility(p, T, D, 678, .9, 1, 520, 46));
-  add(697, p => kidScooter(p, T, D, 696, .84, -1, 330, 96));
-  items.sort((a, b) => a[0] - b[0]).forEach(it => it[1](P));
+  const pg = (x, y, sc, fl, sd) => add(y, p => pigeon(p, x, y, sc * FK * scaleAt(y), fl, T, D, sd), true);
+  pg(955, 689, 1, false, 11); pg(986, 696, .9, true, 12); pg(930, 700, .9, false, 13); pg(612, 712, 1.1, true, 14); pg(220, 700, 1, false, 15);
+  { const kl = FK * scaleAt(640); add(300, p => pigeon(p, 745 + 13 * kl, 640 - 223 * kl, .8 * kl, true, T, D, 16), true); }   // perched on the lamp head
+  // ---- pavement people (same rig as the heroes, size = scaleAt(y)); nobody walks nearer than y=692 so they never cover the heroes' feet
+  const pp = (y, set, o) => add(y, p => person(p, PED[set], Object.assign({ y }, o), T, D), true);
+  pp(634, 0, { dir: -1, at: 900, prop: 'cup' }); pp(648, 7, { dir: 1, at: 120, prop: 'bag', pc: '#e0b020' });
+  pp(676, 8, { dir: 1, at: 330, prop: 'bag', pc: '#2b8c5a', blink: true });
+  pp(656, 4, { dir: 1, at: 700, prop: 'dog', v: 70 });
+  pp(670, 10, { mode: 'chat', x: 120, blink: true }); pp(672, 9, { mode: 'listen', x: 215, blink: true, ph: .3 });             // chatting pair
+  pp(650, 5, { mode: 'phone', x: 478, prop: 'phone', ph: 1 }); pp(658, 12, { mode: 'stand', x: 604, prop: 'bag', pc: '#d14', ph: 3 });   // bus queue
+  add(697, p => kidScooter(p, T, D, 696, .65 * personPx(696) / 92, -1, 330, 130), true);
+  items.sort((a, b) => a[0] - b[0]).forEach(it => { const el = it[1](P); if (!it[2] && el) gsap.set(el, { scale: FK * scaleAt(it[0]), transformOrigin: '50% 100%' }); });
   // blown litter and leaves on generic stretches (flying/rolling along; never beside a brand sign)
   const L = box(root, { left: 0, top: 0, width: W, height: H });
   drift(L, 'crisps', { y: 706, sc: 1, dir: 1, v: 140, at: 200, seed: 31, gap: 600 }, T, D);
@@ -453,11 +454,11 @@ window.ukStreet = function (w, o) {
   // pigeons in flight over the road
   const fl = box(root, { left: 0, top: 0, width: W, height: H });
   [{ y: 560, dir: 1, v: 90, at: 200, seed: 41 }, { y: 520, dir: -1, v: 120, at: 900, seed: 42 }].forEach(f => {
-    const el = pigeon(fl, 0, f.y, .7, f.dir < 0, T, D, f.seed, { fly: true }), R = rr(f.seed);
+    const el = pigeon(fl, 0, f.y, .7 * FK * scaleAt(f.y), f.dir < 0, T, D, f.seed, { fly: true }), R = rr(f.seed);
     const x0 = f.dir > 0 ? -60 : W + 20, S = W + 100 + 500; conv(el, x0, x0 + f.dir * S, prog(f.at, x0, f.dir, S), f.v, T, D);
     lp(el, { y: 0 }, { y: -22, yoyo: true, ease: 'sine.inOut' }, 1.1 + R(), T, D);
   });
-  root.querySelectorAll('svg g').forEach(g => g.setAttribute('data-svg-origin', '0 0'));   // gsap: rotate SVG parts about their own local origin
+  root.querySelectorAll('svg g').forEach(g => { if (!g.closest('[data-ped]')) g.setAttribute('data-svg-origin', '0 0'); });   // gsap: rotate SVG parts about their own local origin
   return { root, road, pave, traffic: lanes, people: P };
 };
 })();
