@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>*{margin:0;padding:0}.abs{position:absolute}body{width:1920px;height:1080px;background:#ffe066;overflow:hidden;font-family:Impact,Arial Black,sans-serif;position:relative}
+#bg{position:absolute;inset:0;background:radial-gradient(circle,#ff9f1c 2.2px,transparent 2.5px) 0 0/22px 22px,#ffe066;opacity:.85}
+h1{position:absolute;top:18px;left:0;width:1920px;text-align:center;font-size:54px;color:#14101c;letter-spacing:4px;text-shadow:3px 3px 0 #fff}
+.tag{position:absolute;text-align:center;width:300px;color:#14101c}.tag b{display:block;font-size:34px;background:#fff;border:4px solid #14101c;border-radius:10px;padding:2px 8px;display:inline-block}.tag i{display:block;font-style:normal;font-family:Arial;font-weight:700;font-size:20px;margin-top:6px}</style></head><body><div id="bg"></div><h1>THE CAST · ORIGINAL ANIME-STYLE CHARACTERS</h1><div id="stage" style="position:absolute;inset:0"></div>
+<script>const tl=gsap.timeline({paused:true});</script>
+<script src="src/kit.js"></script><script src="src/kit2.js"></script><script src="src/anime.js"></script>
+<script>
+const st=document.getElementById('stage');
+const names=Object.keys(CAST);
+names.forEach((k,i)=>{const col=i%5,row=Math.floor(i/5);const x=200+col*380,y=(row?900:470);
+ const p=animePuppet(st,Object.assign({x,y,s:1.25},CAST[k]));p.breathe(0,10,1);
+ const t=document.createElement('div');t.className='tag';t.style.left=(x-150)+'px';t.style.top=(y+14)+'px';t.innerHTML='<b>'+CAST[k].name+'</b><i>'+CAST[k].role+'</i>';st.appendChild(t);});
+// expression strip for Chidi (top right)
+['normal','happy','angry','sad','surprised','sly'].forEach((e,i)=>{const x=1000+((i%3)*0),y=0;});
+window.READY=true;tl.progress(0.0);tl.seek(0.4,false);
+</script></body></html>
