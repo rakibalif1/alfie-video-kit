@@ -94,3 +94,10 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 ## Keeping this memory current
 - At the end of a chat, add new decisions and lessons here. If the repo is attached with push access, commit to branch `kit-v1` and push. If not, show the owner the exact lines to add.
 - Never put secrets, emails or personal details in this file.
+
+
+## Signal-Man v2 (Nov 28): owner said v1 "not good enough to upload" (video, animation, voice)
+- Voice: tools/drama_voice.py (Kokoro, slower 0.76-0.90x, clause phrasing, pauses by punctuation/weight, scene-change breath, storyteller EQ chain). Env GAPSCALE tunes pauses without re-synthesis (line cache in audio/cache). 0.55 gave 15:05. Chatterbox works in /home/user/cb venv (py3.11, torch 2.6 cpu, needs setuptools<81 for perth; ~4-5x slower than real time; clone a British Kokoro clip as reference) but owner chose Kokoro; keep as an upgrade path.
+- Look: projects/signalman/src/kit2.js = puppet() articulated figure (head, 2-seg arms/legs, rim light, breathe/head/arm/walk), breathFog, lightCone, motes. head.html adds grade (lifted blue shadows), letterbox bars 34px, caption scrim; captions bottom-anchored, max 9 words/chunk (fixes clipping). Scenes with absolute seconds must scale by D/OLD_D.
+- Team v2 job: 4 Sonnet workers, shared queue, 7 scene tasks, ~10 min each, ~140k tokens each. Render: 913 s at ~8 fps with 3 workers (~50 min). No render range option: for a sample make a trimmed copy of the project.
+- Owner cannot describe visual faults; show frames/clips and ask "what feels off", I can inspect frames but not hear or judge motion.
