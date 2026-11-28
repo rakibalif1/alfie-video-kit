@@ -1,5 +1,5 @@
 # YOUR FIRST 30 DAYS IN THE UK — script v1 (for approval)
-*Working title. Format: 16:9, 1280x720, one warm narrator, short character voices for the "bad advice" moments. Target about 16 to 17 minutes (about 1,960 spoken words at a slow pace plus pauses). Fact-checked on 28 Nov 2026 (sources at the end). This is a draft: nothing is rendered until you approve it.*
+*Working title. Format: 16:9, 1280x720, one warm narrator, short character voices for the "bad advice" moments. Target about 17 minutes (about 2,080 spoken words at a slow pace plus pauses). Fact-checked on 28 Nov 2026 (sources at the end). This is a draft: nothing is rendered until you approve it.*
 
 ## HOW TO READ THIS SCRIPT
 Each scene has: **ON SCREEN** (exactly what the code must draw), **SOUND**, and **NARRATION** lines in our voice format `SPEAKER[emotion]{pause after, seconds}: text`.
@@ -7,6 +7,25 @@ Each scene has: **ON SCREEN** (exactly what the code must draw), **SOUND**, and 
 - Emotions used: calm, cheer, excited, surprised, worried, sad, angry, sly, hush. (The voice tool needs 3 new presets: surprised, cheer, sly. I will add them.)
 - Punctuation is part of the performance. A comma is a small breath. A dash is a turn. Three dots are a pause for effect. A full stop is a landing. A question mark lifts the voice.
 - Money and numbers are written the way they are spoken. Short forms are spoken letter by letter (see the pronunciation key).
+
+## ALWAYS-ON SAFETY ELEMENTS (owner's rule, 28 Nov 2026)
+- **Month and year only, never a date.** Everywhere the script says `{{MONTH_YEAR}}` the tool fills in the publishing month, for example "November 2026" or "December 2026". Change the one variable and re-record only those lines (cheap).
+- **Corner badge for the whole video** (top-left, under the black bar, small, never over the captions): a green shield with a tick and the text "Info as of {{MONTH_YEAR}} · Always check GOV.UK".
+- **CHECK tag per scene** (bottom-left above the captions, shown for 6 seconds when the step starts), so viewers see exactly where to verify:
+  | Scene | Tag text |
+  |---|---|
+  | 3 eVisa and share code | CHECK: gov.uk/view-prove-immigration-status |
+  | 4 SIM | CHECK: the provider's current terms (ofcom.org.uk for your rights) |
+  | 5 Housing | CHECK: gov.uk/tenancy-deposit-protection |
+  | 6 Bank | CHECK: the bank's own "what you need" page |
+  | 7 NI number | CHECK: gov.uk/apply-national-insurance-number and gov.uk/national-minimum-wage-rates |
+  | 8 GP | CHECK: nhs.uk/register |
+  | 9 Apps | CHECK: only download apps from the official app store |
+  | 10 Voting | CHECK: gov.uk/register-to-vote |
+  | 11 Scams | REPORT: reportfraud.police.uk |
+  | 12 Extras | CHECK: gov.uk (search your situation) |
+- **Spoken reminders** are in Scene 1B, Scene 3, Scene 7, Scene 10 and Scene 13. Keep them short and calm, never scary.
+- **End card and description** carry the full disclaimer (see the end of this file).
 
 ## PRONUNCIATION KEY (the voice tool will apply this automatically; captions keep the normal spelling)
 | Written | Spoken as |
@@ -44,6 +63,14 @@ N[calm]{0.4}: The other one has a bank account, a doctor, a job search already r
 N[hush]{0.7}: The difference was not luck. It was not money. It was the order they did things in.
 N[cheer]{0.3}: So if you have just arrived in the U.K., or you are about to... stay with me. I will tell you what to do first, what to do next, and, just as important, what to never do.
 
+## SCENE 1B — THE SAFETY NOTE · about 0:25
+**ON SCREEN:** A paper calendar on a warm wall; a page flips to the big words "{{MONTH_YEAR}}" (month and year only). A green shield with a tick stamps down beside it: "Correct as of {{MONTH_YEAR}}". Then a browser window slides in, address bar showing "gov.uk", a magnifying glass sweeps across it, and the text "UK rules change. Check GOV.UK first." appears. The shield shrinks and flies into the top-left corner, where it stays for the rest of the video (the corner badge described above).
+**SOUND:** calendar page flip, soft shield chime, one gentle keyboard click.
+**NARRATION:**
+N[calm]{0.3}: One important thing before we start. Everything in this video is correct as of {{MONTH_YEAR}}.
+N[worried]{0.3}: The U.K. changes its rules often, sometimes without much warning.
+N[calm]{0.5}: So please... before you act on anything I say, check the official GOV.UK website, or the N-H-S website for anything about health. I will remind you along the way, and I will show you exactly where to look.
+
 ## SCENE 2 — THE GOLDEN RULE: NEED, NOT WANT · about 1:00
 **ON SCREEN:** Bright shop street. A cheerful salesman (character S, bright shirt, big smile) leans out of a phone shop; the newcomer figure stops in front of a glowing latest-model phone and a shiny laptop. Pop-up price tags: "£1,100 phone", "£1,400 laptop", "24-month contract". A big red stamp "NOT YET" slams on each tag. Then the stamp turns green on a short NEED list written in handwriting on a paper pad: "Food · Bed (second-hand is fine) · Bus pass · Cheap SIM · Work clothes". A calendar page flips to "Day 30", and the newcomer smiles at a bargain: a second-hand phone for £60 in a charity-shop window.
 **SOUND:** shop bell, cash-register "ka-ching" on each price tag; a slow "wrong-answer" buzzer on the stamps; warm ukulele on the need list.
@@ -64,6 +91,7 @@ N[calm]{0.4}: The U.K. is moving away from the plastic B-R-P card. For most peop
 N[calm]{0.4}: Employers, landlords, and banks will ask you for a share code. That is a short code you create yourself, from your account, in about a minute. It lasts for a limited time, and you can make a new one whenever you need.
 N[hush]{0.4}: Do it in your first days. Check your name, your date of birth, and your passport details are exactly right. A tiny mistake here can stop you renting a room, or starting a job.
 N[calm]{0.3}: And one thing that should make you feel safer. The real share-code service is free, and it only lives on the official GOV.UK website.
+N[hush]{0.3}: This system is still changing, so check the page called View and prove your immigration status on GOV.UK for the latest steps.
 
 ## SCENE 4 — STEP 2: THE SIM (and why NOT a contract) · about 1:30
 **ON SCREEN:** A phone shop counter. A friendly clerk character slides over a thick paper contract labelled "24 months" while a calendar pages flip fast to 24 and a price tag creeps up in small print: "£18 … £21 … £24 …". Red chain graphic locks around the newcomer's ankle. Smash cut: the newcomer pulls a tiny SIM card from a bright packet marked "PAY AS YOU GO / 30-DAY SIM ONLY". A small calendar shows "30 days, leave anytime". Brand tiles pop up as plain coloured badges (no logos): "giffgaff · Lebara · Lyca · Voxi · Asda Mobile" with a label "popular no-credit-check options (check current terms)". A credit-score gauge with a big "0" labelled "you have no UK credit history yet" appears next to the contract.
@@ -106,7 +134,7 @@ N[surprised]{0.4}: Here is what surprises almost everyone. You do not need it to
 N[calm]{0.4}: You can only apply once you are in the U.K., and you do it on the official GOV.UK website. It can take up to four weeks after you prove your identity. Before you apply, check your documents. Some people already have a number printed on their B-R-P, or inside their eVisa account.
 A[sly]{0.3}: For two hundred pounds, I can get your N-I number tomorrow. Very fast. Very special.
 N[angry]{0.5}: That is a scam. A National Insurance number is free. Always. Nobody can sell you a faster one.
-N[calm]{0.4}: When you get your first payslip, read it. Check your hours, your tax, and your pay. For anyone aged twenty-one and over, the legal minimum right now is twelve pounds seventy-one an hour. If you are paid less than that, you can get free help.
+N[calm]{0.4}: When you get your first payslip, read it. Check your hours, your tax, and your pay. For anyone aged twenty-one and over, the legal minimum right now is twelve pounds seventy-one an hour. If you are paid less than that, you can get free help. These rates change every April, so check the current figure on GOV.UK.
 N[hush]{0.4}: And remember. In the U.K., an employer is not allowed to charge you for giving you a job.
 
 ## SCENE 8 — STEP 6: REGISTER WITH A GP · about 1:30
@@ -163,7 +191,7 @@ N[calm]{0.4}: If you have children, you apply for a school place through your lo
 N[cheer]{0.3}: And find a free English class near you. Even a little improves your confidence, your job options, and your friends.
 
 ## SCENE 13 — YOUR 30-DAY CHECKLIST (closing) · about 1:20
-**ON SCREEN:** A big clean checklist builds on a wall, each row stamped as the narrator says it, in four columns with a calendar header: "DAY 1–3", "WEEK 1", "WEEKS 2–4", "MONTH 2–3". Day 1–3: eVisa and share code · SIM · safe room. Week 1: bank account · GP. Weeks 2–4: NI number · job apps · register to vote (if eligible). Month 2–3: Think about credit · contract SIM · bigger purchases. The two split-screen figures return: left is now smiling too. The right figure waves at the bus; the camera pulls up over a sunny UK skyline with a double-decker. End card with: "You are not behind. You are just beginning." and a quiet "Subscribe for part 2: your first job, step by step".
+**ON SCREEN:** A big clean checklist builds on a wall, each row stamped as the narrator says it, in four columns with a calendar header: "DAY 1–3", "WEEK 1", "WEEKS 2–4", "MONTH 2–3". Day 1–3: eVisa and share code · SIM · safe room. Week 1: bank account · GP. Weeks 2–4: NI number · job apps · register to vote (if eligible). Month 2–3: Think about credit · contract SIM · bigger purchases. The two split-screen figures return: left is now smiling too. The right figure waves at the bus; the camera pulls up over a sunny UK skyline with a double-decker. End card with: "You are not behind. You are just beginning.", then a small footer on every end-card frame: "Information correct as of {{MONTH_YEAR}} · General information, not legal advice · Always check GOV.UK", and a quiet "Subscribe for part 2: your first job, step by step".
 **SOUND:** a row-stamp "thump" per item; hopeful strings rising; an end sting.
 **NARRATION:**
 N[calm]{0.3}: So let us put it all together.
@@ -172,6 +200,7 @@ N[calm]{0.4}: Week one: a bank account, and your G-P.
 N[calm]{0.4}: Weeks two to four: your National Insurance number, your job applications, and your vote, if you are eligible.
 N[calm]{0.4}: And in months two and three, when you have a job and an address, that is the time to think about credit, a contract, or a bigger purchase.
 N[hush]{0.6}: Notice what is not on the list. A new phone. A new laptop. A new sofa. They can wait.
+N[calm]{0.4}: And one last time, because it matters. This is general information, correct as of {{MONTH_YEAR}}. It is not legal advice. Rules, fees and processes change, so always check GOV.UK before you act. If your situation is complicated, ask Citizens Advice, or a regulated immigration adviser.
 N[story]{0.5}: Starting in a new country is one of the bravest things a person can do. It is supposed to feel hard. That does not mean you are doing it wrong.
 N[cheer]{0.4}: You are not behind. You are just beginning. Welcome to the U.K.
 
@@ -208,3 +237,14 @@ N[cheer]{0.4}: You are not behind. You are just beginning. Welcome to the U.K.
 2. Length: this draft is about 16 to 17 minutes. Shorter (about 10 to 12) or keep full?
 3. Narrator: warm British (like Lewis/George, a friend), or a woman's voice, or an accent closer to your audience?
 4. Which nationalities are your viewers? It changes a few facts (voting, driving).
+
+## DESCRIPTION DISCLAIMER (paste at the top of the YouTube description and the pinned comment)
+"Information correct as of {{MONTH_YEAR}}. This video is general information to help new arrivals, not legal, immigration or financial advice. UK rules, fees and processes change often. Always check the official GOV.UK website (and nhs.uk for health) before you act, and if your situation is complicated, speak to Citizens Advice or a regulated immigration adviser. Official links: gov.uk/apply-national-insurance-number · nhs.uk/register · gov.uk/register-to-vote · gov.uk/view-prove-immigration-status · gov.uk/tenancy-deposit-protection · reportfraud.police.uk. We never ask for money, passports or personal details."
+
+## PUBLISHING CHECKLIST (do every time, to stay safe)
+1. Set the month and year in one place and render. Re-record only the lines that say {{MONTH_YEAR}}.
+2. Within 24 hours before upload, re-check every row in the fact-check table marked RE-CHECK, plus the minimum wage figure and the NI, GP, voting and eVisa pages.
+3. If a rule changed, change the line, then re-render only that scene.
+4. Put the description disclaimer first. Put official links in the description.
+5. Set a reminder to review the video every three months, and if anything is out of date, pin a comment with the correction or replace the video. Never leave outdated advice up.
+6. No real brand logos on screen. No real people's faces. No promise of results ("you will get...").
