@@ -1,0 +1,941 @@
+{
+ "title": "Your First 30 Days in the UK",
+ "series": "UK SURVIVAL GUIDE",
+ "format": "landscape",
+ "cast": {
+  "N": {
+   "name": "Narrator"
+  },
+  "K": {
+   "name": "Kiran"
+  },
+  "C": {
+   "name": "Chidi"
+  },
+  "S": {
+   "name": "Mr Deal"
+  },
+  "A": {
+   "name": "Slick Sid"
+  },
+  "L": {
+   "name": "Mr Rush"
+  },
+  "P": {
+   "name": "Officer Fake"
+  }
+ },
+ "voices": {
+  "N": [
+   "bf_isabella",
+   1.0,
+   "en-gb",
+   -1.0
+  ],
+  "K": [
+   "bm_lewis",
+   1.05,
+   "en-gb"
+  ],
+  "C": [
+   "am_puck",
+   1.1,
+   "en-us"
+  ],
+  "S": [
+   "am_michael",
+   1.08,
+   "en-us"
+  ],
+  "A": [
+   "bm_fable",
+   0.97,
+   "en-gb"
+  ],
+  "L": [
+   "bm_george",
+   1.15,
+   "en-gb"
+  ],
+  "P": [
+   "bm_daniel",
+   0.97,
+   "en-gb"
+  ]
+ },
+ "emo": {
+  "calm": [
+   1.0,
+   0,
+   1,
+   0.35
+  ],
+  "cheer": [
+   1.08,
+   0.5,
+   1,
+   0.3
+  ],
+  "excited": [
+   1.12,
+   1.0,
+   1.05,
+   0.25
+  ],
+  "surprised": [
+   1.06,
+   1.0,
+   1,
+   0.35
+  ],
+  "worried": [
+   1.0,
+   0.3,
+   1,
+   0.35
+  ],
+  "sad": [
+   0.9,
+   -0.8,
+   0.95,
+   0.5
+  ],
+  "angry": [
+   1.06,
+   -0.8,
+   1.1,
+   0.35
+  ],
+  "sly": [
+   0.95,
+   -0.5,
+   1,
+   0.3
+  ],
+  "hush": [
+   0.92,
+   -0.8,
+   0.92,
+   0.45
+  ],
+  "panic": [
+   1.12,
+   1.5,
+   1.1,
+   0.25
+  ],
+  "story": [
+   0.95,
+   -0.3,
+   1,
+   0.5
+  ]
+ },
+ "pace": {
+  "scene_lead": 0.7,
+  "short_gap": 0.2,
+  "short_lead": 0.0,
+  "q_gap": 0.15,
+  "ell_gap": 0.2
+ },
+ "chain": "highpass=f=65,equalizer=f=150:t=q:w=1:g=4.5,equalizer=f=3000:t=q:w=1.2:g=0.4,equalizer=f=7500:t=q:w=1:g=-3.5,acompressor=threshold=-26dB:ratio=3.5:attack=10:release=350:makeup=6,aecho=0.9:0.5:34|80:0.09|0.05,alimiter=limit=0.95",
+ "month": "November 2026",
+ "lines": [
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Two people land in the United Kingdom on the very same day. One flew in from Lagos. The other from Dhaka. Same airport. Same suitcase. Same two thousand pounds.",
+   "scene": "cold",
+   "pause": 0.4,
+   "say": "Two people land in the United Kingdom on the very same day. One flew in from Lay goss. The other from Dah ka. Same airport. Same suitcase. Same two thousand pounds."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "Thirty days later... one of them is broke, in debt, and sleeping on a friend's sofa.",
+   "scene": "cold",
+   "pause": 0.5,
+   "say": "Thirty days later... one of them is broke, in debt, and sleeping on a friend's sofa."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "The other one has a bank account, a doctor, a job search already running, and — this is the part nobody believes — most of that money is still in the bank.",
+   "scene": "cold",
+   "pause": 0.4,
+   "say": "The other one has a bank account, a doctor, a job search already running, and — this is the part nobody believes — most of that money is still in the bank."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "The difference was not luck. It was not money. It was the order they did things in.",
+   "scene": "cold",
+   "pause": 0.7,
+   "say": "The difference was not luck. It was not money. It was the order they did things in."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "So if you have just arrived in the UK, or you are about to... stay with me. I will tell you what to do first, what to do next, and, just as important, what to never do.",
+   "scene": "cold",
+   "pause": 0.3,
+   "say": "So if you have just arrived in the U.K., or you are about to... stay with me. I will tell you what to do first, what to do next, and, just as important, what to never do."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "One important thing before we start. Everything in this video is correct as of November 2026.",
+   "scene": "safety",
+   "pause": 0.3,
+   "say": "One important thing before we start. Everything in this video is correct as of November 2026."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "The UK changes its rules often, sometimes without much warning.",
+   "scene": "safety",
+   "pause": 0.3,
+   "say": "The U.K. changes its rules often, sometimes without much warning."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "So please... before you act on anything I say, check the official GOV.UK website, or the NHS website for anything about health. I will remind you along the way, and I will show you exactly where to look.",
+   "scene": "safety",
+   "pause": 0.5,
+   "say": "So please... before you act on anything I say, check the official gov dot U K website, or the N-H-S website for anything about health. I will remind you along the way, and I will show you exactly where to look."
+  },
+  {
+   "who": "K",
+   "emotion": "calm",
+   "text": "Rule zero. Check GOV.UK. Always.",
+   "scene": "safety"
+  },
+  {
+   "who": "C",
+   "emotion": "sly",
+   "text": "Even on a Sunday?",
+   "scene": "safety"
+  },
+  {
+   "who": "K",
+   "emotion": "sly",
+   "text": "Especially on a Sunday.",
+   "scene": "safety"
+  },
+  {
+   "who": "S",
+   "emotion": "cheer",
+   "text": "Welcome to the UK! You need the newest phone! And a laptop! Only twenty-four months to pay!",
+   "scene": "rule",
+   "pause": 0.2,
+   "say": "Welcome to the U.K.! You need the newest phone! And a laptop! Only twenty-four months to pay!"
+  },
+  {
+   "who": "C",
+   "emotion": "excited",
+   "text": "Yes! The newest phone! And the laptop! Take my money!",
+   "scene": "rule"
+  },
+  {
+   "who": "N",
+   "emotion": "angry",
+   "text": "No. No, no, no. Please. Do not.",
+   "scene": "rule",
+   "pause": 0.4,
+   "say": "No. No, no, no. Please. Do not."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Your first month is not about having nice things. It is about having a safe place to sleep, a way to earn, and money left over for emergencies.",
+   "scene": "rule",
+   "pause": 0.4,
+   "say": "Your first month is not about having nice things. It is about having a safe place to sleep, a way to earn, and money left over for emergencies."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "Every new phone, every new laptop, every new sofa you buy in week one, is money you cannot use when something goes wrong. And in a new country... something always goes a little wrong.",
+   "scene": "rule",
+   "pause": 0.4,
+   "say": "Every new phone, every new laptop, every new sofa you buy in week one, is money you cannot use when something goes wrong. And in a new country... something always goes a little wrong."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "So here is the golden rule. Buy only what you need this week. Everything else can wait thirty days.",
+   "scene": "rule",
+   "pause": 0.4,
+   "say": "So here is the golden rule. Buy only what you need this week. Everything else can wait thirty days."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "Need a phone? A used one works exactly the same. Need furniture? Charity shops, Facebook Marketplace, Vinted, and local free groups are full of good things. Nobody here will judge you for it. Honestly, half of the UK does it.",
+   "scene": "rule",
+   "pause": 0.3,
+   "say": "Need a phone? A used one works exactly the same. Need furniture? Charity shops, Facebook Marketplace, Vinted, and local free groups are full of good things. Nobody here will judge you for it. Honestly, half of the U.K. does it."
+  },
+  {
+   "who": "K",
+   "emotion": "sly",
+   "text": "Used phone. Same screen. Zero stress.",
+   "scene": "rule"
+  },
+  {
+   "who": "C",
+   "emotion": "sad",
+   "text": "But it is not shiny...",
+   "scene": "rule"
+  },
+  {
+   "who": "K",
+   "emotion": "calm",
+   "text": "Shiny is expensive, Chidi.",
+   "scene": "rule"
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Step one, before anything else. Make sure you can prove who you are, and that you are allowed to be here, online.",
+   "scene": "status",
+   "pause": 0.3,
+   "say": "Step one, before anything else. Make sure you can prove who you are, and that you are allowed to be here, online."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "The UK is moving away from the plastic BRP card. For most people now, your immigration status lives in a digital eVisa inside a UKVI account.",
+   "scene": "status",
+   "pause": 0.4,
+   "say": "The U.K. is moving away from the plastic B-R-P card. For most people now, your immigration status lives in a digital ee Visa inside a U-K-V-I account."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Employers, landlords, and banks will ask you for a share code. That is a short code you create yourself, from your account, in about a minute. It lasts for a limited time, and you can make a new one whenever you need.",
+   "scene": "status",
+   "pause": 0.4,
+   "say": "Employers, landlords, and banks will ask you for a share code. That is a short code you create yourself, from your account, in about a minute. It lasts for a limited time, and you can make a new one whenever you need."
+  },
+  {
+   "who": "C",
+   "emotion": "worried",
+   "text": "What is a share code?",
+   "scene": "status"
+  },
+  {
+   "who": "K",
+   "emotion": "calm",
+   "text": "Your digital handshake. You make it on GOV.UK.",
+   "scene": "status"
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Do it in your first days. Check your name, your date of birth, and your passport details are exactly right. A tiny mistake here can stop you renting a room, or starting a job.",
+   "scene": "status",
+   "pause": 0.4,
+   "say": "Do it in your first days. Check your name, your date of birth, and your passport details are exactly right. A tiny mistake here can stop you renting a room, or starting a job."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "And one thing that should make you feel safer. The real share-code service is free, and it only lives on the official GOV.UK website.",
+   "scene": "status",
+   "pause": 0.3,
+   "say": "And one thing that should make you feel safer. The real share-code service is free, and it only lives on the official gov dot U K website."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "This system is still changing, so check the page called View and prove your immigration status on GOV.UK for the latest steps.",
+   "scene": "status",
+   "pause": 0.3,
+   "say": "This system is still changing, so check the page called View and prove your immigration status on gov dot U K for the latest steps."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Step two. A phone number. You need one for jobs, for the bank, for the doctor, for almost everything.",
+   "scene": "sim",
+   "pause": 0.3,
+   "say": "Step two. A phone number. You need one for jobs, for the bank, for the doctor, for almost everything."
+  },
+  {
+   "who": "N",
+   "emotion": "surprised",
+   "text": "And here is where people get trapped. A phone shop will happily sell you a twenty-four month contract. That sounds normal. It is not what you want in your first month.",
+   "scene": "sim",
+   "pause": 0.4,
+   "say": "And here is where people get trapped. A phone shop will happily sell you a twenty-four month contract. That sounds normal. It is not what you want in your first month."
+  },
+  {
+   "who": "C",
+   "emotion": "excited",
+   "text": "Twenty-four months? Sign me up!",
+   "scene": "sim"
+  },
+  {
+   "who": "K",
+   "emotion": "angry",
+   "text": "Chidi. Pen down. Now.",
+   "scene": "sim"
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "You have no UK credit history yet. So a contract can be refused, or come with a deposit. And if your job or your plans change in two months... you are still paying for twenty-two more.",
+   "scene": "sim",
+   "pause": 0.4,
+   "say": "You have no U.K. credit history yet. So a contract can be refused, or come with a deposit. And if your job or your plans change in two months... you are still paying for twenty-two more."
+  },
+  {
+   "who": "N",
+   "emotion": "angry",
+   "text": "Prices on some contracts also go up every year. In the small print. Where nobody reads.",
+   "scene": "sim",
+   "pause": 0.4,
+   "say": "Prices on some contracts also go up every year. In the small print. Where nobody reads."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Instead, buy a pay-as-you-go SIM or a thirty-day rolling SIM-only plan. Providers like giffgaff, Lebara, Lyca, Voxi, and Asda Mobile are popular for this, and many don't run credit checks. Terms change, so check the current offer before you buy.",
+   "scene": "sim",
+   "pause": 0.4,
+   "say": "Instead, buy a pay-as-you-go SIM or a thirty-day rolling SIM-only plan. Providers like giff gaff, Le bara, Lie ka, Vox ee, and Asda Mobile are popular for this, and many don't run credit checks. Terms change, so check the current offer before you buy."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "Thirty days. No chains. Stop any time. Save the contract for later, when you have a credit history and you know exactly where you are living.",
+   "scene": "sim",
+   "pause": 0.3,
+   "say": "Thirty days. No chains. Stop any time. Save the contract for later, when you have a credit history and you know exactly where you are living."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Step three. Where you sleep. And this is the one place where being in a hurry costs the most.",
+   "scene": "home",
+   "pause": 0.3,
+   "say": "Step three. Where you sleep. And this is the one place where being in a hurry costs the most."
+  },
+  {
+   "who": "L",
+   "emotion": "calm",
+   "text": "Just send me the money today. I'll keep the room for you. Cash is fine. No need for paperwork.",
+   "scene": "home",
+   "pause": 0.2,
+   "say": "Just send me the money today. I'll keep the room for you. Cash is fine. No need for paperwork."
+  },
+  {
+   "who": "C",
+   "emotion": "excited",
+   "text": "Cash is fine, he says! Easy!",
+   "scene": "home"
+  },
+  {
+   "who": "K",
+   "emotion": "angry",
+   "text": "Red flag. Giant red flag.",
+   "scene": "home"
+  },
+  {
+   "who": "N",
+   "emotion": "angry",
+   "text": "Never. Never pay for a room you have not seen. Never pay cash without a receipt. And never live anywhere without a written agreement.",
+   "scene": "home",
+   "pause": 0.5,
+   "say": "Never. Never pay for a room you have not seen. Never pay cash without a receipt. And never live anywhere without a written agreement."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "A landlord will usually do a right-to-rent check. That is where your share code comes in. It is normal. It is legal. It is not an insult.",
+   "scene": "home",
+   "pause": 0.4,
+   "say": "A landlord will usually do a right-to-rent check. That is where your share code comes in. It is normal. It is legal. It is not an insult."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "When you pay a deposit, your landlord must put it in a government-approved deposit scheme within thirty days, and tell you which one. If they don't, you have rights, and you can get help.",
+   "scene": "home",
+   "pause": 0.4,
+   "say": "When you pay a deposit, your landlord must put it in a government-approved deposit scheme within thirty days, and tell you which one. If they don't, you have rights, and you can get help."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And a good sign of a legal landlord? A calm one. Anyone who rushes you... is usually hiding something.",
+   "scene": "home",
+   "pause": 0.4,
+   "say": "And a good sign of a legal landlord? A calm one. Anyone who rushes you... is usually hiding something."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Step four. A bank account. You cannot be paid properly, or rent properly, without one.",
+   "scene": "bank",
+   "pause": 0.3,
+   "say": "Step four. A bank account. You cannot be paid properly, or rent properly, without one."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "You have two main routes. A high-street bank in person, or an app bank on your phone. Both will want to see your passport or eVisa share code, and many will ask for proof of address.",
+   "scene": "bank",
+   "pause": 0.4,
+   "say": "You have two main routes. A high-street bank in person, or an app bank on your phone. Both will want to see your passport or ee Visa share code, and many will ask for proof of address."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "Proof of address is where newcomers get stuck. A tenancy agreement works. So can a letter from your employer, or your college. Ask the bank exactly what they accept, before you queue.",
+   "scene": "bank",
+   "pause": 0.4,
+   "say": "Proof of address is where newcomers get stuck. A tenancy agreement works. So can a letter from your employer, or your college. Ask the bank exactly what they accept, before you queue."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "If you are refused a normal account, ask about a basic bank account. It has no overdraft, and no credit check. It is designed for exactly this situation.",
+   "scene": "bank",
+   "pause": 0.4,
+   "say": "If you are refused a normal account, ask about a basic bank account. It has no overdraft, and no credit check. It is designed for exactly this situation."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And please, do not pay anyone to \"arrange\" a bank account for you. It is free. It is your right to ask.",
+   "scene": "bank",
+   "pause": 0.4,
+   "say": "And please, do not pay anyone to \"arrange\" a bank account for you. It is free. It is your right to ask."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Step five. Your National Insurance number. It is how the UK records your tax and your pension, and your employer will ask for it.",
+   "scene": "ni",
+   "pause": 0.3,
+   "say": "Step five. Your National Insurance number. It is how the U.K. records your tax and your pension, and your employer will ask for it."
+  },
+  {
+   "who": "N",
+   "emotion": "surprised",
+   "text": "Here is what surprises almost everyone. You do not need it to start work. You need your right to work. Your employer can check that with your share code. Meanwhile, you apply for the number.",
+   "scene": "ni",
+   "pause": 0.4,
+   "say": "Here is what surprises almost everyone. You do not need it to start work. You need your right to work. Your employer can check that with your share code. Meanwhile, you apply for the number."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "You can only apply once you are in the UK, and you do it on the official GOV.UK website. It can take up to four weeks after you prove your identity. Before you apply, check your documents. Some people already have a number printed on their BRP, or inside their eVisa account.",
+   "scene": "ni",
+   "pause": 0.4,
+   "say": "You can only apply once you are in the U.K., and you do it on the official gov dot U K website. It can take up to four weeks after you prove your identity. Before you apply, check your documents. Some people already have a number printed on their B-R-P, or inside their ee Visa account."
+  },
+  {
+   "who": "A",
+   "emotion": "sly",
+   "text": "For £200, I can get your NI number tomorrow. Very fast. Very special.",
+   "scene": "ni",
+   "pause": 0.3,
+   "say": "For two hundred pounds, I can get your N-I number tomorrow. Very fast. Very special."
+  },
+  {
+   "who": "C",
+   "emotion": "panic",
+   "text": "Fast-track? Two hundred pounds? Take it!",
+   "scene": "ni"
+  },
+  {
+   "who": "K",
+   "emotion": "angry",
+   "text": "Scam. The number is free. Always free.",
+   "scene": "ni"
+  },
+  {
+   "who": "N",
+   "emotion": "angry",
+   "text": "That is a scam. A National Insurance number is free. Always. Nobody can sell you a faster one.",
+   "scene": "ni",
+   "pause": 0.5,
+   "say": "That is a scam. A National Insurance number is free. Always. Nobody can sell you a faster one."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "When you get your first payslip, read it. Check your hours, your tax, and your pay. For anyone aged twenty-one and over, the legal minimum right now is £12.71 an hour. If you are paid less than that, you can get free help. These rates change every April, so check the current figure on GOV.UK.",
+   "scene": "ni",
+   "pause": 0.4,
+   "say": "When you get your first payslip, read it. Check your hours, your tax, and your pay. For anyone aged twenty-one and over, the legal minimum right now is twelve pounds seventy-one an hour. If you are paid less than that, you can get free help. These rates change every April, so check the current figure on gov dot U K."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "And remember. In the UK, an employer is not allowed to charge you for giving you a job.",
+   "scene": "ni",
+   "pause": 0.4,
+   "say": "And remember. In the U.K., an employer is not allowed to charge you for giving you a job."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Step six. A doctor. In the UK, your family doctor is called a GP, and you must register with one before you need one.",
+   "scene": "gp",
+   "pause": 0.3,
+   "say": "Step six. A doctor. In the U.K., your family doctor is called a G-P, and you must register with one before you need one."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Registering is free. Use the NHS website to find a surgery near where you live. Then fill in their form.",
+   "scene": "gp",
+   "pause": 0.4,
+   "say": "Registering is free. Use the NHS website to find a surgery near where you live. Then fill in their form."
+  },
+  {
+   "who": "N",
+   "emotion": "surprised",
+   "text": "And here is the thing the system does not tell you. By the NHS's own guidance, you do not need ID, proof of address, or proof of immigration status to register.",
+   "scene": "gp",
+   "pause": 0.5,
+   "say": "And here is the thing the system does not tell you. By the NHS's own guidance, you do not need ID, proof of address, or proof of immigration status to register."
+  },
+  {
+   "who": "K",
+   "emotion": "calm",
+   "text": "No ID needed. Know your rights.",
+   "scene": "gp"
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "Some receptionists will still ask for them. If that happens, stay calm and politely say you know you do not need them. If a surgery is full, they have to explain why, in writing. Charities like Healthwatch can help you push back.",
+   "scene": "gp",
+   "pause": 0.4,
+   "say": "Some receptionists will still ask for them. If that happens, stay calm and politely say you know you do not need them. If a surgery is full, they have to explain why, in writing. Charities like Health watch can help you push back."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "For something urgent, but not life-threatening, call 111. For an emergency, call 999. And for small problems, a pharmacist is free to ask, and often the fastest help.",
+   "scene": "gp",
+   "pause": 0.4,
+   "say": "For something urgent, but not life-threatening, call one-one-one. For an emergency, call nine-nine-nine. And for small problems, a pharmacist is free to ask, and often the fastest help."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "Step seven. Your phone is about to become your toolbox. Let me show you what to install, today, for free.",
+   "scene": "apps",
+   "pause": 0.3,
+   "say": "Step seven. Your phone is about to become your toolbox. Let me show you what to install, today, for free."
+  },
+  {
+   "who": "N",
+   "emotion": "excited",
+   "text": "Indeed, for jobs. Search near where you live. And a rule worth tattooing on your arm: a real employer never asks you to pay to apply. Not for training. Not for a uniform. Not for a \"background check\". If they ask for money, close the app.",
+   "scene": "apps",
+   "pause": 0.4,
+   "say": "Indeed, for jobs. Search near where you live. And a rule worth tattooing on your arm: a real employer never asks you to pay to apply. Not for training. Not for a uniform. Not for a \"background check\". If they ask for money, close the app."
+  },
+  {
+   "who": "C",
+   "emotion": "excited",
+   "text": "Indeed! I am hired already!",
+   "scene": "apps"
+  },
+  {
+   "who": "K",
+   "emotion": "sly",
+   "text": "Apply first, Chidi. Pay never.",
+   "scene": "apps"
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Google Maps. Not just for walking. Tap the little bus symbol. It shows you routes, the next departures, and the walking time to the stop.",
+   "scene": "apps",
+   "pause": 0.4,
+   "say": "Google Maps. Not just for walking. Tap the little bus symbol. It shows you routes, the next departures, and the walking time to the stop."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Your local bus company almost always has its own app, with live times and tickets. In big cities, Citymapper is brilliant. For trains, use the Trainline, or your train company's app. And in London, use TfL Go.",
+   "scene": "apps",
+   "pause": 0.4,
+   "say": "Your local bus company almost always has its own app, with live times and tickets. In big cities, City mapper is brilliant. For trains, use the Trainline, or your train company's app. And in London, use T-F-L Go."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Add the NHS App for your health records and prescriptions once you are registered. Add a banking app. And keep the GOV.UK website saved as a bookmark.",
+   "scene": "apps",
+   "pause": 0.4,
+   "say": "Add the NHS App for your health records and prescriptions once you are registered. Add a banking app. And keep the gov dot U K website saved as a bookmark."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "Oh, and Vinted and Facebook Marketplace? For the furniture you do not need to buy new. Remember the golden rule.",
+   "scene": "apps",
+   "pause": 0.3,
+   "say": "Oh, and Vinted and Facebook Marketplace? For the furniture you do not need to buy new. Remember the golden rule."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Step eight. Your voice. But please listen carefully, because this one is not the same for everybody.",
+   "scene": "vote",
+   "pause": 0.3,
+   "say": "Step eight. Your voice. But please listen carefully, because this one is not the same for everybody."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "You can register to vote if you are a British citizen, an Irish citizen, or a citizen of a qualifying Commonwealth country with permission to be in the UK",
+   "scene": "vote",
+   "pause": 0.4,
+   "say": "You can register to vote if you are a British citizen, an Irish citizen, or a citizen of a qualifying Commonwealth country with permission to be in the U.K."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Good news for many of you. India, Pakistan, Bangladesh, Sri Lanka, Nigeria and Ghana are all Commonwealth countries. So if you are a citizen of one of those, and you have permission to be here, you can usually register.",
+   "scene": "vote",
+   "pause": 0.4,
+   "say": "Good news for many of you. India, Pakistan, Bangladesh, Sri Lanka, Nigeria and Ghana are all Commonwealth countries. So if you are a citizen of one of those, and you have permission to be here, you can usually register."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "Nepal is not in the Commonwealth, so Nepali citizens cannot vote here unless they become British. And rules can differ for each person. Check on GOV.UK, in the page called Register to vote, before you do anything.",
+   "scene": "vote",
+   "pause": 0.4,
+   "say": "Nepal is not in the Commonwealth, so Nepali citizens cannot vote here unless they become British. And rules can differ for each person. Check on gov dot U K, in the page called Register to vote, before you do anything."
+  },
+  {
+   "who": "N",
+   "emotion": "angry",
+   "text": "And do not tick a box if you are not eligible. Registering when you should not is a crime.",
+   "scene": "vote",
+   "pause": 0.4,
+   "say": "And do not tick a box if you are not eligible. Registering when you should not is a crime."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "If you are eligible, register. It takes about five minutes, and it has a quiet bonus: being on the electoral roll helps lenders confirm your address, which makes it easier to build a credit history later.",
+   "scene": "vote",
+   "pause": 0.4,
+   "say": "If you are eligible, register. It takes about five minutes, and it has a quiet bonus: being on the electoral roll helps lenders confirm your address, which makes it easier to build a credit history later."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Before we go on, we need to talk about scams. Because new arrivals are their favourite targets.",
+   "scene": "scams",
+   "pause": 0.4,
+   "say": "Before we go on, we need to talk about scams. Because new arrivals are their favourite targets."
+  },
+  {
+   "who": "P",
+   "emotion": "calm",
+   "text": "This is the Home Office. There is a problem with your visa. You must pay immediately, or you will be removed.",
+   "scene": "scams",
+   "pause": 0.2,
+   "say": "This is the Home Office. There is a problem with your visa. You must pay immediately, or you will be removed."
+  },
+  {
+   "who": "C",
+   "emotion": "panic",
+   "text": "The Home Office! I will pay now!",
+   "scene": "scams"
+  },
+  {
+   "who": "K",
+   "emotion": "calm",
+   "text": "Hang up. Breathe. Call a friend.",
+   "scene": "scams"
+  },
+  {
+   "who": "N",
+   "emotion": "angry",
+   "text": "That is not the Home Office. The Home Office says it will never ask you to pay by email, or into a personal bank account.",
+   "scene": "scams",
+   "pause": 0.5,
+   "say": "That is not the Home Office. The Home Office says it will never ask you to pay by email, or into a personal bank account."
+  },
+  {
+   "who": "N",
+   "emotion": "worried",
+   "text": "Here is the pattern. Scammers promise you something you desperately want. A job. A visa. A room. A number. And they ask you to pay first. They want you to rush. They want you to be scared.",
+   "scene": "scams",
+   "pause": 0.4,
+   "say": "Here is the pattern. Scammers promise you something you desperately want. A job. A visa. A room. A number. And they ask you to pay first. They want you to rush. They want you to be scared."
+  },
+  {
+   "who": "N",
+   "emotion": "sad",
+   "text": "Every year, hardworking people lose their savings to these promises. And many feel too ashamed to tell anyone.",
+   "scene": "scams",
+   "pause": 0.5,
+   "say": "Every year, hardworking people lose their savings to these promises. And many feel too ashamed to tell anyone."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "One more, especially for people coming for care work and other sponsored jobs. Before you pay anything, or even trust an offer, check the employer on the official Register of Licensed Sponsors on GOV.UK. If the company is not on it, it cannot sponsor you.",
+   "scene": "scams",
+   "pause": 0.4,
+   "say": "One more, especially for people coming for care work and other sponsored jobs. Before you pay anything, or even trust an offer, check the employer on the official Register of Licensed Sponsors on gov dot U K. If the company is not on it, it cannot sponsor you."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "You are not stupid, and you are not alone. If something feels wrong, stop. Take a breath. Ask a friend. And if you have been tricked, report it to the police fraud service, or ask Citizens Advice or Migrant Help. They are free.",
+   "scene": "scams",
+   "pause": 0.4,
+   "say": "You are not stupid, and you are not alone. If something feels wrong, stop. Take a breath. Ask a friend. And if you have been tricked, report it to the police fraud service, or ask Citizens Advice or Migrant Help. They are free."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "The golden rule for scams? Anything real is free, or can wait for a day.",
+   "scene": "scams",
+   "pause": 0.3,
+   "say": "The golden rule for scams? Anything real is free, or can wait for a day."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Once those basics are done, there are a few more things worth knowing.",
+   "scene": "extras",
+   "pause": 0.3,
+   "say": "Once those basics are done, there are a few more things worth knowing."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Your local council will want you registered for council tax, and there may be discounts, for example if you live alone. Don't ignore their letters.",
+   "scene": "extras",
+   "pause": 0.4,
+   "say": "Your local council will want you registered for council tax, and there may be discounts, for example if you live alone. Don't ignore their letters."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "If you drive, a licence from outside Europe can usually be used for twelve months. After that you need a UK licence. For most of our countries, that means passing the UK driving test, so book your theory test early. Check GOV.UK for your own country, because the rules differ.",
+   "scene": "extras",
+   "pause": 0.4,
+   "say": "If you drive, a licence from outside Europe can usually be used for twelve months. After that you need a U.K. licence. For most of our countries, that means passing the U.K. driving test, so book your theory test early. Check gov dot U K for your own country, because the rules differ."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "If you have children, you apply for a school place through your local council. And you only need a TV licence if you watch live television, or the BBC's catch-up service.",
+   "scene": "extras",
+   "pause": 0.4,
+   "say": "If you have children, you apply for a school place through your local council. And you only need a T-V licence if you watch live television, or the BBC's catch-up service."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "And find a free English class near you. Even a little improves your confidence, your job options, and your friends.",
+   "scene": "extras",
+   "pause": 0.3,
+   "say": "And find a free English class near you. Even a little improves your confidence, your job options, and your friends."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "So let us put it all together.",
+   "scene": "finish",
+   "pause": 0.3,
+   "say": "So let us put it all together."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Days one to three: your eVisa and share code, a cheap SIM, and a safe place to sleep.",
+   "scene": "finish",
+   "pause": 0.4,
+   "say": "Days one to three: your ee Visa and share code, a cheap SIM, and a safe place to sleep."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Week one: a bank account, and your GP.",
+   "scene": "finish",
+   "pause": 0.4,
+   "say": "Week one: a bank account, and your G-P."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "Weeks two to four: your National Insurance number, your job applications, and your vote, if you are eligible.",
+   "scene": "finish",
+   "pause": 0.4,
+   "say": "Weeks two to four: your National Insurance number, your job applications, and your vote, if you are eligible."
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "And in months two and three, when you have a job and an address, that is the time to think about credit, a contract, or a bigger purchase.",
+   "scene": "finish",
+   "pause": 0.4,
+   "say": "And in months two and three, when you have a job and an address, that is the time to think about credit, a contract, or a bigger purchase."
+  },
+  {
+   "who": "N",
+   "emotion": "hush",
+   "text": "Notice what is not on the list. A new phone. A new laptop. A new sofa. They can wait.",
+   "scene": "finish",
+   "pause": 0.6,
+   "say": "Notice what is not on the list. A new phone. A new laptop. A new sofa. They can wait."
+  },
+  {
+   "who": "C",
+   "emotion": "sad",
+   "text": "Not even a small phone?",
+   "scene": "finish"
+  },
+  {
+   "who": "K",
+   "emotion": "cheer",
+   "text": "Day thirty-one, Chidi. Day thirty-one.",
+   "scene": "finish"
+  },
+  {
+   "who": "N",
+   "emotion": "calm",
+   "text": "And one last time, because it matters. This is general information, correct as of November 2026. It is not legal advice. Rules, fees and processes change, so always check GOV.UK before you act. If your situation is complicated, ask Citizens Advice, or a regulated immigration adviser.",
+   "scene": "finish",
+   "pause": 0.4,
+   "say": "And one last time, because it matters. This is general information, correct as of November 2026. It is not legal advice. Rules, fees and processes change, so always check gov dot U K before you act. If your situation is complicated, ask Citizens Advice, or a regulated immigration adviser."
+  },
+  {
+   "who": "N",
+   "emotion": "story",
+   "text": "Starting in a new country is one of the bravest things a person can do. It is supposed to feel hard. That does not mean you are doing it wrong.",
+   "scene": "finish",
+   "pause": 0.5,
+   "say": "Starting in a new country is one of the bravest things a person can do. It is supposed to feel hard. That does not mean you are doing it wrong."
+  },
+  {
+   "who": "N",
+   "emotion": "cheer",
+   "text": "Whether you came from Dhaka, Delhi, Karachi, Kathmandu, Colombo, Lagos or Accra... you are not behind. You are just beginning. Welcome to the UK",
+   "scene": "finish",
+   "pause": 0.4,
+   "say": "Whether you came from Dah ka, Del ee, Kuh rah chee, Kat man doo, Kuh lum bo, Lay goss or Uh krah... you are not behind. You are just beginning. Welcome to the U.K."
+  }
+ ]
+}

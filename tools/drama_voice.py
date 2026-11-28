@@ -13,6 +13,8 @@ EMO = {"calm": (0.90, 0.0, 1.0, 0.55), "story": (0.86, -0.8, 1.0, 0.65), "hush":
        "ghostly": (0.82, -1.5, 0.9, 1.20), "sad": (0.82, -1.2, 0.9, 0.85), "old": (0.88, -3.0, 1.0, 0.65), "worried": (0.92, 0.6, 1.0, 0.55),
        "angry": (0.95, -1.0, 1.1, 0.6), "panic": (1.0, 1.5, 1.1, 0.5)}
 ECHO = {"ghostly"}
+EMO.update({k: tuple(v) for k, v in ep.get("emo", {}).items()})            # episode.json "emo" overrides/adds presets
+PACE = {"scene_lead": 1.1, "short_gap": 0.55, "short_lead": 0.35, "q_gap": 0.25, "ell_gap": 0.3}; PACE.update(ep.get("pace", {}))
 PUNCT = {",": 0.30, ";": 0.50, ":": 0.50, "—": 0.50, "-": 0.40, "...": 0.80, "…": 0.80}   # pause after a clause ending in this
 data = espeakng_loader.get_data_path()
 if len(data) > 100:
@@ -54,20 +56,20 @@ os.makedirs("audio/cache", exist_ok=True)
 lines = ep["lines"]; wav, meta, t, prev_scene = [], [], 0.0, None
 for i, l in enumerate(lines):
     who, emo, text = l["who"], l.get("emotion") or "calm", l["text"]
-    v = VOICES[who]; e = EMO.get(emo, EMO["calm"]); words = len(text.split())
-    ck = "audio/cache/%d_%08x.npy" % (i, int(__import__("hashlib").md5(repr((text, v[0], v[1], emo)).encode()).hexdigest()[:8], 16))
+    v = VOICES[who]; e = EMO.get(emo, EMO["calm"]); words = len(text.split()); speak = l.get("say", text); pitch = e[1] + (v[3] if len(v) > 3 else 0)
+    ck = "audio/cache/%d_%08x.npy" % (i, int(__import__("hashlib").md5(repr((speak, v[0], v[1], emo, pitch)).encode()).hexdigest()[:8], 16))
     if os.path.exists(ck): s = np.load(ck)
     else:
         segs = []
-        for ph, pause in clauses(text):
+        for ph, pause in clauses(speak):
             s, _ = k.create(ph, voice=v[0], speed=v[1] * e[0], lang=v[2] if len(v) > 2 else "en-gb")
             segs += [trim(s), np.zeros(int(pause * GS * SR), dtype=np.float32)]
-        s = fx(np.concatenate(segs[:-1]) if len(segs) > 1 else segs[0], e[1], e[2], emo in ECHO); np.save(ck, s)
-    gap = e[3] + (0.25 if text.rstrip().endswith("?") else 0) + (0.55 if words <= 6 else 0) + (0.3 if text.rstrip().endswith("...") else 0)
+        s = fx(np.concatenate(segs[:-1]) if len(segs) > 1 else segs[0], pitch, e[2], emo in ECHO); np.save(ck, s)
+    gap = e[3] + (PACE["q_gap"] if text.rstrip().endswith("?") else 0) + (PACE["short_gap"] if words <= 6 else 0) + (PACE["ell_gap"] if text.rstrip().endswith("...") else 0)
     gap = (gap + float(l.get("pause", 0))) * GS
     lead = 0.0
-    if l["scene"] != prev_scene and i: lead += 1.1                       # a breath as the scene changes
-    if words <= 6 and i and lines[i - 1]["scene"] == l["scene"]: lead += 0.35   # short line: let the last one land first
+    if l["scene"] != prev_scene and i: lead += PACE["scene_lead"]                       # a breath as the scene changes
+    if words <= 6 and i and lines[i - 1]["scene"] == l["scene"]: lead += PACE["short_lead"]   # short line: let the last one land first
     lead *= GS
     if lead: wav.append(np.zeros(int(lead * SR), dtype=np.float32)); t += lead
     meta.append({"i": i, "who": who, "text": text, "start": round(t, 3), "dur": round(len(s) / SR, 3)})
@@ -76,7 +78,8 @@ for i, l in enumerate(lines):
 raw = np.concatenate(wav); os.makedirs("audio", exist_ok=True)
 sf.write("audio/_raw.wav", raw, SR)
 # storyteller chain: low rumble out, warm body, clear presence, gentle de-ess, even level, a hint of room
-CHAIN = "highpass=f=70,equalizer=f=180:t=q:w=1:g=2.5,equalizer=f=3200:t=q:w=1.2:g=1.8,deesser=i=0.35,acompressor=threshold=-22dB:ratio=3:attack=15:release=250:makeup=4,aecho=0.9:0.55:38|85:0.10|0.06,alimiter=limit=0.95"
+CHAIN0 = "highpass=f=70,equalizer=f=180:t=q:w=1:g=2.5,equalizer=f=3200:t=q:w=1.2:g=1.8,deesser=i=0.35,acompressor=threshold=-22dB:ratio=3:attack=15:release=250:makeup=4,aecho=0.9:0.55:38|85:0.10|0.06,alimiter=limit=0.95"
+CHAIN = ep.get("chain", CHAIN0)
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", "audio/_raw.wav", "-af", CHAIN, "-ar", "44100", "-ac", "1", "-c:a", "pcm_s16le", "audio/vo.wav"], check=True)
 os.remove("audio/_raw.wav")
 json.dump(meta, open("audio/lines.json", "w"), indent=1)
