@@ -51,7 +51,7 @@ function illus(c, o) {
   const sleeveCol = { kameez: c1, saree: c1, kurta: c1, kaftan: c1, ankara: fillA, blazer: c1, jumper: c3 }[out];
   const arm = (side) => { const sx = side === 'f' ? 112 : 48, w = L[2], f = L[3];
     return `<g id="${id}_a${side}"><path d="M${sx - 7} 90 L${sx - 6} 138 L${sx + 6} 138 L${sx + 7} 90Z" fill="${skin}"/><path d="M${sx - w - 1} 92 Q${sx} 76 ${sx + w + 1} 92 Q${sx + w + f} 100 ${sx + w + f} ${84 + L[0]} L${sx - w - f} ${84 + L[0]} Q${sx - w - f} 100 ${sx - w - 1} 92Z" fill="${sleeveCol}"/>
-      <g id="${id}_f${side}"><path d="M${sx - 6} 136 L${sx - 5.5} 184 L${sx + 5.5} 184 L${sx + 6} 136Z" fill="${skin}"/>${L[1] ? `<path d="M${sx - w - f} 134 L${sx - w - f + 1} ${134 + L[1]} L${sx + w + f - 1} ${134 + L[1]} L${sx + w + f} 134Z" fill="${sleeveCol}"/><rect x="${sx - w - f + 1}" y="${134 + L[1] - 4}" width="${2 * (w + f) - 2}" height="5" fill="${out === 'kaftan' || out === 'kameez' ? c2 : shade(sleeveCol, -0.25)}"/>` : ''}<path d="M${sx - 6} 182 Q${sx - 9} 194 ${sx - 4} 199 Q${sx + 2} 202 ${sx + 7} 195 Q${sx + 8} 187 ${sx + 6} 182Z" fill="${skin}"/>${out === 'saree' || out === 'kameez' ? `<path d="M${sx - 6} 178 H${sx + 6}" stroke="${c2}" stroke-width="3"/><path d="M${sx - 6} 172 H${sx + 6}" stroke="${c3}" stroke-width="2.4"/>` : ''}</g></g>`; };
+      <g id="${id}_f${side}"><path d="M${sx - 6} 136 L${sx - 5.5} 184 L${sx + 5.5} 184 L${sx + 6} 136Z" fill="${skin}"/>${L[1] ? `<path d="M${sx - w - f} 134 L${sx - w - f + 1} ${134 + L[1]} L${sx + w + f - 1} ${134 + L[1]} L${sx + w + f} 134Z" fill="${sleeveCol}"/><rect x="${sx - w - f + 1}" y="${134 + L[1] - 4}" width="${2 * (w + f) - 2}" height="5" fill="${out === 'kaftan' || out === 'kameez' ? c2 : shade(sleeveCol, -0.25)}"/>` : ''}<g id="${id}_w${side}"><path d="M${sx - 6} 182 Q${sx - 9} 194 ${sx - 4} 199 Q${sx + 2} 202 ${sx + 7} 195 Q${sx + 8} 187 ${sx + 6} 182Z" fill="${skin}"/>${out === 'saree' || out === 'kameez' ? `<path d="M${sx - 6} 178 H${sx + 6}" stroke="${c2}" stroke-width="3"/><path d="M${sx - 6} 172 H${sx + 6}" stroke="${c3}" stroke-width="2.4"/>` : ''}</g></g></g>`; };
   const LSET = (col, to, w, shoe, top = 200, bare = false) => { const xl = 68, xr = 92, ww = w || 9; const leg = (x) => col ? `<path d="M${x - ww} ${top} L${x - ww + 1} ${to} L${x + ww - 1} ${to} L${x + ww} ${top}Z" fill="${col}"/>` : '';
     return `<g id="${id}_l1">${leg(xl)}<path d="M${xl - ww} 302 L${xl - ww} 318 Q${xl - ww - 14} 321 ${xl - ww - 16} 326 L${xl + ww + 2} 326 L${xl + ww} 304Z" fill="${shoe}"/></g><g id="${id}_l2">${leg(xr)}<path d="M${xr + ww} 302 L${xr + ww} 318 Q${xr + ww + 14} 321 ${xr + ww + 16} 326 L${xr - ww - 2} 326 L${xr - ww} 304Z" fill="${shoe}"/></g>`; };
   const legs = (col, to = 306, w = 11) => `<path d="M${80 - w - 12} 200 L${80 - w - 14} ${to} L${80 - 3} ${to} L${80 - 1} 200Z M${80 + w + 12} 200 L${80 + w + 14} ${to} L${80 + 3} ${to} L${80 + 1} 200Z" fill="${col}"/>`;
@@ -69,10 +69,10 @@ function illus(c, o) {
   g.style.filter = 'drop-shadow(0 0 2.5px rgba(255,255,255,.95)) drop-shadow(0 3px 3px rgba(0,0,0,.25))';
   g.innerHTML = `<svg viewBox="0 0 160 330" width="100%" height="100%" style="overflow:visible"><defs>${defs}</defs><ellipse cx="80" cy="326" rx="52" ry="6" fill="rgba(0,0,0,.18)"/>${lower}<g id="${id}_t"><g id="${id}_dr0">${back}</g>${body}<g id="${id}_ab">${arm('b')}</g><g id="${id}_dr1">${over}</g><g id="${id}_af">${arm('f')}</g><g id="${id}_h"><g transform="translate(48 20) scale(.64)">${illusHead(ho, id)}</g></g></g></svg>`;
   if (o.flip) gsap.set(g, { scaleX: -1 });
-  const q = (k) => g.querySelector('#' + id + '_' + k), P = { t: q('t'), h: q('h'), ab: q('ab'), af: q('af'), abf: q('fb'), aff: q('ff'), dr0: q('dr0'), dr1: q('dr1') };
+  const q = (k) => g.querySelector('#' + id + '_' + k), P = { t: q('t'), h: q('h'), ab: q('ab'), af: q('af'), abf: q('fb'), aff: q('ff'), abw: q('wb'), afw: q('wf'), dr0: q('dr0'), dr1: q('dr1') };
   const hs = g.querySelector('svg[data-id]'), hid = hs.dataset.id, hq = (k) => hs.querySelector('#' + hid + '_' + k);
   const eyes = hq('eyes'), mouth = hq('m'), bl = hq('bl'), br = hq('br');
-  gsap.set(P.ab, { svgOrigin: '48 86' }); gsap.set(P.af, { svgOrigin: '112 86' }); gsap.set(P.abf, { svgOrigin: '48 136' }); gsap.set(P.aff, { svgOrigin: '112 136' });
+  gsap.set(P.ab, { svgOrigin: '48 86' }); gsap.set(P.af, { svgOrigin: '112 86' }); gsap.set(P.abw, { svgOrigin: '48 182' }); gsap.set(P.afw, { svgOrigin: '112 182' }); gsap.set(P.abf, { svgOrigin: '48 136' }); gsap.set(P.aff, { svgOrigin: '112 136' });
   gsap.set(P.h, { svgOrigin: '80 80' }); gsap.set(P.t, { svgOrigin: '80 180' }); gsap.set(eyes, { svgOrigin: '50 54' }); gsap.set([P.dr0, P.dr1], { svgOrigin: '80 90' });
   gsap.set(P.ab, { rotation: 3 }); gsap.set(P.af, { rotation: -3 });
   const api = { g, P, face: { eyes, mouth } };
@@ -96,11 +96,36 @@ function illus(c, o) {
   api.talk = (T, D) => { for (let t = T; t < T + D - 0.2; t += 0.15) { tl.set(mouth, { attr: { d: [IMOUTH.o, IMOUTH.open, IMOUTH.smile, IMOUTH.open, IMOUTH.grin][Math.floor(rnd() * 5)] } }, t); }
     tl.set(mouth, { attr: { d: IMOUTH.smile } }, T + D);
     for (let t = T; t < T + D - 0.5; t += 0.55 + rnd() * 0.3) { tl.to(P.h, { y: 2, rotation: (rnd() - 0.5) * 5, duration: 0.18, ease: 'sine.out' }, t); tl.to(P.h, { y: -0.5, duration: 0.25, ease: 'sine.inOut' }, t + 0.2); } };
+  // ===== natural-motion layer (v3): overlapping action, anticipation, overshoot, hold, release, speech-driven nods/brows/gestures =====
+  const RR = (a, b) => a + rnd() * (b - a), JT = (side) => side === 'f' ? { u: P.af, f: P.aff, w: P.afw, s: 1 } : { u: P.ab, f: P.abf, w: P.abw, s: -1 };
+  const GEST = { open: [-58, -42, -24], beat: [-40, -62, 12], point: [-72, -10, 0], count: [-44, -80, -12], chest: [-20, -118, 4], palm: [-64, -28, -36], shrug: [-26, -34, -18], explain: [-52, -52, 6] };
+  api.pose = (side, T, g, o = {}) => { const j = JT(side), s = j.s, [u, f, w] = [g[0] + RR(-5, 5), g[1] + RR(-6, 6), g[2] + RR(-4, 4)], ant = o.ant ?? 0.13, st = o.st ?? 0.24, hold = o.hold ?? RR(0.35, 0.7), rel = o.rel ?? 0.55;
+    tl.to(j.u, { rotation: s * (-u * 0.1 + 2), duration: ant, ease: 'sine.out' }, T);                                   // anticipation
+    tl.to(j.u, { rotation: s * u, duration: st, ease: 'back.out(1.6)' }, T + ant);                                     // stroke with overshoot
+    tl.to(j.f, { rotation: s * f, duration: st + 0.1, ease: 'back.out(1.3)' }, T + ant + 0.05);                         // forearm lags
+    tl.to(j.w, { rotation: s * w, duration: st + 0.14, ease: 'back.out(2.2)' }, T + ant + 0.11);                        // wrist lags more
+    tl.to(j.u, { rotation: s * (u + RR(3, 6)), duration: hold, ease: 'sine.inOut' }, T + ant + st);                     // hold, tiny drift
+    tl.to(j.f, { rotation: s * (f + RR(-5, 5)), duration: hold, ease: 'sine.inOut' }, T + ant + st);
+    tl.to(j.u, { rotation: s * RR(2, 6), duration: rel, ease: 'power2.inOut' }, T + ant + st + hold);                   // release and settle
+    tl.to(j.f, { rotation: s * RR(2, 8), duration: rel, ease: 'power2.inOut' }, T + ant + st + hold + 0.05);
+    tl.to(j.w, { rotation: 0, duration: rel, ease: 'power2.inOut' }, T + ant + st + hold + 0.1);
+    tl.to(P.t, { rotation: -s * 2.2, duration: st + ant, ease: 'sine.inOut' }, T); tl.to(P.t, { rotation: 0, duration: rel + 0.2, ease: 'sine.inOut' }, T + ant + st + hold);   // torso leans into the gesture
+    return T + ant + st + hold + rel; };
+  api.gesture = (T, D) => { const keys = Object.keys(GEST); let t = T; while (t < T + D - 1.3) { const k = keys[Math.floor(rnd() * keys.length)], side = rnd() < 0.28 ? 'b' : 'f'; t = api.pose(side, t, GEST[k]) + RR(0.25, 1.1); } };
+  // speech: env = loudness per frame (0..1) at fps. Mouth shapes follow loudness; peaks give a head nod, brow lift and (sometimes) a gesture beat.
+  api.speak = (T, env, fps = 30, o = {}) => { let last = '', lastPeak = -9, lastG = -9; const sm = env.map((v, i) => (v + (env[i - 1] ?? v) + (env[i + 1] ?? v)) / 3);
+    sm.forEach((a, i) => { const t = T + i / fps, shape = a < 0.07 ? IMOUTH.smile : a < 0.2 ? IMOUTH.o : a < 0.45 ? IMOUTH.open : IMOUTH.grin; if (shape !== last) { tl.set(mouth, { attr: { d: shape } }, t); last = shape; }
+      if (i > 2 && i < sm.length - 2 && a > 0.55 && a >= sm[i - 1] && a >= sm[i + 1] && t - lastPeak > 0.5) { lastPeak = t;
+        tl.to(P.h, { y: 2.6, rotation: RR(-3.5, 3.5), duration: 0.1, ease: 'power2.out' }, t - 0.04); tl.to(P.h, { y: -0.4, duration: 0.3, ease: 'sine.inOut' }, t + 0.08);
+        tl.set(bl, { attr: { d: IBROW.surp[0] } }, t - 0.05); tl.set(br, { attr: { d: IBROW.surp[1] } }, t - 0.05); tl.set(bl, { attr: { d: IBROW.norm[0] } }, t + 0.3); tl.set(br, { attr: { d: IBROW.norm[1] } }, t + 0.3);
+        if (o.gesture !== false && t - lastG > 1.5 && rnd() < 0.7) { lastG = t; const keys = Object.keys(GEST); api.pose(rnd() < 0.25 ? 'b' : 'f', Math.max(T, t - 0.37), GEST[keys[Math.floor(rnd() * keys.length)]]); } } });
+    tl.set(mouth, { attr: { d: IMOUTH.smile } }, T + env.length / fps); };
+  api.saccades = (T, D) => { for (let t = T + RR(0.3, 1); t < T + D; t += RR(0.7, 2)) api.look(RR(-1.3, 1.3), RR(-0.6, 0.6), t, 0.08); };
+  // weight shift: legs and hips alternate every few seconds; cloth drags behind the torso
+  api.weight = (T, D) => { let t = T, k = 0; while (t < T + D - 1) { const d = RR(3.2, 5), s = k % 2 ? 1 : -1; tl.to(P.t, { x: s * RR(2, 3.4), duration: 0.9, ease: 'sine.inOut' }, t); if (legA) { tl.to(legA, { rotation: s * 2.6, duration: 0.9, ease: 'sine.inOut' }, t); tl.to(legB, { rotation: s * -1.4, duration: 0.9, ease: 'sine.inOut' }, t); }
+      tl.to([P.dr0, P.dr1], { rotation: s * 2.2, duration: 1.2, ease: 'sine.inOut' }, t + 0.12); t += d; k++; } };
   api.head = (deg, T, d = 1.2) => tl.to(P.h, { rotation: deg, duration: d, ease: 'sine.inOut' }, T);
   api.arm = (side, sh, el, T, d = 0.8) => { if (side === 'b') { sh = -sh; el = -el; } tl.to(side === 'f' ? P.af : P.ab, { rotation: sh, duration: d, ease: 'sine.inOut' }, T); tl.to(side === 'f' ? P.aff : P.abf, { rotation: el, duration: d, ease: 'sine.inOut' }, T); };
-  // expressive talking gestures: lift, beat, open palm, return; opposite arm joins sometimes; torso turns into the gesture
-  api.gesture = (T, D) => { let t = T, k = 0; while (t < T + D - 0.7) { const side = k % 3 === 2 ? 'b' : 'f', up = -45 - rnd() * 40, bend = -30 - rnd() * 50; api.arm(side, up, bend, t, 0.4); tl.to(P.t, { rotation: side === 'f' ? -2 : 2, duration: 0.4 }, t);
-      api.arm(side, up + 14, bend + 14, t + 0.5, 0.25); api.arm(side, up, bend, t + 0.75, 0.25); api.arm(side, -5, -8, t + 1.1, 0.5); tl.to(P.t, { rotation: 0, duration: 0.5 }, t + 1.1); t += 1.7 + rnd() * 0.9; k++; } };
   api.laugh = (T, D) => { api.emote('laugh', T); for (let t = T; t < T + D; t += 0.2) { tl.to(P.t, { y: 3, duration: 0.1, yoyo: true, repeat: 1 }, t); tl.set(mouth, { attr: { d: t % 0.4 < 0.2 ? IMOUTH.laugh : IMOUTH.open } }, t); }
     tl.to(P.h, { rotation: -7, duration: 0.3 }, T); for (let t = T + 0.3; t < T + D; t += 0.3) tl.to(P.h, { rotation: (t % 0.6 < 0.3) ? -9 : -4, duration: 0.15 }, t); tl.to(P.aff, { rotation: -80, duration: 0.3 }, T); tl.to(P.af, { rotation: -30, duration: 0.3 }, T);
     tl.to([P.af, P.aff, P.h], { rotation: 0, duration: 0.4 }, T + D); api.emote('normal', T + D + 0.05); };

@@ -1,5 +1,11 @@
 import json,re
 d=json.load(open('lines.json')); DUR=round(d['dur']+0.4,1)
+import wave, numpy as np
+_w=wave.open('assets/vo.wav'); _sr=_w.getframerate(); _a=np.frombuffer(_w.readframes(_w.getnframes()),dtype=np.int16).astype(float)/32768
+_p=np.percentile(np.abs(_a),99) or 1.0
+for _l in d['lines']:
+    _h=_sr//30; _s=int(_l['start']*_sr); _n=int(_l['dur']*30)
+    _l['env']=[round(float(min(1,np.sqrt(np.mean(_a[_s+i*_h:_s+(i+1)*_h]**2))/_p*1.7)),2) if _s+(i+1)*_h<=len(_a) else 0 for i in range(_n)]
 S='/home/user/jobguide/project/src/'
 kit=open(S+'kit.js').read(); ill=open(S+'illus.js').read()
 extra=''.join(open(S+f).read()+'\n' for f in ['bg_sky.js','bg_shops.js','bg_street.js','bg_gags.js'] if __import__('os').path.exists(S+f))
@@ -26,9 +32,9 @@ function BASIC_BG(w){{box(w,{{left:0,top:0,width:W,height:470,background:'linear
 const c=document.getElementById('s_a'),w=box(c,{{left:0,top:0,width:W,height:H,transformOrigin:'640px 420px'}});
 {basic}{''.join(calls)}
 const cast=[['priya',360],['emma',640],['ada',920]],P={{}};
-cast.forEach(([k,x])=>{{P[k]=illus(w,Object.assign({{x,y:702,s:1.3,T:0,D:DUR}},ICAST[k]));P[k].breathe(0,DUR);}});
+cast.forEach(([k,x])=>{{P[k]=illus(w,Object.assign({{x,y:702,s:1.3,T:0,D:DUR}},ICAST[k]));P[k].breathe(0,DUR);P[k].weight(0,DUR);P[k].saccades(0,DUR);}});
 const NM={{priya:['PRIYA','#2a9d8f'],emma:['EMMA','#1d3557'],ada:['ADA','#e63946']}},EM=['happy','happy','angry','happy'],X={{priya:360,emma:640,ada:920}};
-LINES.forEach((l,i)=>{{const sp=P[l.who];sp.emote(EM[i],l.start);sp.talk(l.start,l.dur);sp.gesture(l.start+0.3,l.dur);sp.emote('normal',l.start+l.dur+0.1);
+LINES.forEach((l,i)=>{{const sp=P[l.who];sp.emote(EM[i],l.start);sp.speak(l.start,l.env,30);sp.emote('normal',l.start+l.dur+0.1);
  Object.keys(P).forEach((k)=>{{if(k===l.who)return;const dir=X[l.who]>X[k]?1:-1;P[k].look(dir*1.6,0,l.start,0.3);P[k].head(dir*4,l.start,0.7);P[k].emote(EM[i]==='angry'?'surprised':'normal',l.start+0.2);P[k].emote('normal',l.start+l.dur*0.7);}});
  const e=document.createElement('div');e.className='capl';e.innerHTML=`<span class="nm" style="background:${{NM[l.who][1]}}">${{NM[l.who][0]}}</span>${{l.text}}`;document.getElementById('cap').appendChild(e);gsap.set(e,{{opacity:0}});tl.to(e,{{opacity:1,duration:0.15}},l.start);tl.to(e,{{opacity:0,duration:0.15}},l.start+l.dur);}});
 const last=LINES[LINES.length-1];Object.keys(P).forEach((k,i)=>P[k].laugh(last.start+last.dur-0.6+i*0.15,2.2));
