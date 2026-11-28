@@ -30,7 +30,7 @@ function hairFront(st, c) {
   return m[st] ?? '';
 }
 function animeHead(o) {
-  const skin = o.skin || SKIN.warm, hair = o.hair || '#15121a', eye = o.eye || '#3b2a5a', id = 'ah' + Math.floor(Math.random() * 1e6), dk = '#1a1020';
+  const skin = o.skin || SKIN.warm, hair = o.hair || '#15121a', eye = o.eye || '#3b2a5a', id = 'ah' + Math.floor(rnd() * 1e6), dk = '#1a1020';
   const acc = o.acc === 'glasses' ? `<g fill="none" stroke="${o.accColor || '#22222a'}" stroke-width="2.2"><circle cx="36" cy="56" r="12.5"/><circle cx="64" cy="56" r="12.5"/><path d="M48.5 55 H51.5"/></g>`
     : o.acc === 'shades' ? `<g id="${id}_sh"><rect x="22" y="48" width="25" height="15" rx="6" fill="${o.accColor || '#10101a'}"/><rect x="53" y="48" width="25" height="15" rx="6" fill="${o.accColor || '#10101a'}"/><path d="M47 54 H53" stroke="#10101a" stroke-width="2"/><path d="M26 52 L34 50" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/></g>`
     : o.acc === 'headband' ? `<path d="M19 34 Q50 18 81 34 L80 40 Q50 25 20 40Z" fill="${o.accColor || '#e63946'}"/>` : '';
@@ -56,11 +56,11 @@ function animePuppet(c, o) {
   P.t.appendChild(P.h); const svg = P.h.querySelector('svg'), id = svg.dataset.id, q = (k) => P.h.querySelector('#' + id + '_' + k);
   const eyes = q('eyes'), mouth = q('m'), bl = q('bl'), br = q('br');
   gsap.set(eyes, { svgOrigin: '50 56' }); p.face = { eyes, mouth, bl, br };
-  p.blink = (T, D) => { for (let t = T + 1.2; t < T + D; t += 2.4 + Math.random() * 2.4) tl.to(eyes, { scaleY: 0.08, duration: 0.07, yoyo: true, repeat: 1 }, t); };
+  p.blink = (T, D) => { for (let t = T + 1.2; t < T + D; t += 2.4 + rnd() * 2.4) tl.to(eyes, { scaleY: 0.08, duration: 0.07, yoyo: true, repeat: 1 }, t); };
   p.emote = (name, T) => { const b = EYEBROW[{ angry: 'angry', sad: 'sad', surprised: 'surp', sly: 'sly', happy: 'happy', normal: 'norm' }[name] || 'norm'];
     const m = { angry: MOUTH.frown, sad: MOUTH.frown, surprised: MOUTH.o, sly: MOUTH.smirk, happy: MOUTH.grin, normal: MOUTH.smile }[name] || MOUTH.smile;
     tl.set(bl, { attr: { d: b[0] } }, T); tl.set(br, { attr: { d: b[1] } }, T); tl.set(mouth, { attr: { d: m } }, T); };
-  p.talk = (T, D) => { for (let t = T; t < T + D - 0.2; t += 0.17) tl.set(mouth, { attr: { d: Math.random() < 0.3 ? MOUTH.o : MOUTH.open } }, t); tl.set(mouth, { attr: { d: MOUTH.smile } }, T + D); };
+  p.talk = (T, D) => { for (let t = T; t < T + D - 0.2; t += 0.17) tl.set(mouth, { attr: { d: rnd() < 0.3 ? MOUTH.o : MOUTH.open } }, t); tl.set(mouth, { attr: { d: MOUTH.smile } }, T + D); };
   if (o.T !== undefined) p.blink(o.T, o.D || 20);
   return p;
 }

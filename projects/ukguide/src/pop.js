@@ -1,7 +1,7 @@
 // ===== UK GUIDE pop-art kit (1280x720). Needs kit.js (box, mk, rr, S, win, W, H, tl), kit2.js (puppet), anime.js (animePuppet, CAST). =====
 const INK = '#14101c';
 const PP = { yellow: '#ffe066', orange: '#ff9f1c', red: '#e63946', blue: '#3a86ff', navy: '#1d3557', teal: '#2a9d8f', pink: '#f72585', purple: '#7b2cbf', green: '#38b000', cream: '#fff8e1', white: '#ffffff', sky: '#8ecae6', mint: '#b7e4c7', grey: '#e9ecef' };
-const FONT = '"Arial Black", Impact, Arial, sans-serif';
+const FONT = '"Arial Black", Arial, sans-serif';
 window.SFX = window.SFX || [];
 const sfx = (name, t, vol) => window.SFX.push([name, +(+t).toFixed(2), vol ?? 1]);   // names: stamp pop ding whoosh cash buzz tick chime ring coin swish thud
 const LS = (scene, who) => LINES.filter((l) => l.scene === scene && (!who || l.who === who));   // lines of a scene (start, dur, who, text)
