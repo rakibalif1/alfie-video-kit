@@ -101,3 +101,8 @@ This repo is public. It holds decisions and preferences for the owner's video pr
 - Look: projects/signalman/src/kit2.js = puppet() articulated figure (head, 2-seg arms/legs, rim light, breathe/head/arm/walk), breathFog, lightCone, motes. head.html adds grade (lifted blue shadows), letterbox bars 34px, caption scrim; captions bottom-anchored, max 9 words/chunk (fixes clipping). Scenes with absolute seconds must scale by D/OLD_D.
 - Team v2 job: 4 Sonnet workers, shared queue, 7 scene tasks, ~10 min each, ~140k tokens each. Render: 913 s at ~8 fps with 3 workers (~50 min). No render range option: for a sample make a trimmed copy of the project.
 - Owner cannot describe visual faults; show frames/clips and ask "what feels off", I can inspect frames but not hear or judge motion.
+
+## New direction (Nov 28): "Your First 30 Days in the UK" newcomer guide
+- Owner wants an immigrant-to-UK guide: SIM (no contract), no new phone/laptop, bank, NI number, GP, voting, Indeed/Maps/bus apps, other essentials. Script is the power: detailed on-screen directions, pronunciation, emotion tags (surprised, sad, angry). Draft v1 at projects/ukguide/script.md (13 scenes, ~1,960 words, fact-check table). Owner's message ended mid-sentence at "The man is ignored by ..." (ask).
+- Facts the owner had slightly wrong: NI number can only be applied for after arriving, is free, and is not needed to start work; voting is not for all residents (depends on nationality, registering when ineligible is an offence); BRP is replaced by eVisa + share code.
+- Style plan: bright pop-art HyperFrames explainer (the liked style), warm narrator, character voices for scam moments; voice tool needs presets surprised/cheer/sly added to tools/drama_voice.py EMO.
